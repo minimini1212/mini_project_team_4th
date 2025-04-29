@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class EquipmentView {
+	
 	public void displayEquipmentResults(ResultSet rs) {
 		try {
 			System.out.println("장비ID    장비명      모델명          제조사    시리얼번호  "
@@ -28,46 +29,68 @@ public class EquipmentView {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} //end findById()
+	} //end displayEquipmentResults()
 	
-// 필요없을듯 ? 위에껄로 출력가능해서. 일단은 냅둔다.	
-//	public void findAll(ResultSet rs, ResultSetMetaData rsmd) {
-//		try {
-//			int count = rsmd.getColumnCount();
-//			while (rs.next()) {
-//				for (int i = 1; i <= count; i++) { // 각 타입별로 출력하기
-//
-//					switch (rsmd.getColumnType(i)) {
-//					case Types.NUMERIC:
-//					case Types.INTEGER:
-//						System.out.println(rsmd.getColumnName(i) + " : " + rs.getInt(i) + "  ");
-//						break;
-//					case Types.FLOAT:
-//						System.out.println(rsmd.getColumnName(i) + " : " + rs.getFloat(i) + "  ");
-//						break;
-//
-//					case Types.DOUBLE:
-//						System.out.println(rsmd.getColumnName(i) + " : " + rs.getDouble(i) + "  ");
-//						break;
-//
-//					case Types.CHAR:
-//						System.out.println(rsmd.getColumnName(i) + " : " + rs.getString(i) + "  ");
-//						break;
-//
-//					case Types.DATE:
-//						System.out.println(rsmd.getColumnName(i) + " : " + rs.getDate(i) + "  ");
-//						break;
-//
-//					default:
-//						System.out.println(rsmd.getColumnName(i) + " : " + rs.getString(i) + "  ");
-//						break;
-//					} // end switch
-//				} // end for
-//				System.out.println();
-//			} // end while
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	} //emd findAll
+	public void countByStatus(ResultSet rs) {
+		try {
+			System.out.println("상태\t  개수");
+			System.out.println("-------------");
+			while(rs.next()) {	    
+			    String status = rs.getString("status");
+			    int count = rs.getInt("count(*)");
+			    System.out.printf("%s\t  %d개\n", status, count);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} //end countByStatus
+	
+	public void countByCategory(ResultSet rs) {
+		try {
+			System.out.println("카테고리\t  개수");
+			System.out.println("-------------");
+			while(rs.next()) {	    
+			    String category = rs.getString("CATEGORY_ID");
+			    int count = rs.getInt("count(*)");
+			    System.out.printf("%s\t  %d개\n", category, count);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} //end countByCategory
+	
+	public void countByDepartment(ResultSet rs) {
+		try {
+			System.out.println("부서이름\t  개수");
+			System.out.println("-------------");
+			while(rs.next()) {	    
+			    String departmentId = rs.getString("department_id");
+			    int count = rs.getInt("count(*)");
+			    System.out.printf("%s\t  %d개\n", departmentId, count);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} //end countByDepartment
+	
+	public void sumPurchasePriceByCategory(ResultSet rs) {
+		try {
+			System.out.println("카테고리\t     가격");
+			System.out.println("----------------");
+			while(rs.next()) {	    
+			    String category = rs.getString("CATEGORY_ID");
+			    int sum = rs.getInt("SUM(PURCHASE_PRICE)");
+			    System.out.printf("%s\t%5d만원\n", category, sum / 10000);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} //end sumPurchasePriceByCategory
+	
+	
+	
+	
+	
+	
+	
 }

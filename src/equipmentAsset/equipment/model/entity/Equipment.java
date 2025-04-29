@@ -1,11 +1,11 @@
 package equipmentAsset.equipment.model.entity;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
-
-
 
 /**
  * 장비 마스터 정보를 담는 엔티티 클래스

@@ -131,12 +131,113 @@ public class EquipmentDAO {
 	        pstmt.setString(12, equipment.getDescription());
 	        pstmt.setDate(13, new java.sql.Date(equipment.getLastUpdatedDate().getTime()));
 	        
+	        //밑에 나중에 삭제할거임
 	        int result = pstmt.executeUpdate();
 			System.out.println(result + " 개 데이터 추가 성공!");
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}			
+	} // end save
+	
+	/**=-=-=-=-=-=-=-=-=-=-=-=-= 수정 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	//- 장비 상태 업데이트 > '정상', '점검필요', '수리중', '폐기예정', '폐기완료' 만 선택가능
+	public void updateStatus(int equipmentId, String status) {
+		String sql = "UPDATE EQUIPMENT SET STATUS = ?, LAST_UPDATED_DATE = SYSDATE WHERE EQUIPMENT_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, equipmentId);
+	       
+	        //밑에 나중에 삭제할거임
+	        int result = pstmt.executeUpdate();
+			System.out.println(result + " 개 데이터 수정 성공!");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	} // end updateStatus
+	
+	//- 장비 담당자 업데이트
+	public void updateManager(int equipmentId, int managerId) {
+		String sql = "UPDATE EQUIPMENT SET MANAGER_ID = ?, LAST_UPDATED_DATE = SYSDATE WHERE EQUIPMENT_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, managerId);
+			pstmt.setInt(2, equipmentId);
+	       
+	        //밑에 나중에 삭제할거임
+	        int result = pstmt.executeUpdate();
+			System.out.println(result + " 개 데이터 수정 성공!");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	} // end updateManager
+	
+	/**=-=-=-=-=-=-=-=-=-=-=-=-= 삭제 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	//- 장비 정보 삭제
+	public void delete(int equipmentId) {
+		String sql = "DELETE FROM EQUIPMENT WHERE EQUIPMENT_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, equipmentId);
+	       
+	        //밑에 나중에 삭제할거임
+	        int result = pstmt.executeUpdate();
+			System.out.println(result + " 개 데이터 삭제 성공!");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
+	
+	/**=-=-=-=-=-=-=-=-=-=-=-=-= 집계 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	// - 상태별 장비 개수 집계
+	public void countByStatus() {
+		try {
+			rs = stmt.executeQuery("SELECT STATUS, COUNT(*) FROM EQUIPMENT GROUP BY STATUS ORDER BY COUNT(*) DESC");
+			equipmentVIew.countByStatus(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 	
+	}
+	// - 카테고리별 장비 개수 집계
+	public void countByCategory() {
+		try {
+			rs = stmt.executeQuery("SELECT CATEGORY_ID, COUNT(*) FROM EQUIPMENT GROUP BY CATEGORY_ID ORDER BY COUNT(*) DESC");
+			equipmentVIew.countByCategory(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 			
+	}
+	// - 부서별 장비 개수 집계
+	public void countByDepartment() {
+		try {
+			rs = stmt.executeQuery("SELECT DEPARTMENT_ID, COUNT(*) FROM EQUIPMENT GROUP BY DEPARTMENT_ID ORDER BY COUNT(*) DESC");
+			equipmentVIew.countByDepartment(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+	// - 카테고리별 구매 가격 합계
+	public void sumPurchasePriceByCategory() {
+		try {
+			rs = stmt.executeQuery("SELECT CATEGORY_ID, SUM(PURCHASE_PRICE) FROM EQUIPMENT GROUP BY CATEGORY_ID ORDER BY SUM(PURCHASE_PRICE) DESC");
+			equipmentVIew.sumPurchasePriceByCategory(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+	// - 최근에 업데이트된 장비 목록
+	public void getRecentlyUpdatedEquipments() {
+		try {
+			rs = stmt.executeQuery("SELECT CATEGORY_ID, SUM(PURCHASE_PRICE) FROM EQUIPMENT GROUP BY CATEGORY_ID ORDER BY SUM(PURCHASE_PRICE) DESC");
+			equipmentVIew.sumPurchasePriceByCategory(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+
 	
 } //end class

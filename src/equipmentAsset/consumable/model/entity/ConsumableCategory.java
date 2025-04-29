@@ -14,6 +14,4 @@ public class ConsumableCategory {
     private int categoryId;          // 카테고리 ID
     private String categoryName;     // 카테고리명
     private String categoryCode;     // 카테고리 코드
-    private String description;      // 설명
-    private Date lastUpdatedDate;    // 최종 업데이트 일자
 }
