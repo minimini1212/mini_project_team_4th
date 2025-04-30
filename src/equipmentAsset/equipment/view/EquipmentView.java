@@ -8,6 +8,7 @@ import java.sql.Types;
 
 public class EquipmentView {
 	
+	// - 장비 정보 출력
 	public void displayEquipmentResults(ResultSet rs) {
 		try {
 			System.out.println("장비ID    장비명      모델명          제조사    시리얼번호  "
@@ -31,6 +32,8 @@ public class EquipmentView {
 		}
 	} //end displayEquipmentResults()
 	
+	
+	// - 상태별 장비 개수 출력
 	public void countByStatus(ResultSet rs) {
 		try {
 			System.out.println("상태\t  개수");
@@ -45,6 +48,8 @@ public class EquipmentView {
 		}
 	} //end countByStatus
 	
+	
+	// - 카테고리별 장비 개수 출력
 	public void countByCategory(ResultSet rs) {
 		try {
 			System.out.println("카테고리\t  개수");
@@ -59,6 +64,8 @@ public class EquipmentView {
 		}
 	} //end countByCategory
 	
+	
+	// - 부서별 장비 개수 출력
 	public void countByDepartment(ResultSet rs) {
 		try {
 			System.out.println("부서이름\t  개수");
@@ -73,6 +80,7 @@ public class EquipmentView {
 		}
 	} //end countByDepartment
 	
+	// - 카테고리별 장비 금액 합계
 	public void sumPurchasePriceByCategory(ResultSet rs) {
 		try {
 			System.out.println("카테고리\t     가격");
@@ -87,10 +95,40 @@ public class EquipmentView {
 		}
 	} //end sumPurchasePriceByCategory
 	
+	// - 최근 수정된 장비 5개 정보 출력
+	public void getRecentlyUpdatedEquipments(ResultSet rs) {
+		try {
+			System.out.println("장비ID\t이름\t               담당자\t상태\t   최종수정일");
+			System.out.println("---------------------------------------------------------------");
+			while(rs.next()) {	    
+				int equipmentId = rs.getInt("equipment_id");
+			    String equipmentName = rs.getString("equipment_name");
+			    int manager = rs.getInt("manager_id");
+			    String status = rs.getString("status");
+			    Date lastUpdatedDate = rs.getDate("last_updated_date");
+			    
+			    System.out.printf("%-7d\t%-15s\t%d\t%-5s\t   %s\n", equipmentId, equipmentName, manager, status, lastUpdatedDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} //end getRecentlyUpdatedEquipments
 	
-	
-	
-	
-	
+	// - 모든 카테고리 출력
+	public void findAllCategories(ResultSet rs) {
+		try {
+			System.out.println("카테고리번호     카테고리이름\t        코드");
+			System.out.println("-----------------------------------");
+			while(rs.next()) {	    
+				int categoryId = rs.getInt("CATEGORY_ID");
+			    String categoryName = rs.getString("CATEGORY_NAME");
+			    String categoryCode = rs.getString("CATEGORY_CODE");
+			    
+			    System.out.printf("%-5d\t      %-10s\t%s\n", categoryId, categoryName, categoryCode);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} //end findAllCategories	
 	
 }

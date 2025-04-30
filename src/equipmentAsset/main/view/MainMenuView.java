@@ -1,21 +1,26 @@
 package equipmentAsset.main.view;
 import java.util.Date;
 
+import equipmentAsset.equipment.model.dao.CategoryDAO;
 import equipmentAsset.equipment.model.dao.EquipmentDAO;
 import equipmentAsset.equipment.model.entity.Equipment;
+import equipmentAsset.equipment.model.entity.EquipmentCategory;
 
 public class MainMenuView {
 	public static void main(String[] args) {
 		EquipmentDAO dao = new EquipmentDAO();
 		dao.connect();
 		
+		CategoryDAO dao2 = new CategoryDAO();
+		dao2.connect();
+		
 		//dao.findAll();             //완료
 		//dao.findById(10);        //완료
 		//dao.findByCategory(1);   //완료
 		//dao.findByDepartment(5); //완료
 		//dao.findByStatus("정상"); //완료
-		
-		////=========여기까지 조회 테스트 완료=========////
+		////=========여기까지 조회 메소드 테스트 완료=========////
+
 //		Equipment testEquipment = new Equipment();
 //		Date currentDate = new Date();
 //		
@@ -34,21 +39,35 @@ public class MainMenuView {
 //	    testEquipment.setLastUpdatedDate(currentDate);
 		
 	    //dao.save(testEquipment);  //완료
-	    
-		////=========여기까지 등록 테스트 완료=========////
+		////=========여기까지 등록 메소드 테스트 완료=========////
+		
 		//dao.updateStatus(11, "정상");
 		//dao.updateManager(11, 110);
+		////=========여기까지 수정 메소드 테스트 완료=========////
 		
-		////=========여기까지 수정 테스트 완료=========////
-		//dao.delete(11);
-		
-		////=========여기까지 삭제 테스트 완료=========////
+		//dao.delete(11);	
+		////=========여기까지 삭제 메소드 테스트 완료=========////
 		
 		//dao.countByStatus();
 		//dao.countByCategory();
 		//dao.countByDepartment();
-		dao.sumPurchasePriceByCategory();
+		//dao.sumPurchasePriceByCategory();
+		//dao.getRecentlyUpdatedEquipments();
+		////=========여기까지 집계 메소드 테스트 완료=========////
+		
+//		EquipmentCategory testCategory = new EquipmentCategory();
+//		testCategory.setCategoryId(6);
+//		testCategory.setCategoryName("테스트장비");
+//		testCategory.setCategoryCode("TEST2");
+		
+		//dao2.saveCategory(testCategory);
+		//dao2.deleteCategory(6);
+		//dao2.findAllCategories();
+		////========여기까지 카테고리 관련 테스트 완료========////
+		
+		
 		
 		dao.close();
+		dao2.close();
 	}
 }

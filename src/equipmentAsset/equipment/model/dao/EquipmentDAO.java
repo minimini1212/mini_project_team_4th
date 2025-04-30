@@ -1,40 +1,27 @@
 package equipmentAsset.equipment.model.dao;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
-import java.util.List;
-import java.util.Scanner;
 
 import equipmentAsset.common.util.CloseHelper;
 import equipmentAsset.common.util.ConnectionSingletonHelper;
 import equipmentAsset.equipment.model.entity.Equipment;
 import equipmentAsset.equipment.view.EquipmentView;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 
 public class EquipmentDAO {
-	private static final String TABLE_NAME = "EQUIPMENT";
+	private final String TABLE_NAME = "EQUIPMENT";
 	
-	private Equipment equipment = new Equipment();
 	private EquipmentView equipmentVIew = new EquipmentView();
 	
 	// 연결, 삽입, 삭제, 수정, 검색,......
-	private Scanner sc = new Scanner(System.in);
 	private Statement stmt = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	private Connection conn = null;
-	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
 	// connect
 	public void connect() {
@@ -62,7 +49,7 @@ public class EquipmentDAO {
 	/**=-=-=-=-=-=-=-=-=-=-=-=-= 조회 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
 	
 	// - ID로 특정 장비 조회
-	public void findById (int equipmentId) {
+	public void findByIdEquipment (int equipmentId) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE EQUIPMENT_ID = " + equipmentId);
 			equipmentVIew.displayEquipmentResults(rs);
@@ -72,7 +59,7 @@ public class EquipmentDAO {
 	} // end findById
 	
 	// - 모든 장비 목록 조회
-	public void findAll() {
+	public void findAllEquipment() {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME);
 			equipmentVIew.displayEquipmentResults(rs);
@@ -82,7 +69,7 @@ public class EquipmentDAO {
 	} // end findAll
 	
 	// - 특정 카테고리의 장비 조회
-	public void findByCategory(int categoryId) {
+	public void findByCategoryEquipment(int categoryId) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE CATEGORY_ID = " + categoryId);
 			equipmentVIew.displayEquipmentResults(rs);
@@ -92,7 +79,7 @@ public class EquipmentDAO {
 	} // end findByCategory
 	
 	// - 특정 부서의 장비 조회
-	public void findByDepartment(int departmentId) {
+	public void findByDepartmentEquipment(int departmentId) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE DEPARTMENT_ID = " + departmentId);
 			equipmentVIew.displayEquipmentResults(rs);
@@ -102,7 +89,7 @@ public class EquipmentDAO {
 	}
 	
 	// - 특정 상태(정상, 점검필요, 수리중 등)의 장비 조회
-	public void findByStatus(String status) {
+	public void findByStatusEquipment(String status) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE STATUS = '" + status +"'");
 			equipmentVIew.displayEquipmentResults(rs);
@@ -112,8 +99,9 @@ public class EquipmentDAO {
 	}	
 	
 	/**=-=-=-=-=-=-=-=-=-=-=-=-= 등록 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	
 	// - 새 장비 정보 저장
-	public void save(Equipment equipment) {
+	public void saveEquipment(Equipment equipment) {
 		String sql = "INSERT INTO EQUIPMENT VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -141,8 +129,9 @@ public class EquipmentDAO {
 	} // end save
 	
 	/**=-=-=-=-=-=-=-=-=-=-=-=-= 수정 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	
 	//- 장비 상태 업데이트 > '정상', '점검필요', '수리중', '폐기예정', '폐기완료' 만 선택가능
-	public void updateStatus(int equipmentId, String status) {
+	public void updateStatusEquipment(int equipmentId, String status) {
 		String sql = "UPDATE EQUIPMENT SET STATUS = ?, LAST_UPDATED_DATE = SYSDATE WHERE EQUIPMENT_ID = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -159,7 +148,7 @@ public class EquipmentDAO {
 	} // end updateStatus
 	
 	//- 장비 담당자 업데이트
-	public void updateManager(int equipmentId, int managerId) {
+	public void updateManagerEquipment(int equipmentId, int managerId) {
 		String sql = "UPDATE EQUIPMENT SET MANAGER_ID = ?, LAST_UPDATED_DATE = SYSDATE WHERE EQUIPMENT_ID = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -176,8 +165,9 @@ public class EquipmentDAO {
 	} // end updateManager
 	
 	/**=-=-=-=-=-=-=-=-=-=-=-=-= 삭제 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	
 	//- 장비 정보 삭제
-	public void delete(int equipmentId) {
+	public void deleteEquipment(int equipmentId) {
 		String sql = "DELETE FROM EQUIPMENT WHERE EQUIPMENT_ID = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -193,6 +183,7 @@ public class EquipmentDAO {
 	}
 	
 	/**=-=-=-=-=-=-=-=-=-=-=-=-= 집계 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	
 	// - 상태별 장비 개수 집계
 	public void countByStatus() {
 		try {
@@ -232,8 +223,9 @@ public class EquipmentDAO {
 	// - 최근에 업데이트된 장비 목록
 	public void getRecentlyUpdatedEquipments() {
 		try {
-			rs = stmt.executeQuery("SELECT CATEGORY_ID, SUM(PURCHASE_PRICE) FROM EQUIPMENT GROUP BY CATEGORY_ID ORDER BY SUM(PURCHASE_PRICE) DESC");
-			equipmentVIew.sumPurchasePriceByCategory(rs);
+			rs = stmt.executeQuery("SELECT * FROM (SELECT EQUIPMENT_ID, EQUIPMENT_NAME, MANAGER_ID, STATUS, LAST_UPDATED_DATE"
+									+ " FROM EQUIPMENT ORDER BY LAST_UPDATED_DATE DESC) WHERE ROWNUM <=5");
+			equipmentVIew.getRecentlyUpdatedEquipments(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
