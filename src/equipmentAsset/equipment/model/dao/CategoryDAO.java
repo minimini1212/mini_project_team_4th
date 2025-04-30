@@ -11,6 +11,20 @@ import equipmentAsset.common.util.ConnectionSingletonHelper;
 import equipmentAsset.equipment.model.entity.EquipmentCategory;
 import equipmentAsset.equipment.view.EquipmentView;
 
+
+/** =-=-=-=-=-=-=-=-=-=-=-=-=-= equipment.CategoryDAO Class =-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	--- 카테고리 조회
+	void findAllCategories() : 모든 카테고리 조회
+	
+	--- 카테고리 추가
+	void saveCategory(EquipmentCategory category) : 새 카테고리 저장
+	
+	--- 카테고리 삭제
+	void deleteCategory(int categoryId) : 카테고리 삭제
+
+	=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- **/
+
 public class CategoryDAO {
 	private final String TABLE_NAME = "EQUIPMENT_CATEGORY";
 

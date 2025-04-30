@@ -1,10 +1,6 @@
 package equipmentAsset.main.view;
-import java.util.Date;
-
 import equipmentAsset.equipment.model.dao.CategoryDAO;
 import equipmentAsset.equipment.model.dao.EquipmentDAO;
-import equipmentAsset.equipment.model.entity.Equipment;
-import equipmentAsset.equipment.model.entity.EquipmentCategory;
 
 public class MainMenuView {
 	public static void main(String[] args) {
@@ -14,11 +10,11 @@ public class MainMenuView {
 		CategoryDAO dao2 = new CategoryDAO();
 		dao2.connect();
 		
-		//dao.findAll();             //완료
-		//dao.findById(10);        //완료
-		//dao.findByCategory(1);   //완료
-		//dao.findByDepartment(5); //완료
-		//dao.findByStatus("정상"); //완료
+		//dao.findAllEquipment();           //완료
+		//dao.findByIdEquipment(1);        //완료
+		//dao.findByCategoryEquipment("수술장비");   //완료
+		//dao.findByDepartmentEquipment("장비팀"); //완료
+		//dao.findByStatusEquipment("정상"); //완료
 		////=========여기까지 조회 메소드 테스트 완료=========////
 
 //		Equipment testEquipment = new Equipment();
@@ -64,8 +60,6 @@ public class MainMenuView {
 		//dao2.deleteCategory(6);
 		//dao2.findAllCategories();
 		////========여기까지 카테고리 관련 테스트 완료========////
-		
-		
 		
 		dao.close();
 		dao2.close();

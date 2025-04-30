@@ -11,24 +11,41 @@ public class EquipmentView {
 	// - 장비 정보 출력
 	public void displayEquipmentResults(ResultSet rs) {
 		try {
-			System.out.println("장비ID    장비명      모델명          제조사    시리얼번호  "
-					+ "       구매일        구매가격       상태");
-			while(rs.next()) {
-			    int equipmentId = rs.getInt("equipment_id");
-			    String equipmentName = rs.getString("equipment_name");
-			    String modelName = rs.getString("model_name");
-			    String manufacturer = rs.getString("manufacturer");
-			    String serialNumber = rs.getString("serial_number");
-			    Date purchaseDate = rs.getDate("purchase_date");
-			    int purchasePrice = rs.getInt("purchase_price");
-			    String status = rs.getString("status");
+		    System.out.printf("%-7s %-25s\t%-20s\t%-18s\t%-17s\t%-12s\t%-12s\t%-10s\t%-15s\t%-15s\t%-15s\t%-15s\n",
+		        "장비ID", "장비명", "모델명", "제조사", "시리얼번호", "구매일", "구매가격", "상태", "담당자", "부서", "직급", "직무");
+		    System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-			    System.out.println(equipmentId + "\t " + equipmentName + "   " + modelName + "   " + 
-	                     manufacturer + "   " + serialNumber + "      " + purchaseDate + "  " + 
-	                     purchasePrice + "     " + status);
-			}
+		    while(rs.next()) {
+		        int equipmentId = rs.getInt("equipment_id");
+		        String categoryName = rs.getString("category_name");
+		        String equipmentName = rs.getString("equipment_name");
+		        String modelName = rs.getString("model_name");
+		        String manufacturer = rs.getString("manufacturer");
+		        String serialNumber = rs.getString("serial_number");
+		        Date purchaseDate = rs.getDate("purchase_date");
+		        int purchasePrice = rs.getInt("purchase_price");
+		        String status = rs.getString("status");
+		        String managerName = rs.getString("manager_name");
+		        String departmentName = rs.getString("department_name");
+		        String positionName = rs.getString("position_name");
+		        String jobName = rs.getString("job_name");
+
+		        System.out.printf("%-7d %-25s\t%-20s\t%-18s\t%-17s\t%-8s\t%6d만원\t%-10s\t%-15s\t%-15s\t%-15s\t%-15s\n",
+		            equipmentId,
+		            equipmentName,
+		            modelName,
+		            manufacturer,
+		            serialNumber,
+		            purchaseDate,
+		            purchasePrice / 10000,
+		            status,
+		            managerName,
+		            departmentName,
+		            positionName,
+		            jobName);
+		    }
 		} catch (Exception e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	} //end displayEquipmentResults()
 	
