@@ -25,10 +25,10 @@ public class UserAccountService {
         this.departmentDao = departmentDao;
     }
 
-    public Employee login(String empId, String password) throws SQLException {
-        String pw = userAccountDao.findPasswordByEmpId(empId);
+    public Employee login(String userId, String password) throws SQLException {
+        String pw = userAccountDao.findPasswordByUserId(userId);
         if (pw != null && pw.equals(password)) {
-            return employeeDao.findByEmpId(empId);
+            return employeeDao.findByEmpNumber(userId);     // Employee.EmpNumber = UserAccount.UserId
         }
         return null;
     }

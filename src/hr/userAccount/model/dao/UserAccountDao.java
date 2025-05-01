@@ -12,10 +12,10 @@ public class UserAccountDao {
         this.conn = conn;
     }
 
-    public String findPasswordByEmpId(String empId) throws SQLException {
-        String sql = "SELECT password FROM account WHERE employee_id = ?";
+    public String findPasswordByUserId(String userId) throws SQLException {
+        String sql = "SELECT password FROM user_account WHERE user_id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, empId);
+            pstmt.setString(1, userId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return rs.getString("password");

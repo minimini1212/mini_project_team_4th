@@ -37,7 +37,7 @@ public class MainEntry {
 
                         Employee emp = userAccountService.login(id, pw);
                         if (emp != null) {
-                            System.out.println("로그인 성공: " + emp.getName());
+                            System.out.println("로그인 성공. 어서오세요. " + emp.getName() + "님");
                             // TODO: 이후 시스템 메뉴로 이동
                         } else {
                             System.out.println("로그인 실패. 정보가 일치하지 않습니다.");
