@@ -14,9 +14,9 @@ import equipmentAsset.equipment.model.entity.EquipmentCategory;
 public class EquipmentService {
 	EquipmentDAO equipmentDao = new EquipmentDAO();
 	CategoryDAO categoryDAO = new CategoryDAO();
-	
-	/**=-=-=-=-=-=-=-=-=-=-=-=-= 장비 조회 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
-	
+
+	/** =-=-=-=-=-=-=-=-=-=-=-=-= 장비 조회 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
+
 	// - 모든 장비 목록 조회
 	public boolean findAllEquipment() {
 		try {
@@ -106,9 +106,46 @@ public class EquipmentService {
 			equipmentDao.close();
 		}
 	}
+
+	// - 담당자 명단 출력
+	public boolean findAllManager() {
+		try {
+			equipmentDao.connect();
+			if (!equipmentDao.findAllManager()) {
+				System.out.println("조회할 장비가 없습니다");
+				return false;
+			}
+			;
+			return true;
+		} catch (Exception e) {
+			System.out.println("조회 중 오류가 발생하였습니다");
+			return false;
+		} finally {
+			equipmentDao.close();
+		}
+	}
 	
-	/**=-=-=-=-=-=-=-=-=-=-=-=-= 장비 등록 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
+	// 카테고리 ID를 받아서 이름을 반환
+	public String getCategoryNameById(int categoryId) {
+	    try {
+	        categoryDAO.connect();
+	        String categoryName = categoryDAO.getCategoryNameById(categoryId);
+	        if(categoryName == null) {
+	            System.out.println("해당 ID의 카테고리가 존재하지 않습니다.");
+	            return null;
+	        }
+	        return categoryName;
+	    } catch (Exception e) {
+	        System.out.println("조회 중 오류가 발생하였습니다");
+	        return null;
+	    } finally {
+	        categoryDAO.close();
+	    }
+	}
 	
+	
+	/** =-=-=-=-=-=-=-=-=-=-=-=-= 장비 등록 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
+
 	// - 새 장비 정보 저장
 	public boolean saveEquipment(Equipment equipment) {
 		try {
@@ -136,17 +173,125 @@ public class EquipmentService {
 		}
 	}
 
-	/**=-=-=-=-=-=-=-=-=-=-=-=-= 장비 수정 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
-	
+	/** =-=-=-=-=-=-=-=-=-=-=-=-= 장비 수정 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
+
+	// - 장비 구매날짜 업데이트
+	public boolean updatePurchaseDate(int equipmentId, String purchaseDateStr) {
+		try {
+			equipmentDao.connect();
+
+			// 오토커밋 해제
+			equipmentDao.getConn().setAutoCommit(false);
+
+			if (!equipmentDao.updatePurchaseDate(equipmentId, purchaseDateStr)) {
+				System.out.println("업데이트에 실패하였습니다");
+
+				// 업데이트 실패시 롤백
+				equipmentDao.getConn().rollback();
+				return false;
+			}
+			;
+			// 업데이트에 성공했을 때 커밋
+			equipmentDao.getConn().commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println("업데이트 중 오류가 발생하였습니다");
+			return false;
+		} finally {
+			equipmentDao.close();
+		}
+	}
+
+	// - 장비 구매가격 업데이트
+	public boolean updatePurchasePrice(int equipmentId, int purchasePrice) {
+		try {
+			equipmentDao.connect();
+
+			// 오토커밋 해제
+			equipmentDao.getConn().setAutoCommit(false);
+
+			if (!equipmentDao.updatePurchasePrice(equipmentId, purchasePrice)) {
+				System.out.println("업데이트에 실패하였습니다");
+
+				// 업데이트 실패시 롤백
+				equipmentDao.getConn().rollback();
+				return false;
+			}
+			;
+			// 업데이트에 성공했을 때 커밋
+			equipmentDao.getConn().commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println("업데이트 중 오류가 발생하였습니다");
+			return false;
+		} finally {
+			equipmentDao.close();
+		}
+	}
+
+	// - 카테고리 업데이트
+	public boolean updateEquipmentCategory(int equipmentId, int categoryId) {
+		try {
+			equipmentDao.connect();
+
+			// 오토커밋 해제
+			equipmentDao.getConn().setAutoCommit(false);
+
+			if (!equipmentDao.updateEquipmentCategory(equipmentId, categoryId)) {
+				System.out.println("업데이트에 실패하였습니다");
+
+				// 업데이트 실패시 롤백
+				equipmentDao.getConn().rollback();
+				return false;
+			}
+			;
+			// 업데이트에 성공했을 때 커밋
+			equipmentDao.getConn().commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println("업데이트 중 오류가 발생하였습니다");
+			return false;
+		} finally {
+			equipmentDao.close();
+		}
+	}
+
+	// - 담당자 업데이트
+	public boolean updateEquipmentManager(int equipmentId, int managerId) {
+		try {
+			equipmentDao.connect();
+
+			// 오토커밋 해제
+			equipmentDao.getConn().setAutoCommit(false);
+
+			if (!equipmentDao.updateEquipmentManager(equipmentId, managerId)) {
+				System.out.println("업데이트에 실패하였습니다");
+
+				// 업데이트 실패시 롤백
+				equipmentDao.getConn().rollback();
+				return false;
+			}
+			;
+			// 업데이트에 성공했을 때 커밋
+			equipmentDao.getConn().commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println("업데이트 중 오류가 발생하였습니다");
+			return false;
+		} finally {
+			equipmentDao.close();
+		}
+	}
+
 	// - 장비 상태 업데이트
-	public boolean updateStatusEquipment(int equipmentId, String status) {
+	public boolean updateEquipmentStatus(int equipmentId, String status) {
 		try {
 			equipmentDao.connect();
 
 			// 오토커밋 해제
 			equipmentDao.getConn().setAutoCommit(false);
 
-			if (!equipmentDao.updateStatusEquipment(equipmentId, status)) {
+			if (!equipmentDao.updateEquipmentStatus(equipmentId, status)) {
 				System.out.println("업데이트에 실패하였습니다");
 
 				// 업데이트 실패시 롤백
@@ -165,15 +310,15 @@ public class EquipmentService {
 		}
 	}
 
-	// - 장비 담당자 업데이트
-	public boolean updateManagerEquipment(int equipmentId, int managerId) {
+	// - 장비 설명 업데이트
+	public boolean updateEquipmentDescription(int equipmentId, String description) {
 		try {
 			equipmentDao.connect();
 
 			// 오토커밋 해제
 			equipmentDao.getConn().setAutoCommit(false);
 
-			if (!equipmentDao.updateManagerEquipment(equipmentId, managerId)) {
+			if (!equipmentDao.updateEquipmentDescription(equipmentId, description)) {
 				System.out.println("업데이트에 실패하였습니다");
 
 				// 업데이트 실패시 롤백
@@ -191,9 +336,9 @@ public class EquipmentService {
 			equipmentDao.close();
 		}
 	}
-	
-	/**=-=-=-=-=-=-=-=-=-=-=-=-= 장비 삭제 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
-	
+
+	/** =-=-=-=-=-=-=-=-=-=-=-=-= 장비 삭제 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
+
 	// - 장비 정보 삭제
 	public boolean deleteEquipment(int equipmentId) {
 		try {
@@ -221,8 +366,8 @@ public class EquipmentService {
 		}
 	}
 
-	/**=-=-=-=-=-=-=-=-=-=-=-=-= 장비 집계 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=**/
-	
+	/** =-=-=-=-=-=-=-=-=-=-=-=-= 장비 집계 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
+
 	// - 상태별 장비 개수 집계
 	public boolean countByStatus() {
 		try {
@@ -313,8 +458,8 @@ public class EquipmentService {
 		}
 	}
 
-	/**=-=-=-=-=-=-=-=-=-=-=-=- 카테고리 관련 메소드 -=-=-=-=-=-=-=-=-=-=-=-=**/
-	
+	/** =-=-=-=-=-=-=-=-=-=-=-=- 카테고리 관련 메소드 -=-=-=-=-=-=-=-=-=-=-=-= **/
+
 	// - 모든 카테고리 조회
 	public boolean findAllCategories() {
 		try {
@@ -337,18 +482,18 @@ public class EquipmentService {
 	public boolean saveCategory(EquipmentCategory category) {
 		try {
 			categoryDAO.connect();
-			
+
 			// 오토커밋 해제
 			categoryDAO.getConn().setAutoCommit(false);
-			
+
 			if (!categoryDAO.saveCategory(category)) {
 				System.out.println("등록에 실패하였습니다.");
-				//등록 실패 시 롤백
+				// 등록 실패 시 롤백
 				categoryDAO.getConn().rollback();
 				return false;
 			}
 			;
-			//등록 성공 시 커밋
+			// 등록 성공 시 커밋
 			categoryDAO.getConn().commit();
 			return true;
 		} catch (Exception e) {
@@ -364,17 +509,22 @@ public class EquipmentService {
 		try {
 			categoryDAO.connect();
 			
+			if(categoryDAO.isUsedInEquipment(categoryId)) {
+				System.out.println("사용중인 카테고리여서 삭제할 수 없습니다");
+				return false;
+			}
+			
 			// 오토커밋 해제
 			categoryDAO.getConn().setAutoCommit(false);
-						
+
 			if (!categoryDAO.deleteCategory(categoryId)) {
 				System.out.println("삭제에 실패하였습니다.");
-				//삭제 실패 시 롤백
+				// 삭제 실패 시 롤백
 				categoryDAO.getConn().rollback();
 				return false;
 			}
 			;
-			//삭제 성공 시 커밋
+			// 삭제 성공 시 커밋
 			categoryDAO.getConn().commit();
 			return true;
 		} catch (Exception e) {
