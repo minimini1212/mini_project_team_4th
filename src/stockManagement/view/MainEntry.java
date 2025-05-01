@@ -10,9 +10,7 @@ import stockManagement.order.model.service.OrderService;
 import stockManagement.stock.controller.StockController;
 import stockManagement.stock.model.dao.StockDao;
 import stockManagement.stock.model.service.StockService;
-import stockManagement.stockHistory.controller.StockHistoryController;
-import stockManagement.stockHistory.model.dao.StockHistoryDao;
-import stockManagement.stockHistory.model.service.StockHistoryService;
+
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -28,12 +26,12 @@ public class MainEntry {
             ItemDao itemDao = new ItemDao(conn);
             OrderDao orderDao = new OrderDao(conn);
             StockDao stockDao = new StockDao(conn);
-            StockHistoryDao historyDao = new StockHistoryDao(conn);
+
 
             OrderService orderService = new OrderService(orderDao);
             ItemService itemService = new ItemService(conn, itemDao, stockDao);
             StockService stockService = new StockService(stockDao);
-            StockHistoryService historyService = new StockHistoryService(historyDao);
+
 
             // 3. 컨트롤러 객체 생성
             OrderController orderController = new OrderController(orderService);
@@ -42,7 +40,7 @@ public class MainEntry {
 
             // admin 또는 user 권한 설정 (로그인 시스템 연동 시 대체 가능)
             String role = "admin";
-            StockHistoryController historyController = new StockHistoryController(historyService, role);
+
 
             // 4. 사용자 메뉴 선택
             Scanner scanner = new Scanner(System.in);
@@ -51,6 +49,7 @@ public class MainEntry {
                 System.out.println("1. 물품 관리");
                 System.out.println("2. 재고 관리");
                 System.out.println("3. 입출 기록 관리");
+                System.out.println("4. 발주 관리");
                 System.out.println("0. 종료");
                 System.out.print("메뉴 선택: ");
 
@@ -58,7 +57,8 @@ public class MainEntry {
                 switch (choice) {
                     case 1 -> itemController.run();
                     case 2 -> stockController.run();
-                    case 3 -> historyController.run();
+
+                    case 4 -> orderController.run();
                     case 0 -> {
                         System.out.println("프로그램을 종료합니다.");
                         return;
