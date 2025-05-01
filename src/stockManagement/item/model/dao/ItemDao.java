@@ -78,11 +78,12 @@ public class ItemDao {
 
     // 5. 물품명/카테고리로 검색
     public List<Item> search(String keyword) throws SQLException {
-        String sql = "SELECT * FROM item WHERE del_yn = 'N' AND (item_name LIKE ? OR category LIKE ?)";
+        String sql = "SELECT * FROM item WHERE del_yn = 'N' AND (item_name LIKE ? OR category LIKE ? OR item_code LIKE ?)";
         List<Item> result = new ArrayList<>();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, "%" + keyword + "%");
             pstmt.setString(2, "%" + keyword + "%");
+            pstmt.setString(3, "%" + keyword + "%");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 result.add(mapRow(rs));
