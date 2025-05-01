@@ -118,7 +118,7 @@ public class ItemController {
     }
 
     private void searchItems() throws SQLException {
-        System.out.print("검색어 (이름 or 카테고리): ");
+        System.out.print("검색어 (품명 or 카테고리 or 코드): ");
         String keyword = scanner.nextLine();
 
         List<Item> results = itemService.searchItems(keyword);
