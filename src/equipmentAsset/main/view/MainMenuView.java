@@ -61,7 +61,12 @@ public class MainMenuView {
 		//dao2.findAllCategories();
 		////========여기까지 카테고리 관련 테스트 완료========////
 		
+		dao.findAllManager();
+		
+		
 		dao.close();
 		dao2.close();
+		
+		
 	}
 }
