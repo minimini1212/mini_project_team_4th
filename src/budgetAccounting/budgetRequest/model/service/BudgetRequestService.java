@@ -28,20 +28,30 @@ public class BudgetRequestService {
 	// 예산 승인 및 예산 테이블에 삽입
 	public void approveAndInsertToBudget(int requestId, int approverId) throws SQLException {
 		try {
+			// 자동 커밋 false
 			conn.setAutoCommit(false);
 
+			// status = 'APPROVED'로
 			budgetRequestDao.approve(requestId, approverId);
 
+			// 예산 신청 ID로 특정 예산 신청 가져오기
 			BudgetRequest budgetRequest = budgetRequestDao.findByBudgetRequestId(requestId).get(0);
 
+			// getNextBudgetId로 시퀀스를 가져와 예산 Id로 추가
 			int newBudgetId = budgetDao.getNextBudgetId();
+			// 타입 변경
 			Budget budget = convertToBudget(budgetRequest);
+			// budget의 id와 budget_request id 넣기
 			budget.setBudgetId(newBudgetId);
+			budget.setBudgetRequestId(requestId);
 
+			// 예산 생성
 			budgetDao.insertBudget(budget);
 
+			// 커밋
 			conn.commit();
 		} catch (SQLException e) {
+			// 하나라도 오류가 나면 롤백
 			conn.rollback();
 			throw e;
 		} finally {
