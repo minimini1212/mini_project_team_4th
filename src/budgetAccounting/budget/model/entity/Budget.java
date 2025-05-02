@@ -22,6 +22,7 @@ import lombok.ToString;
 @ToString
 public class Budget {
 	private int budgetId;
+	private int budgetRequestId;
 	private int departmentId;
 	private int year;
 	private int budgetAmount;
