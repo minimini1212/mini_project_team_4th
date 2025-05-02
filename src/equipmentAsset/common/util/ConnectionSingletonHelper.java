@@ -25,11 +25,11 @@ public class ConnectionSingletonHelper {
 			
 			if( dsn.equals("mysql") ) {
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kosaDB","donggue", "mysql");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kosaDB","his", "mysql");
 				
 			} else if ( dsn.equals("oracle") ) {
 				Class.forName("oracle.jdbc.OracleDriver");
-				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","donggue", "oracle");
+				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","his", "oracle");
 //				System.out.println("oracle connection sucess!!");
 			} 
 			

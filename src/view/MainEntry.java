@@ -7,8 +7,6 @@ import hr.employee.model.entity.Employee;
 import hr.position.model.dao.PositionDao;
 import hr.userAccount.model.dao.UserAccountDao;
 import hr.userAccount.model.service.UserAccountService;
-import stockManagement.item.controller.ItemController;
-import stockManagement.order.controller.OrderController;
 import stockManagement.view.StockManagementView;
 
 import java.sql.Connection;
@@ -64,6 +62,7 @@ public class MainEntry {
 								System.out.println("2. 예산/회계 관리 부서");
 								System.out.println("3. 자산 관리 부서");
 
+								System.out.print("선택: ");
 								int choice2 = scanner.nextInt();
 								switch (choice2) {
 									case 1 -> {	// 인사 관리 부서
