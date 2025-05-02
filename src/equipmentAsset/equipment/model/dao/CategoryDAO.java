@@ -110,10 +110,6 @@ public class CategoryDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, categoryId);
-			
-			
-			
-			
 			pstmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {

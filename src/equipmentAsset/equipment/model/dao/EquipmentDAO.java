@@ -56,7 +56,7 @@ public class EquipmentDAO {
 	public boolean findAllEquipment() {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL ORDER BY EQUIPMENT_ID");
-			equipmentVIew.displayEquipmentResults(rs);
+			equipmentVIew.findAllEquipment(rs);
 			return true;
 		} catch (SQLException e) {
 			return false;
@@ -67,7 +67,7 @@ public class EquipmentDAO {
 	public boolean findByIdEquipment(int equipmentId) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE EQUIPMENT_ID IN (" + equipmentId + ")");
-			equipmentVIew.displayEquipmentResults(rs);
+			equipmentVIew.findAllEquipment(rs);
 			return true;
 		} catch (SQLException e) {
 			return false;
@@ -78,7 +78,7 @@ public class EquipmentDAO {
 	public boolean findByCategoryEquipment(String categoryName) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE CATEGORY_NAME IN ('" + categoryName + "')");
-			equipmentVIew.displayEquipmentResults(rs);
+			equipmentVIew.findAllEquipment(rs);
 			return true;
 		} catch (SQLException e) {
 			return false;
@@ -90,7 +90,7 @@ public class EquipmentDAO {
 		try {
 			rs = stmt.executeQuery(
 					"SELECT * FROM V_EQUIPMENT_DETAIL WHERE DEPARTMENT_NAME IN ('" + departmentName + "')");
-			equipmentVIew.displayEquipmentResults(rs);
+			equipmentVIew.findAllEquipment(rs);
 			return true;
 		} catch (SQLException e) {
 			return false;
@@ -113,7 +113,7 @@ public class EquipmentDAO {
 	public boolean findByStatusEquipment(String status) {
 		try {
 			rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE STATUS IN ('" + status + "')");
-			equipmentVIew.displayEquipmentResults(rs);
+			equipmentVIew.findAllEquipment(rs);
 			return true;
 		} catch (SQLException e) {
 			return false;

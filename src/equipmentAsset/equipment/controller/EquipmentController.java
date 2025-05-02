@@ -40,7 +40,8 @@ public class EquipmentController {
 			case "5":
 				int categoryId = inputCategory();
 				String categoryName = equipmentService.getCategoryNameById(categoryId);
-				if(categoryName == null) return;
+				if (categoryName == null)
+					return;
 				equipmentService.findByCategoryEquipment(categoryName);
 				break;
 			default:
@@ -133,7 +134,7 @@ public class EquipmentController {
 			}
 		}
 	}
-	
+
 	// - 카테고리 관리
 	public void manageCategoryMenu() {
 		while (true) {
@@ -155,7 +156,7 @@ public class EquipmentController {
 				System.out.println("잘못된 입력입니다");
 				break;
 			}
-		}	
+		}
 	}
 
 	/** =-=-=-=-=-=-=-=-=-=-=-= 하위 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
@@ -219,16 +220,16 @@ public class EquipmentController {
 
 		return true;
 	} // end createEquipment
-	
+
 	public boolean createCategory() {
 		EquipmentCategory category = new EquipmentCategory();
-		
+
 		System.out.println("--- 카테고리 정보 등록 ---");
 		System.out.print("카테고리 이름 입력 : ");
 		category.setCategoryName(sc.nextLine());
 		System.out.print("카테고리 코드 입력 : ");
 		category.setCategoryCode(sc.nextLine());
-	
+
 		if (!equipmentService.saveCategory(category)) {
 			return false;
 		}
@@ -238,8 +239,7 @@ public class EquipmentController {
 
 		return true;
 	} // end createEquipment
-	
-	
+
 	// - 구매 정보 입력
 	public boolean inputPurchaseInfo(Equipment equipment) {
 		// 날짜 정규표현식 (YYYY-MM-DD)
@@ -295,7 +295,7 @@ public class EquipmentController {
 		}
 		return true;
 	}
-	
+
 	// - 담당자 선택
 	public boolean selectEquipmentManager(Equipment equipment) {
 
@@ -506,26 +506,26 @@ public class EquipmentController {
 		}
 		return department;
 	}
-	
-	// - 카테고리 입력받고 반환
-		public int inputCategory() {
-			int categoryId;
-			while (true) {
-				try {
-					if (!equipmentService.findAllCategories()) {
-						return -1;
-					}
-					System.out.println();
-					System.out.println("---------------------");
-					System.out.print("카테고리 번호 선택 : ");
-					categoryId = Integer.parseInt(sc.nextLine());
 
-				} catch (Exception e) {
-					System.out.println("숫자만 입력해주세요.");
-					continue;
+	// - 카테고리 입력받고 반환
+	public int inputCategory() {
+		int categoryId;
+		while (true) {
+			try {
+				if (!equipmentService.findAllCategories()) {
+					return -1;
 				}
-				return categoryId;
+				System.out.println();
+				System.out.println("---------------------");
+				System.out.print("카테고리 번호 선택 : ");
+				categoryId = Integer.parseInt(sc.nextLine());
+
+			} catch (Exception e) {
+				System.out.println("숫자만 입력해주세요.");
+				continue;
 			}
+			return categoryId;
 		}
+	}
 
 } // end class
