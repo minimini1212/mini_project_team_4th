@@ -1,6 +1,7 @@
 package stockManagement.view;
 
 import dbConn.ConnectionSingletonHelper;
+import hr.employee.model.entity.Employee;
 import stockManagement.item.controller.ItemController;
 import stockManagement.item.model.dao.ItemDao;
 import stockManagement.item.model.service.ItemService;
@@ -16,34 +17,31 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 
-public class MainEntry {
-    public static void main(String[] args) {
+public class StockManagementView {
+
+    private final Connection conn;
+
+    public StockManagementView(Connection conn) {
+        this.conn = conn;
+    }
+
+    public void run(Scanner scanner, String role, Employee emp) {
         try {
-
-            Connection conn = ConnectionSingletonHelper.getConnection("oracle");
-
             // 2. DAO/Service 객체 생성
             ItemDao itemDao = new ItemDao(conn);
             OrderDao orderDao = new OrderDao(conn);
             StockDao stockDao = new StockDao(conn);
 
-
             OrderService orderService = new OrderService(orderDao);
             ItemService itemService = new ItemService(conn, itemDao, stockDao);
             StockService stockService = new StockService(stockDao);
-
 
             // 3. 컨트롤러 객체 생성
             OrderController orderController = new OrderController(orderService);
             ItemController itemController = new ItemController(itemService);
             StockController stockController = new StockController(stockService);
 
-            // admin 또는 user 권한 설정 (로그인 시스템 연동 시 대체 가능)
-            String role = "admin";
-
-
             // 4. 사용자 메뉴 선택
-            Scanner scanner = new Scanner(System.in);
             while (true) {
                 System.out.println("\n====== 병원 재고 시스템 ======");
                 System.out.println("1. 물품 관리");
@@ -57,7 +55,6 @@ public class MainEntry {
                 switch (choice) {
                     case 1 -> itemController.run();
                     case 2 -> stockController.run();
-
                     case 4 -> orderController.run();
                     case 0 -> {
                         System.out.println("프로그램을 종료합니다.");

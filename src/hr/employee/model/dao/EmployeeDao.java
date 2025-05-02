@@ -31,14 +31,14 @@ public class EmployeeDao {
         }
     }
 
-    public Employee findByEmpId(String employeeId) throws SQLException {
-        String sql = "SELECT * FROM employee WHERE employee_id = ?";
+    public Employee findByEmpNumber(String empNumber) throws SQLException {
+        String sql = "SELECT * FROM employee WHERE emp_number = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, employeeId);
+            pstmt.setString(1, empNumber);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 Employee emp = new Employee();
-                emp.setEmpNumber(rs.getString("employee_id"));
+                emp.setEmployeeId(rs.getInt("employee_id"));
                 emp.setName(rs.getString("name"));
                 emp.setPhone(rs.getString("phone"));
                 emp.setHireDate(rs.getDate("hire_date"));
