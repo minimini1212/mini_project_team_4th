@@ -51,7 +51,7 @@ public class StockManagementView {
                 System.out.println("0. 종료");
                 System.out.print("메뉴 선택: ");
 
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = scanner.nextInt();
                 switch (choice) {
                     case 1 -> itemController.run();
                     case 2 -> stockController.run();
