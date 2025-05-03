@@ -2,33 +2,199 @@ package budgetAccounting.budget.controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 import budgetAccounting.budget.model.entity.Budget;
 import budgetAccounting.budget.model.service.BudgetService;
+import budgetAccounting.budget.view.BudgetView;
 
 public class BudgetController {
-	
-	private final BudgetService budgetService;
-	
-	public BudgetController(Connection conn) {
-		this.budgetService = new BudgetService(conn);
-	}
-	
-	public void handleNewBudget(String DepartmentId, String category) {
-        Budget budget = new Budget();
-        budget.setBudgetId();
-        budget.setDepartmentId();
-        budget.setYear();
-        budget.setBudgetAmount();
-        budget.setCategoryId();
-        budget.setDescription();
 
-        try {
-        	budgetService.registerBudget(budget);
-            System.out.println("예산이 성공적으로 등록되었습니다.");
-        } catch (SQLException e) {
-            System.out.println("예산 등록 실패: " + e.getMessage());
-        }
-    }
-	
+	private BudgetService budgetservice;
+	private BudgetView budgetView;
+
+	public BudgetController(Connection conn, BudgetView budgetView) {
+		this.budgetservice = new BudgetService(conn);
+		this.budgetView = budgetView;
+	}
+
+	public void run() {
+		Scanner sc = new Scanner(System.in);
+		boolean running = true;
+
+		while (running) {
+			budgetView.menu();
+			int choice = sc.nextInt();
+
+			try {
+				switch (choice) {
+				case 1:
+					createBudget(sc);
+					break;
+				case 2:
+					listRequests();
+					break;
+				case 3:
+					findOneRequest(sc);
+					break;
+				case 4:
+					updateRequest(sc);
+					break;
+				case 5:
+					softDeleteRequest(sc);
+					break;
+				case 0:
+					running = false;
+					break;
+				default:
+					System.out.println("잘못된 입력입니다.");
+				}
+			} catch (SQLException e) {
+				System.err.println("오류: " + e.getMessage());
+			}
+		}
+
+		sc.close();
+	}
+
+	// 예산 생성
+	private void createBudget(Scanner sc) throws SQLException {
+		while (true) {
+			try {
+				System.out.print("부서 ID: ");
+				int deptId = sc.nextInt();
+				System.out.print("연도: ");
+				int year = sc.nextInt();
+				System.out.print("예산 금액: ");
+				int amount = sc.nextInt();
+				System.out.print("카테고리 ID: ");
+				int categoryId = sc.nextInt();
+				sc.nextLine(); // flush newline
+				System.out.print("설명: ");
+				String description = sc.nextLine();
+
+				Budget request = new Budget();
+				request.setDepartmentId(deptId);
+				request.setYear(year);
+				request.setBudgetAmount(amount);
+				request.setCategoryId(categoryId);
+				request.setDescription(description);
+
+				budgetservice.createBudget(request);
+				System.out.println("예산이 등록되었습니다.");
+				break;
+
+			} catch (InputMismatchException e) {
+				System.out.println("올바르게 입력해주세요.");
+				sc.nextLine();
+
+			} catch (SQLException e) {
+				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				sc.nextLine();
+			} catch (Exception e) {
+				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				sc.nextLine();
+			}
+		}
+	}
+
+	// 전체 예산 조회
+	private void listRequests() throws SQLException {
+		List<Budget> requests = budgetservice.getAllBudget();
+		System.out.println("\n[전체 예산 신청 목록]");
+		for (Budget br : requests) {
+			System.out.println(br);
+		}
+	}
+
+	// 특정 예산 조회
+	private void findOneRequest(Scanner sc) throws SQLException {
+
+		while (true) {
+			try {
+				System.out.print("조회할 예산 ID: ");
+				int requestId = sc.nextInt();
+				List<Budget> requests = budgetservice.getBudgetById(requestId);
+				for (Budget br : requests) {
+					System.out.println(br);
+				}
+				break;
+
+			} catch (InputMismatchException e) {
+				System.out.println("올바르게 입력해주세요.");
+				sc.nextLine();
+
+			} catch (SQLException e) {
+				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				sc.nextLine();
+			} catch (Exception e) {
+				System.out.println("예산 등록 중 오류가 발생했습니다.");
+				sc.nextLine();
+			}
+		}
+
+	}
+
+	// 예산 수정
+	private void updateRequest(Scanner sc) throws SQLException {
+
+		while (true) {
+			try {
+				System.out.print("수정할 예산 ID: ");
+				int requestId = sc.nextInt();
+				System.out.print("예산 금액: ");
+				int amount = sc.nextInt();
+				sc.nextLine();
+				System.out.print("설명: ");
+				String description = sc.nextLine();
+
+				Budget request = new Budget();
+				request.setBudgetRequestId(requestId);
+				request.setBudgetAmount(amount);
+				request.setDescription(description);
+
+				budgetservice.updateBudget(request);
+				System.out.println("예산이 수정되었습니다.");
+				break;
+
+			} catch (InputMismatchException e) {
+				System.out.println("올바르게 입력해주세요.");
+				sc.nextLine();
+
+			} catch (Exception e) {
+				System.out.println("예산 등록 중 오류가 발생했습니다: ");
+				sc.nextLine();
+			}
+		}
+
+	}
+
+	// 예산 소프트딜리트
+	private void softDeleteRequest(Scanner sc) throws SQLException {
+
+		while (true) {
+			try {
+				System.out.print("삭제할 예산 ID: ");
+				int requestId = sc.nextInt();
+				budgetservice.softDeleteBudget(requestId);
+				System.out.println("예산이 소프트 삭제되었습니다.");
+				break;
+
+			} catch (InputMismatchException e) {
+				System.out.println("올바르게 입력해주세요.");
+				sc.nextLine();
+
+			} catch (SQLException e) {
+				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				sc.nextLine();
+			} catch (Exception e) {
+				System.out.println("예산 등록 중 오류가 발생했습니다: ");
+				sc.nextLine();
+			}
+		}
+
+	}
+
 }
