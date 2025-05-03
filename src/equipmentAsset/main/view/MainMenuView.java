@@ -1,14 +1,14 @@
 package equipmentAsset.main.view;
-import equipmentAsset.equipment.model.dao.CategoryDAO;
-import equipmentAsset.equipment.model.dao.EquipmentDAO;
+import equipmentAsset.inspection.model.dao.InspectionDAO;
+import equipmentAsset.inspection.model.service.InspectionService;
 
 public class MainMenuView {
 	public static void main(String[] args) {
-		EquipmentDAO dao = new EquipmentDAO();
-		dao.connect();
-		
-		CategoryDAO dao2 = new CategoryDAO();
-		dao2.connect();
+//		EquipmentDAO dao = new EquipmentDAO();
+//		dao.connect();
+//		
+//		CategoryDAO dao2 = new CategoryDAO();
+//		dao2.connect();
 		
 		//dao.findAllEquipment();           //완료
 		//dao.findByIdEquipment(1);        //완료
@@ -61,11 +61,17 @@ public class MainMenuView {
 		//dao2.findAllCategories();
 		////========여기까지 카테고리 관련 테스트 완료========////
 		
-		dao.findAllManager();
-		
-		
-		dao.close();
-		dao2.close();
+		//dao.findAllManager();
+		//dao.close();
+		//dao2.close();
+		////==========================================////
+		InspectionDAO dao3 = new InspectionDAO();
+//		dao3.connect();
+//		dao3.findByScheduleId(5);
+//		dao3.close();
+		InspectionService service = new InspectionService();
+		//service.findByScheduleId(5);
+		service.findAllInspection();
 		
 		
 	}
