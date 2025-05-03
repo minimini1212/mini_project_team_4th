@@ -1,7 +1,6 @@
 package stockManagement.view;
 
-import dbConn.ConnectionSingletonHelper;
-import hr.employee.model.entity.Employee;
+import humanResource.employee.model.entity.Employee;
 import stockManagement.item.controller.ItemController;
 import stockManagement.item.model.dao.ItemDao;
 import stockManagement.item.model.service.ItemService;
@@ -43,7 +42,7 @@ public class StockManagementView {
 
             // 4. 사용자 메뉴 선택
             while (true) {
-                System.out.println("\n====== 병원 재고 시스템 ======");
+                System.out.println("\n====== 재고 관리 메뉴 ======");
                 System.out.println("1. 물품 관리");
                 System.out.println("2. 재고 관리");
                 System.out.println("3. 입출 기록 관리");
@@ -51,7 +50,7 @@ public class StockManagementView {
                 System.out.println("0. 종료");
                 System.out.print("메뉴 선택: ");
 
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = scanner.nextInt();
                 switch (choice) {
                     case 1 -> itemController.run();
                     case 2 -> stockController.run();
