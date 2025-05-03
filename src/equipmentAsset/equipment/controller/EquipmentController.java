@@ -452,33 +452,36 @@ public class EquipmentController {
 
 	// - 상태 정보 입력받아 반환해주는 메소드
 	public String getEquipmentStatus() {
-		String status;
-		while (true) {
-			System.out.println("---- 입력 가능 상태 ----");
-			equipmentView.inputStatusAndDescriptionMenu();
-			switch (sc.nextLine()) {
-			case "1":
-				status = "정상";
-				break;
-			case "2":
-				status = "점검필요";
-				break;
-			case "3":
-				status = "수리중";
-				break;
-			case "4":
-				status = "폐기예정";
-				break;
-			case "5":
-				status = "폐기완료";
-				break;
-			default:
-				System.out.println("잘못된 입력입니다");
-				continue;
-			}
-			break;
-		}
-		return status;
+		  String status;
+		    while (true) {
+		        System.out.println("---- 입력 가능 상태 ----");
+		        equipmentView.inputStatusAndDescriptionMenu();
+		        switch (sc.nextLine()) {
+		        case "1":
+		            status = "정상";
+		            break;
+		        case "2":
+		            status = "점검필요";
+		            break;
+		        case "3":
+		            status = "수리필요";
+		            break;
+		        case "4":
+		            status = "수리중";
+		            break;
+		        case "5":
+		            status = "폐기예정";
+		            break;
+		        case "6":
+		            status = "폐기완료";
+		            break;
+		        default:
+		            System.out.println("잘못된 입력입니다");
+		            continue;
+		        }
+		        break;
+		    }
+		    return status;
 	}
 
 	// - 부서 이름 입력받아 반환해주는 메소드

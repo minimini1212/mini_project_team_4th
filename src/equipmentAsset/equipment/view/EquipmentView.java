@@ -26,16 +26,17 @@ public class EquipmentView {
 		System.out.println("2. 카테고리 입력");
 		System.out.println("3. 담당자 입력");
 		System.out.println("4. 상태 및 추가 설명 입력");
-		System.out.println("5. 나중에 입력");
+		System.out.println("5. 나중에 입력하기");
 		System.out.print("번호 입력 : ");
 	}
 	
 	public void inputStatusAndDescriptionMenu() {
 		System.out.println("1. 정상");
 		System.out.println("2. 점검필요");
-		System.out.println("3. 수리중");
-		System.out.println("4. 폐기예정");
-		System.out.println("5. 폐기완료");
+		System.out.println("3. 수리필요");
+		System.out.println("4. 수리중");
+		System.out.println("5. 폐기예정");
+		System.out.println("6. 폐기완료");
 		System.out.print("번호 입력 : ");
 	}
 
@@ -45,7 +46,7 @@ public class EquipmentView {
 		System.out.println("1. 신규 장비 등록");
 		System.out.print("번호 입력 : ");
 	}
-
+	
 	public void updateEquipmentMenu() {
 		System.out.println("---- 장비 정보 수정 ----");
 		System.out.println("0. 이전 메뉴 돌아가기");
@@ -71,7 +72,7 @@ public class EquipmentView {
 		System.out.println("3. 기존 카테고리 삭제");
 		System.out.print("번호 입력 : ");
 	}
-
+	
 	public void inputDepartment() {
 		System.out.println("---- 전체 부서 목록 ----");
 		System.out.println("1. 인사팀");
@@ -80,7 +81,7 @@ public class EquipmentView {
 		System.out.println("4. 장비팀");
 		System.out.print("번호 입력 : ");
 	}
-
+	
 	/** =-=-=-=-=-=-=-=-=-=-=-= DAO 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	// - 장비 정보 출력
@@ -213,7 +214,7 @@ public class EquipmentView {
 			e.printStackTrace();
 		}
 	} // end getRecentlyUpdatedEquipments
-
+	
 	// - 모든 카테고리 출력
 	public void findAllCategories(ResultSet rs) {
 		try {
