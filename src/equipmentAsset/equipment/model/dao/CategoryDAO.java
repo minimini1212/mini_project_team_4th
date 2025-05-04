@@ -6,50 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import equipmentAsset.common.util.CloseHelper;
-import equipmentAsset.common.util.ConnectionSingletonHelper;
+import dbConn.*;
 import equipmentAsset.equipment.model.entity.EquipmentCategory;
 import equipmentAsset.equipment.view.EquipmentView;
 import lombok.Getter;
 
 @Getter
 
-public class CategoryDAO {
+public class CategoryDAO extends BaseDAO {
     private final String TABLE_NAME = "EQUIPMENT_CATEGORY";
-
     private EquipmentView equipmentVIew = new EquipmentView();
-
-    /**
-     * =-=-=-=-=-=-=-=-=-=-=-=-= 연결 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
-     **/
-    // 연결, 삽입, 삭제, 수정, 검색,......
-    private Statement stmt = null;
-    private PreparedStatement pstmt = null;
-    private ResultSet rs = null;
-    private Connection conn = null;
-
-    // connect
-    public void connect() {
-        try {
-            conn = ConnectionSingletonHelper.getConnection("oracle");
-            stmt = conn.createStatement();
-            conn.setAutoCommit(false); // 자동커밋 끄기
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } // end connect()
-
-    // close
-    public void close() {
-        try {
-            CloseHelper.close(rs);
-            CloseHelper.close(stmt);
-            CloseHelper.close(pstmt);
-            CloseHelper.close(conn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } // end close
 
     /**
      * =-=-=-=-=-=-=-=-=-=-=-=-= 조회 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
