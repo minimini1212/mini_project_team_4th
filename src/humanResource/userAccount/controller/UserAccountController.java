@@ -2,6 +2,7 @@ package humanResource.userAccount.controller;
 
 import common.SessionContext;
 import humanResource.employee.model.entity.Employee;
+import humanResource.employee.model.service.EmployeeService;
 import humanResource.userAccount.model.service.UserAccountService;
 import humanResource.userAccount.view.UserAccountView;
 import lombok.RequiredArgsConstructor;
@@ -13,29 +14,31 @@ import java.util.Scanner;
 @RequiredArgsConstructor
 public class UserAccountController {
 
-    private final Scanner scanner;
-    private final UserAccountService userAccountService;
-    private final UserAccountView userAccountView = new UserAccountView();
+    Scanner scanner = new Scanner(System.in);
+    UserAccountService userAccountService = new UserAccountService();
+    EmployeeService employeeService = new EmployeeService();
+    UserAccountView userAccountView = new UserAccountView();
 
-    public void menu() {
+    public void loginMenu() {
         while (true) {
             userAccountView.findUserAccountMenu();
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 1 -> login();
-                case 2 -> register();
+                case 2 -> createEmployee();
                 case 0 -> {
                     System.out.println("프로그램 종료");
                     return;
                 }
-                default -> System.out.println("잘못된 입력입니다.");
+                default -> System.out.println("보기의 번호를 선택해주세요.");
             }
         }
     }
 
     private void login() {
-        System.out.print("사번(empId): ");
+        System.out.println("===== 로그인 =====");
+        System.out.print("사번: ");
         String id = scanner.nextLine();
         System.out.print("비밀번호: ");
         String pw = scanner.nextLine();
@@ -53,8 +56,7 @@ public class UserAccountController {
         }
     }
 
-    private void register() {
-
+    private void createEmployee() {
         try {
             boolean continueRegistration = true;
             while (continueRegistration) {
@@ -138,7 +140,7 @@ public class UserAccountController {
                     }
                 }
 
-                userAccountService.register(emp, pw);
+                employeeService.createEmployee(emp, pw);
             }
         } catch (Exception e) {
             System.out.println("회원가입 중 오류 발생: " + e.getMessage());
@@ -146,18 +148,22 @@ public class UserAccountController {
         }
     }
 
-    public Employee getLoggedInUser() {
-        return SessionContext.getUser();
-    }
-
-    public String getUserRole() {
-        return SessionContext.getRole();
-    }
-
     private boolean isValidPassword(String password) {
         return password.length() >= 8 &&
                 password.matches(".*[0-9].*") &&  // 숫자 포함
                 password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");  // 특수문자 포함
     }
+
+//    public void logout() {
+//        if (!SessionContext.isLoggedIn()) {
+//            System.out.println("⚠️ 현재 로그인된 사용자가 없습니다.");
+//            return;
+//        }
+//
+//        String name = SessionContext.getUser().getName();
+//        SessionContext.clear();
+//        System.out.println("✅ " + name + " 님이 로그아웃되었습니다.");
+//    }
+
 
 }

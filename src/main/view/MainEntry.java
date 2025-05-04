@@ -13,14 +13,13 @@ import java.util.Scanner;
 public class MainEntry {
 	public static void main(String[] args) {
 		try {
-			Connection conn = ConnectionSingletonHelper.getConnection("oracle");
 
 			// DAO/Service 객체 생성
-			UserAccountService userAccountService = new UserAccountService(conn);
-			UserAccountController userAccountController = new UserAccountController(new Scanner(System.in), userAccountService);
+			UserAccountService userAccountService = new UserAccountService();
+			UserAccountController userAccountController = new UserAccountController();
 
 			// 로그인 메뉴 호출
-			userAccountController.menu();
+			userAccountController.loginMenu();
 
 			// 세션 정보 확인 후 MainController 실행
 			if (SessionContext.isLoggedIn()) {
