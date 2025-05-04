@@ -10,6 +10,18 @@ public class EquipmentView {
 
 	/** =-=-=-=-=-=-=-=-=-=-=-= 컨트롤러 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
+	public void equipmentMenu() {
+	    System.out.println("---- 장비 관리 ----");
+	    System.out.println("0. 이전 메뉴 돌아가기");
+	    System.out.println("1. 장비 정보 조회");
+	    System.out.println("2. 장비 정보 등록");
+	    System.out.println("3. 장비 정보 수정");
+	    System.out.println("4. 장비 정보 삭제");
+	    System.out.println("5. 장비 현황 대시보드");
+	    System.out.println("6. 카테고리 관리");
+	    System.out.print("번호 입력 : ");
+	}
+	
 	public void findEquipmentMenu() {
 		System.out.println("---- 장비 정보 조회 ----");
 		System.out.println("0. 이전 메뉴 돌아가기");
@@ -35,8 +47,6 @@ public class EquipmentView {
 		System.out.println("2. 점검필요");
 		System.out.println("3. 수리필요");
 		System.out.println("4. 수리중");
-		System.out.println("5. 폐기예정");
-		System.out.println("6. 폐기완료");
 		System.out.print("번호 입력 : ");
 	}
 
@@ -50,7 +60,14 @@ public class EquipmentView {
 	public void updateEquipmentMenu() {
 		System.out.println("---- 장비 정보 수정 ----");
 		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 기존 장비 수정");
+		System.out.println("1. 장비 정보 수정");
+		System.out.print("번호 입력 : ");
+	}
+	
+	public void deleteEquipmentMenu() {
+		System.out.println("---- 장비 정보 삭제 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 장비 삭제");
 		System.out.print("번호 입력 : ");
 	}
 

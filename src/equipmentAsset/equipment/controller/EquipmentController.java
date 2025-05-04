@@ -13,6 +13,40 @@ public class EquipmentController {
 	EquipmentService equipmentService = new EquipmentService();
 	Scanner sc = new Scanner(System.in);
 
+	/** =-=-=-=-=-=-=-=-=-=-=-= 최상위 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
+
+	// - 장비 관리 최상위 메뉴
+	public void equipmentMenu() {
+	    while (true) {
+	        equipmentView.equipmentMenu();
+	        switch (sc.nextLine()) {
+	        case "0": // - 이전 메뉴로 돌아가기
+	            return;
+	        case "1": // - 장비 정보 조회 메뉴로 이동
+	            findEquipmentMenu();
+	            break;
+	        case "2": // - 장비 등록 메뉴로 이동
+	            saveEquipmentMenu();
+	            break;
+	        case "3": // - 장비 정보 수정 메뉴로 이동
+	            updateEquipmentMenu();
+	            break;
+	        case "4": // - 장비 정보 삭제 메뉴로 이동
+	            deleteEquipmentMenu();
+	            break;
+	        case "5": // - 장비 현황 대시보드 메뉴로 이동
+	            showEquipmentDashboardMenu();
+	            break;
+	        case "6": // - 카테고리 관리 메뉴로 이동
+	            manageCategoryMenu();
+	            break;
+	        default:
+	            System.out.println("잘못된 입력입니다");
+	            break;
+	        }
+	    }
+	}
+
 	/** =-=-=-=-=-=-=-=-=-=-=-= 상위 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	// - 장비 조회
@@ -20,26 +54,28 @@ public class EquipmentController {
 	    while (true) {
 	        equipmentView.findEquipmentMenu();
 	        switch (sc.nextLine()) {
-	        case "0":
+	        case "0": // - 이전 메뉴 돌아가기
 	            return;
-	        case "1":
-	            equipmentService.findAllEquipment();
+	        case "1": // - 모든 장비 목록 조회
+	            if (!equipmentService.findAllEquipment()) {
+	                continue;
+	            }
 	            break;
-	        case "2":
+	        case "2": // - 특정 ID 장비 조회
 	            int equipmentId = getEquipmentId();
 	            if (equipmentId != -1) {
 	                equipmentService.findByIdEquipment(equipmentId);
 	            }
 	            break;
-	        case "3":
+	        case "3": // - 특정 상태 장비 조회
 	            String status = getEquipmentStatus();
 	            equipmentService.findByStatusEquipment(status);
 	            break;
-	        case "4":
+	        case "4": // - 특정 부서 장비 조회
 	            String department = getEquipmentDepartment();
 	            equipmentService.findByDepartmentEquipment(department);
 	            break;
-	        case "5":
+	        case "5": // - 특정 카테고리 장비 조회
 	            int categoryId = getEquipmentCategoryId();
 	            if (categoryId != -1) {
 	                String categoryName = equipmentService.getCategoryNameById(categoryId);
@@ -60,9 +96,9 @@ public class EquipmentController {
 	    while (true) {
 	        equipmentView.saveEquipmentMenu();
 	        switch (sc.nextLine()) {
-	        case "0":
+	        case "0": // - 이전 메뉴 돌아가기
 	            return;
-	        case "1":
+	        case "1": // - 신규 장비 등록
 	            createEquipment();
 	            break;
 	        default:
@@ -77,9 +113,9 @@ public class EquipmentController {
 	    while (true) {
 	        equipmentView.updateEquipmentMenu();
 	        switch (sc.nextLine()) {
-	        case "0":
+	        case "0": // - 이전 메뉴 돌아가기
 	            return;
-	        case "1":
+	        case "1": // - 기존 장비 수정
 	            updateEquipment();
 	            break;
 	        default:
@@ -92,11 +128,11 @@ public class EquipmentController {
 	// - 장비 삭제
 	public void deleteEquipmentMenu() {
 	    while (true) {
-	        equipmentView.updateEquipmentMenu();
+	        equipmentView.deleteEquipmentMenu(); 
 	        switch (sc.nextLine()) {
-	        case "0":
+	        case "0": // - 이전 메뉴 돌아가기
 	            return;
-	        case "1":
+	        case "1": // - 장비 삭제
 	            deleteEquipment();
 	            break;
 	        default:
@@ -111,18 +147,18 @@ public class EquipmentController {
 	    while (true) {
 	        equipmentView.showEquipmentDashboardMenu();
 	        switch (sc.nextLine()) {
-	        case "0":
+	        case "0": // - 이전 메뉴 돌아가기
 	            return;
-	        case "1":
+	        case "1": // - 상태별 장비 개수 조회
 	            equipmentService.countByStatus();
 	            break;
-	        case "2":
+	        case "2": // - 부서별 장비 개수 조회
 	            equipmentService.countByDepartment();
 	            break;
-	        case "3":
+	        case "3": // - 카테고리별 장비 개수 조회
 	            equipmentService.countByCategory();
 	            break;
-	        case "4":
+	        case "4": // - 최근 수정된 장비 조회
 	            equipmentService.getRecentlyUpdatedEquipments();
 	            break;
 	        default:
@@ -137,15 +173,15 @@ public class EquipmentController {
 	    while (true) {
 	        equipmentView.manageCategoryMenu();
 	        switch (sc.nextLine()) {
-	        case "0":
+	        case "0": // - 이전 메뉴 돌아가기
 	            return;
-	        case "1":
+	        case "1": // - 모든 카테고리 조회
 	            equipmentService.findAllCategories();
 	            break;
-	        case "2":
+	        case "2": // - 신규 카테고리 추가
 	            createCategory();
 	            break;
-	        case "3":
+	        case "3": // - 기존 카테고리 삭제
 	            int categoryId = getEquipmentCategoryId();
 	            if (categoryId != -1) {
 	                equipmentService.deleteCategory(categoryId);
@@ -468,12 +504,6 @@ public class EquipmentController {
 		            break;
 		        case "4":
 		            status = "수리중";
-		            break;
-		        case "5":
-		            status = "폐기예정";
-		            break;
-		        case "6":
-		            status = "폐기완료";
 		            break;
 		        default:
 		            System.out.println("잘못된 입력입니다");
