@@ -606,41 +606,63 @@ public class InspectionDAO {
 
 	/** =-=-=-=-=-=-=-=-=-=-=-=-= 삭제 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
 
-	// 점검 일정 삭제 메소드
+	// 점검 일정 삭제 - 프로시저 사용
 	public boolean deleteInspectionSchedule(int scheduleId) {
-		String sql = "DELETE FROM INSPECTION_SCHEDULE WHERE SCHEDULE_ID = ?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, scheduleId);
-
-			int result = pstmt.executeUpdate();
-			if (result <= 0) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 삭제할 수 없습니다.");
-				return false;
-			}
-			return true;
-		} catch (SQLException e) {
-			System.out.println("점검 일정 삭제 중 오류가 발생했습니다: " + e.getMessage());
-			e.printStackTrace();
-			return false;
-		}
+	    String sql = "{call PROC_DELETE_INSPECTION_SCHEDULE(?, ?)}";
+	    try {
+	        cstmt = conn.prepareCall(sql);
+	        cstmt.setInt(1, scheduleId);
+	        cstmt.registerOutParameter(2, Types.NUMERIC); // 삭제 성공 여부
+	        
+	        cstmt.execute();
+	        
+	        int deleteResult = cstmt.getInt(2);
+	        
+	        if (deleteResult == 0) {
+	            System.out.println("이미 결과가 등록된 점검 일정은 삭제할 수 없습니다.");
+	            return false;
+	        } else if (deleteResult == 2) {
+	            System.out.println("일정 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+	            return false;
+	        } else if (deleteResult == -1) {
+	            System.out.println("점검 일정 삭제 중 오류가 발생했습니다.");
+	            return false;
+	        }
+	        
+	        return true;
+	    } catch (SQLException e) {
+	        System.out.println("점검 일정 삭제 중 오류 발생: " + e.getMessage());
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	// 점검 결과 삭제
+	// 점검 결과 삭제 - 프로시저 사용
 	public boolean deleteInspectionResult(int resultId) {
-		String sql = "{call PROC_DELETE_INSPECTION_RESULT(?)}";
-
-		try {
-			cstmt = conn.prepareCall(sql);
-			cstmt.setInt(1, resultId);
-
-			cstmt.execute();
-			return true;
-		} catch (SQLException e) {
-			System.out.println("점검 결과 삭제 중 오류 발생: " + e.getMessage());
-			e.printStackTrace();
-			return false;
-		}
+	    String sql = "{call PROC_DELETE_INSPECTION_RESULT(?, ?)}";
+	    try {
+	        cstmt = conn.prepareCall(sql);
+	        cstmt.setInt(1, resultId);
+	        cstmt.registerOutParameter(2, Types.NUMERIC); // 삭제 성공 여부
+	        
+	        cstmt.execute();
+	        
+	        int deleteResult = cstmt.getInt(2);
+	        
+	        if (deleteResult == 0) {
+	            System.out.println("결과 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+	            return false;
+	        } else if (deleteResult == -1) {
+	            System.out.println("점검 결과 삭제 중 오류가 발생했습니다.");
+	            return false;
+	        }
+	        
+	        return true;
+	    } catch (SQLException e) {
+	        System.out.println("점검 결과 삭제 중 오류 발생: " + e.getMessage());
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
 	/** =-=-=-=-=-=-=-=-=-=-=-=-= 시퀀스 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
