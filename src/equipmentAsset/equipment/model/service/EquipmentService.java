@@ -338,6 +338,31 @@ public class EquipmentService {
         }
     }
 
+    // 장비 폐기 메서드 추가
+    public boolean disposeEquipment(int equipmentId, String disposeReason) {
+        try {
+            equipmentDAO.connect();
+
+            // 오토커밋 해제
+            equipmentDAO.getConn().setAutoCommit(false);
+
+            if (!equipmentDAO.disposeEquipment(equipmentId, disposeReason)) {
+                // 폐기 실패시 롤백
+                equipmentDAO.getConn().rollback();
+                return false;
+            }
+
+            // 폐기 성공시 커밋
+            equipmentDAO.getConn().commit();
+            return true;
+        } catch (Exception e) {
+            System.out.println("데이터베이스 연결 중 오류가 발생하였습니다");
+            return false;
+        } finally {
+            equipmentDAO.close();
+        }
+    }
+
     /**
      * =-=-=-=-=-=-=-=-=-=-=-=-= 장비 집계 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
      **/

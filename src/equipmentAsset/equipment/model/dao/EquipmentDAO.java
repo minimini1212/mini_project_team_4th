@@ -418,6 +418,38 @@ public class EquipmentDAO {
         }
     }
 
+    // 장비 폐기 메서드 추가
+    public boolean disposeEquipment(int equipmentId, String disposeReason) {
+        String sql = "{call PROC_DISPOSE_EQUIPMENT(?, ?, ?)}";
+        try {
+            cstmt = conn.prepareCall(sql);
+            cstmt.setInt(1, equipmentId);
+            cstmt.setString(2, disposeReason);
+            cstmt.registerOutParameter(3, Types.NUMERIC); // 처리 성공 여부
+
+            cstmt.execute();
+
+            int result = cstmt.getInt(3);
+
+            if (result == 0) {
+                System.out.println("해당 장비가 폐기예정 상태가 아닙니다. 폐기예정 상태의 장비만 폐기할 수 있습니다.");
+                return false;
+            } else if (result == -1) {
+                System.out.println("존재하지 않는 장비입니다.");
+                return false;
+            } else if (result == -2) {
+                System.out.println("장비 폐기 처리 중 오류가 발생했습니다.");
+                return false;
+            }
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("장비 폐기 처리 중 오류 발생: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * =-=-=-=-=-=-=-=-=-=-=-=-= 집계 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
      **/

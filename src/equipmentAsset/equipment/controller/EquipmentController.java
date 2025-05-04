@@ -508,8 +508,12 @@ public class EquipmentController {
             return false;
         }
 
+        // 폐기 사유 입력 받기
+        System.out.print("폐기 사유 입력 : ");
+        String disposeReason = sc.nextLine();
+
         // 확인 메시지
-        System.out.println("정말 폐기하시겠습니까? 폐기하면 상태가 '폐기완료'로 변경됩니다.");
+        System.out.println("정말 폐기하시겠습니까? 폐기하면 상태가 '폐기완료'로 변경되고 이력에 기록됩니다.");
         System.out.print("Y / N : ");
 
         while (true) {
@@ -523,8 +527,8 @@ public class EquipmentController {
             System.out.println("Y / N 을 입력해주세요");
         }
 
-        // 상태 변경
-        if (!equipmentService.updateEquipmentStatus(equipmentId, "폐기완료")) {
+        // 폐기 처리
+        if (!equipmentService.disposeEquipment(equipmentId, disposeReason)) {
             return false;
         }
 
