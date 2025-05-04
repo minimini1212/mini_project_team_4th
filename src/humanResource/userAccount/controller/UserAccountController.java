@@ -18,17 +18,19 @@ public class UserAccountController {
     private final UserAccountView userAccountView = new UserAccountView();
 
     public void menu() {
-        userAccountView.findUserAccountMenu();
-        int choice = Integer.parseInt(scanner.nextLine());
+        while (true) {
+            userAccountView.findUserAccountMenu();
+            int choice = Integer.parseInt(scanner.nextLine());
 
-        switch (choice) {
-            case 1 -> login();
-            case 2 -> register();
-            case 0 -> {
-                System.out.println("프로그램 종료");
-                return;
+            switch (choice) {
+                case 1 -> login();
+                case 2 -> register();
+                case 0 -> {
+                    System.out.println("프로그램 종료");
+                    return;
+                }
+                default -> System.out.println("잘못된 입력입니다.");
             }
-            default -> System.out.println("잘못된 입력입니다.");
         }
     }
 
@@ -68,15 +70,19 @@ public class UserAccountController {
             Date hireDate = sdf.parse(hireStr);
             emp.setHireDate(hireDate);
 
+            // TODO: 부서 선택으로 수정
             System.out.print("부서 ID: ");
             emp.setDepartmentId(Integer.parseInt(scanner.nextLine()));
 
+            // TODO: 직급 선택으로 수정
             System.out.print("직급 ID: ");
             emp.setPositionId(Integer.parseInt(scanner.nextLine()));
 
+            // TODO: 근무 형태 선택으로 수정
             System.out.print("근무 형태(계약직 or 정규직): ");
             emp.setEmpType(scanner.nextLine());
 
+            // TODO: 비밀번호 조건 추가
             System.out.print("비밀번호: ");
             String pw = scanner.nextLine();
 
