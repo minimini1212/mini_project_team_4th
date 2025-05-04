@@ -520,7 +520,7 @@ public class InspectionDAO extends BaseDAO {
 
 	// 점검 결과 유형 수정
 	public boolean updateInspectionResultType(int resultId, String inspectionResult) {
-		String sql = "{call PROC_UPDATE_INSPECTION_RESULT_TYPE(?, ?)}";
+		String sql = "{call PROC_UPD_INSP_RESULT_TYPE(?, ?)}";
 
 		try {
 			cstmt = conn.prepareCall(sql);
@@ -576,7 +576,7 @@ public class InspectionDAO extends BaseDAO {
 
 	// 점검 일정 삭제 - 프로시저 사용
 	public boolean deleteInspectionSchedule(int scheduleId) {
-	    String sql = "{call PROC_DELETE_INSPECTION_SCHEDULE(?, ?)}";
+	    String sql = "{call PROC_DEL_INSP_SCHEDULE(?, ?)}";
 	    try {
 	        cstmt = conn.prepareCall(sql);
 	        cstmt.setInt(1, scheduleId);
