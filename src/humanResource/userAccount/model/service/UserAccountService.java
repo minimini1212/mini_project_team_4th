@@ -1,11 +1,14 @@
 package humanResource.userAccount.model.service;
 
+import common.SessionContext;
 import dbConn.ConnectionSingletonHelper;
 import humanResource.common.util.EmpNumberGenerator;
 import humanResource.department.model.dao.DepartmentDao;
 import humanResource.employee.model.dao.EmployeeDao;
 import humanResource.employee.model.entity.Employee;
+import humanResource.position.model.dao.PositionDao;
 import humanResource.userAccount.model.dao.UserAccountDao;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,77 +17,53 @@ import java.util.Date;
 import java.util.Scanner;
 
 
+@RequiredArgsConstructor
 public class UserAccountService {
-    private final UserAccountDao userAccountDao;
-    private final EmployeeDao employeeDao;
-    private final DepartmentDao departmentDao;
 
-    public UserAccountService(UserAccountDao userAccountDao, EmployeeDao employeeDao, DepartmentDao departmentDao) {
-        this.userAccountDao = userAccountDao;
-        this.employeeDao = employeeDao;
-        this.departmentDao = departmentDao;
-    }
+    private final Connection conn;
+    private final UserAccountDao userAccountDao = new UserAccountDao(conn);
+    private final EmployeeDao employeeDao = new EmployeeDao(conn);
+    private final PositionDao positionDao = new PositionDao(conn);
 
     public Employee login(String userId, String password) throws SQLException {
         String pw = userAccountDao.findPasswordByUserId(userId);
         if (pw != null && pw.equals(password)) {
-            return employeeDao.findByEmpNumber(userId);     // Employee.EmpNumber = UserAccount.UserId
+            Employee emp = employeeDao.findByEmpNumber(userId);
+            int rankOrder = positionDao.findRankOrderByPositionId(emp.getPositionId());
+
+            String role = getRoleFromRank(rankOrder);
+            SessionContext.set(emp, role);
+            return emp;
         }
+
         return null;
     }
 
-    public void register(){
-        Scanner sc = new Scanner(System.in);
-        Connection conn = null;
+    private String getRoleFromRank(int rankOrder) {
+        if (rankOrder == 1) return "master";
+        else if (rankOrder >= 2 && rankOrder <= 4) return "admin";
+        else return "basic";
+    }
 
+    public void register(Employee emp, String pw) {
+        Connection conn = null;
         try {
             conn = ConnectionSingletonHelper.getConnection("oracle");
             conn.setAutoCommit(false);
 
-            System.out.println("===== 회원가입 =====");
-            Employee emp = new Employee();
-
-            System.out.print("이름: ");
-            emp.setName(sc.nextLine());
-
-            System.out.print("전화번호 (예: 010-1234-5678): ");
-            emp.setPhone(sc.nextLine());
-
-            System.out.print("입사일 (yyyy-MM-dd): ");
-            String hireStr = sc.nextLine();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date hireDate = sdf.parse(hireStr);
-            emp.setHireDate(hireDate);
-
-            System.out.print("부서 ID: ");
-            emp.setDepartmentId(Integer.parseInt(sc.nextLine()));
-
-            System.out.print("직급 ID: ");
-            emp.setPositionId(Integer.parseInt(sc.nextLine()));
-
-            System.out.println("근무 형태(계약직 or 정규직): ");
-            emp.setEmpType(sc.nextLine());
-
-            System.out.print("비밀번호: ");
-            String pw = sc.nextLine();
-
-
-//            String deptCode = departmentDao.findDepartmentCodeById(emp.getDepartmentId());
             String empNumber = EmpNumberGenerator.generateEmpNumber(emp.getHireDate(), emp.getDepartmentId(), emp.getPhone());
-            System.out.println("empNumber: " + empNumber);
             emp.setEmpNumber(empNumber);
-            emp.setStatus("재직");        // 기본 재직 상태
+            emp.setStatus("재직"); // 기본 상태
 
             employeeDao.insert(emp);
             int employeeId = employeeDao.findIdByEmpNumber(emp.getEmpNumber());
             userAccountDao.insertAccount(employeeId, empNumber, pw);
 
-            conn.commit();  // 모든 insert 완료 후 커밋
+            conn.commit();
             System.out.println("회원가입 완료! 생성된 사번(empId): " + empNumber);
-
         } catch (Exception e) {
             try {
-                if (conn != null) conn.rollback(); // 실패 시 롤백
+                if (conn != null) conn.rollback();
             } catch (SQLException se) {
                 System.out.println("롤백 중 오류: " + se.getMessage());
             }
@@ -92,10 +71,11 @@ public class UserAccountService {
             e.printStackTrace();
         } finally {
             try {
-                if (conn != null) conn.setAutoCommit(true); // 트랜잭션 원복
+                if (conn != null) conn.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
+
 }

@@ -13,23 +13,15 @@ public class StockService {
         this.stockDao = stockDao;
     }
 
-    // 전체 재고 조회
-    public List<Stock> getAllStocks() throws SQLException {
-        return stockDao.findAll();
+    public void createStock(Stock stock) {
+        stockDao.insert(stock);
     }
 
-    // 특정 itemId의 재고 조회
-    public Stock getStockByItemId(int itemId) throws SQLException {
+    public Stock findByItemId(int itemId) {
         return stockDao.findByItemId(itemId);
     }
 
-    // 재고 수량 갱신 (입고/출고)
-    public void updateStock(int itemId, int changeAmount) throws SQLException {
-        stockDao.updateQuantity(itemId, changeAmount);
-    }
-
-    // 재고 생성 (itemService에서 사용)
-    public void createStock(Stock stock) throws SQLException {
-        stockDao.insertStock(stock);
+    public void updateQuantity(int itemId, int qtyChange) {
+        stockDao.updateQuantity(itemId, qtyChange);
     }
 }

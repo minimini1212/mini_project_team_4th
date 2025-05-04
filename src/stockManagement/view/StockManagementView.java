@@ -17,53 +17,62 @@ import java.util.Scanner;
 
 
 public class StockManagementView {
-
-    private final Connection conn;
-
-    public StockManagementView(Connection conn) {
-        this.conn = conn;
+    public void showMainMenu() {
+        System.out.println("\n====== 병원 재고 시스템 ======");
+        System.out.println("1. 물품 관리");
+        System.out.println("2. 재고 관리");
+        System.out.println("3. 입출 기록 관리");
+        System.out.println("4. 발주 관리");
+        System.out.println("0. 종료");
+        System.out.print("메뉴 선택: ");
     }
 
-    public void run(Scanner scanner, String role, Employee emp) {
-        try {
-            // 2. DAO/Service 객체 생성
-            ItemDao itemDao = new ItemDao(conn);
-            OrderDao orderDao = new OrderDao(conn);
-            StockDao stockDao = new StockDao(conn);
-
-            OrderService orderService = new OrderService(orderDao);
-            ItemService itemService = new ItemService(conn, itemDao, stockDao);
-            StockService stockService = new StockService(stockDao);
-
-            // 3. 컨트롤러 객체 생성
-            OrderController orderController = new OrderController(orderService);
-            ItemController itemController = new ItemController(itemService);
-            StockController stockController = new StockController(stockService);
-
-            // 4. 사용자 메뉴 선택
-            while (true) {
-                System.out.println("\n====== 재고 관리 메뉴 ======");
-                System.out.println("1. 물품 관리");
-                System.out.println("2. 재고 관리");
-                System.out.println("3. 입출 기록 관리");
-                System.out.println("4. 발주 관리");
-                System.out.println("0. 종료");
-                System.out.print("메뉴 선택: ");
-
-                int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1 -> itemController.run();
-                    case 2 -> stockController.run();
-                    case 4 -> orderController.run();
-                    case 0 -> {
-                        System.out.println("프로그램을 종료합니다.");
-                        return;
-                    }
-                    default -> System.out.println("잘못된 입력입니다.");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    private final Connection conn;
+//
+//    public StockManagementView(Connection conn) {
+//        this.conn = conn;
+//    }
+//
+//    public void run(Scanner scanner, String role, Employee emp) {
+//        try {
+//            // 2. DAO/Service 객체 생성
+//            ItemDao itemDao = new ItemDao(conn);
+//            OrderDao orderDao = new OrderDao(conn);
+//            StockDao stockDao = new StockDao(conn);
+//
+//            OrderService orderService = new OrderService(orderDao);
+//            ItemService itemService = new ItemService(conn, itemDao, stockDao);
+//            StockService stockService = new StockService(stockDao);
+//
+//            // 3. 컨트롤러 객체 생성
+//            OrderController orderController = new OrderController(orderService);
+//            ItemController itemController = new ItemController(itemService);
+//            StockController stockController = new StockController(stockService);
+//
+//            // 4. 사용자 메뉴 선택
+//            while (true) {
+//                System.out.println("\n====== 재고 관리 메뉴 ======");
+//                System.out.println("1. 물품 관리");
+//                System.out.println("2. 재고 관리");
+//                System.out.println("3. 입출 기록 관리");
+//                System.out.println("4. 발주 관리");
+//                System.out.println("0. 종료");
+//                System.out.print("메뉴 선택: ");
+//
+//                int choice = scanner.nextInt();
+//                switch (choice) {
+//                    case 1 -> itemController.run();
+//                    case 2 -> stockController.run();
+//                    case 4 -> orderController.run();
+//                    case 0 -> {
+//                        System.out.println("프로그램을 종료합니다.");
+//                        return;
+//                    }
+//                    default -> System.out.println("잘못된 입력입니다.");
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -1,88 +1,62 @@
 package stockManagement.stock.controller;
 
+import stockManagement.item.controller.ItemController;
+import stockManagement.item.model.dao.ItemDao;
+import stockManagement.item.model.service.ItemService;
+import stockManagement.order.controller.OrderController;
+import stockManagement.order.model.service.OrderService;
+import stockManagement.stock.model.dao.StockDao;
 import stockManagement.stock.model.entity.Stock;
 import stockManagement.stock.model.service.StockService;
+import stockManagement.stock.view.StockView;
+import stockManagement.view.StockManagementView;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 public class StockController {
     private final StockService stockService;
-    private final Scanner scanner;
+    private final StockView stockView = new StockView();
 
     public StockController(StockService stockService) {
         this.stockService = stockService;
-        this.scanner = new Scanner(System.in);
     }
 
-    public void run() {
+    public void run(Scanner scanner) {
         while (true) {
-            printMenu();
-            int choice = Integer.parseInt(scanner.nextLine());
-            try {
-                switch (choice) {
-                    case 1 -> listAllStocks();
-                    case 2 -> viewStockByItemId();
-                    case 3 -> updateStockQuantity(); // IN/OUT 처리
-                    case 0 -> {
-                        System.out.println("재고 관리 종료");
-                        return;
-                    }
-                    default -> System.out.println("잘못된 입력입니다.");
+            stockView.showMenu();
+            String input = scanner.nextLine();
+            if (input.isBlank()) continue;
+            int choice = Integer.parseInt(input);
+
+            switch (choice) {
+                case 1 -> checkStock(scanner);
+                case 2 -> updateStock(scanner);
+                case 0 -> {
+                    return;
                 }
-            } catch (Exception e) {
-                System.out.println("⚠오류 발생: " + e.getMessage());
+                default -> stockView.showInvalidInput();
             }
         }
     }
 
-    private void printMenu() {
-        System.out.println("\n===== 재고 관리 메뉴 =====");
-        System.out.println("1. 전체 재고 조회");
-        System.out.println("2. 특정 품목 재고 확인");
-        System.out.println("3. 재고 수량 갱신 (IN/OUT)");
-        System.out.println("0. 종료");
-        System.out.print("선택: ");
+    private void checkStock(Scanner scanner) {
+        int itemId = stockView.getItemIdInput(scanner);
+        Stock stock = stockService.findByItemId(itemId);
+        stockView.printStock(stock);
     }
 
-    private void listAllStocks() throws SQLException {
-        List<Stock> stocks = stockService.getAllStocks();
-        if (stocks.isEmpty()) {
-            System.out.println("재고 데이터가 없습니다.");
-        } else {
-            for (Stock stock : stocks) {
-                printStock(stock);
-            }
+    private void updateStock(Scanner scanner) {
+        int itemId = stockView.getItemIdInput(scanner);
+        int amount = stockView.getQuantityChangeInput(scanner);
+
+        try {
+            stockService.updateQuantity(itemId, amount);
+            stockView.showSuccess("재고 수량이 업데이트되었습니다.");
+        } catch (Exception e) {
+            stockView.showError("재고 업데이트 중 오류 발생: " + e.getMessage());
         }
-    }
-
-    private void viewStockByItemId() throws SQLException {
-        System.out.print("조회할 품목 ID: ");
-        int itemId = Integer.parseInt(scanner.nextLine());
-        Stock stock = stockService.getStockByItemId(itemId);
-        if (stock == null) {
-            System.out.println("해당 품목의 재고 정보가 없습니다.");
-        } else {
-            printStock(stock);
-        }
-    }
-
-    private void updateStockQuantity() throws SQLException {
-        System.out.print("품목 ID: ");
-        int itemId = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("수량 변경 (양수: 입고 / 음수: 출고): ");
-        int amount = Integer.parseInt(scanner.nextLine());
-
-        stockService.updateStock(itemId, amount);
-        System.out.println("재고가 갱신되었습니다.");
-    }
-
-    private void printStock(Stock stock) {
-        System.out.println("---------------");
-        System.out.println("Stock ID: " + stock.getStockId());
-        System.out.println("Item ID: " + stock.getItemId());
-        System.out.println("현재 수량: " + stock.getQuantity());
     }
 }
