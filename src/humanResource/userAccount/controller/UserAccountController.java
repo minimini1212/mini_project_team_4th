@@ -6,6 +6,8 @@ import humanResource.userAccount.model.service.UserAccountService;
 import humanResource.userAccount.view.UserAccountView;
 import lombok.RequiredArgsConstructor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 @RequiredArgsConstructor
@@ -62,6 +64,9 @@ public class UserAccountController {
 
             System.out.print("입사일 (yyyy-MM-dd): ");
             String hireStr = scanner.nextLine();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date hireDate = sdf.parse(hireStr);
+            emp.setHireDate(hireDate);
 
             System.out.print("부서 ID: ");
             emp.setDepartmentId(Integer.parseInt(scanner.nextLine()));

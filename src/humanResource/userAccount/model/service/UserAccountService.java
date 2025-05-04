@@ -21,31 +21,36 @@ import java.util.Scanner;
 public class UserAccountService {
 
     private final Connection conn;
-    private final UserAccountDao userAccountDao = new UserAccountDao(conn);
-    private final EmployeeDao employeeDao = new EmployeeDao(conn);
-    private final PositionDao positionDao = new PositionDao(conn);
+    private final UserAccountDao userAccountDao;
+    private final EmployeeDao employeeDao;
+    private final PositionDao positionDao;
+    private final DepartmentDao departmentDao;
+
+    public UserAccountService(Connection conn) {
+        this.conn = conn;
+        this.userAccountDao = new UserAccountDao(conn);
+        this.employeeDao = new EmployeeDao(conn);
+        this.positionDao = new PositionDao(conn);
+        this.departmentDao = new DepartmentDao(conn);
+    }
 
     public Employee login(String userId, String password) throws SQLException {
         String pw = userAccountDao.findPasswordByUserId(userId);
         if (pw != null && pw.equals(password)) {
             Employee emp = employeeDao.findByEmpNumber(userId);
             int rankOrder = positionDao.findRankOrderByPositionId(emp.getPositionId());
-
             String role = getRoleFromRank(rankOrder);
+
             SessionContext.set(emp, role);
+            SessionContext.setRankOrder(rankOrder);
+            SessionContext.setDeptId(emp.getDepartmentId());
+
             return emp;
         }
-
         return null;
     }
 
-    private String getRoleFromRank(int rankOrder) {
-        if (rankOrder == 1) return "master";
-        else if (rankOrder >= 2 && rankOrder <= 4) return "admin";
-        else return "basic";
-    }
-
-    public void register(Employee emp, String pw) {
+    public void register(Employee emp, String password) {
         Connection conn = null;
         try {
             conn = ConnectionSingletonHelper.getConnection("oracle");
@@ -53,14 +58,15 @@ public class UserAccountService {
 
             String empNumber = EmpNumberGenerator.generateEmpNumber(emp.getHireDate(), emp.getDepartmentId(), emp.getPhone());
             emp.setEmpNumber(empNumber);
-            emp.setStatus("재직"); // 기본 상태
+            emp.setStatus("재직");
 
             employeeDao.insert(emp);
             int employeeId = employeeDao.findIdByEmpNumber(emp.getEmpNumber());
-            userAccountDao.insertAccount(employeeId, empNumber, pw);
+            userAccountDao.insertAccount(employeeId, empNumber, password);
 
             conn.commit();
             System.out.println("회원가입 완료! 생성된 사번(empId): " + empNumber);
+
         } catch (Exception e) {
             try {
                 if (conn != null) conn.rollback();
@@ -76,6 +82,12 @@ public class UserAccountService {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String getRoleFromRank(int rankOrder) {
+        if (rankOrder == 1) return "master";
+        else if (rankOrder >= 2 && rankOrder <= 4) return "admin";
+        else return "basic";
     }
 
 }

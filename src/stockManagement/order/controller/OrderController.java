@@ -3,6 +3,7 @@ package stockManagement.order.controller;
 import stockManagement.order.model.entity.Order;
 import stockManagement.order.model.entity.OrderStatus;
 import stockManagement.order.model.service.OrderService;
+import stockManagement.order.view.OrderView;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -11,31 +12,30 @@ import java.util.Scanner;
 
 public class OrderController {
     private final OrderService orderService;
-    private final Scanner scanner;
+    private final OrderView orderView = new OrderView();
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
-        this.scanner = new Scanner(System.in);
     }
 
-    public void run() {
+    public void run(Scanner scanner) {
         while (true) {
-            printMenu();
+            orderView.printMenu();
             int choice = Integer.parseInt(scanner.nextLine());
             try {
                 switch (choice) {
-                    case 1 -> createOrder();
-                    case 2 -> approveOrder();
-                    case 3 -> rejectOrder();
-                    case 4 -> cancelOrder();
-                    case 5 -> modifyOrder();
+                    case 1 -> createOrder(scanner);
+                    case 2 -> approveOrder(scanner);
+                    case 3 -> rejectOrder(scanner);
+                    case 4 -> cancelOrder(scanner);
+                    case 5 -> modifyOrder(scanner);
                     case 6 -> listAllOrders();
-                    case 7 -> listOrdersByStatus();
+                    case 7 -> listOrdersByStatus(scanner);
                     case 0 -> {
-                        System.out.println("종료합니다.");
+                        orderView.printExit();
                         return;
                     }
-                    default -> System.out.println("잘못된 입력입니다.");
+                    default -> orderView.printInvalid();
                 }
             } catch (Exception e) {
                 System.out.println("오류 발생: " + e.getMessage());
@@ -43,20 +43,7 @@ public class OrderController {
         }
     }
 
-    private void printMenu() {
-        System.out.println("\n===== 발주 관리 메뉴 =====");
-        System.out.println("1. 발주 생성");
-        System.out.println("2. 발주 승인 (관리자)");
-        System.out.println("3. 발주 거절 (관리자)");
-        System.out.println("4. 발주 취소 (요청자)");
-        System.out.println("5. 발주 수정 (요청자)");
-        System.out.println("6. 전체 발주 조회");
-        System.out.println("7. 상태별 발주 조회");
-        System.out.println("0. 종료");
-        System.out.print("선택: ");
-    }
-
-    private void createOrder() throws SQLException {
+    private void createOrder(Scanner scanner) throws SQLException {
         System.out.print("발주 ID: ");
         int orderId = Integer.parseInt(scanner.nextLine());
 
@@ -81,7 +68,7 @@ public class OrderController {
         System.out.println("발주가 등록되었습니다.");
     }
 
-    private void approveOrder() throws SQLException {
+    private void approveOrder(Scanner scanner) throws SQLException {
         System.out.print("발주 ID: ");
         int orderId = Integer.parseInt(scanner.nextLine());
         System.out.print("관리자 ID: ");
@@ -94,7 +81,7 @@ public class OrderController {
         }
     }
 
-    private void rejectOrder() throws SQLException {
+    private void rejectOrder(Scanner scanner) throws SQLException {
         System.out.print("발주 ID: ");
         int orderId = Integer.parseInt(scanner.nextLine());
         System.out.print("관리자 ID: ");
@@ -107,7 +94,7 @@ public class OrderController {
         }
     }
 
-    private void cancelOrder() throws SQLException {
+    private void cancelOrder(Scanner scanner) throws SQLException {
         System.out.print("발주 ID: ");
         int orderId = Integer.parseInt(scanner.nextLine());
         System.out.print("요청자 ID: ");
@@ -120,7 +107,7 @@ public class OrderController {
         }
     }
 
-    private void modifyOrder() throws SQLException {
+    private void modifyOrder(Scanner scanner) throws SQLException {
         System.out.print("발주 ID: ");
         int orderId = Integer.parseInt(scanner.nextLine());
         System.out.print("요청자 ID: ");
@@ -144,30 +131,13 @@ public class OrderController {
 
     private void listAllOrders() throws SQLException {
         List<Order> list = orderService.getAllOrders();
-        System.out.println("\n전체 발주 목록:");
-        for (Order o : list) {
-            printOrder(o);
-        }
+        orderView.printOrderList(list);
     }
 
-    private void listOrdersByStatus() throws SQLException {
+    private void listOrdersByStatus(Scanner scanner) throws SQLException {
         System.out.print("조회할 상태 (REQUESTED / APPROVED / REJECTED / CANCELLED): ");
         OrderStatus status = OrderStatus.valueOf(scanner.nextLine().trim().toUpperCase());
         List<Order> list = orderService.getOrdersByStatus(status);
-        for (Order o : list) {
-            printOrder(o);
-        }
-    }
-
-    private void printOrder(Order o) {
-        System.out.println("---------------");
-        System.out.println("ID: " + o.getOrderId());
-        System.out.println("품목 ID: " + o.getItemId());
-        System.out.println("수량: " + o.getQuantity());
-        System.out.println("요청자: " + o.getRequesterId());
-        System.out.println("승인자: " + o.getApproverId());
-        System.out.println("요청일: " + o.getRequestDate());
-        System.out.println("승인일: " + o.getApprovalDate());
-        System.out.println("상태: " + o.getStatus());
+        orderView.printOrderList(list);
     }
 }
