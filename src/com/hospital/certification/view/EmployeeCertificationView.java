@@ -2,52 +2,81 @@ package com.hospital.certification.view;
 
 import com.hospital.certification.model.entity.EmployeeCertification;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeCertificationView {
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
-    public Long inputEmployeeId() {
-        System.out.print("조회할 직원 ID: ");
-        return Long.parseLong(sc.nextLine());
+    public void showMenu() {
+        System.out.println("\n===== 사원 자격증 내역 관리 =====");
+        System.out.println("1. 전체 자격증 내역 조회");
+        System.out.println("2. 사원별 자격증 조회");
+        System.out.println("3. 자격증 등록");
+        System.out.println("4. 자격증 정보 수정");
+        System.out.println("5. 자격증 삭제");
+        System.out.println("0. 이전 메뉴");
+        System.out.print("선택: ");
+    }
+
+    public int inputMenu() {
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public void showList(List<EmployeeCertification> list) {
-        System.out.println("ID | 직원ID | 자격증ID | 취득일 | 만료일 | 번호 | 갱신여부 | 알림일");
-        list.forEach(ec -> System.out.printf(
-                "%d | %d | %d | %s | %s | %s | %s | %s\n",
-                ec.getEmpCertId(),
-                ec.getEmployeeId(),
-                ec.getCertId(),
-                ec.getAcquisitionDate(),
-                ec.getExpiryDate(),
-                ec.getCertNumber(),
-                ec.isRenewalRequired() ? "Y" : "N",
-                ec.getAlertDate()
-        ));
+        System.out.println("--- 자격증 보유 현황 ---");
+        for (EmployeeCertification ec : list) {
+            System.out.println(ec);
+        }
     }
 
-    public EmployeeCertification inputEmployeeCertification() {
-        System.out.print("직원 ID: ");
-        Long empId = Long.parseLong(sc.nextLine());
+    public EmployeeCertification inputForCreate() {
+        System.out.println("===== 자격증 등록 =====");
+        EmployeeCertification ec = new EmployeeCertification();
+        System.out.print("사원 ID: ");
+        ec.setEmployeeId(Long.parseLong(scanner.nextLine()));
         System.out.print("자격증 ID: ");
-        Long certId = Long.parseLong(sc.nextLine());
+        ec.setCertId(Long.parseLong(scanner.nextLine()));
         System.out.print("취득일 (YYYY-MM-DD): ");
-        LocalDate acq = LocalDate.parse(sc.nextLine());
+        ec.setAcquisitionDate(java.time.LocalDate.parse(scanner.nextLine()));
         System.out.print("만료일 (YYYY-MM-DD): ");
-        LocalDate exp = LocalDate.parse(sc.nextLine());
-        System.out.print("자격증 번호: ");
-        String num = sc.nextLine();
-        System.out.print("갱신 필요? (Y/N): ");
-        boolean renew = sc.nextLine().equalsIgnoreCase("Y");
-        LocalDate alert = exp.minusDays(30);
-        return new EmployeeCertification(null, empId, certId, acq, exp, num, renew, alert);
+        ec.setExpiryDate(java.time.LocalDate.parse(scanner.nextLine()));
+        System.out.print("자격 번호: ");
+        ec.setCertNumber(scanner.nextLine());
+        System.out.print("갱신 필요 여부 (Y/N): ");
+        ec.setRenewalRequired(scanner.nextLine());
+        System.out.print("알림일 (YYYY-MM-DD): ");
+        ec.setAlertDate(java.time.LocalDate.parse(scanner.nextLine()));
+        return ec;
     }
 
-    public Long inputEmpCertId() {
-        System.out.print("삭제할 직원-자격증 ID: ");
-        return Long.parseLong(sc.nextLine());
+    public EmployeeCertification inputForUpdate() {
+        System.out.println("===== 자격증 정보 수정 =====");
+        EmployeeCertification ec = new EmployeeCertification();
+        System.out.print("사원 ID: ");
+        ec.setEmpCertId(Long.parseLong(scanner.nextLine()));
+        System.out.print("새 취득일 (YYYY-MM-DD): ");
+        ec.setAcquisitionDate(java.time.LocalDate.parse(scanner.nextLine()));
+        System.out.print("새 만료일 (YYYY-MM-DD): ");
+        ec.setExpiryDate(java.time.LocalDate.parse(scanner.nextLine()));
+        System.out.print("새 갱신 필요 여부 (Y/N): ");
+        ec.setRenewalRequired(scanner.nextLine());
+        System.out.print("새 알림일 (YYYY-MM-DD): ");
+        ec.setAlertDate(java.time.LocalDate.parse(scanner.nextLine()));
+        return ec;
+    }
+
+    public long inputEmpCertId() {
+        System.out.print("자격증 삭제할 사원 ID: ");
+        return Long.parseLong(scanner.nextLine());
+    }
+
+    public long inputEmployeeId() {
+        System.out.print("조회할 사원 ID: ");
+        return Long.parseLong(scanner.nextLine());
+    }
+
+    public void showError(String msg) {
+        System.out.println("❌ " + msg);
     }
 }

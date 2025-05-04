@@ -1,21 +1,24 @@
 package com.hospital.certification.model.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * 사원별 자격증 매핑 정보
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeCertification {
-    private Long empCertId;       // PK
-    private Long employeeId;      // FK → EMPLOYEE.employee_id
-    private Long certId;          // FK → CERTIFICATION.cert_id
+    private Long      empCertId;
+    private Long      employeeId;
+    private Long      certId;
     private LocalDate acquisitionDate;
     private LocalDate expiryDate;
-    private String certNumber;
-    private boolean renewalRequired;
-    private LocalDate alertDate;  // expiryDate.minusDays(30)
+    private String    certNumber;
+    private String    renewalRequired;  // 예: "Y"/"N"
+    private LocalDate alertDate;
 }

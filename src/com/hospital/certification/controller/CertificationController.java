@@ -1,48 +1,35 @@
 package com.hospital.certification.controller;
 
+
+
 import com.hospital.certification.model.entity.Certification;
-import com.hospital.certification.model.entity.EmployeeCertification;
 import com.hospital.certification.model.service.CertificationService;
-import com.hospital.certification.model.service.EmployeeCertificationService;
 import com.hospital.certification.view.CertificationView;
-import com.hospital.certification.view.EmployeeCertificationView;
-
 public class CertificationController {
-    private final CertificationService certSvc = new CertificationService();
-    private final EmployeeCertificationService ecSvc = new EmployeeCertificationService();
-    private final CertificationView certView = new CertificationView();
-    private final EmployeeCertificationView ecView = new EmployeeCertificationView();
+    private final CertificationService service = new CertificationService();
+    private final CertificationView view = new CertificationView();
 
-    public void start() {
+    public void certificationMenu() {
         while (true) {
-            int menu = certView.showMainMenu();
+            view.showMenu();
+            int menu = view.inputMenu();
             switch (menu) {
                 case 1:
-                    certView.showList(certSvc.getAll());
+                    view.showList(service.getAll());
                     break;
                 case 2:
-                    certSvc.create(certView.inputCertification());
+                    service.create(view.inputCertification());
                     break;
                 case 3:
-                    certSvc.modify(certView.inputCertificationForUpdate());
+                    service.modify(view.inputCertificationForUpdate());
                     break;
                 case 4:
-                    certSvc.remove(certView.inputCertId());
-                    break;
-                case 5:
-                    ecView.showList(ecSvc.getByEmployee(ecView.inputEmployeeId()));
-                    break;
-                case 6:
-                    ecSvc.addCertification(ecView.inputEmployeeCertification());
-                    break;
-                case 7:
-                    ecSvc.removeCertification(ecView.inputEmpCertId());
+                    service.remove(view.inputCertId());
                     break;
                 case 0:
                     return;
                 default:
-                    certView.showError("잘못된 선택입니다.");
-                    break;
+                    view.showError("잘못된 선택입니다.");
             }
         }
     }
