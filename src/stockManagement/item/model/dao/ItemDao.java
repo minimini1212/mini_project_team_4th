@@ -55,7 +55,7 @@ public class ItemDao {
 
     // 3. 물품 삭제
     public void deleteItem(int itemId) throws SQLException {
-        String sql = "DELETE FROM item WHERE item_id = ?";
+        String sql = "UPDATE item SET del_yn = 'Y' WHERE item_id = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, itemId);
             pstmt.executeUpdate();
@@ -64,7 +64,7 @@ public class ItemDao {
 
     // 4. 전체 물품 조회
     public List<Item> findAll() throws SQLException {
-        String sql = "SELECT * FROM item";
+        String sql = "SELECT * FROM item WHERE del_yn = 'N'";
         List<Item> result = new ArrayList<>();
         try (PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
@@ -78,11 +78,12 @@ public class ItemDao {
 
     // 5. 물품명/카테고리로 검색
     public List<Item> search(String keyword) throws SQLException {
-        String sql = "SELECT * FROM item WHERE item_name LIKE ? OR category LIKE ?";
+        String sql = "SELECT * FROM item WHERE del_yn = 'N' AND (item_name LIKE ? OR category LIKE ? OR item_code LIKE ?)";
         List<Item> result = new ArrayList<>();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, "%" + keyword + "%");
             pstmt.setString(2, "%" + keyword + "%");
+            pstmt.setString(3, "%" + keyword + "%");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 result.add(mapRow(rs));
@@ -101,7 +102,7 @@ public class ItemDao {
     }
 
     public Item findItemById(int itemId) throws SQLException {
-        String sql = "SELECT * FROM item WHERE item_id = ?";
+        String sql = "SELECT * FROM item WHERE item_id = ? AND del_yn = 'N'";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, itemId);
             try (ResultSet rs = pstmt.executeQuery()) {
