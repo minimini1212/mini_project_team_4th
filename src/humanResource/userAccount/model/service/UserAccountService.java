@@ -46,8 +46,10 @@ public class UserAccountService {
             DepartmentDao departmentDao = new DepartmentDao();
             departmentDao.connect(conn);
 
+
+            // 테스트 기간동안만 암호화 검증 해제, 파일 백업 노션에다가.
             String encryptedPwFromDB = userAccountDao.findPasswordByUserId(userId);
-            if (encryptedPwFromDB != null && PasswordEncoder.matches(password, encryptedPwFromDB)) {
+            if (encryptedPwFromDB != null && (encryptedPwFromDB.equals(password) || PasswordEncoder.matches(password, encryptedPwFromDB))) {
                 Employee emp = employeeDao.findByEmpNumber(userId);
                 int rankOrder = positionDao.findRankOrderByPositionId(emp.getPositionId());
                 String role = getRoleFromRank(rankOrder);
@@ -58,6 +60,7 @@ public class UserAccountService {
 
                 return emp;
             }
+
             return null;
 
         } finally {
