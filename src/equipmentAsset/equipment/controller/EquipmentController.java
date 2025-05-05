@@ -602,16 +602,13 @@ public class EquipmentController {
             equipmentView.inputDepartment();
             switch (sc.nextLine()) {
                 case "1":
-                    department = "인사팀";
+                    department = "인사 관리 부서";
                     break;
                 case "2":
-                    department = "재무팀";
+                    department = "예산/회계 관리 부서";
                     break;
                 case "3":
-                    department = "재고팀";
-                    break;
-                case "4":
-                    department = "장비팀";
+                    department = "자산 관리 부서";
                     break;
                 default:
                     System.out.println("잘못된 입력입니다");
