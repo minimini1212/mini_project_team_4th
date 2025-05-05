@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import budgetAccounting.budget.model.entity.Budget;
-import budgetAccounting.budgetRequest.model.entity.BudgetRequest;
 
 public class BudgetDao {
 	private Connection conn;
@@ -21,12 +20,14 @@ public class BudgetDao {
 
 	// 예산 생성
 	public void insertBudget(Budget budget) throws SQLException {
-		String sql = "INSERT INTO budget (budget_id, budget_request_id, department_id, year, budget_amount, category_id, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO budget (" + "budget_id, budget_request_id, department_id, "
+				+ "year, budget_amount, category_id, description, " + "remaining_budget"
+				+ ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int sequence = getNextBudgetId();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, sequence);
-			
+
 			if (budget.getBudgetRequestId() == 0) {
 				pstmt.setNull(2, Types.INTEGER);
 			} else {
@@ -37,8 +38,14 @@ public class BudgetDao {
 			pstmt.setInt(5, budget.getBudgetAmount());
 			pstmt.setInt(6, budget.getCategoryId());
 			pstmt.setString(7, budget.getDescription());
+			pstmt.setInt(8, budget.getRemainingBudget());
 
 			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 발생: " + e.getMessage());
+			System.out.println("SQL 상태: " + e.getSQLState());
+			System.out.println("오류 코드: " + e.getErrorCode());
+			e.printStackTrace();
 		}
 	}
 
@@ -63,6 +70,7 @@ public class BudgetDao {
 				budget.setBudgetAmount(rs.getInt("budget_amount"));
 				budget.setCategoryId(rs.getInt("category_id"));
 				budget.setDescription(rs.getString("description"));
+				budget.setRemainingBudget(rs.getInt("remaining_budget"));
 
 				list.add(budget);
 
@@ -93,6 +101,7 @@ public class BudgetDao {
 					budget.setBudgetAmount(rs.getInt("budget_amount"));
 					budget.setCategoryId(rs.getInt("category_id"));
 					budget.setDescription(rs.getString("description"));
+					budget.setRemainingBudget(rs.getInt("remaining_budget"));
 					list.add(budget);
 				}
 			} catch (SQLException e) {
@@ -110,6 +119,7 @@ public class BudgetDao {
 	public void updateByBudgetId(Budget budget) throws SQLException {
 		String sql = "UPDATE budget SET budget_amount = ?, description = ? WHERE budget_id = ?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			System.out.println("바꿨어?");
 			pstmt.setInt(1, budget.getBudgetAmount());
 			pstmt.setString(2, budget.getDescription());
 			pstmt.setInt(3, budget.getBudgetRequestId());

@@ -2,10 +2,8 @@ package budgetAccounting.budget.view;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 import budgetAccounting.budget.controller.BudgetController;
-import budgetAccounting.budgetRequest.controller.BudgetRequestController;
 import dbConn.ConnectionHelper;
 
 public class BudgetView {
