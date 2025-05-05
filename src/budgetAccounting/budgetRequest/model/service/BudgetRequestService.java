@@ -47,7 +47,6 @@ public class BudgetRequestService {
 
 			// 예산 생성
 			budgetDao.insertBudget(budget);
-
 			// 커밋
 			conn.commit();
 		} catch (SQLException e) {

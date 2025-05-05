@@ -97,7 +97,7 @@ public class BudgetRequestController {
 				request.setRequesterId(requesterId);
 
 				budgetRequestservice.createBudgetRequest(request);
-				System.out.println("예산 신청이 완료되었습니다.");
+				
 				break;
 
 			} catch (InputMismatchException e) {
@@ -167,7 +167,7 @@ public class BudgetRequestController {
 				int approverId = sc.nextInt();
 
 				budgetRequestservice.approveAndInsertToBudget(requestId, approverId);
-				System.out.println("승인 및 예산 등록이 완료되었습니다.");
+				
 				break;
 
 			} catch (InputMismatchException e) {
@@ -205,7 +205,7 @@ public class BudgetRequestController {
 				request.setDescription(description);
 
 				budgetRequestservice.updateBudgetRequest(request);
-				System.out.println("예산 신청이 수정되었습니다.");
+				
 				break;
 
 			} catch (InputMismatchException e) {
@@ -232,7 +232,7 @@ public class BudgetRequestController {
 				System.out.print("삭제할 신청 ID: ");
 				int requestId = sc.nextInt();
 				budgetRequestservice.softDeleteBudgetRequest(requestId);
-				System.out.println("예산 신청이 소프트 삭제되었습니다.");
+				
 				break;
 
 			} catch (InputMismatchException e) {

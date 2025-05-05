@@ -46,15 +46,9 @@ public class BudgetRequestDao {
 					pstmt.setInt(5, budgetRequest.getCategoryId());
 					pstmt.setInt(6, budgetRequest.getRequesterId());
 					pstmt.setString(7, budgetRequest.getDescription());
-					System.out.println("Department ID: " + budgetRequest.getDepartmentId());
-					System.out.println("Year: " + budgetRequest.getYear());
-					System.out.println("Requested Amount: " + budgetRequest.getRequestedAmount());
-					System.out.println("Category ID: " + budgetRequest.getCategoryId());
-					System.out.println("Requester ID: " + budgetRequest.getRequesterId());
-					System.out.println("Description: " + budgetRequest.getDescription());
 
-					int result = pstmt.executeUpdate();
-					System.out.println("삽입된 행 수: " + result);
+					pstmt.executeUpdate();
+					System.out.println("예산 신청이 완료되었습니다.");
 				}
 			}
 
@@ -79,6 +73,20 @@ public class BudgetRequestDao {
 		}
 
 	}
+	
+	// 예산 신청 거절
+		public void reject(int requestId, int approverId) throws SQLException {
+			String sql = "UPDATE budget_request SET status = 'REJECTED', " + "approver_id = ?, approval_date = SYSDATE "
+					+ "WHERE budget_request_id = ? AND del_yn = 'N'";
+
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+				pstmt.setInt(1, approverId);
+				pstmt.setInt(2, requestId);
+				pstmt.executeUpdate();
+			}
+
+		}
 
 	// 예산 신청 전체 조회
 	public List<BudgetRequest> findAllBudgetRequest() throws SQLException {
@@ -164,6 +172,7 @@ public class BudgetRequestDao {
 			pstmt.setInt(3, budgetRequest.getBudgetRequestId());
 
 			pstmt.executeUpdate();
+			System.out.println("예산 신청이 수정되었습니다.");
 		}
 	}
 
@@ -174,6 +183,7 @@ public class BudgetRequestDao {
 			pstmt.setInt(1, requestId);
 
 			pstmt.executeUpdate();
+			System.out.println("예산 신청이 소프트 삭제되었습니다.");
 		}
 	}
 
