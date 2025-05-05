@@ -18,9 +18,9 @@ public class EquipmentController {
      **/
 
     // - 장비 관리 최상위 메뉴
-    public void equipmentMenu() {
+    public void equipmentAdminMenu() {
         while (true) {
-            equipmentView.equipmentMenu();
+            equipmentView.equipmentAdminMenu();
             switch (sc.nextLine()) {
                 case "0": // - 이전 메뉴로 돌아가기
                     return;
@@ -44,6 +44,28 @@ public class EquipmentController {
                     break;
                 case "7": // - 장비 폐기 메뉴로 이동 (추가)
                     disposeEquipmentMenu();
+                    break;
+                default:
+                    System.out.println("잘못된 입력입니다");
+                    break;
+            }
+        }
+    }
+
+    public void equipmentUserMenu() {
+        while (true) {
+            equipmentView.equipmentUserMenu();
+            switch (sc.nextLine()) {
+                case "0": // - 이전 메뉴로 돌아가기
+                    return;
+                case "1": // - 장비 정보 조회 메뉴로 이동
+                    findEquipmentMenu();
+                    break;
+                case "2": // - 장비 정보 수정 메뉴로 이동
+                    updateEquipmentMenu();
+                    break;
+                case "3": // - 장비 현황 대시보드 메뉴로 이동
+                    showEquipmentDashboardMenu();
                     break;
                 default:
                     System.out.println("잘못된 입력입니다");
