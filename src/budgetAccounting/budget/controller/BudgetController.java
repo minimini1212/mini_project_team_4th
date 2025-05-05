@@ -2,6 +2,7 @@ package budgetAccounting.budget.controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -81,15 +82,18 @@ public class BudgetController {
 				request.setBudgetAmount(amount);
 				request.setCategoryId(categoryId);
 				request.setDescription(description);
+				request.setRemainingBudget(amount);
 
 				budgetservice.createBudget(request);
-				System.out.println("예산이 등록되었습니다.");
+
 				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
 
+			} catch (SQLIntegrityConstraintViolationException e) {
+				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 			} catch (SQLException e) {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
@@ -156,7 +160,7 @@ public class BudgetController {
 				request.setDescription(description);
 
 				budgetservice.updateBudget(request);
-				System.out.println("예산이 수정되었습니다.");
+				
 				break;
 
 			} catch (InputMismatchException e) {
@@ -179,7 +183,7 @@ public class BudgetController {
 				System.out.print("삭제할 예산 ID: ");
 				int requestId = sc.nextInt();
 				budgetservice.softDeleteBudget(requestId);
-				System.out.println("예산이 소프트 삭제되었습니다.");
+
 				break;
 
 			} catch (InputMismatchException e) {
