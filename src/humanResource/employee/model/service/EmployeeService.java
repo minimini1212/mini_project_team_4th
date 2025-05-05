@@ -1,6 +1,7 @@
 package humanResource.employee.model.service;
 
 import common.PasswordEncoder;
+import dbConn.ConnectionSingletonHelper;
 import humanResource.common.util.EmpNumberGenerator;
 import humanResource.employee.model.dao.EmployeeDao;
 import humanResource.employee.model.entity.Employee;
@@ -16,20 +17,27 @@ public class EmployeeService {
 
     // 직원 + 계정 등록
     public void createEmployee(Employee emp, String rawPassword) {
-        employeeDao.connect();
-        userAccountDao.connect();
+        Connection conn = null;
 
         try {
-            Connection conn = employeeDao.getConn();  // 동일 커넥션 사용 전제
+            conn = ConnectionSingletonHelper.getConnection("oracle");
+            if (conn == null || conn.isClosed()) {
+                throw new SQLException("⚠ 유효하지 않은 DB 연결입니다.");
+            }
+
             conn.setAutoCommit(false);
+
+            // DAO에 커넥션 전달
+            employeeDao.connect(conn);
+            userAccountDao.connect(conn);
 
             String empNumber = EmpNumberGenerator.generateEmpNumber(emp.getHireDate(), emp.getDepartmentId(), emp.getPhone());
             emp.setEmpNumber(empNumber);
             emp.setStatus("재직");
 
             employeeDao.insert(emp);
+            int employeeId = employeeDao.findIdByEmpNumber(emp.getEmpNumber());
 
-            int employeeId = employeeDao.findIdByEmpNumber(empNumber);
             String encryptedPw = PasswordEncoder.encode(rawPassword);
             userAccountDao.insertAccount(employeeId, empNumber, encryptedPw);
 
@@ -38,29 +46,31 @@ public class EmployeeService {
 
         } catch (Exception e) {
             try {
-                if (employeeDao.getConn() != null) {
-                    employeeDao.getConn().rollback();
-                    System.out.println("⚠ 트랜잭션 롤백 완료");
-                }
+                if (conn != null) conn.rollback();
+                System.out.println("❌ 롤백 완료");
             } catch (SQLException se) {
-                System.out.println("❌ 롤백 중 오류 발생: " + se.getMessage());
+                System.out.println("❌ 롤백 중 오류: " + se.getMessage());
             }
             System.out.println("❌ 회원가입 중 오류: " + e.getMessage());
-            e.printStackTrace();
-
         } finally {
-            employeeDao.close();
-            userAccountDao.close();
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                System.out.println("❌ 커넥션 닫는 중 오류: " + e.getMessage());
+            }
         }
     }
 
+
+
     // 직원 정보 수정
     public void updateEmployeeInfo(Employee newData) throws SQLException {
-        employeeDao.connect();
+        Connection conn = ConnectionSingletonHelper.getConnection("oracle");
         try {
+            employeeDao.connect(conn);
             Employee existing = employeeDao.findByEmpNumber(newData.getEmpNumber());
             if (existing == null) {
-                throw new IllegalArgumentException("❌ 해당 사번의 직원이 존재하지 않습니다.");
+                throw new IllegalArgumentException("해당 사번의 직원이 존재하지 않습니다.");
             }
 
             if (newData.getName() != null) existing.setName(newData.getName());
@@ -69,7 +79,10 @@ public class EmployeeService {
             if (newData.getEmail() != null) existing.setEmail(newData.getEmail());
 
             employeeDao.update(existing);
-
+            conn.commit();
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
         } finally {
             employeeDao.close();
         }
@@ -77,16 +90,19 @@ public class EmployeeService {
 
     // 직원 삭제
     public void deleteEmployee(String empNumber) throws Exception {
-        employeeDao.connect();
+        Connection conn = ConnectionSingletonHelper.getConnection("oracle");
         try {
+            employeeDao.connect(conn);
             Employee emp = employeeDao.findByEmpNumber(empNumber);
             if (emp == null) {
-                throw new Exception("❌ 해당 사번의 직원이 존재하지 않습니다.");
+                throw new Exception("해당 사번의 직원이 존재하지 않습니다.");
             }
-
             emp.setDelYn("Y");
             employeeDao.update(emp);
-
+            conn.commit();
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
         } finally {
             employeeDao.close();
         }
@@ -94,8 +110,9 @@ public class EmployeeService {
 
     // 이름으로 검색
     public List<Employee> findByName(String name) throws SQLException {
-        employeeDao.connect();
+        Connection conn = ConnectionSingletonHelper.getConnection("oracle");
         try {
+            employeeDao.connect(conn);
             return employeeDao.findByName(name);
         } finally {
             employeeDao.close();
@@ -104,8 +121,9 @@ public class EmployeeService {
 
     // 사번으로 검색
     public Employee findByEmpNumber(String empNumber) throws SQLException {
-        employeeDao.connect();
+        Connection conn = ConnectionSingletonHelper.getConnection("oracle");
         try {
+            employeeDao.connect(conn);
             return employeeDao.findByEmpNumber(empNumber);
         } finally {
             employeeDao.close();
@@ -114,8 +132,9 @@ public class EmployeeService {
 
     // 부서 ID로 검색
     public List<Employee> findByDepartmentId(int deptId) throws SQLException {
-        employeeDao.connect();
+        Connection conn = ConnectionSingletonHelper.getConnection("oracle");
         try {
+            employeeDao.connect(conn);
             return employeeDao.findByDepartmentId(deptId);
         } finally {
             employeeDao.close();

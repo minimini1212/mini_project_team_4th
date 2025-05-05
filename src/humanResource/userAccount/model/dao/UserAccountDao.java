@@ -1,7 +1,6 @@
 package humanResource.userAccount.model.dao;
 
 import dbConn.CloseHelper;
-import dbConn.ConnectionSingletonHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,44 +12,38 @@ public class UserAccountDao {
     private PreparedStatement pstmt;
     private ResultSet rs;
 
-    public void connect() {
-        try {
-            conn = ConnectionSingletonHelper.getConnection("oracle");
-            conn.setAutoCommit(false);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void connect(Connection conn) throws SQLException {
+        this.conn = conn;
+        if (this.conn.isClosed()) {
+            throw new SQLException("⚠ 연결이 이미 종료되었습니다.");
         }
+        this.conn.setAutoCommit(false);  // 트랜잭션 수동 관리
     }
 
+    // 자원 해제
     public void close() {
-        try {
-            CloseHelper.close(rs);
-            CloseHelper.close(pstmt);
-            CloseHelper.close(conn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        CloseHelper.close(rs);
+        CloseHelper.close(pstmt);
+        // conn.close()는 서비스 계층에서 처리
     }
 
     public String findPasswordByUserId(String userId) throws SQLException {
         String sql = "SELECT password FROM user_account WHERE user_id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, userId);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("password");
-            }
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, userId);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("password");
         }
         return null;
     }
 
     public void insertAccount(int employeeId, String userId, String password) throws SQLException {
         String sql = "INSERT INTO user_account (employee_id, user_id, password) VALUES (?, ?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, employeeId);
-            pstmt.setString(2, userId);
-            pstmt.setString(3, password);
-            pstmt.executeUpdate();
-        }
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, employeeId);
+        pstmt.setString(2, userId);
+        pstmt.setString(3, password);
+        pstmt.executeUpdate();
     }
 }

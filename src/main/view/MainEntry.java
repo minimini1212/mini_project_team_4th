@@ -1,12 +1,9 @@
 package main.view;
 
 import common.SessionContext;
-import dbConn.ConnectionSingletonHelper;
 import humanResource.userAccount.controller.UserAccountController;
-import humanResource.userAccount.model.service.UserAccountService;
 import main.controller.MainController;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
 // 최상위 View
@@ -15,14 +12,14 @@ public class MainEntry {
 		try {
 
 			// DAO/Service 객체 생성
-			UserAccountService userAccountService = new UserAccountService();
+//			UserAccountService userAccountService = new UserAccountService();
 			UserAccountController userAccountController = new UserAccountController();
 
 			// 로그인 메뉴 호출
-			userAccountController.loginMenu();
+			boolean isLoginSuccess  = userAccountController.loginMenu();
 
 			// 세션 정보 확인 후 MainController 실행
-			if (SessionContext.isLoggedIn()) {
+			if (isLoginSuccess && SessionContext.isLoggedIn()) {
 				MainController mainController = new MainController(new Scanner(System.in));
 				mainController.run();
 			} else {
@@ -30,6 +27,7 @@ public class MainEntry {
 			}
 
 		} catch (Exception e) {
+			System.out.println("❌ 프로그램 실행 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
