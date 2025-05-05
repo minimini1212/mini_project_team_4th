@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import budgetAccounting.budget.model.entity.Budget;
-import budgetAccounting.budgetRequest.model.entity.BudgetRequest;
 
 public class BudgetDao {
 	private Connection conn;
@@ -21,12 +21,14 @@ public class BudgetDao {
 
 	// 예산 생성
 	public void insertBudget(Budget budget) throws SQLException {
-		String sql = "INSERT INTO budget (budget_id, budget_request_id, department_id, year, budget_amount, category_id, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO budget (" + "budget_id, budget_request_id, department_id, "
+				+ "year, budget_amount, category_id, description, " + "remaining_budget"
+				+ ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int sequence = getNextBudgetId();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, sequence);
-			
+
 			if (budget.getBudgetRequestId() == 0) {
 				pstmt.setNull(2, Types.INTEGER);
 			} else {
@@ -37,8 +39,18 @@ public class BudgetDao {
 			pstmt.setInt(5, budget.getBudgetAmount());
 			pstmt.setInt(6, budget.getCategoryId());
 			pstmt.setString(7, budget.getDescription());
+			pstmt.setInt(8, budget.getRemainingBudget());
 
 			pstmt.executeUpdate();
+			System.out.println("예산이 등록되었습니다.");
+			
+		} catch (SQLIntegrityConstraintViolationException e) {
+			System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 발생: " + e.getMessage());
+			System.out.println("SQL 상태: " + e.getSQLState());
+			System.out.println("오류 코드: " + e.getErrorCode());
+			e.printStackTrace();
 		}
 	}
 
@@ -63,6 +75,7 @@ public class BudgetDao {
 				budget.setBudgetAmount(rs.getInt("budget_amount"));
 				budget.setCategoryId(rs.getInt("category_id"));
 				budget.setDescription(rs.getString("description"));
+				budget.setRemainingBudget(rs.getInt("remaining_budget"));
 
 				list.add(budget);
 
@@ -93,6 +106,7 @@ public class BudgetDao {
 					budget.setBudgetAmount(rs.getInt("budget_amount"));
 					budget.setCategoryId(rs.getInt("category_id"));
 					budget.setDescription(rs.getString("description"));
+					budget.setRemainingBudget(rs.getInt("remaining_budget"));
 					list.add(budget);
 				}
 			} catch (SQLException e) {
@@ -115,6 +129,7 @@ public class BudgetDao {
 			pstmt.setInt(3, budget.getBudgetRequestId());
 
 			pstmt.executeUpdate();
+			System.out.println("예산이 수정되었습니다.");
 		}
 	}
 
@@ -125,6 +140,7 @@ public class BudgetDao {
 			pstmt.setInt(1, requestId);
 
 			pstmt.executeUpdate();
+			System.out.println("예산이 소프트 삭제되었습니다.");
 		}
 	}
 

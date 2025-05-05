@@ -47,7 +47,6 @@ public class BudgetRequestService {
 
 			// 예산 생성
 			budgetDao.insertBudget(budget);
-
 			// 커밋
 			conn.commit();
 		} catch (SQLException e) {
@@ -67,6 +66,8 @@ public class BudgetRequestService {
 		budget.setBudgetAmount(request.getRequestedAmount());
 		budget.setCategoryId(request.getCategoryId());
 		budget.setDescription(request.getDescription());
+		budget.setDescription(request.getDescription());
+		budget.setRemainingBudget(request.getRequestedAmount());
 
 		return budget;
 	}

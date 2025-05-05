@@ -48,9 +48,9 @@ public class ExpenditureRequestDao {
 					pstmt.setInt(5, expenditureRequest.getCategoryId());
 					pstmt.setInt(6, expenditureRequest.getRequesterId());
 					pstmt.setString(7, expenditureRequest.getDescription());
-					
 
 					pstmt.executeUpdate();
+					System.out.println("지출 신청이 완료되었습니다.");
 				}
 			}
 
@@ -76,7 +76,7 @@ public class ExpenditureRequestDao {
 
 	}
 
-	// 예산 신청 전체 조회
+	// 지출 신청 전체 조회
 	public List<ExpenditureRequest> findAllExpenditureRequest() throws SQLException {
 
 		String sql = "SELECT * FROM expenditure_request WHERE del_yn IN ('N', 'n')";
@@ -116,7 +116,7 @@ public class ExpenditureRequestDao {
 		return list;
 	}
 
-	// 예산 신청 부분 조회 - expenditure_request_id로 검색
+	// 지출 신청 부분 조회 - expenditure_request_id로 검색
 	public List<ExpenditureRequest> findByExpenditureRequestId(int requestId) throws SQLException {
 		String sql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
 		List<ExpenditureRequest> list = new ArrayList<>();
@@ -124,6 +124,11 @@ public class ExpenditureRequestDao {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, requestId); // 먼저 값 바인딩
 			try (ResultSet rs = pstmt.executeQuery()) { // 그리고 실행
+
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
 				while (rs.next()) {
 					ExpenditureRequest expenditureRequest = new ExpenditureRequest();
 					expenditureRequest.setExpenditureRequestId(rs.getInt("expenditure_request_id"));
@@ -140,36 +145,59 @@ public class ExpenditureRequestDao {
 
 					list.add(expenditureRequest);
 				}
-			} catch (SQLException e) {
-				System.out.println("SQL 오류 발생: " + e.getMessage());
-				System.out.println("SQL 상태: " + e.getSQLState());
-				System.out.println("오류 코드: " + e.getErrorCode());
-				e.printStackTrace();
 			}
 		}
 
 		return list;
 	}
 
-	// 예산 신청 수정 - 금액과 설명
-	public void updateByExpenditureRequestId(ExpenditureRequest expenditureRequest) throws SQLException {
+	// 지출 신청 수정 - 금액과 설명
+	public void updateByExpenditureRequestId(ExpenditureRequest expenditureRequest, int requestId) throws SQLException {
 		String sql = "UPDATE expenditure_request SET amount = ?, description = ? WHERE expenditure_request_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, expenditureRequest.getAmount());
-			pstmt.setString(2, expenditureRequest.getDescription());
-			pstmt.setInt(3, expenditureRequest.getExpenditureRequestId());
+		String selectSql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
 
-			pstmt.executeUpdate();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+			pstmt1.setInt(1, requestId);
+
+			try (ResultSet rs = pstmt1.executeQuery()) {
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setInt(1, expenditureRequest.getAmount());
+				pstmt.setString(2, expenditureRequest.getDescription());
+				pstmt.setInt(3, expenditureRequest.getExpenditureRequestId());
+
+				pstmt.executeUpdate();
+				System.out.println("지출 신청이 수정되었습니다.");
+			}
+
 		}
 	}
 
-	// 예산 신청 소프트딜리트
+	// 지출 신청 소프트딜리트
 	public void softDeleteByExpenditureRequestId(int requestId) throws SQLException {
 		String sql = "UPDATE expenditure_request SET del_yn = 'Y' WHERE expenditure_request_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId);
+		String selectSql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
 
-			pstmt.executeUpdate();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+
+			pstmt1.setInt(1, requestId);
+
+			try (ResultSet rs = pstmt1.executeQuery()) { // 그리고 실행
+
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setInt(1, requestId);
+
+				pstmt.executeUpdate();
+				System.out.println("지출 신청이 소프트 삭제되었습니다.");
+			}
+
 		}
 	}
 
