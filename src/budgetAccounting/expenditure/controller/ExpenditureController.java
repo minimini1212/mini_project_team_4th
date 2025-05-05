@@ -65,7 +65,7 @@ public class ExpenditureController {
 		while (true) {
 			try {
 				sc.nextLine(); // 개행 제거
-				System.out.print("부서 ID (인사, 자산, 회계): ");
+				System.out.print("부서 ID (자산 1번, 인사 2번, 회계 3번): ");
 				int deptId = Integer.parseInt(sc.nextLine());
 				System.out.print("연도: ");
 				int year = Integer.parseInt(sc.nextLine());

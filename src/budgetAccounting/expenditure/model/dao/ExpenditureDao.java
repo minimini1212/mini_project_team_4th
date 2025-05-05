@@ -19,7 +19,7 @@ public class ExpenditureDao {
 	}
 
 	// 지출 생성
-	public void insertExpenditure(Expenditure expenditure) throws SQLException {
+	public void insertExpenditure1(Expenditure expenditure) throws SQLException {
 		String sql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int sequence = getNextExpenditureId();
 
@@ -40,6 +40,75 @@ public class ExpenditureDao {
 
 			pstmt.executeUpdate();
 		}
+	}
+	
+	public void insertExpenditure(Expenditure expenditure) throws SQLException {
+	    conn.setAutoCommit(false); // 트랜잭션 시작
+
+	    // 쿼리문 미리 선언
+	    String selectBudgetSql = "SELECT budget_id, remaining_budget FROM budget " +
+	                             "WHERE department_id = ? AND category_id = ? AND year = ? AND del_yn = 'N' FOR UPDATE";
+
+	    String insertExpenditureSql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		
+	    String updateBudgetSql = "UPDATE budget SET remaining_budget = remaining_budget - ? WHERE budget_id = ?";
+	    
+	    int sequence = getNextExpenditureId();
+	    
+	    try (
+	        PreparedStatement pstmt1 = conn.prepareStatement(selectBudgetSql)
+	    ) {
+	    	pstmt1.setInt(1, expenditure.getDepartmentId());
+	    	pstmt1.setInt(2, expenditure.getCategoryId());
+	    	pstmt1.setInt(3, expenditure.getYear());
+
+	        try (ResultSet rs = pstmt1.executeQuery()) {
+	            if (!rs.next()) {
+	                throw new SQLException("해당 조건에 맞는 예산이 존재하지 않습니다.");
+	            }
+
+	            int budgetId = rs.getInt("budget_id");
+	            int remaining = rs.getInt("remaining_budget");
+
+	            if (remaining < expenditure.getAmount()) {
+	                throw new SQLException("잔여 예산이 부족합니다.");
+	            }
+
+	            try (PreparedStatement pstmt2 = conn.prepareStatement(insertExpenditureSql)) {
+	            	pstmt2.setInt(1, sequence);
+
+	    			if (expenditure.getExpenditureId() == 0) {
+	    				pstmt2.setNull(2, Types.INTEGER);
+	    			} else {
+	    				pstmt2.setInt(2, expenditure.getExpenditureRequestId());
+	    			}
+	    			pstmt2.setInt(3, expenditure.getDepartmentId());
+	    			pstmt2.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
+	    			pstmt2.setInt(5, expenditure.getAmount());
+	    			pstmt2.setInt(6, expenditure.getCategoryId());
+	    			pstmt2.setString(7, expenditure.getDescription());
+	    			pstmt2.setInt(8, expenditure.getYear());
+
+	    			pstmt2.executeUpdate();
+	            }
+
+	            try (PreparedStatement pstmt3 = conn.prepareStatement(updateBudgetSql)) {
+	            	pstmt3.setInt(1, expenditure.getAmount());
+	            	pstmt3.setInt(2, budgetId);
+	            	pstmt3.executeUpdate();
+	            }
+
+	            conn.commit();
+	            System.out.println("지출 등록 및 예산 차감 성공");
+	        }
+
+	    } catch (SQLException e) {
+	        conn.rollback();
+	        System.err.println("에러 발생, 롤백 수행: " + e.getMessage());
+	        throw e;
+	    } finally {
+	        conn.setAutoCommit(true);
+	    }
 	}
 
 	// 지츨 전체 조회
