@@ -8,7 +8,7 @@ public class HistoryView {
     /** =-=-=-=-=-=-=-=-=-=-=-= 컨트롤러 사용 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
 
     // 이력 관리 메인 메뉴
-    public void historyMenu() {
+    public void historyAdminMenu() {
         System.out.println("---- 장비 이력 관리 ----");
         System.out.println("0. 이전 메뉴 돌아가기");
         System.out.println("1. 이력 통합 조회");
