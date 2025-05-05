@@ -18,31 +18,32 @@ public class ExpenditureDao {
 		this.conn = conn;
 	}
 
+//	// 지출 생성
+//	public void insertExpenditure1(Expenditure expenditure) throws SQLException {
+//		String sql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//		int sequence = getNextExpenditureId();
+//
+//		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//			pstmt.setInt(1, sequence);
+//
+//			if (expenditure.getExpenditureId() == 0) {
+//				pstmt.setNull(2, Types.INTEGER);
+//			} else {
+//				pstmt.setInt(2, expenditure.getExpenditureRequestId());
+//			}
+//			pstmt.setInt(3, expenditure.getDepartmentId());
+//			pstmt.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
+//			pstmt.setInt(5, expenditure.getAmount());
+//			pstmt.setInt(6, expenditure.getCategoryId());
+//			pstmt.setString(7, expenditure.getDescription());
+//			pstmt.setInt(8, expenditure.getYear());
+//
+//			pstmt.executeUpdate();
+//			System.out.println("지출이 등록되었습니다.");
+//		}
+//	}
+
 	// 지출 생성
-	public void insertExpenditure1(Expenditure expenditure) throws SQLException {
-		String sql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		int sequence = getNextExpenditureId();
-
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, sequence);
-
-			if (expenditure.getExpenditureId() == 0) {
-				pstmt.setNull(2, Types.INTEGER);
-			} else {
-				pstmt.setInt(2, expenditure.getExpenditureRequestId());
-			}
-			pstmt.setInt(3, expenditure.getDepartmentId());
-			pstmt.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
-			pstmt.setInt(5, expenditure.getAmount());
-			pstmt.setInt(6, expenditure.getCategoryId());
-			pstmt.setString(7, expenditure.getDescription());
-			pstmt.setInt(8, expenditure.getYear());
-
-			pstmt.executeUpdate();
-			System.out.println("지출이 등록되었습니다.");
-		}
-	}
-
 	public void insertExpenditure(Expenditure expenditure) throws SQLException {
 		conn.setAutoCommit(false); // 트랜잭션 시작
 
@@ -153,14 +154,13 @@ public class ExpenditureDao {
 		List<Expenditure> list = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId); // 먼저 값 바인딩
+			pstmt.setInt(1, requestId);
 			try (ResultSet rs = pstmt.executeQuery()) {
 
-				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
-				}
-
+				boolean hasData = false;
 				while (rs.next()) {
+					hasData = true;
+
 					Expenditure expenditure = new Expenditure();
 					expenditure.setExpenditureId(rs.getInt("expenditure_id"));
 					expenditure.setExpenditureRequestId(rs.getInt("expenditure_request_id"));
@@ -173,6 +173,10 @@ public class ExpenditureDao {
 
 					list.add(expenditure);
 				}
+
+				if (!hasData) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
 			}
 		}
 
@@ -182,7 +186,7 @@ public class ExpenditureDao {
 	// 특정 지출 수정
 	public void updateByExpenditureId(Expenditure expenditure, int requestId) throws SQLException {
 		String sql = "UPDATE expenditure SET description = ? WHERE expenditure_id = ?";
-		String selectSql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
+		String selectSql = "SELECT * FROM expenditure WHERE expenditure_id = ? AND del_yn IN ('N', 'n')";
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
@@ -205,7 +209,7 @@ public class ExpenditureDao {
 	// 지출 소프트딜리트
 	public void softDeleteByExpenditureId(int requestId) throws SQLException {
 		String sql = "UPDATE expenditure SET del_yn = 'Y' WHERE expenditure_id = ?";
-		String selectSql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
+		String selectSql = "SELECT * FROM expenditure WHERE expenditure_id = ? AND del_yn IN ('N', 'n')";
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);
 				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {

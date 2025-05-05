@@ -175,7 +175,12 @@ public class ExpenditureRequestController {
 			} catch (SQLIntegrityConstraintViolationException e) {
 				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 			} catch (SQLException e) {
-				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					break;
+				} else {
+					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				}
 				sc.nextLine();
 			} catch (Exception e) {
 				System.out.println("예산 등록 중 오류가 발생했습니다. ");
