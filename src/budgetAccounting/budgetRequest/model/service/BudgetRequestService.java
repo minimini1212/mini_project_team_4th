@@ -83,17 +83,12 @@ public class BudgetRequestService {
 	}
 
 	// 예산 신청 수정
-	public void updateBudgetRequest(BudgetRequest request) throws SQLException {
-		budgetRequestDao.updateByBudgetRequestId(request);
+	public void updateBudgetRequest(BudgetRequest request, int requestId) throws SQLException {
+		budgetRequestDao.updateByBudgetRequestId(request, requestId);
 	}
 
 	// 소프트 삭제
 	public void softDeleteBudgetRequest(int requestId) throws SQLException {
 		budgetRequestDao.softDeleteByBudgetRequestId(requestId);
-	}
-
-	// 완전 삭제
-	public void deleteBudgetRequest(int requestId) throws SQLException {
-		budgetRequestDao.deleteByBudgetRequestId(requestId);
 	}
 }

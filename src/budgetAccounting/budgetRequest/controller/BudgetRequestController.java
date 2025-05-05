@@ -74,15 +74,15 @@ public class BudgetRequestController {
 
 		while (true) {
 			try {
-				System.out.print("부서 ID: ");
+				System.out.print("부서 ID (자산 1번, 인사 2번, 회계 3번): ");
 				int deptId = sc.nextInt();
-				System.out.print("연도: ");
+				System.out.print("연도를 입력하세요(4자리): ");
 				int year = sc.nextInt();
-				System.out.print("요청 금액: ");
+				System.out.print("예산 신청 금액을 입력하세요: ");
 				int amount = sc.nextInt();
-				System.out.print("카테고리 ID: ");
+				System.out.print("카테고리 ID (인건비 1번, 수리비 2번, 소모품비 3번, 출장비 4번, 운영비 5번): ");
 				int categoryId = sc.nextInt();
-				sc.nextLine(); // flush newline
+				sc.nextLine();
 				System.out.print("설명: ");
 				String description = sc.nextLine();
 				System.out.print("신청자 ID: ");
@@ -145,7 +145,12 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					break;
+				} else {
+					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				}
 				sc.nextLine();
 			} catch (Exception e) {
 				System.out.println("예산 조회 중 오류가 발생했습니다. ");
@@ -175,7 +180,12 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				if ("해당 조건에 맞는 예산 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					break;
+				} else {
+					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				}
 				sc.nextLine();
 			} catch (Exception e) {
 				System.out.println("예산 신청 승인 중 오류가 발생했습니다. ");
@@ -204,7 +214,7 @@ public class BudgetRequestController {
 				request.setRequestedAmount(amount);
 				request.setDescription(description);
 
-				budgetRequestservice.updateBudgetRequest(request);
+				budgetRequestservice.updateBudgetRequest(request, requestId);
 				
 				break;
 
@@ -213,7 +223,12 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					break;
+				} else {
+					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				}
 				sc.nextLine();
 			} catch (Exception e) {
 				System.out.println("예산 신청 수정 중 오류가 발생했습니다. ");
@@ -240,7 +255,12 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					break;
+				} else {
+					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				}
 				sc.nextLine();
 			} catch (Exception e) {
 				System.out.println("예산 신청 삭제 중 오류가 발생했습니다. ");

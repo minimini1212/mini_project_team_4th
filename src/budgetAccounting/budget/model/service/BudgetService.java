@@ -32,8 +32,8 @@ public class BudgetService {
 	}
 
 	// 예산 신청 수정
-	public void updateBudget(Budget budget) throws SQLException {
-		budgetDao.updateByBudgetId(budget);
+	public void updateBudget(Budget budget, int requestId) throws SQLException {
+		budgetDao.updateByBudgetId(budget, requestId);
 	}
 
 	// 소프트 삭제
