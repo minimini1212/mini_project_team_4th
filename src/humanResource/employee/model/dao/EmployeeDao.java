@@ -40,9 +40,7 @@ public class EmployeeDao {
         pstmt.setInt(6, emp.getPositionId());
         pstmt.setString(7, emp.getStatus());
         pstmt.setString(8, emp.getEmpType());
-        System.out.println("pstmt 실행 직전");
         pstmt.executeUpdate();
-        System.out.println("pstmt 실행 완료");
     }
 
     public Employee findByEmpNumber(String empNumber) throws SQLException {
@@ -136,6 +134,10 @@ public class EmployeeDao {
         emp.setDepartmentId(rs.getInt("department_id"));
         emp.setPositionId(rs.getInt("position_id"));
         emp.setEmpType(rs.getString("emp_type"));
+        emp.setAddress(rs.getString("address"));
+        emp.setEmail(rs.getString("email"));
+        emp.setStatus(rs.getString("status"));
+        emp.setJobId(rs.getInt("job_id"));
         emp.setDelYn(rs.getString("del_yn"));
         return emp;
     }

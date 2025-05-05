@@ -25,18 +25,18 @@ public class UserAccountController {
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
+                case 0 -> {
+                    System.out.println("프로그램을 종료합니다.");
+                    return false;
+                }
                 case 1 -> {
                     login();
                     if (SessionContext.isLoggedIn()) {
                         return true;  // 로그인 성공 시 true 반환
                     }
                 }
-
                 case 2 -> createEmployee();
-                case 0 -> {
-                    System.out.println("프로그램 종료");
-                    return false;
-                }
+
                 default -> System.out.println("보기의 번호를 선택해주세요.");
             }
         }
@@ -65,72 +65,51 @@ public class UserAccountController {
     private void createEmployee() {
         try {
             System.out.println("\n===== 회원가입 =====");
+
+            if (!promptYesOrNo("회원가입을 진행하시겠습니까?")) {
+                System.out.println("🔙 회원가입이 취소되었습니다. 로그인 메뉴로 돌아갑니다.");
+                return;
+            }
+
             Employee emp = new Employee();
 
-            System.out.print("이름: ");
-            emp.setName(scanner.nextLine());
+            emp.setName(promptNonEmptyInput("이름: "));
 
-            System.out.print("전화번호(예: 010-1234-5678): ");
-            String phone = scanner.nextLine();
-            while (!phone.matches("\\d{3}-\\d{4}-\\d{4}")) {
-                System.out.println("잘못된 전화번호 형식입니다. 하이픈(-) 포함하여 010-1234-1234 형태로 입력해주세요.");
-                System.out.print("전화번호 (예: 010-1234-1234): ");
-                phone = scanner.nextLine();
-            }
+            String phone = promptValidatedInput(
+                    "전화번호(예: 010-1234-5678): ",
+                    "\\d{3}-\\d{4}-\\d{4}",
+                    "잘못된 전화번호 형식입니다. 010-1234-5678 형태로 입력해주세요."
+            );
             emp.setPhone(phone);
 
-            System.out.print("입사일(예: yyyy-MM-dd): ");
-            String hireStr = scanner.nextLine();
-            while (!hireStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                System.out.println("잘못된 생일 형식입니다. 하이픈(-) 포함하여 yyyy-MM-dd 형태로 입력해주세요.");
-                System.out.print("입사일 (yyyy-MM-dd): ");
-                hireStr = scanner.nextLine();
-            }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date hireDate = sdf.parse(hireStr);
+            String hireStr = promptValidatedInput(
+                    "입사일(예: yyyy-MM-dd): ",
+                    "\\d{4}-\\d{2}-\\d{2}",
+                    "잘못된 형식입니다. yyyy-MM-dd 형태로 입력해주세요."
+            );
+            Date hireDate = new SimpleDateFormat("yyyy-MM-dd").parse(hireStr);
             emp.setHireDate(hireDate);
 
             System.out.println("부서 선택(1. 병원장실 / 2. 인사 관리 부서 / 3. 예산・회계 관리 부서 / 4. 자산 관리 부서)");
-            System.out.print("선택: ");
-            int deptChoice = 0;
-            while (true) {
-                System.out.print("선택: ");
-                deptChoice = Integer.parseInt(scanner.nextLine());
-                if (deptChoice >= 1 && deptChoice <= 4) break;
-                else System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
-            }
+            int deptChoice = promptIntInRange("선택: ", 1, 4);
             emp.setDepartmentId(deptChoice);
 
             System.out.println("직급 선택(1. 병원장 / 2. 부장 / 3. 차장 / 4. 과장 / 5. 대리 / 6. 사원 / 7. 인턴)");
-            int positionChoice = 0;
-            while (true) {
-                System.out.print("선택: ");
-                positionChoice = Integer.parseInt(scanner.nextLine());
-                if (positionChoice >= 1 && positionChoice <= 10) break;
-                else System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
-            }
+            int positionChoice = promptIntInRange("선택: ", 1, 7);
             emp.setPositionId(positionChoice);
 
             System.out.println("근무 형태 선택(1. 계약직 / 2. 정규직)");
-            int empTypeChoice = 0;
-            while (true) {
-                System.out.print("선택: ");
-                empTypeChoice = Integer.parseInt(scanner.nextLine());
-                if (empTypeChoice == 1 || empTypeChoice == 2) break;
-                else System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
-            }
+            int empTypeChoice = promptIntInRange("선택: ", 1, 2);
             emp.setEmpType(empTypeChoice == 1 ? "계약직" : "정규직");
 
-            String pw = "";
+            String pw;
             while (true) {
-                System.out.print("비밀번호 (8자 이상, 특수문자, 숫자 포함): ");
-                pw = scanner.nextLine();
+                pw = promptNonEmptyInput("비밀번호 (8자 이상, 특수문자, 숫자 포함): ");
                 if (isValidPassword(pw)) break;
-                else System.out.println("비밀번호가 조건을 만족하지 않습니다. 다시 입력해주세요.");
+                System.out.println("비밀번호가 조건을 만족하지 않습니다. 다시 입력해주세요.");
             }
 
             employeeService.createEmployee(emp, pw);
-
             System.out.println("✅ 회원가입이 완료되었습니다.");
             System.out.println("🔙 로그인 메뉴로 돌아갑니다.");
 
@@ -140,24 +119,50 @@ public class UserAccountController {
         }
     }
 
+    private String promptNonEmptyInput(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) return input;
+            System.out.println("입력은 필수입니다. 다시 입력해주세요.");
+        }
+    }
 
+    private String promptValidatedInput(String prompt, String regex, String errorMsg) {
+        while (true) {
+            String input = promptNonEmptyInput(prompt);
+            if (input.matches(regex)) return input;
+            System.out.println(errorMsg);
+        }
+    }
+
+    private int promptIntInRange(String prompt, int min, int max) {
+        while (true) {
+            String input = promptNonEmptyInput(prompt);
+            try {
+                int value = Integer.parseInt(input);
+                if (value >= min && value <= max) return value;
+            } catch (NumberFormatException ignored) {}
+            System.out.printf("잘못된 입력입니다. %d ~ %d 사이의 숫자를 입력해주세요.%n", min, max);
+        }
+    }
+
+    public boolean promptYesOrNo(String message) {
+        while (true) {
+            System.out.print(message + " (y/n): ");
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equals("y")) return true;
+            if (input.equals("n")) return false;
+
+            System.out.println("❌ 잘못된 입력입니다. y 또는 n을 입력해주세요.");
+        }
+    }
 
     private boolean isValidPassword(String password) {
         return password.length() >= 8 &&
                 password.matches(".*[0-9].*") &&  // 숫자 포함
                 password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");  // 특수문자 포함
     }
-
-//    public void logout() {
-//        if (!SessionContext.isLoggedIn()) {
-//            System.out.println("⚠️ 현재 로그인된 사용자가 없습니다.");
-//            return;
-//        }
-//
-//        String name = SessionContext.getUser().getName();
-//        SessionContext.clear();
-//        System.out.println("✅ " + name + " 님이 로그아웃되었습니다.");
-//    }
-
 
 }

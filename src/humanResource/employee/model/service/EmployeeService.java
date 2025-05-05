@@ -64,19 +64,24 @@ public class EmployeeService {
 
 
     // 직원 정보 수정
-    public void updateEmployeeInfo(Employee newData) throws SQLException {
+    public void updateEmployeeInfo(String empNumber, String name, String address, String phone,
+                                   String email, String status, String positionStr, String jobStr) throws SQLException {
         Connection conn = ConnectionSingletonHelper.getConnection("oracle");
         try {
             employeeDao.connect(conn);
-            Employee existing = employeeDao.findByEmpNumber(newData.getEmpNumber());
+            Employee existing = employeeDao.findByEmpNumber(empNumber);
+
             if (existing == null) {
                 throw new IllegalArgumentException("해당 사번의 직원이 존재하지 않습니다.");
             }
 
-            if (newData.getName() != null) existing.setName(newData.getName());
-            if (newData.getPhone() != null) existing.setPhone(newData.getPhone());
-            if (newData.getAddress() != null) existing.setAddress(newData.getAddress());
-            if (newData.getEmail() != null) existing.setEmail(newData.getEmail());
+            if (!name.isEmpty()) existing.setName(name);
+            if (!address.isEmpty()) existing.setAddress(address);
+            if (!phone.isEmpty()) existing.setPhone(phone);
+            if (!email.isEmpty()) existing.setEmail(email);
+            if (!status.isEmpty()) existing.setStatus(status);
+            if (!positionStr.isEmpty()) existing.setPositionId(Integer.parseInt(positionStr));
+            if (!jobStr.isEmpty()) existing.setJobId(Integer.parseInt(jobStr));
 
             employeeDao.update(existing);
             conn.commit();
@@ -87,6 +92,7 @@ public class EmployeeService {
             employeeDao.close();
         }
     }
+
 
     // 직원 삭제
     public void deleteEmployee(String empNumber) throws Exception {
@@ -139,5 +145,13 @@ public class EmployeeService {
         } finally {
             employeeDao.close();
         }
+    }
+
+    public static boolean isValidPhoneNumber(String phone) {
+        return phone.matches("^010-\\d{4}-\\d{4}$");
+    }
+
+    public static boolean isValidEmail(String email) {
+        return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
     }
 }

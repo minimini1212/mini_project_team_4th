@@ -33,37 +33,24 @@ public class MainController {
             if (rankOrder == 1) {
                 while (true) {
                     mainView.showDepartmentMenu();
-                    int choice;
-
-                    try {
-                        choice = Integer.parseInt(scanner.nextLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("❌ 숫자를 입력해주세요.");
-                        continue;
-                    }
+                    int choice = promptIntInRange("선택: ", 0, 4);
 
                     if (choice == 0) {
                         if (confirmLogout()) {
                             SessionContext.clear();
                             System.out.println("✅ 로그아웃되었습니다. 로그인 메뉴로 돌아갑니다.\n");
-                            // 로그인 메뉴로 돌아감
                             MainEntry.main(null);
                             return;
-                        } else {
-                            continue;
                         }
-                    }
-
-                    if (choice < 0 || choice > 3) {
-                        System.out.println("❌ 유효한 메뉴 번호(0~3)를 입력해주세요.");
                         continue;
                     }
 
+                    // rankOrder = 1 유저 진입
                     handleDepartmentMenu(choice, rankOrder);
                 }
 
             } else {
-                // 일반 사용자는 자신의 부서 메뉴로 바로 진입
+                // rankOrder <= 2 유저 진입
                 handleUserDepartmentMenu(deptId, rankOrder);
             }
 
@@ -77,19 +64,16 @@ public class MainController {
         switch (choice) {
             case 1 -> {
                 // TODO: 병원장실
-                System.out.println("🔹 병원장실 진입");
+                System.out.println("🔹 병원장실 진입이 아직 연결되지 않음");
             }
             case 2 -> {
-                System.out.println("🔹 인사 관리 부서 진입");
-                new HumanResourceController().humanResourceMenu(scanner);
+                new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
             case 3 -> {
                 // TODO: FinanceMenu 클래스를 생성하여 위임
-                System.out.println("🔹 예산/회계 관리 부서 진입");
+                System.out.println("🔹 예산/회계 관리 부서 진입이 아직 연결되지 않음");
             }
             case 4 -> {
-                // TODO: AssetMenu 클래스를 생성하여 위임
-                System.out.println("🔹 자산 관리 부서 진입");
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
 
@@ -99,17 +83,17 @@ public class MainController {
     private void handleUserDepartmentMenu(int deptId, int rankOrder) {
         switch (deptId) {
             case 1 -> {
-                // TODO: HRMenu 클래스를 생성하여 위임
-                System.out.println("🔸 인사 관리 부서 진입");
-                new HumanResourceController().humanResourceMenu(scanner);
+                // TODO: 병원장실
+                System.out.println("🔹 병원장실 진입이 아직 연결되지 않음");
             }
             case 2 -> {
-                // TODO: FinanceMenu 클래스를 생성하여 위임
-                System.out.println("🔸 예산/회계 관리 부서 진입");
+                new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
             case 3 -> {
-                // TODO: AssetMenu 클래스를 생성하여 위임
-                System.out.println("🔸 자산 관리 부서 진입");
+                // TODO: FinanceMenu 클래스를 생성하여 위임
+                System.out.println("🔸 예산/회계 관리 부서 진입이 아직 연결되지 않음");
+            }
+            case 4 -> {
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
             default -> System.out.println("⚠ 알 수 없는 부서입니다.");
@@ -125,6 +109,24 @@ public class MainController {
             if (input.equals("n")) return false;
 
             System.out.println("❌ 잘못된 입력입니다. y 또는 n을 입력해주세요.");
+        }
+    }
+
+    private int promptIntInRange(String prompt, int min, int max) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice >= min && choice <= max) {
+                    return choice;
+                } else {
+                    System.out.printf("❌ 유효한 메뉴 번호(%d~%d)를 입력해주세요.%n", min, max);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("❌ 숫자를 입력해주세요.");
+            }
         }
     }
 }
