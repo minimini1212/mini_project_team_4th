@@ -39,7 +39,7 @@ public class UserAccountDao {
     }
 
     public void insertAccount(int employeeId, String userId, String password) throws SQLException {
-        String sql = "INSERT INTO user_account (employee_id, user_id, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO user_account (account_id, employee_id, user_id, password) VALUES (account_id_seq.NEXTVAL, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, employeeId);
         pstmt.setString(2, userId);

@@ -14,6 +14,5 @@ public class UserAccount extends BaseEntity {
     private int accountId;
     private String userId;
     private String password;
-
     private int employeeId;
 }

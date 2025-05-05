@@ -30,7 +30,7 @@ public class EmployeeDao {
     }
 
     public void insert(Employee emp) throws SQLException {
-        String sql = "INSERT INTO employee (emp_number, name, phone, hire_date, department_id, position_id, status, emp_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO employee (employee_id, emp_number, name, phone, hire_date, department_id, position_id, status, emp_type) VALUES (emp_id_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, emp.getEmpNumber());
         pstmt.setString(2, emp.getName());
