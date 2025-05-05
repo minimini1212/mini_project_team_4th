@@ -66,6 +66,8 @@ public class BudgetRequestService {
 		budget.setBudgetAmount(request.getRequestedAmount());
 		budget.setCategoryId(request.getCategoryId());
 		budget.setDescription(request.getDescription());
+		budget.setDescription(request.getDescription());
+		budget.setRemainingBudget(request.getRequestedAmount());
 
 		return budget;
 	}
