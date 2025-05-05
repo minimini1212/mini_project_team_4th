@@ -10,6 +10,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
+
 public class RepairRequest {
     private int requestId;           // 요청 ID
     private int equipmentId;         // 장비 ID
