@@ -93,10 +93,9 @@ public class EquipmentView {
 	
 	public void inputDepartment() {
 		System.out.println("---- 전체 부서 목록 ----");
-		System.out.println("1. 인사팀");
-		System.out.println("2. 재무팀");
-		System.out.println("3. 재고팀");
-		System.out.println("4. 장비팀");
+		System.out.println("1. 인사 관리 부서");
+		System.out.println("2. 예산/회계 관리 부서");
+		System.out.println("3. 자산 관리 부서");
 		System.out.print("번호 입력 : ");
 	}
 
