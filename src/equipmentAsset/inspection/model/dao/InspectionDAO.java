@@ -10,48 +10,16 @@ import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import equipmentAsset.common.util.CloseHelper;
-import equipmentAsset.common.util.ConnectionSingletonHelper;
+import dbConn.*;
 import equipmentAsset.inspection.model.entity.InspectionResult;
 import equipmentAsset.inspection.model.entity.InspectionSchedule;
 import equipmentAsset.inspection.view.InspectionView;
 import lombok.Getter;
 
 @Getter
-public class InspectionDAO {
+public class InspectionDAO extends BaseDAO {
 	private final String TABLE_NAME = "INSPECTION_SCHEDULE";
 	private InspectionView inspectionView = new InspectionView();
-
-	// 연결 관련 객체
-	private Statement stmt = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	private Connection conn = null;
-	private CallableStatement cstmt = null;
-
-	// connect
-	public void connect() {
-		try {
-			conn = ConnectionSingletonHelper.getConnection("oracle");
-			stmt = conn.createStatement();
-			conn.setAutoCommit(false); // 자동커밋 끄기
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	// close
-	public void close() {
-		try {
-			CloseHelper.close(rs);
-			CloseHelper.close(stmt);
-			CloseHelper.close(pstmt);
-			CloseHelper.close(cstmt);
-			CloseHelper.close(conn);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/** =-=-=-=-=-=-=-=-=-=-=-=-= 조회 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
 
@@ -552,7 +520,7 @@ public class InspectionDAO {
 
 	// 점검 결과 유형 수정
 	public boolean updateInspectionResultType(int resultId, String inspectionResult) {
-		String sql = "{call PROC_UPDATE_INSPECTION_RESULT_TYPE(?, ?)}";
+		String sql = "{call PROC_UPD_INSP_RESULT_TYPE(?, ?)}";
 
 		try {
 			cstmt = conn.prepareCall(sql);
@@ -608,7 +576,7 @@ public class InspectionDAO {
 
 	// 점검 일정 삭제 - 프로시저 사용
 	public boolean deleteInspectionSchedule(int scheduleId) {
-	    String sql = "{call PROC_DELETE_INSPECTION_SCHEDULE(?, ?)}";
+	    String sql = "{call PROC_DEL_INSP_SCHEDULE(?, ?)}";
 	    try {
 	        cstmt = conn.prepareCall(sql);
 	        cstmt.setInt(1, scheduleId);

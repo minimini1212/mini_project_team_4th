@@ -17,5 +17,4 @@ public class EquipmentHistory {
     private Date occurrenceDate;      // 발생일
     private String description;       // 설명
     private Integer relatedId;        // 관련 ID (점검결과ID, 수리요청ID 등) (null 가능)
-    private Date lastUpdatedDate;     // 최종 업데이트 일자
 }
