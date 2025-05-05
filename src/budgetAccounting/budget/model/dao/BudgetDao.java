@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -41,6 +42,10 @@ public class BudgetDao {
 			pstmt.setInt(8, budget.getRemainingBudget());
 
 			pstmt.executeUpdate();
+			System.out.println("예산이 등록되었습니다.");
+			
+		} catch (SQLIntegrityConstraintViolationException e) {
+			System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 발생: " + e.getMessage());
 			System.out.println("SQL 상태: " + e.getSQLState());
@@ -119,12 +124,12 @@ public class BudgetDao {
 	public void updateByBudgetId(Budget budget) throws SQLException {
 		String sql = "UPDATE budget SET budget_amount = ?, description = ? WHERE budget_id = ?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			System.out.println("바꿨어?");
 			pstmt.setInt(1, budget.getBudgetAmount());
 			pstmt.setString(2, budget.getDescription());
 			pstmt.setInt(3, budget.getBudgetRequestId());
 
 			pstmt.executeUpdate();
+			System.out.println("예산이 수정되었습니다.");
 		}
 	}
 
@@ -135,6 +140,7 @@ public class BudgetDao {
 			pstmt.setInt(1, requestId);
 
 			pstmt.executeUpdate();
+			System.out.println("예산이 소프트 삭제되었습니다.");
 		}
 	}
 

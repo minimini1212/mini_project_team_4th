@@ -98,6 +98,7 @@ public class BudgetRequestController {
 
 				budgetRequestservice.createBudgetRequest(request);
 				System.out.println("예산 신청이 완료되었습니다.");
+				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
@@ -105,6 +106,7 @@ public class BudgetRequestController {
 
 			} catch (SQLIntegrityConstraintViolationException e) {
 				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
+				sc.nextLine();
 			} catch (SQLException e) {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
@@ -136,6 +138,7 @@ public class BudgetRequestController {
 				for (BudgetRequest br : requests) {
 					System.out.println(br);
 				}
+				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
@@ -165,6 +168,7 @@ public class BudgetRequestController {
 
 				budgetRequestservice.approveAndInsertToBudget(requestId, approverId);
 				System.out.println("승인 및 예산 등록이 완료되었습니다.");
+				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
@@ -202,6 +206,7 @@ public class BudgetRequestController {
 
 				budgetRequestservice.updateBudgetRequest(request);
 				System.out.println("예산 신청이 수정되었습니다.");
+				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
@@ -228,6 +233,7 @@ public class BudgetRequestController {
 				int requestId = sc.nextInt();
 				budgetRequestservice.softDeleteBudgetRequest(requestId);
 				System.out.println("예산 신청이 소프트 삭제되었습니다.");
+				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");

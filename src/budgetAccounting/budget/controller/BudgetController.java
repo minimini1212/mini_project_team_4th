@@ -85,7 +85,7 @@ public class BudgetController {
 				request.setRemainingBudget(amount);
 
 				budgetservice.createBudget(request);
-				System.out.println("예산이 등록되었습니다.");
+
 				break;
 
 			} catch (InputMismatchException e) {
@@ -160,7 +160,7 @@ public class BudgetController {
 				request.setDescription(description);
 
 				budgetservice.updateBudget(request);
-				System.out.println("예산이 수정되었습니다.");
+				
 				break;
 
 			} catch (InputMismatchException e) {
@@ -183,7 +183,7 @@ public class BudgetController {
 				System.out.print("삭제할 예산 ID: ");
 				int requestId = sc.nextInt();
 				budgetservice.softDeleteBudget(requestId);
-				System.out.println("예산이 소프트 삭제되었습니다.");
+
 				break;
 
 			} catch (InputMismatchException e) {
