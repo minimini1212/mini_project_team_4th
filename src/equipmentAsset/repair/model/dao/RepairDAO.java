@@ -10,49 +10,17 @@ import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import equipmentAsset.common.util.CloseHelper;
-import equipmentAsset.common.util.ConnectionSingletonHelper;
+import dbConn.*;
 import equipmentAsset.repair.model.entity.RepairRequest;
 import equipmentAsset.repair.model.entity.RepairResult;
 import equipmentAsset.repair.view.RepairView;
 import lombok.Getter;
 
 @Getter
-public class RepairDAO {
+public class RepairDAO extends BaseDAO {
 	private final String REQUEST_TABLE = "REPAIR_REQUEST";
 	private final String RESULT_TABLE = "REPAIR_RESULT";
 	private RepairView repairView = new RepairView();
-
-	// 연결 관련 객체
-	private Statement stmt = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	private Connection conn = null;
-	private CallableStatement cstmt = null;
-
-	// connect
-	public void connect() {
-		try {
-			conn = ConnectionSingletonHelper.getConnection("oracle");
-			stmt = conn.createStatement();
-			conn.setAutoCommit(false); // 자동커밋 끄기
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	// close
-	public void close() {
-		try {
-			CloseHelper.close(rs);
-			CloseHelper.close(stmt);
-			CloseHelper.close(pstmt);
-			CloseHelper.close(cstmt);
-			CloseHelper.close(conn);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/** =-=-=-=-=-=-=-=-=-=-=-=-= 조회 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
 
