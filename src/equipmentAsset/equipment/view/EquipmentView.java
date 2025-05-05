@@ -19,6 +19,7 @@ public class EquipmentView {
 	    System.out.println("4. 장비 정보 삭제");
 	    System.out.println("5. 장비 현황 대시보드");
 	    System.out.println("6. 카테고리 관리");
+		System.out.println("7. 장비 폐기");
 	    System.out.print("번호 입력 : ");
 	}
 	
@@ -98,7 +99,14 @@ public class EquipmentView {
 		System.out.println("4. 장비팀");
 		System.out.print("번호 입력 : ");
 	}
-	
+
+	// 폐기 메뉴 화면
+	public void disposeEquipmentMenu() {
+		System.out.println("---- 장비 폐기 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 폐기할 장비 선택");
+		System.out.print("번호 입력 : ");
+	}
 	/** =-=-=-=-=-=-=-=-=-=-=-= DAO 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	// - 장비 정보 출력
