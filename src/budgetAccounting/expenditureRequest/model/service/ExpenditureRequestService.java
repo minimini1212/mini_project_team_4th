@@ -48,7 +48,7 @@ public class ExpenditureRequestService {
 
 			// 지출 생성
 			expenditureDao.insertExpenditure(expenditure);
-
+			System.out.println("승인 및 지출 등록이 완료되었습니다.");
 			// 커밋
 			conn.commit();
 		} catch (SQLException e) {
@@ -68,7 +68,7 @@ public class ExpenditureRequestService {
 		expenditure.setAmount(request.getAmount());
 		expenditure.setCategoryId(request.getCategoryId());
 		expenditure.setDescription(request.getDescription());
-		expenditure.setExpenditureDate(new Date()); // <-- 추가
+		expenditure.setExpenditureDate(new Date());
 
 		return expenditure;
 	}
@@ -84,8 +84,8 @@ public class ExpenditureRequestService {
 	}
 
 	// 지출 신청 수정
-	public void updateExpenditureRequest(ExpenditureRequest request) throws SQLException {
-		expenditureRequestDao.updateByExpenditureRequestId(request);
+	public void updateExpenditureRequest(ExpenditureRequest request, int requestId) throws SQLException {
+		expenditureRequestDao.updateByExpenditureRequestId(request, requestId);
 	}
 
 	// 소프트 삭제
