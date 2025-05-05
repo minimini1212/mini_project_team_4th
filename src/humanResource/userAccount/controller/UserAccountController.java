@@ -43,7 +43,7 @@ public class UserAccountController {
     }
 
     private void login() {
-        System.out.println("===== 로그인 =====");
+        System.out.println("\n===== 로그인 =====");
         System.out.print("사번: ");
         String id = scanner.nextLine();
         System.out.print("비밀번호: ");
@@ -64,7 +64,7 @@ public class UserAccountController {
 
     private void createEmployee() {
         try {
-            System.out.println("===== 회원가입 =====");
+            System.out.println("\n===== 회원가입 =====");
             Employee emp = new Employee();
 
             System.out.print("이름: ");
@@ -90,40 +90,34 @@ public class UserAccountController {
             Date hireDate = sdf.parse(hireStr);
             emp.setHireDate(hireDate);
 
-            System.out.println("부서 선택");
-            System.out.println("1. 인사 관리 부서 / 2. 회계 관리 부서 / 3. 자산 관리 부서");
+            System.out.println("부서 선택(1. 병원장실 / 2. 인사 관리 부서 / 3. 예산・회계 관리 부서 / 4. 자산 관리 부서)");
             System.out.print("선택: ");
-            int deptChoice = Integer.parseInt(scanner.nextLine());
-            switch (deptChoice) {
-                case 1 -> emp.setDepartmentId(1);
-                case 2 -> emp.setDepartmentId(2);
-                case 3 -> emp.setDepartmentId(3);
-                default -> {
-                    System.out.println("잘못된 부서 선택입니다. 기본값으로 인사 관리 부서로 설정됩니다.");
-                    emp.setDepartmentId(1);
-                }
+            int deptChoice = 0;
+            while (true) {
+                System.out.print("선택: ");
+                deptChoice = Integer.parseInt(scanner.nextLine());
+                if (deptChoice >= 1 && deptChoice <= 4) break;
+                else System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
             }
+            emp.setDepartmentId(deptChoice);
 
-            System.out.println("직급 선택");
-            System.out.println("1. 병원장 / 2. 진료부장 / 3. 행정부장 / 4. 과장 / 5. 전문의");
-            System.out.println("6. 주임 / 7. 레지던트 / 8. 대리 / 9. 인턴 / 10. 사원");
+            System.out.println("직급 선택(1. 병원장 / 2. 부장 / 3. 차장 / 4. 과장 / 5. 대리 / 6. 사원 / 7. 인턴)");
             int positionChoice = 0;
             while (true) {
                 System.out.print("선택: ");
                 positionChoice = Integer.parseInt(scanner.nextLine());
                 if (positionChoice >= 1 && positionChoice <= 10) break;
-                else System.out.println("잘못된 선택입니다. 다시 입력해주세요.");
+                else System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
             }
             emp.setPositionId(positionChoice);
 
-            System.out.println("근무 형태 선택");
-            System.out.println("1. 계약직 / 2. 정규직");
+            System.out.println("근무 형태 선택(1. 계약직 / 2. 정규직)");
             int empTypeChoice = 0;
             while (true) {
                 System.out.print("선택: ");
                 empTypeChoice = Integer.parseInt(scanner.nextLine());
                 if (empTypeChoice == 1 || empTypeChoice == 2) break;
-                else System.out.println("잘못된 선택입니다. 다시 입력해주세요.");
+                else System.out.println("잘못된 입력값입니다. 다시 입력해주세요.");
             }
             emp.setEmpType(empTypeChoice == 1 ? "계약직" : "정규직");
 
@@ -132,7 +126,7 @@ public class UserAccountController {
                 System.out.print("비밀번호 (8자 이상, 특수문자, 숫자 포함): ");
                 pw = scanner.nextLine();
                 if (isValidPassword(pw)) break;
-                else System.out.println("비밀번호가 조건을 만족하지 않습니다. 다시 시도하세요.");
+                else System.out.println("비밀번호가 조건을 만족하지 않습니다. 다시 입력해주세요.");
             }
 
             employeeService.createEmployee(emp, pw);

@@ -76,19 +76,23 @@ public class MainController {
     private void handleDepartmentMenu(int choice, int rankOrder) {
         switch (choice) {
             case 1 -> {
-                // TODO: HRMenu 클래스를 생성하여 위임
+                // TODO: 병원장실
+                System.out.println("🔹 병원장실 진입");
+            }
+            case 2 -> {
                 System.out.println("🔹 인사 관리 부서 진입");
                 new HumanResourceController().humanResourceMenu(scanner);
             }
-            case 2 -> {
+            case 3 -> {
                 // TODO: FinanceMenu 클래스를 생성하여 위임
                 System.out.println("🔹 예산/회계 관리 부서 진입");
             }
-            case 3 -> {
+            case 4 -> {
                 // TODO: AssetMenu 클래스를 생성하여 위임
                 System.out.println("🔹 자산 관리 부서 진입");
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
+
         }
     }
 
