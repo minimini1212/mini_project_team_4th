@@ -64,24 +64,33 @@ public class BudgetRequestDao {
 	public void approve(int requestId, int approverId) throws SQLException {
 		String sql = "UPDATE budget_request SET status = 'APPROVED', " + "approver_id = ?, approval_date = SYSDATE "
 				+ "WHERE budget_request_id = ? AND del_yn = 'N'";
+		String selectSql = "SELECT * FROM budget_request WHERE budget_request_id = ? AND del_yn IN ('N', 'n')";
 
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+			pstmt1.setInt(1, requestId);
 
-			pstmt.setInt(1, approverId);
-			pstmt.setInt(2, requestId);
-			pstmt.executeUpdate();
+			try (ResultSet rs = pstmt1.executeQuery()) {
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setInt(1, approverId);
+				pstmt.setInt(2, requestId);
+				pstmt.executeUpdate();
+			}
+
 		}
-
 	}
-	
+
 	// 예산 신청 전체 조회
 	public List<BudgetRequest> findAllBudgetRequest() throws SQLException {
-		
+
 		String sql = "SELECT * FROM budget_request WHERE del_yn IN ('N', 'n')";
 		List<BudgetRequest> list = new ArrayList<>();
-		
+
 		if (conn == null || conn.isClosed()) {
-		    throw new SQLException("DB 연결이 유효하지 않습니다.");
+			throw new SQLException("DB 연결이 유효하지 않습니다.");
 		}
 
 		// try-with-resources 문법을 사용 -> 자원을 자동으로 닫도록 설정
@@ -102,7 +111,7 @@ public class BudgetRequestDao {
 				budgetRequest.setDescription(rs.getString("description"));
 
 				list.add(budgetRequest);
-				
+
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 발생: " + e.getMessage());
@@ -120,9 +129,13 @@ public class BudgetRequestDao {
 		List<BudgetRequest> list = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId); // 먼저 값 바인딩
-			try (ResultSet rs = pstmt.executeQuery()) { // 그리고 실행
+			pstmt.setInt(1, requestId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+
+				boolean hasData = false;
 				while (rs.next()) {
+					hasData = true;
+
 					BudgetRequest budgetRequest = new BudgetRequest();
 					budgetRequest.setBudgetRequestId(rs.getInt("budget_request_id"));
 					budgetRequest.setDepartmentId(rs.getInt("department_id"));
@@ -138,11 +151,10 @@ public class BudgetRequestDao {
 
 					list.add(budgetRequest);
 				}
-			} catch (SQLException e) {
-				System.out.println("SQL 오류 발생: " + e.getMessage());
-				System.out.println("SQL 상태: " + e.getSQLState());
-				System.out.println("오류 코드: " + e.getErrorCode());
-				e.printStackTrace();
+
+				if (!hasData) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
 			}
 		}
 
@@ -150,36 +162,52 @@ public class BudgetRequestDao {
 	}
 
 	// 예산 신청 수정 - 금액과 설명
-	public void updateByBudgetRequestId(BudgetRequest budgetRequest) throws SQLException {
+	public void updateByBudgetRequestId(BudgetRequest budgetRequest, int requestId) throws SQLException {
 		String sql = "UPDATE budget_request SET requested_amount = ?, description = ? WHERE budget_request_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, budgetRequest.getRequestedAmount());
-			pstmt.setString(2, budgetRequest.getDescription());
-			pstmt.setInt(3, budgetRequest.getBudgetRequestId());
+		String selectSql = "SELECT * FROM budget_request WHERE budget_request_id = ? AND del_yn IN ('N', 'n')";
 
-			pstmt.executeUpdate();
-			System.out.println("예산 신청이 수정되었습니다.");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+			pstmt1.setInt(1, requestId);
+
+			try (ResultSet rs = pstmt1.executeQuery()) {
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setInt(1, budgetRequest.getRequestedAmount());
+				pstmt.setString(2, budgetRequest.getDescription());
+				pstmt.setInt(3, budgetRequest.getBudgetRequestId());
+
+				pstmt.executeUpdate();
+				System.out.println("예산 신청이 수정되었습니다.");
+			}
+
 		}
 	}
 
 	// 예산 신청 소프트딜리트
 	public void softDeleteByBudgetRequestId(int requestId) throws SQLException {
 		String sql = "UPDATE budget_request SET del_yn = 'Y' WHERE budget_request_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId);
+		String selectSql = "SELECT * FROM budget_request WHERE budget_request_id = ? AND del_yn IN ('N', 'n')";
 
-			pstmt.executeUpdate();
-			System.out.println("예산 신청이 소프트 삭제되었습니다.");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+			pstmt1.setInt(1, requestId);
+
+			try (ResultSet rs = pstmt1.executeQuery()) {
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setInt(1, requestId);
+
+				pstmt.executeUpdate();
+				System.out.println("예산 신청이 소프트 삭제되었습니다.");
+			}
+
 		}
+
 	}
 
-	// 예산 신청 삭제
-	public void deleteByBudgetRequestId(int requestId) throws SQLException {
-		String sql = "DELETE FROM budget_request WHERE budget_request_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId);
-
-			pstmt.executeUpdate();
-		}
-	}
 }

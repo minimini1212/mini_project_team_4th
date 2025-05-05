@@ -19,16 +19,4 @@ public class BudgetView {
 			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
 		}
 	}
-
-	// 예산 관리 메뉴
-	public void menu() {
-		System.out.println("\n==== 예산 신청 관리 ====");
-		System.out.println("1. 예산 등록");
-		System.out.println("2. 예산 전체 조회");
-		System.out.println("3. 특정 예산 조회");
-		System.out.println("4. 예산 수정");
-		System.out.println("5. 예산 삭제");
-		System.out.println("0. 종료");
-		System.out.print("선택: ");
-	}
 }
