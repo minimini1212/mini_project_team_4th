@@ -74,20 +74,6 @@ public class BudgetRequestDao {
 
 	}
 	
-	// 예산 신청 거절
-		public void reject(int requestId, int approverId) throws SQLException {
-			String sql = "UPDATE budget_request SET status = 'REJECTED', " + "approver_id = ?, approval_date = SYSDATE "
-					+ "WHERE budget_request_id = ? AND del_yn = 'N'";
-
-			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-				pstmt.setInt(1, approverId);
-				pstmt.setInt(2, requestId);
-				pstmt.executeUpdate();
-			}
-
-		}
-
 	// 예산 신청 전체 조회
 	public List<BudgetRequest> findAllBudgetRequest() throws SQLException {
 		
