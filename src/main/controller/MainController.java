@@ -1,6 +1,7 @@
 package main.controller;
 
 import common.SessionContext;
+import equipmentAsset.common.controller.EquipmentAssetController;
 import humanResource.common.controller.HumanResourceController;
 import humanResource.employee.model.entity.Employee;
 import main.view.MainEntry;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class MainController {
     private final Scanner scanner;
     private final MainView mainView = new MainView();
+    private EquipmentAssetController equipmentAssetController = new EquipmentAssetController();
 
     public MainController(Scanner scanner) {
         this.scanner = scanner;
@@ -57,12 +59,12 @@ public class MainController {
                         continue;
                     }
 
-                    handleDepartmentMenu(choice);
+                    handleDepartmentMenu(choice, rankOrder);
                 }
 
             } else {
                 // 일반 사용자는 자신의 부서 메뉴로 바로 진입
-                handleUserDepartmentMenu(deptId);
+                handleUserDepartmentMenu(deptId, rankOrder);
             }
 
         } catch (Exception e) {
@@ -71,7 +73,7 @@ public class MainController {
         }
     }
 
-    private void handleDepartmentMenu(int choice) {
+    private void handleDepartmentMenu(int choice, int rankOrder) {
         switch (choice) {
             case 1 -> {
                 // TODO: HRMenu 클래스를 생성하여 위임
@@ -85,11 +87,12 @@ public class MainController {
             case 3 -> {
                 // TODO: AssetMenu 클래스를 생성하여 위임
                 System.out.println("🔹 자산 관리 부서 진입");
+                equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
         }
     }
 
-    private void handleUserDepartmentMenu(int deptId) {
+    private void handleUserDepartmentMenu(int deptId, int rankOrder) {
         switch (deptId) {
             case 1 -> {
                 // TODO: HRMenu 클래스를 생성하여 위임
@@ -103,6 +106,7 @@ public class MainController {
             case 3 -> {
                 // TODO: AssetMenu 클래스를 생성하여 위임
                 System.out.println("🔸 자산 관리 부서 진입");
+                equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
             default -> System.out.println("⚠ 알 수 없는 부서입니다.");
         }
