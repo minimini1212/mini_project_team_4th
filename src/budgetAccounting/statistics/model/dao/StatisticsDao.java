@@ -64,7 +64,7 @@ public class StatisticsDao {
 
 			while (rs.next()) {
 				DeptYearlyBudgetStats stats = new DeptYearlyBudgetStats();
-				stats.setDepartmentName("department_name");
+				stats.setDepartmentName(rs.getString("department_name"));
 				stats.setYear(rs.getInt("year"));
 				stats.setTotalBudget(rs.getInt("total_budget"));
 				stats.setTotalExpenditure(rs.getInt("total_expenditure"));
@@ -96,7 +96,7 @@ public class StatisticsDao {
 
 			while (rs.next()) {
 				CategoryYearlyBudgetStats stats = new CategoryYearlyBudgetStats();
-				stats.setCategoryName("category_name");
+				stats.setCategoryName(rs.getString("category_name"));
 				stats.setYear(rs.getInt("year"));
 				stats.setTotalBudget(rs.getInt("total_budget"));
 				stats.setTotalExpenditure(rs.getInt("total_expenditure"));
