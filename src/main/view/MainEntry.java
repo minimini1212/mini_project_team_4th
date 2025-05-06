@@ -12,7 +12,6 @@ public class MainEntry {
 		try {
 
 			// DAO/Service 객체 생성
-//			UserAccountService userAccountService = new UserAccountService();
 			UserAccountController userAccountController = new UserAccountController();
 
 			// 로그인 메뉴 호출
@@ -22,9 +21,8 @@ public class MainEntry {
 			if (isLoginSuccess && SessionContext.isLoggedIn()) {
 				MainController mainController = new MainController(new Scanner(System.in));
 				mainController.run();
-			} else {
-				System.out.println("로그인 후 진행해 주세요.");
 			}
+
 
 		} catch (Exception e) {
 			System.out.println("❌ 프로그램 실행 중 오류 발생: " + e.getMessage());
