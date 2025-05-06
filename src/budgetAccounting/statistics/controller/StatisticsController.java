@@ -54,7 +54,7 @@ public class StatisticsController {
 	// 연도별
 	private void listStatsByYear() throws SQLException {
 		List<YearlyBudgetStats> statisticss = statisticsService.getBudgetGroupByYear();
-		System.out.println("\n[부서별 통계]");
+		System.out.println("\n[연도별 통계]");
 		for (YearlyBudgetStats br : statisticss) {
 			System.out.println(br);
 		}
@@ -72,7 +72,7 @@ public class StatisticsController {
 	// 카테고리별
 	private void listStatsByCategory() throws SQLException {
 		List<CategoryYearlyBudgetStats> statisticss = statisticsService.getBudgetGroupByCategory();
-		System.out.println("\n[부서별 통계]");
+		System.out.println("\n[카테고리별 통계]");
 		for (CategoryYearlyBudgetStats br : statisticss) {
 			System.out.println(br);
 		}

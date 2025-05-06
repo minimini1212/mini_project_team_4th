@@ -63,20 +63,6 @@ public class ExpenditureRequestDao {
 		}
 	}
 
-//	// 지출 신청 승인
-//	public void approve(int requestId, int approverId) throws SQLException {
-//		String sql = "UPDATE expenditure_request SET status = 'APPROVED', "
-//				+ "approver_id = ?, approval_date = SYSDATE " + "WHERE expenditure_request_id = ? AND del_yn = 'N'";
-//
-//		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//
-//			pstmt.setInt(1, approverId);
-//			pstmt.setInt(2, requestId);
-//			pstmt.executeUpdate();
-//		}
-//
-//	}
-
 	// 지출 신청 승인
 	public void approve(int requestId, int approverId) throws SQLException {
 		String sql = "UPDATE expenditure_request SET status = 'APPROVED', "
@@ -127,6 +113,15 @@ public class ExpenditureRequestDao {
 				expenditureRequest.setRequestDate(rs.getDate("request_date"));
 				expenditureRequest.setApprovalDate(rs.getDate("approval_date"));
 				expenditureRequest.setDescription(rs.getString("description"));
+				
+				// 부서 이름, 카테고리 이름 추가
+				int departmentId = rs.getInt("department_id");
+				int categoryId = rs.getInt("category_id");
+				String departmentName = getDepartmentNameById(departmentId);
+				String categoryName = getCategoryNameById(categoryId);
+
+				expenditureRequest.setDepartmentName(departmentName);
+				expenditureRequest.setCategoryName(categoryName);
 
 				list.add(expenditureRequest);
 
@@ -166,6 +161,15 @@ public class ExpenditureRequestDao {
 					expenditureRequest.setRequestDate(rs.getDate("request_date"));
 					expenditureRequest.setApprovalDate(rs.getDate("approval_date"));
 					expenditureRequest.setDescription(rs.getString("description"));
+					
+					// 부서 이름, 카테고리 이름 추가
+					int departmentId = rs.getInt("department_id");
+					int categoryId = rs.getInt("category_id");
+					String departmentName = getDepartmentNameById(departmentId);
+					String categoryName = getCategoryNameById(categoryId);
+
+					expenditureRequest.setDepartmentName(departmentName);
+					expenditureRequest.setCategoryName(categoryName);
 
 					list.add(expenditureRequest);
 				}
@@ -226,6 +230,36 @@ public class ExpenditureRequestDao {
 				System.out.println("지출 신청이 소프트 삭제되었습니다.");
 			}
 
+		}
+	}
+
+	// 카테고리ID로 카테고리명 찾는 메서드
+	public String getCategoryNameById(int categoryId) throws SQLException {
+		String sql = "SELECT category_name FROM vw_category_name WHERE category_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, categoryId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("category_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
+			}
+		}
+	}
+
+	// 부서ID로 부서명 찾는 메서드
+	public String getDepartmentNameById(int departmentId) throws SQLException {
+		String sql = "SELECT department_name FROM vw_department_name WHERE department_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, departmentId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("department_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
+			}
 		}
 	}
 

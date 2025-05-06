@@ -20,6 +20,8 @@ public class ExpenditureRequest {
 	private int approverId;
 	private Date approvalDate;
 	private int year;
+	private String departmentName;
+    private String categoryName;
 	
 	@Override
 	public String toString() {
@@ -28,14 +30,16 @@ public class ExpenditureRequest {
 	           "{\n" +
 	           "  \"요청 ID\"         : " + expenditureRequestId + ",\n" +
 	           "  \"부서 ID\"         : " + departmentId + ",\n" +
+	           "  \"부서명\"           : " + departmentName + ",\n" +
 	           "  \"년도\"            : " + year + ",\n" +
-	           "  \"요청 금액\"       : " + amount + ",\n" +
-	           "  \"카테고리 ID\"     : " + categoryId + ",\n" +
+	           "  \"요청 금액\"        : " + amount + ",\n" +
+	           "  \"카테고리 ID\"      : " + categoryId + ",\n" +
+	           "  \"카테고리명\"        : " + categoryName + ",\n" +
 	           "  \"상태\"            : \"" + status + "\",\n" +
-	           "  \"요청자 ID\"       : " + requesterId + ",\n" +
-	           "  \"승인자 ID\"       : " + approverId + ",\n" +
-	           "  \"요청일\"          : " + requestDate + ",\n" +
-	           "  \"승인일\"          : " + approvalDate + ",\n" +
+	           "  \"요청자 ID\"        : " + requesterId + ",\n" +
+	           "  \"승인자 ID\"        : " + approverId + ",\n" +
+	           "  \"요청일\"           : " + requestDate + ",\n" +
+	           "  \"승인일\"           : " + approvalDate + ",\n" +
 	           "  \"설명\"            : \"" + description + "\"\n" +
 	           "}\n" +
 	           "=================================================\n";
