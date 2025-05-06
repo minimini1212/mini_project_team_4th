@@ -1,6 +1,5 @@
 package budgetAccounting.expenditureRequest.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.InputMismatchException;
@@ -9,29 +8,21 @@ import java.util.Scanner;
 
 import budgetAccounting.expenditureRequest.model.entity.ExpenditureRequest;
 import budgetAccounting.expenditureRequest.model.service.ExpenditureRequestService;
+import budgetAccounting.expenditureRequest.view.ExpenditureRequestView;
 
 public class ExpenditureRequestController {
 	private ExpenditureRequestService expenditureRequestservice;
+	private ExpenditureRequestView expenditureRequestView = new ExpenditureRequestView();
 
-	public ExpenditureRequestController(Connection conn) {
+	public ExpenditureRequestController() {
 		this.expenditureRequestservice = new ExpenditureRequestService();
 	}
 
-	public void run() {
-		Scanner sc = new Scanner(System.in);
+	public void run(Scanner sc, int rankOrder) {
 		boolean running = true;
 
 		while (running) {
-			System.out.println("\n==== 지출 신청 관리 ====");
-			System.out.println("1. 지출 신청 등록");
-			System.out.println("2. 지출 신청 전체 조회");
-			System.out.println("3. 특정 지출 신청 조회");
-			System.out.println("4. 지출 신청 승인 및 지출 등록");
-			System.out.println("5. 지출 신청 수정");
-			System.out.println("6. 지출 신청 삭제");
-
-			System.out.println("0. 종료");
-			System.out.print("선택: ");
+			expenditureRequestView.menu();
 			int choice = sc.nextInt();
 
 			try {
@@ -46,6 +37,10 @@ public class ExpenditureRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
+					if (rankOrder >= 2) {
+						running = false;
+						return;
+					}
 					approveRequest(sc);
 					break;
 				case 5:
