@@ -47,7 +47,7 @@ public class ExpenditureRequestDao {
 					pstmt.setInt(3, expenditureRequest.getYear());
 					pstmt.setInt(4, expenditureRequest.getAmount());
 					pstmt.setInt(5, expenditureRequest.getCategoryId());
-					pstmt.setInt(6, expenditureRequest.getRequesterId());
+					pstmt.setString(6, expenditureRequest.getRequesterId());
 					pstmt.setString(7, expenditureRequest.getDescription());
 
 					pstmt.executeUpdate();
@@ -108,8 +108,8 @@ public class ExpenditureRequestDao {
 				expenditureRequest.setAmount(rs.getInt("amount"));
 				expenditureRequest.setCategoryId(rs.getInt("category_id"));
 				expenditureRequest.setStatus(rs.getString("status"));
-				expenditureRequest.setRequesterId(rs.getInt("requester_id"));
-				expenditureRequest.setApproverId(rs.getInt("approver_id"));
+				expenditureRequest.setRequesterId(rs.getString("requester_id"));
+				expenditureRequest.setApproverId(rs.getString("approver_id"));
 				expenditureRequest.setRequestDate(rs.getDate("request_date"));
 				expenditureRequest.setApprovalDate(rs.getDate("approval_date"));
 				expenditureRequest.setDescription(rs.getString("description"));
@@ -156,8 +156,8 @@ public class ExpenditureRequestDao {
 					expenditureRequest.setAmount(rs.getInt("amount"));
 					expenditureRequest.setCategoryId(rs.getInt("category_id"));
 					expenditureRequest.setStatus(rs.getString("status"));
-					expenditureRequest.setRequesterId(rs.getInt("requester_id"));
-					expenditureRequest.setApproverId(rs.getInt("approver_id"));
+					expenditureRequest.setRequesterId(rs.getString("requester_id"));
+					expenditureRequest.setApproverId(rs.getString("approver_id"));
 					expenditureRequest.setRequestDate(rs.getDate("request_date"));
 					expenditureRequest.setApprovalDate(rs.getDate("approval_date"));
 					expenditureRequest.setDescription(rs.getString("description"));

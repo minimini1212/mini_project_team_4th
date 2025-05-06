@@ -12,12 +12,12 @@ public class ExpenditureRequest {
 	private int expenditureRequestId;
 	private int departmentId;
 	private Date requestDate;
-	private int requesterId;
+	private String requesterId;
 	private int amount;
 	private int categoryId;
 	private String description;
 	private String status;
-	private int approverId;
+	private String approverId;
 	private Date approvalDate;
 	private int year;
 	private String departmentName;
