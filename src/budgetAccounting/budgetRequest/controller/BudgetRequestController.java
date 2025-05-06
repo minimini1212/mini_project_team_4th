@@ -13,26 +13,17 @@ import budgetAccounting.budgetRequest.view.BudgetRequestView;
 public class BudgetRequestController {
 
 	private BudgetRequestService budgetRequestservice;
+	private BudgetRequestView budgetRequestView = new BudgetRequestView();
 
-	public BudgetRequestController(BudgetRequestView budgetRequestView) {
+	public BudgetRequestController() {
 		this.budgetRequestservice = new BudgetRequestService();
 	}
 
-	public void run() {
-		Scanner sc = new Scanner(System.in);
+	public void run(Scanner sc, int rankOrder) {
 		boolean running = true;
 
 		while (running) {
-			System.out.println("\n==== 예산 신청 관리 ====");
-			System.out.println("1. 예산 신청 등록");
-			System.out.println("2. 예산 신청 전체 조회");
-			System.out.println("3. 특정 예산 신청 조회");
-			System.out.println("4. 예산 신청 승인 및 예산 등록");
-			System.out.println("5. 예산 신청 수정");
-			System.out.println("6. 예산 신청 삭제");
-
-			System.out.println("0. 종료");
-			System.out.print("선택: ");
+			budgetRequestView.menu();
 			int choice = sc.nextInt();
 
 			try {
@@ -47,6 +38,11 @@ public class BudgetRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
+					if (rankOrder >= 2) {
+						System.out.println("해당 기능에 대한 권한이 없습니다.");
+						running = false;
+						return;
+					}
 					approveRequest(sc);
 					break;
 				case 5:
@@ -57,7 +53,7 @@ public class BudgetRequestController {
 					break;
 				case 0:
 					running = false;
-					break;
+					return;
 				default:
 					System.out.println("잘못된 입력입니다.");
 				}
