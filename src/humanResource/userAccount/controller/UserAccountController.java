@@ -22,7 +22,15 @@ public class UserAccountController {
     public boolean loginMenu() {
         while (true) {
             userAccountView.findUserAccountMenu();
-            int choice = Integer.parseInt(scanner.nextLine());
+            String input = scanner.nextLine().trim();
+
+            int choice;
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("❌ 보기의 번호를 입력해주세요.");
+                continue;
+            }
 
             switch (choice) {
                 case 0 -> {
@@ -36,11 +44,11 @@ public class UserAccountController {
                     }
                 }
                 case 2 -> createEmployee();
-
-                default -> System.out.println("보기의 번호를 선택해주세요.");
+                default -> System.out.println("❌ 보기의 번호를 선택해주세요.");
             }
         }
     }
+
 
     private void login() {
         System.out.println("\n===== 로그인 =====");
@@ -52,7 +60,7 @@ public class UserAccountController {
         try {
             Employee emp = userAccountService.login(id, pw);
             if (emp != null) {
-                System.out.println("✅ 로그인 성공! 안녕하세요, " + emp.getName() + "님.");
+                System.out.println("\n✅ 로그인 성공! 안녕하세요, " + emp.getName() + "님.");
             } else {
                 System.out.println("❌ 로그인 실패. 정보가 일치하지 않습니다.");
             }

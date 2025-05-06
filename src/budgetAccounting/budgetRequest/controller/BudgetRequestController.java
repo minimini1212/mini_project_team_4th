@@ -1,6 +1,5 @@
 package budgetAccounting.budgetRequest.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.InputMismatchException;
@@ -9,30 +8,22 @@ import java.util.Scanner;
 
 import budgetAccounting.budgetRequest.model.entity.BudgetRequest;
 import budgetAccounting.budgetRequest.model.service.BudgetRequestService;
+import budgetAccounting.budgetRequest.view.BudgetRequestView;
 
 public class BudgetRequestController {
 
 	private BudgetRequestService budgetRequestservice;
+	private BudgetRequestView budgetRequestView = new BudgetRequestView();
 
-	public BudgetRequestController(Connection conn) {
-		this.budgetRequestservice = new BudgetRequestService(conn);
+	public BudgetRequestController() {
+		this.budgetRequestservice = new BudgetRequestService();
 	}
 
-	public void run() {
-		Scanner sc = new Scanner(System.in);
+	public void run(Scanner sc, int rankOrder) {
 		boolean running = true;
 
 		while (running) {
-			System.out.println("\n==== 예산 신청 관리 ====");
-			System.out.println("1. 예산 신청 등록");
-			System.out.println("2. 예산 신청 전체 조회");
-			System.out.println("3. 특정 예산 신청 조회");
-			System.out.println("4. 예산 신청 승인 및 예산 등록");
-			System.out.println("5. 예산 신청 수정");
-			System.out.println("6. 예산 신청 삭제");
-
-			System.out.println("0. 종료");
-			System.out.print("선택: ");
+			budgetRequestView.menu();
 			int choice = sc.nextInt();
 
 			try {
@@ -47,6 +38,11 @@ public class BudgetRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
+					if (rankOrder >= 2) {
+						System.out.println("해당 기능에 대한 권한이 없습니다.");
+						running = false;
+						return;
+					}
 					approveRequest(sc);
 					break;
 				case 5:
@@ -57,7 +53,7 @@ public class BudgetRequestController {
 					break;
 				case 0:
 					running = false;
-					break;
+					return;
 				default:
 					System.out.println("잘못된 입력입니다.");
 				}
@@ -111,7 +107,7 @@ public class BudgetRequestController {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				System.out.println("예산 등록 중 오류가 발생했습니다. " + e.getMessage());
 				sc.nextLine();
 			}
 		}

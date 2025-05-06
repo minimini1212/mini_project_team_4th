@@ -19,13 +19,7 @@ public class EmployeeController {
 
     public void run() {
         while (true) {
-            System.out.println("\n===== 직원 관리 메뉴 =====");
-            System.out.println("0. 뒤로 가기");
-            System.out.println("1. 직원 조회");
-            System.out.println("2. 직원 정보 수정");
-            System.out.println("3. 직원 삭제");
-            System.out.print("선택: ");
-
+            employeeView.employeeMenu();
             try {
                 int choice = Integer.parseInt(scanner.nextLine());
 
@@ -49,6 +43,8 @@ public class EmployeeController {
 
     public void updateEmployeeInfo() {
         try {
+//            System.out.println("\n전체메뉴 > 인사관리 > 직원관리 > 직원수정");
+            System.out.println("===== 직원 수정 =====");
             System.out.print("수정할 직원의 사번을 입력해주세요: ");
             String empNumber = scanner.nextLine().trim();
 
@@ -180,9 +176,10 @@ public class EmployeeController {
     }
 
     public void deleteEmployee() {
+//        System.out.println("\n전체메뉴 > 인사관리 > 직원관리 > 직원삭제");
         System.out.println("===== 직원 삭제 =====");
         try {
-            System.out.print("삭제할 직원의 사번(empNumber)을 입력하세요: ");
+            System.out.print("삭제할 직원의 사번을 입력하세요: ");
             String empNumber = scanner.nextLine();
 
             String confirm;
@@ -222,18 +219,18 @@ public class EmployeeController {
                         return;
                     }
                     case 1 -> {
-                        System.out.print("이름을 입력하세요: ");
+                        System.out.print("이름: ");
                         String name = scanner.nextLine();
                         results = employeeService.findByName(name);
                     }
                     case 2 -> {
-                        System.out.print("사번을 입력하세요: ");
+                        System.out.print("사번: ");
                         String empNumber = scanner.nextLine();
                         Employee emp = employeeService.findByEmpNumber(empNumber);
                         if (emp != null) results.add(emp);
                     }
                     case 3 -> {
-                        System.out.print("부서 ID를 입력하세요: ");
+                        System.out.print("부서 ID(1. 병원장실 / 2. 인사관리 / 3. 예산·회계관리 / 4. 자산관리): ");
                         int deptId = Integer.parseInt(scanner.nextLine());
                         results = employeeService.findByDepartmentId(deptId);
                     }
@@ -286,7 +283,4 @@ public class EmployeeController {
             }
         }
     }
-
-
-
 }
