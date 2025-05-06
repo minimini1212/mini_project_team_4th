@@ -10,25 +10,21 @@ import java.sql.SQLException;
 
 public class PositionDao {
     private Connection conn;
-    private PreparedStatement pstmt;
-    private ResultSet rs;
 
-    /** 연결 **/
-    public void connect() {
-        try {
-            conn = ConnectionSingletonHelper.getConnection("oracle");
-            conn.setAutoCommit(false);
-        } catch (Exception e) {
-            e.printStackTrace();
+    // 연결 주입
+    public void connect(Connection conn) throws SQLException {
+        this.conn = conn;
+        if (this.conn.isClosed()) {
+            throw new SQLException("⚠ 연결이 이미 종료되었습니다.");
         }
+        this.conn.setAutoCommit(false); // 트랜잭션 수동 처리
     }
 
+    // 자원 해제
     public void close() {
         try {
-            CloseHelper.close(rs);
-            CloseHelper.close(pstmt);
-            CloseHelper.close(conn);
-        } catch (Exception e) {
+            if (conn != null && !conn.isClosed()) conn.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

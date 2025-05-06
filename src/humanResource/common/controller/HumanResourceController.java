@@ -10,7 +10,7 @@ public class HumanResourceController {
     private HumanResourceView humanResourceView = new HumanResourceView();
     private EmployeeController employeeController = new EmployeeController();
 
-    public void humanResourceMenu(Scanner sc){
+    public void humanResourceMenu(Scanner sc, int rankOrder){
         while(true){
             humanResourceView.humanResourceMenu();
             switch (sc.nextLine()){
@@ -25,6 +25,4 @@ public class HumanResourceController {
             }
         }
     }
-
-
 }

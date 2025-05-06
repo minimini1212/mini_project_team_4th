@@ -17,6 +17,6 @@ public class EmpNumberGenerator {
     }
 
     public static String generateEmpNumber(Date hireDate, int departmentId, String phone) {
-        return getHireYear(hireDate) + departmentId + getPhoneTail(phone);
+        return getHireYear(hireDate) + "0" + departmentId + getPhoneTail(phone);
     }
 }

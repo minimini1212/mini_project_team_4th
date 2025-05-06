@@ -2,15 +2,12 @@ package equipmentAsset.equipment.view;
 
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Types;
 
 public class EquipmentView {
 
 	/** =-=-=-=-=-=-=-=-=-=-=-= 컨트롤러 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
-	public void equipmentMenu() {
+	public void equipmentAdminMenu() {
 	    System.out.println("---- 장비 관리 ----");
 	    System.out.println("0. 이전 메뉴 돌아가기");
 	    System.out.println("1. 장비 정보 조회");
@@ -19,7 +16,17 @@ public class EquipmentView {
 	    System.out.println("4. 장비 정보 삭제");
 	    System.out.println("5. 장비 현황 대시보드");
 	    System.out.println("6. 카테고리 관리");
+		System.out.println("7. 장비 폐기");
 	    System.out.print("번호 입력 : ");
+	}
+
+	public void equipmentUserMenu() {
+		System.out.println("---- 장비 관리 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 장비 정보 조회");
+		System.out.println("2. 장비 정보 수정");
+		System.out.println("3. 장비 현황 대시보드");
+		System.out.print("번호 입력 : ");
 	}
 	
 	public void findEquipmentMenu() {
@@ -92,13 +99,19 @@ public class EquipmentView {
 	
 	public void inputDepartment() {
 		System.out.println("---- 전체 부서 목록 ----");
-		System.out.println("1. 인사팀");
-		System.out.println("2. 재무팀");
-		System.out.println("3. 재고팀");
-		System.out.println("4. 장비팀");
+		System.out.println("1. 인사 관리 부서");
+		System.out.println("2. 예산/회계 관리 부서");
+		System.out.println("3. 자산 관리 부서");
 		System.out.print("번호 입력 : ");
 	}
-	
+
+	// 폐기 메뉴 화면
+	public void disposeEquipmentMenu() {
+		System.out.println("---- 장비 폐기 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 폐기할 장비 선택");
+		System.out.print("번호 입력 : ");
+	}
 	/** =-=-=-=-=-=-=-=-=-=-=-= DAO 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	// - 장비 정보 출력

@@ -18,27 +18,96 @@ public class ExpenditureDao {
 		this.conn = conn;
 	}
 
+//	// 지출 생성
+//	public void insertExpenditure1(Expenditure expenditure) throws SQLException {
+//		String sql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//		int sequence = getNextExpenditureId();
+//
+//		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//			pstmt.setInt(1, sequence);
+//
+//			if (expenditure.getExpenditureId() == 0) {
+//				pstmt.setNull(2, Types.INTEGER);
+//			} else {
+//				pstmt.setInt(2, expenditure.getExpenditureRequestId());
+//			}
+//			pstmt.setInt(3, expenditure.getDepartmentId());
+//			pstmt.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
+//			pstmt.setInt(5, expenditure.getAmount());
+//			pstmt.setInt(6, expenditure.getCategoryId());
+//			pstmt.setString(7, expenditure.getDescription());
+//			pstmt.setInt(8, expenditure.getYear());
+//
+//			pstmt.executeUpdate();
+//			System.out.println("지출이 등록되었습니다.");
+//		}
+//	}
+
 	// 지출 생성
 	public void insertExpenditure(Expenditure expenditure) throws SQLException {
-		String sql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		conn.setAutoCommit(false); // 트랜잭션 시작
+
+		// 쿼리문 미리 선언
+		String selectBudgetSql = "SELECT budget_id, remaining_budget FROM budget "
+				+ "WHERE department_id = ? AND category_id = ? AND year = ? AND del_yn = 'N' FOR UPDATE";
+
+		String insertExpenditureSql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+		String updateBudgetSql = "UPDATE budget SET remaining_budget = remaining_budget - ? WHERE budget_id = ?";
+
 		int sequence = getNextExpenditureId();
 
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, sequence);
+		try (PreparedStatement pstmt1 = conn.prepareStatement(selectBudgetSql)) {
+			pstmt1.setInt(1, expenditure.getDepartmentId());
+			pstmt1.setInt(2, expenditure.getCategoryId());
+			pstmt1.setInt(3, expenditure.getYear());
 
-			if (expenditure.getExpenditureId() == 0) {
-				pstmt.setNull(2, Types.INTEGER);
-			} else {
-				pstmt.setInt(2, expenditure.getExpenditureRequestId());
+			try (ResultSet rs = pstmt1.executeQuery()) {
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 예산이 존재하지 않습니다.");
+				}
+
+				int budgetId = rs.getInt("budget_id");
+				int remaining = rs.getInt("remaining_budget");
+
+				if (remaining < expenditure.getAmount()) {
+					throw new SQLException("잔여 예산이 부족합니다.");
+				}
+
+				try (PreparedStatement pstmt2 = conn.prepareStatement(insertExpenditureSql)) {
+					pstmt2.setInt(1, sequence);
+
+					if (expenditure.getExpenditureId() == 0) {
+						pstmt2.setNull(2, Types.INTEGER);
+					} else {
+						pstmt2.setInt(2, expenditure.getExpenditureRequestId());
+					}
+					pstmt2.setInt(3, expenditure.getDepartmentId());
+					pstmt2.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
+					pstmt2.setInt(5, expenditure.getAmount());
+					pstmt2.setInt(6, expenditure.getCategoryId());
+					pstmt2.setString(7, expenditure.getDescription());
+					pstmt2.setInt(8, expenditure.getYear());
+
+					pstmt2.executeUpdate();
+				}
+
+				try (PreparedStatement pstmt3 = conn.prepareStatement(updateBudgetSql)) {
+					pstmt3.setInt(1, expenditure.getAmount());
+					pstmt3.setInt(2, budgetId);
+					pstmt3.executeUpdate();
+				}
+
+				conn.commit();
+				System.out.println("지출 등록 및 예산 차감 성공");
 			}
-			pstmt.setInt(3, expenditure.getDepartmentId());
-			pstmt.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
-			pstmt.setInt(5, expenditure.getAmount());
-			pstmt.setInt(6, expenditure.getCategoryId());
-			pstmt.setString(7, expenditure.getDescription());
-			pstmt.setInt(8, expenditure.getYear());
 
-			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			conn.rollback();
+			System.err.println("에러 발생, 롤백 수행: " + e.getMessage());
+			throw e;
+		} finally {
+			conn.setAutoCommit(true);
 		}
 	}
 
@@ -85,9 +154,13 @@ public class ExpenditureDao {
 		List<Expenditure> list = new ArrayList<>();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId); // 먼저 값 바인딩
-			try (ResultSet rs = pstmt.executeQuery()) { // 그리고 실행
+			pstmt.setInt(1, requestId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+
+				boolean hasData = false;
 				while (rs.next()) {
+					hasData = true;
+
 					Expenditure expenditure = new Expenditure();
 					expenditure.setExpenditureId(rs.getInt("expenditure_id"));
 					expenditure.setExpenditureRequestId(rs.getInt("expenditure_request_id"));
@@ -100,11 +173,10 @@ public class ExpenditureDao {
 
 					list.add(expenditure);
 				}
-			} catch (SQLException e) {
-				System.out.println("SQL 오류 발생: " + e.getMessage());
-				System.out.println("SQL 상태: " + e.getSQLState());
-				System.out.println("오류 코드: " + e.getErrorCode());
-				e.printStackTrace();
+
+				if (!hasData) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
 			}
 		}
 
@@ -112,26 +184,52 @@ public class ExpenditureDao {
 	}
 
 	// 특정 지출 수정
-	public void updateByExpenditureId(Expenditure expenditure) throws SQLException {
-		String sql = "UPDATE expenditure SET amount = ?, description = ? WHERE expenditure_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, expenditure.getAmount());
-			pstmt.setString(2, expenditure.getDescription());
-			pstmt.setInt(3, expenditure.getExpenditureId());
+	public void updateByExpenditureId(Expenditure expenditure, int requestId) throws SQLException {
+		String sql = "UPDATE expenditure SET description = ? WHERE expenditure_id = ?";
+		String selectSql = "SELECT * FROM expenditure WHERE expenditure_id = ? AND del_yn IN ('N', 'n')";
 
-			pstmt.executeUpdate();
-			
-		} 
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+			pstmt1.setInt(1, requestId);
+
+			try (ResultSet rs = pstmt1.executeQuery()) {
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setString(1, expenditure.getDescription());
+				pstmt.setInt(2, expenditure.getExpenditureId());
+
+				pstmt.executeUpdate();
+				System.out.println("지출이 수정되었습니다.");
+			}
+		}
 	}
 
 	// 지출 소프트딜리트
 	public void softDeleteByExpenditureId(int requestId) throws SQLException {
 		String sql = "UPDATE expenditure SET del_yn = 'Y' WHERE expenditure_id = ?";
-		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, requestId);
+		String selectSql = "SELECT * FROM expenditure WHERE expenditure_id = ? AND del_yn IN ('N', 'n')";
 
-			pstmt.executeUpdate();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+				PreparedStatement pstmt1 = conn.prepareStatement(selectSql)) {
+
+			pstmt1.setInt(1, requestId);
+
+			try (ResultSet rs = pstmt1.executeQuery()) { // 그리고 실행
+
+				if (!rs.next()) {
+					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+				}
+
+				pstmt.setInt(1, requestId);
+
+				pstmt.executeUpdate();
+				System.out.println("지출이 소프트 삭제되었습니다.");
+			}
+
 		}
+
 	}
 
 	// 기본키 가져오는 메서드

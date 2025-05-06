@@ -31,7 +31,7 @@ public class ConnectionHelper {
 			} else if (dsn.equals("oracle")) {
 				Class.forName("oracle.jdbc.OracleDriver");
 				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "his", "oracle");
-				System.out.println("oracle connection success");
+//				System.out.println("oracle connection success");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

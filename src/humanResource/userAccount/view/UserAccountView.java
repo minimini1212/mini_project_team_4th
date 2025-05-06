@@ -2,10 +2,22 @@ package humanResource.userAccount.view;
 
 public class UserAccountView {
     public void findUserAccountMenu(){
-        System.out.println("\n====== 병원 관리 시스템 ======");
-        System.out.println("1. 로그인");
-        System.out.println("2. 회원가입");
-        System.out.println("0. 종료");
-        System.out.print("선택: ");
+
+
+        System.out.println("" +
+                "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        System.out.println(
+                "        ┏┓︱┏┓ ┏━━┓ ┏━━━┓\n" +
+                "        ┃┃︱┃┃ ┗┫┣┛ ┃┏━┓┃\n" +
+                "        ┃┗━┛┃ ︱┃┃︱ ┃┗━━┓\n" +
+                "        ┃┏━┓┃ ︱┃┃︱ ┗━━┓┃\n" +
+                "        ┃┃︱┃┃ ┏┫┣┓ ┃┗━┛┃\n" +
+                "        ┗┛︱┗┛ ┗━━┛ ┗━━━┛");
+        System.out.println(
+                "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        System.out.println("0\uFE0F⃣ 종료");
+        System.out.println("1\uFE0F⃣ 로그인");
+        System.out.println("2\uFE0F⃣ 회원가입");
+        System.out.print("\u23E9 ");
     }
 }

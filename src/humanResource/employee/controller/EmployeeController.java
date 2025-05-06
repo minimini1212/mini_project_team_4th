@@ -1,6 +1,7 @@
 package humanResource.employee.controller;
 
 import common.SessionContext;
+import humanResource.common.util.EmployeeOptionMapper;
 import humanResource.employee.model.entity.Employee;
 import humanResource.employee.model.service.EmployeeService;
 import humanResource.employee.view.EmployeeView;
@@ -18,13 +19,7 @@ public class EmployeeController {
 
     public void run() {
         while (true) {
-            System.out.println("\n===== 직원 관리 메뉴 =====");
-            System.out.println("0. 뒤로 가기");
-            System.out.println("1. 직원 조회");
-            System.out.println("2. 직원 정보 수정");
-            System.out.println("3. 직원 삭제");
-            System.out.print("선택: ");
-
+            employeeView.employeeMenu();
             try {
                 int choice = Integer.parseInt(scanner.nextLine());
 
@@ -47,46 +42,144 @@ public class EmployeeController {
     }
 
     public void updateEmployeeInfo() {
-        if (!SessionContext.isLoggedIn()) {
-            System.out.println("로그인이 필요합니다.");
-            return;
-        }
-
-        Employee current = SessionContext.getUser();
-        System.out.println("[계정 정보 수정]");
-
-        Employee updated = new Employee();
-        updated.setEmpNumber(current.getEmpNumber());
-
-        System.out.print("이름 수정 (현재: " + current.getName() + "): ");
-        String name = scanner.nextLine();
-        updated.setName(name.isBlank() ? current.getName() : name);
-
-        System.out.print("주소 수정 (현재: " + current.getAddress() + "): ");
-        String address = scanner.nextLine();
-        updated.setAddress(address.isBlank() ? current.getAddress() : address);
-
-        System.out.print("전화번호 수정 (현재: " + current.getPhone() + "): ");
-        String phone = scanner.nextLine();
-        updated.setPhone(phone.isBlank() ? current.getPhone() : phone);
-
-        System.out.print("이메일 수정 (현재: " + current.getEmail() + "): ");
-        String email = scanner.nextLine();
-        updated.setEmail(email.isBlank() ? current.getEmail() : email);
-
         try {
-            employeeService.updateEmployeeInfo(updated);
-            System.out.println("✅ 계정 정보가 수정되었습니다.");
+//            System.out.println("\n전체메뉴 > 인사관리 > 직원관리 > 직원수정");
+            System.out.println("===== 직원 수정 =====");
+            System.out.print("수정할 직원의 사번을 입력해주세요: ");
+            String empNumber = scanner.nextLine().trim();
+
+            Employee existing = employeeService.findByEmpNumber(empNumber);
+            if (existing == null) {
+                System.out.println("❌ 해당 사번의 직원이 존재하지 않습니다.");
+                return;
+            }
+
+            System.out.println("\n📋 현재 직원 정보:");
+            System.out.printf("이름: %s | 주소: %s | 전화번호: %s | 이메일: %s%n",
+                    existing.getName(), existing.getAddress(), existing.getPhone(), existing.getEmail());
+            System.out.printf("재직 상태: %s | 직급: %s | 직무: %s%n",
+                    existing.getStatus(),
+                    EmployeeOptionMapper.getPositionName(existing.getPositionId()),
+                    EmployeeOptionMapper.getJobName(existing.getJobId()));
+
+            String confirm;
+            while (true) {
+                System.out.print("\n이 직원을 수정하시겠습니까? (y/n): ");
+                confirm = scanner.nextLine().trim().toLowerCase();
+
+                if (confirm.equals("y")) break;         // 수정 진행
+                if (confirm.equals("n")) {
+                    System.out.println("🔙 직원 정보 수정을 취소했습니다.");
+                    return;
+                }
+
+                System.out.println("❌ 잘못된 입력입니다. y 또는 n을 입력해주세요.");
+            }
+
+            System.out.print("이름 [" + existing.getName() + "]: ");
+            String name = scanner.nextLine().trim();
+
+            System.out.print("주소 [" + existing.getAddress() + "]: ");
+            String address = scanner.nextLine().trim();
+
+            String phone = "";
+            while (true) {
+                System.out.print("전화번호 [" + existing.getPhone() + "] (010-1234-5678 형식): ");
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) break;
+
+                if (EmployeeService.isValidPhoneNumber(input)) {
+                    phone = input;
+                    break;
+                }
+                System.out.println("❌ 잘못된 전화번호 형식입니다. 예: 010-1234-5678");
+            }
+
+            String email = "";
+            while (true) {
+                System.out.print("이메일 [" + existing.getEmail() + "]: ");
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) break;
+
+                if (EmployeeService.isValidEmail(input)) {
+                    email = input;
+                    break;
+                }
+                System.out.println("❌ 이메일 형식이 잘못되었습니다.");
+            }
+
+            // 재직 상태
+            String status = "";
+            while (true) {
+                System.out.println("재직 상태 선택 (현재: " + existing.getStatus() + ")");
+                EmployeeOptionMapper.printStatusOptions();
+                System.out.print("선택 (빈칸 입력 시 유지): ");
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) break;
+                if (input.matches("[1-3]")) {
+                    status = EmployeeOptionMapper.STATUS_MAP.get(Integer.parseInt(input));
+                    break;
+                }
+                System.out.println("❌ 1~3 중에서 선택해주세요.");
+            }
+
+            // 포지션
+            String positionStr = "";
+            while (true) {
+                System.out.println("직급 선택 (현재: " + EmployeeOptionMapper.getPositionName(existing.getPositionId()) + ")");
+                EmployeeOptionMapper.printPositionOptions();
+                System.out.print("선택 (빈칸 입력 시 유지): ");
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) break;
+                if (input.matches("[1-7]")) {
+                    positionStr = input;
+                    break;
+                }
+                System.out.println("❌ 1~7 사이의 숫자를 입력해주세요.");
+            }
+
+            // 직무
+            String jobStr = "";
+            while (true) {
+                System.out.println("직무 선택 (현재: " + EmployeeOptionMapper.getJobName(existing.getJobId()) + ")");
+                EmployeeOptionMapper.printJobOptions();
+                System.out.print("선택 (빈칸 입력 시 유지): ");
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) break;
+                if (input.matches("[1-8]")) {
+                    jobStr = input;
+                    break;
+                }
+                System.out.println("❌ 1~8 사이의 숫자를 입력해주세요.");
+            }
+
+            while (true) {
+                System.out.print("\n저장하시겠습니까? (y/n): ");
+                String saveConfirm = scanner.nextLine().trim().toLowerCase();
+
+                if (saveConfirm.equals("y")) break;
+                if (saveConfirm.equals("n")) {
+                    System.out.println("🔙 변경 사항을 저장하지 않고 이전 메뉴로 돌아갑니다.");
+                    return;
+                }
+
+                System.out.println("❌ 잘못된 입력입니다. y 또는 n을 입력해주세요.");
+            }
+
+            employeeService.updateEmployeeInfo(empNumber, name, address, phone, email, status, positionStr, jobStr);
+            System.out.println("✅ 직원 정보가 성공적으로 수정되었습니다.");
+
         } catch (Exception e) {
-            System.out.println("❌ 계정 정보 수정 중 오류: " + e.getMessage());
+            System.out.println("❌ 직원 정보 수정 중 오류 발생: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-
     public void deleteEmployee() {
+//        System.out.println("\n전체메뉴 > 인사관리 > 직원관리 > 직원삭제");
         System.out.println("===== 직원 삭제 =====");
         try {
-            System.out.print("삭제할 직원의 사번(empNumber)을 입력하세요: ");
+            System.out.print("삭제할 직원의 사번을 입력하세요: ");
             String empNumber = scanner.nextLine();
 
             String confirm;
@@ -152,9 +245,35 @@ public class EmployeeController {
                 } else {
                     System.out.println("===== 검색 결과 =====");
                     for (Employee e : results) {
-                        System.out.printf("사번: %s | 이름: %s | 부서ID: %d | 전화번호: %s | 입사일: %s%n",
-                                e.getEmpNumber(), e.getName(), e.getDepartmentId(), e.getPhone(),
-                                new SimpleDateFormat("yyyy-MM-dd").format(e.getHireDate()));
+                        // 부서 ID → 부서명 매핑
+                        String deptName = switch (e.getDepartmentId()) {
+                            case 1 -> "병원장실";
+                            case 2 -> "인사관리부서";
+                            case 3 -> "예산/회계관리부서";
+                            case 4 -> "자산관리부서";
+                            default -> "알 수 없음";
+                        };
+
+                        // 직급, 직무, 상태는 Map 기반으로 변환
+                        String positionName = EmployeeOptionMapper.getPositionName(e.getPositionId());
+                        String jobName = EmployeeOptionMapper.getJobName(e.getJobId());
+                        String statusName = EmployeeOptionMapper.getStatusName(e.getStatus());
+
+                        String hireDate = new SimpleDateFormat("yyyy-MM-dd").format(e.getHireDate());
+
+                        // 최종 출력
+                        System.out.printf(
+                                "사번: %s | 이름: %s | 부서: %s | 직급: %s | 직무: %s | 재직 상태: %s | 입사일: %s | 전화번호: %s | 주소: %s%n",
+                                e.getEmpNumber(),
+                                e.getName(),
+                                deptName,
+                                positionName,
+                                jobName,
+                                statusName,
+                                hireDate,
+                                e.getPhone(),
+                                e.getAddress()
+                        );
                     }
                 }
             } catch (NumberFormatException e) {
@@ -164,7 +283,4 @@ public class EmployeeController {
             }
         }
     }
-
-
-
 }
