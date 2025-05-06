@@ -109,6 +109,15 @@ public class BudgetRequestDao {
 				budgetRequest.setRequestDate(rs.getDate("request_date"));
 				budgetRequest.setApprovalDate(rs.getDate("approval_date"));
 				budgetRequest.setDescription(rs.getString("description"));
+				
+				// 부서 이름, 카테고리 이름 추가
+				int departmentId = rs.getInt("department_id");
+				int categoryId = rs.getInt("category_id");
+				String departmentName = getDepartmentNameById(departmentId);
+				String categoryName = getCategoryNameById(categoryId);
+
+				budgetRequest.setDepartmentName(departmentName);
+				budgetRequest.setCategoryName(categoryName);
 
 				list.add(budgetRequest);
 
@@ -148,6 +157,15 @@ public class BudgetRequestDao {
 					budgetRequest.setRequestDate(rs.getDate("request_date"));
 					budgetRequest.setApprovalDate(rs.getDate("approval_date"));
 					budgetRequest.setDescription(rs.getString("description"));
+					
+					// 부서 이름, 카테고리 이름 추가
+					int departmentId = rs.getInt("department_id");
+					int categoryId = rs.getInt("category_id");
+					String departmentName = getDepartmentNameById(departmentId);
+					String categoryName = getCategoryNameById(categoryId);
+
+					budgetRequest.setDepartmentName(departmentName);
+					budgetRequest.setCategoryName(categoryName);
 
 					list.add(budgetRequest);
 				}
@@ -208,6 +226,36 @@ public class BudgetRequestDao {
 
 		}
 
+	}
+
+	// 카테고리ID로 카테고리명 찾는 메서드
+	public String getCategoryNameById(int categoryId) throws SQLException {
+		String sql = "SELECT category_name FROM vw_category_name WHERE category_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, categoryId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("category_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
+			}
+		}
+	}
+
+	// 부서ID로 부서명 찾는 메서드
+	public String getDepartmentNameById(int departmentId) throws SQLException {
+		String sql = "SELECT department_name FROM vw_department_name WHERE department_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, departmentId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("department_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
+			}
+		}
 	}
 
 }
