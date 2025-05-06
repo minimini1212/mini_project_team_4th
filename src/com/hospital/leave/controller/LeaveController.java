@@ -49,9 +49,12 @@ public class LeaveController {
 
     private void approveReject() {
         long id = view.inputLeaveId();
+        String approverId = view.inputApproverId(); // ✅ 먼저 문자열로 입력
+
         boolean ok = view.confirmApprove()
-                ? service.approveLeave(id, view.inputApproverId())
-                : service.rejectLeave(id, view.inputApproverId());
+                ? service.approveLeave(id, approverId)
+                : service.rejectLeave(id, approverId);
+
         view.showMessage(ok ? "처리 완료" : "처리 실패");
     }
 

@@ -25,13 +25,13 @@ public class LeaveView {
     }
 
     public Leave inputNewLeave() {
-        System.out.print("사번: "); long empId = Long.parseLong(scanner.nextLine());
+        System.out.print("사번: "); String empId = scanner.nextLine();
         System.out.print("휴가 종류: "); String type = scanner.nextLine();
         System.out.print("시작일 (YYYY-MM-DD): "); LocalDate sd = LocalDate.parse(scanner.nextLine());
         System.out.print("종료일 (YYYY-MM-DD): "); LocalDate ed = LocalDate.parse(scanner.nextLine());
         System.out.print("일수: "); double days = Double.parseDouble(scanner.nextLine());
         System.out.print("사유: "); String reason = scanner.nextLine();
-        System.out.print("승인자 사번: "); long apr = Long.parseLong(scanner.nextLine());
+        System.out.print("승인자 사번: "); String apr = scanner.nextLine();
         LocalDate ap = LocalDate.now();
         return new Leave(null, empId, type, sd, ed, days, reason, "REQUEST", apr, ap);
     }
@@ -45,12 +45,12 @@ public class LeaveView {
         return scanner.nextLine().equalsIgnoreCase("Y");
     }
 
-    public long inputApproverId() {
-        System.out.print("승인자 사번: "); return Long.parseLong(scanner.nextLine());
+    public String inputApproverId() {
+        System.out.print("승인자 사번: "); return scanner.nextLine();
     }
 
-    public long inputEmployeeId() {
-        System.out.print("조회할 사번: "); return Long.parseLong(scanner.nextLine());
+    public String inputEmployeeId() {
+        System.out.print("조회할 사번: "); return scanner.nextLine();
     }
 
     public long inputDepartmentId() {

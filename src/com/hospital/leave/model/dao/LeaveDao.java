@@ -39,13 +39,13 @@ public class LeaveDao {
         try {
             pstmt = conn.prepareStatement(sql);
             int i = 1;
-            pstmt.setLong(i++, l.getEmployeeId());
+            pstmt.setString(i++, l.getEmployeeId());
             pstmt.setString(i++, l.getLeaveType());
             pstmt.setDate(i++, Date.valueOf(l.getStartDate()));
             pstmt.setDate(i++, Date.valueOf(l.getEndDate()));
             pstmt.setDouble(i++, l.getDays());
             pstmt.setString(i++, l.getReason());
-            pstmt.setLong(i++, l.getApproverId());
+            pstmt.setString(i++, l.getApproverId());
             pstmt.setDate(i,   Date.valueOf(l.getApplyDate()));
             boolean ok = pstmt.executeUpdate() == 1;
             conn.commit();
@@ -56,12 +56,12 @@ public class LeaveDao {
         }
     }
 
-    public boolean updateStatus(Long id, String status, Long approverId) {
+    public boolean updateStatus(Long id, String status, String approverId) {
         String sql = "UPDATE LEAVE_REQUEST SET status=?, approver_id=? WHERE leave_id=?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, status);
-            pstmt.setLong(2, approverId);
+            pstmt.setString(2, approverId);
             pstmt.setLong(3, id);
             boolean ok = pstmt.executeUpdate() == 1;
             conn.commit();
@@ -72,24 +72,24 @@ public class LeaveDao {
         }
     }
 
-    public List<Leave> findByEmployee(Long empId) {
+    public List<Leave> findByEmployee(String empId) {
         List<Leave> list = new ArrayList<>();
         String sql = "SELECT * FROM LEAVE_REQUEST WHERE employee_id=? ORDER BY start_date";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, empId);
+            pstmt.setString(1, empId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new Leave(
                         rs.getLong("leave_id"),
-                        rs.getLong("employee_id"),
+                        rs.getString("employee_id"),
                         rs.getString("leave_type"),
                         rs.getDate("start_date").toLocalDate(),
                         rs.getDate("end_date").toLocalDate(),
                         rs.getDouble("days"),
                         rs.getString("reason"),
                         rs.getString("status"),
-                        rs.getLong("approver_id"),
+                        rs.getString("approver_id"),
                         rs.getDate("apply_date").toLocalDate()
                 ));
             }
