@@ -16,21 +16,21 @@ public class LeaveService {
         return ok;
     }
 
-    public boolean approveLeave(Long id, Long approverId) {
+    public boolean approveLeave(Long id, String approverId) {
         dao.connect();
         boolean ok = dao.updateStatus(id, "APPROVED", approverId);
         dao.close();
         return ok;
     }
 
-    public boolean rejectLeave(Long id, Long approverId) {
+    public boolean rejectLeave(Long id, String approverId) {
         dao.connect();
         boolean ok = dao.updateStatus(id, "REJECTED", approverId);
         dao.close();
         return ok;
     }
 
-    public List<Leave> getByEmployee(Long empId) {
+    public List<Leave> getByEmployee(String empId) {
         dao.connect();
         List<Leave> list = dao.findByEmployee(empId);
         dao.close();
