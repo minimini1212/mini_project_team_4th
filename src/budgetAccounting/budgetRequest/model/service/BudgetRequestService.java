@@ -80,7 +80,7 @@ public class BudgetRequestService {
 		budget.setCategoryId(request.getCategoryId());
 		budget.setDescription(request.getDescription());
 		budget.setDescription(request.getDescription());
-		budget.setRemainingBudget(request.getRequestedAmount());
+		budget.setRemainingAmount(request.getRequestedAmount());
 
 		return budget;
 	}

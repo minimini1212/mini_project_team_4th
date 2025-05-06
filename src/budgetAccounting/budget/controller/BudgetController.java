@@ -94,7 +94,7 @@ public class BudgetController {
 				request.setBudgetAmount(amount);
 				request.setCategoryId(categoryId);
 				request.setDescription(description);
-				request.setRemainingBudget(amount);
+				request.setRemainingAmount(amount);
 
 				budgetservice.createBudget(request);
 

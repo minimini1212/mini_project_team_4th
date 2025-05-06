@@ -81,7 +81,7 @@ public class ExpenditureRequestController {
 				System.out.print("설명: ");
 				String description = sc.nextLine();
 				System.out.print("신청자 ID: ");
-				int requesterId = sc.nextInt();
+				String requesterId = sc.nextLine();
 
 				ExpenditureRequest request = new ExpenditureRequest();
 				request.setDepartmentId(deptId);
