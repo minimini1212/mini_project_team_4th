@@ -12,6 +12,8 @@ import java.util.List;
 public class LeaveController {
     private final LeaveService service = new LeaveService();
     private final LeaveView    view    = new LeaveView();
+    private final LeaveUsageStatService statService = new LeaveUsageStatService();
+    private final LeaveUsageStatView    statView    = new LeaveUsageStatView();
 
     public void leaveMenu() {
         while (true) {
@@ -29,9 +31,6 @@ public class LeaveController {
                     break;
                 case 4:
                     cancel();
-                    break;
-                case 5:
-                    view.showMessage("통계 조회 기능은 구현 예정");
                     break;
                 case 0:
                     return;
@@ -66,4 +65,6 @@ public class LeaveController {
             view.showMessage("취소 완료");
         else view.showError("취소 실패");
     }
-}
+
+    }
+

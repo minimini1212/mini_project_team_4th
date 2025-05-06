@@ -15,7 +15,6 @@ public class LeaveView {
         System.out.println("2. 휴가 승인/반려");
         System.out.println("3. 휴가 현황 조회");
         System.out.println("4. 휴가 취소");
-        System.out.println("5. 통계 조회");
         System.out.println("0. 뒤로가기");
         System.out.print("> ");
     }
