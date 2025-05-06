@@ -36,7 +36,7 @@ public class BudgetAccountingController {
 				expenditureRequestController.run(sc, rankOrder);
 				break;
 			case "5":
-				statisticsController.run(sc);
+				statisticsController.run(sc, rankOrder);
 				break;
 			default:
 				System.out.println("잘못된 입력입니다.");
