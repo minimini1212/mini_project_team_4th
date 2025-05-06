@@ -15,4 +15,11 @@ public class Certification {
     private String certName;
     private String issuingOrg;
     private String description;
+    @Override
+    public String toString() {
+        return String.format(
+                "자격증 ID : %d\n자격증명   : %s\n발급기관   : %s\n설명       : %s\n------------------------------",
+                certId, certName, issuingOrg, description
+        );
+    }
 }
