@@ -1,6 +1,5 @@
 package budgetAccounting.expenditure.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,8 +15,8 @@ public class ExpenditureController {
 	private ExpenditureService expenditureservice;
 	private ExpenditureView expenditureView;
 
-	public ExpenditureController(Connection conn, ExpenditureView expenditureView) {
-		this.expenditureservice = new ExpenditureService(conn);
+	public ExpenditureController(ExpenditureView expenditureView) {
+		this.expenditureservice = new ExpenditureService();
 		this.expenditureView = expenditureView;
 	}
 

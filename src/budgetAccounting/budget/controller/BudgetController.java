@@ -1,6 +1,5 @@
 package budgetAccounting.budget.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.InputMismatchException;
@@ -15,8 +14,8 @@ public class BudgetController {
 
 	private BudgetService budgetservice;
 
-	public BudgetController(Connection conn, BudgetView budgetView) {
-		this.budgetservice = new BudgetService(conn);
+	public BudgetController(BudgetView budgetView) {
+		this.budgetservice = new BudgetService();
 	}
 
 	public void run() {

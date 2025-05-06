@@ -1,6 +1,5 @@
 package budgetAccounting.budgetRequest.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.InputMismatchException;
@@ -9,13 +8,14 @@ import java.util.Scanner;
 
 import budgetAccounting.budgetRequest.model.entity.BudgetRequest;
 import budgetAccounting.budgetRequest.model.service.BudgetRequestService;
+import budgetAccounting.budgetRequest.view.BudgetRequestView;
 
 public class BudgetRequestController {
 
 	private BudgetRequestService budgetRequestservice;
 
-	public BudgetRequestController(Connection conn) {
-		this.budgetRequestservice = new BudgetRequestService(conn);
+	public BudgetRequestController(BudgetRequestView budgetRequestView) {
+		this.budgetRequestservice = new BudgetRequestService();
 	}
 
 	public void run() {
@@ -111,7 +111,7 @@ public class BudgetRequestController {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				System.out.println("예산 등록 중 오류가 발생했습니다. " + e.getMessage());
 				sc.nextLine();
 			}
 		}
