@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import budgetAccounting.budget.model.entity.Budget;
+import dbConn.BaseDAO;
 
-public class BudgetDao {
+public class BudgetDao extends BaseDAO {
 	private Connection conn;
 
 	public BudgetDao(Connection conn) {
@@ -32,8 +33,6 @@ public class BudgetDao {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, sequence);
 			
-			System.out.println(sequence);
-
 			if (budget.getBudgetRequestId() == 0) {
 				pstmt.setNull(2, Types.INTEGER);
 			} else {
