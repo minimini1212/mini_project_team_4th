@@ -76,7 +76,7 @@ public class BudgetController {
 	private void createBudget(Scanner sc) throws SQLException {
 		while (true) {
 			try {
-				System.out.print("부서 ID (자산 1번, 인사 2번, 회계 3번): ");
+				System.out.print("부서 ID (인사 1번, 예산/회계 2번, 자산 3번): ");
 				int deptId = sc.nextInt();
 				System.out.print("연도를 입력하세요(4자리): ");
 				int year = sc.nextInt();
