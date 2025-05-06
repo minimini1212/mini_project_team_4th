@@ -10,12 +10,12 @@ public class EmployeeCertificationView {
 
     public void showMenu() {
         System.out.println("\n===== 사원 자격증 내역 관리 =====");
-        System.out.println("1. 전체 자격증 내역 조회");
-        System.out.println("2. 사원별 자격증 조회");
-        System.out.println("3. 자격증 등록");
-        System.out.println("4. 자격증 정보 수정");
-        System.out.println("5. 자격증 삭제");
-        System.out.println("0. 이전 메뉴");
+        System.out.println("1️⃣ 전체 자격증 내역 조회");
+        System.out.println("2️⃣ 사원별 자격증 조회");
+        System.out.println("3️⃣ 자격증 등록");
+        System.out.println("4️⃣ 자격증 정보 수정");
+        System.out.println("5️⃣ 자격증 삭제");
+        System.out.println("0️⃣ 이전 메뉴");
         System.out.print("선택: ");
     }
 
