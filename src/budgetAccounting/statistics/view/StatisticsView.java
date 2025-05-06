@@ -13,11 +13,15 @@ public class StatisticsView {
 //	}
 
 	public void menu() {
-		System.out.println("\n==== 통계 조회 ====");
-		System.out.println("1. 연도별 조회");
-		System.out.println("2. 부서별 조회");
-		System.out.println("3. 카테고리별 조회");
-		System.out.println("0. 뒤로 가기");
-		System.out.print("선택: ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌    𝙎𝙏𝘼𝙏𝙄𝙎𝙏𝙄𝘾𝙎    ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 연도별 조회");
+		System.out.println("2️⃣ 부서별 조회");
+		System.out.println("3️⃣ 카테고리별 조회");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 }
