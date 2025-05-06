@@ -33,7 +33,7 @@ public class MainController {
             if (rankOrder == 1) {
                 while (true) {
                     mainView.showDepartmentMenu();
-                    int choice = promptIntInRange("선택: ", 0, 4);
+                    int choice = promptIntInRange("\u23E9 ", 0, 4);
 
                     if (choice == 0) {
                         if (confirmLogout()) {
