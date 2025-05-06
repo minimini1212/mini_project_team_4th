@@ -15,9 +15,9 @@ public class HistoryController {
     /** =-=-=-=-=-=-=-=-=-=-=-= 최상위 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
 
     // - 이력 관리 메인 메뉴
-    public void historyMenu() {
+    public void historyAdminMenu() {
         while (true) {
-            historyView.historyMenu();
+            historyView.historyAdminMenu();
             switch (sc.nextLine()) {
                 case "0": // - 이전 메뉴로 돌아가기
                     return;
