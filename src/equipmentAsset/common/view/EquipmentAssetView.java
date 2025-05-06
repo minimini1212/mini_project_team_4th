@@ -1,12 +1,13 @@
 package equipmentAsset.common.view;
 
+import common.view.HospitalBannerUtils;
+
 public class EquipmentAssetView {
 	
 	/** =-=-=-=-=-=-=-=-=-=-=-= 최상위 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
 	
     public void equipmentAssetMenu() {
-        System.out.println("  ▌│█║▌   𝙀 𝙌 𝙐 𝙄 𝙋 𝙈 𝙀 𝙉 𝙏   ▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printEquipmentBanner();
         System.out.println();
         System.out.println("0\uFE0F⃣ 이전 메뉴 돌아가기");
         System.out.println("1\uFE0F⃣ 장비 정보 관리");

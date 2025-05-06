@@ -1,5 +1,7 @@
 package budgetAccounting.expenditureRequest.view;
 
+import common.view.HospitalBannerUtils;
+
 public class ExpenditureRequestView {
 //	public static void main(String[] args) {
 //		System.out.println("========== 예산 회계 시스템에 오신 것을 환영합니다 ==========");
@@ -14,8 +16,7 @@ public class ExpenditureRequestView {
 
 	public void menu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║  𝙀𝙓𝙋𝙀𝙉𝙎𝙀 𝙍𝙀𝙌𝙐𝙀𝙎𝙏  ║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printExpenseRequestBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 지출 신청 등록");

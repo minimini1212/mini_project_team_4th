@@ -1,11 +1,12 @@
 package humanResource.employee.view;
 
+import common.view.HospitalBannerUtils;
+
 public class EmployeeView {
 
     public void employeeMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║   𝙀 𝙈 𝙋 𝙇 𝙊 𝙔 𝙀 𝙀   ║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printEmployeeBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 직원 조회");
@@ -17,8 +18,7 @@ public class EmployeeView {
 
     public void searchEmployeeMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printSearchBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 이름으로 검색");

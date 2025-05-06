@@ -1,10 +1,11 @@
 package budgetAccounting.common.view;
 
+import common.view.HospitalBannerUtils;
+
 public class BudgetAccountingView {
         public void budgetAccountingMenu() {
                 System.out.println();
-                System.out.println("  ▌│█║▌║▌   𝘼𝘾𝘾𝙊𝙐𝙉𝙏𝙄𝙉𝙂   ▌║▌║█│▌");
-                System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+                HospitalBannerUtils.printAccountingBanner();
                 System.out.println();
                 System.out.println("0️⃣ 이전 메뉴 돌아가기");
                 System.out.println("1️⃣ 예산 관리");

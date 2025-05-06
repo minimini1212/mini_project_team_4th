@@ -1,5 +1,7 @@
 package equipmentAsset.equipment.view;
 
+import common.view.HospitalBannerUtils;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 
@@ -9,8 +11,7 @@ public class EquipmentView {
 
 	public void equipmentAdminMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌  𝙈 𝘼 𝙉 𝘼 𝙂 𝙀  ▌║▌║█│ ▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printManageBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 장비 정보 조회");
@@ -26,8 +27,7 @@ public class EquipmentView {
 
 	public void equipmentUserMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌  𝙈 𝘼 𝙉 𝘼 𝙂 𝙀  ▌║▌║█│ ▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printManageBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 장비 정보 조회");
@@ -39,8 +39,7 @@ public class EquipmentView {
 
 	public void findEquipmentMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printSearchBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 모든 장비 목록 조회");
@@ -54,8 +53,7 @@ public class EquipmentView {
 
 	public void createEquipmentMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌    𝙄 𝙉 𝙋 𝙐 𝙏    ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printInputBanner();
 		System.out.println();
 		System.out.println("1️⃣ 구매정보 입력");
 		System.out.println("2️⃣ 카테고리 입력");
@@ -68,8 +66,7 @@ public class EquipmentView {
 
 	public void inputStatusAndDescriptionMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙎 𝙏 𝘼 𝙏 𝙐 𝙎   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printStatusBanner();
 		System.out.println();
 		System.out.println("1️⃣ 정상");
 		System.out.println("2️⃣ 점검필요");
@@ -81,8 +78,7 @@ public class EquipmentView {
 
 	public void saveEquipmentMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙂 𝙄 𝙎 𝙏   ▌ ║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printRegisterBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 신규 장비 등록");
@@ -92,8 +88,7 @@ public class EquipmentView {
 
 	public void updateEquipmentMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printUpdateBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 장비 정보 수정");
@@ -103,8 +98,7 @@ public class EquipmentView {
 
 	public void deleteEquipmentMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝘿 𝙀 𝙇 𝙀 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printDeleteBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 장비 삭제");
@@ -114,8 +108,7 @@ public class EquipmentView {
 
 	public void showEquipmentDashboardMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝘿𝘼𝙎𝙃𝘽𝙊𝘼𝙍𝘿   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printDashboardBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 상태별 장비 개수 조회");
@@ -128,8 +121,7 @@ public class EquipmentView {
 
 	public void manageCategoryMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌ 𝘾 𝘼 𝙏 𝙀 𝙂 𝙊 𝙍 𝙔 ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printCategoryBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 모든 카테고리 조회");
@@ -141,8 +133,7 @@ public class EquipmentView {
 
 	public void inputDepartment() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌     𝘿 𝙀 𝙋 𝙏     ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printDeptBanner();
 		System.out.println();
 		System.out.println("1️⃣ 인사 관리 부서");
 		System.out.println("2️⃣ 예산/회계 관리 부서");
@@ -154,8 +145,7 @@ public class EquipmentView {
 	// 폐기 메뉴 화면
 	public void disposeEquipmentMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌ 𝘿 𝙄 𝙎 𝙋 𝙊 𝙎 𝘼 𝙇 ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printDisposalBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 폐기할 장비 선택");
