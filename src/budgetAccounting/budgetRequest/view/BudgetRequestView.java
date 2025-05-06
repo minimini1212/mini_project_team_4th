@@ -22,7 +22,7 @@ public class BudgetRequestView {
 		System.out.println("4. 예산 신청 승인 및 예산 등록");
 		System.out.println("5. 예산 신청 수정");
 		System.out.println("6. 예산 신청 삭제");
-		System.out.println("0. 종료");
+		System.out.println("0. 뒤로 가기");
 		System.out.print("선택: ");
 	}
 	

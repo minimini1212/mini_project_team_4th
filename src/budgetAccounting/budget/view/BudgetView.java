@@ -21,7 +21,7 @@ public class BudgetView {
 		System.out.println("3. 특정 예산 조회");
 		System.out.println("4. 예산 수정");
 		System.out.println("5. 예산 삭제");
-		System.out.println("0. 종료");
+		System.out.println("0. 뒤로 가기");
 		System.out.print("선택: ");
 	}
 	

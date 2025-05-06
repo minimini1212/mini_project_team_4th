@@ -20,7 +20,7 @@ public class ExpenditureView {
 		System.out.println("3. 특정 지출 조회");
 		System.out.println("4. 지출 수정");
 		System.out.println("5. 지출 삭제");
-		System.out.println("0. 종료");
+		System.out.println("0. 뒤로 가기");
 		System.out.print("선택: ");
 	}
 }

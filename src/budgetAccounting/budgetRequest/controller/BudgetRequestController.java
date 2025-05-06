@@ -39,6 +39,7 @@ public class BudgetRequestController {
 					break;
 				case 4:
 					if (rankOrder >= 2) {
+						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
 					}
@@ -52,7 +53,7 @@ public class BudgetRequestController {
 					break;
 				case 0:
 					running = false;
-					break;
+					return;
 				default:
 					System.out.println("잘못된 입력입니다.");
 				}

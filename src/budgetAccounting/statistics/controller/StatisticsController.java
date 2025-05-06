@@ -40,7 +40,7 @@ public class StatisticsController {
 					break;
 				case 0:
 					running = false;
-					break;
+					return;
 				default:
 					System.out.println("잘못된 입력입니다.");
 				}

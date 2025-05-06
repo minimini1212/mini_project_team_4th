@@ -20,7 +20,7 @@ public class ExpenditureRequestView {
 		System.out.println("4. 지출 신청 승인 및 지출 등록");
 		System.out.println("5. 지출 신청 수정");
 		System.out.println("6. 지출 신청 삭제");
-		System.out.println("0. 종료");
+		System.out.println("0. 뒤로 가기");
 		System.out.print("선택: ");
 	}
 }
