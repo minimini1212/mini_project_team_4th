@@ -19,8 +19,7 @@ public class StatisticsController {
 		this.statisticsService = new StatisticsService();
 	}
 
-	public void run() {
-		Scanner sc = new Scanner(System.in);
+	public void run(Scanner sc, int rankOrder) {
 		boolean running = true;
 
 		while (running) {
