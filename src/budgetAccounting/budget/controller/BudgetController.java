@@ -25,7 +25,7 @@ public class BudgetController {
 		while (running) {
 			budgetView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:

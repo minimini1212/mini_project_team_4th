@@ -24,7 +24,7 @@ public class ExpenditureRequestController {
 		while (running) {
 			expenditureRequestView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:
