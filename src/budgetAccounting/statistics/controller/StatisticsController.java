@@ -1,6 +1,5 @@
 package budgetAccounting.statistics.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -14,11 +13,10 @@ import budgetAccounting.statistics.view.StatisticsView;
 public class StatisticsController {
 
 	private StatisticsService statisticsService;
-	private StatisticsView statisticsView;
+	private StatisticsView statisticsView = new StatisticsView();
 
-	public StatisticsController(Connection conn, StatisticsView statisticsView) {
-		this.statisticsService = new StatisticsService(conn);
-		this.statisticsView = statisticsView;
+	public StatisticsController() {
+		this.statisticsService = new StatisticsService();
 	}
 
 	public void run() {
@@ -42,7 +40,7 @@ public class StatisticsController {
 					break;
 				case 0:
 					running = false;
-					break;
+					return;
 				default:
 					System.out.println("잘못된 입력입니다.");
 				}

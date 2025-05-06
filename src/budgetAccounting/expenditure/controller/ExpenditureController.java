@@ -13,15 +13,13 @@ import budgetAccounting.expenditure.view.ExpenditureView;
 
 public class ExpenditureController {
 	private ExpenditureService expenditureservice;
-	private ExpenditureView expenditureView;
+	private ExpenditureView expenditureView = new ExpenditureView();
 
-	public ExpenditureController(ExpenditureView expenditureView) {
+	public ExpenditureController() {
 		this.expenditureservice = new ExpenditureService();
-		this.expenditureView = expenditureView;
 	}
 
-	public void run() {
-		Scanner sc = new Scanner(System.in);
+	public void run(Scanner sc, int rankOrder) {
 		boolean running = true;
 
 		while (running) {
@@ -31,6 +29,11 @@ public class ExpenditureController {
 			try {
 				switch (choice) {
 				case 1:
+					if (rankOrder >= 2) {
+						System.out.println("해당 기능에 대한 권한이 없습니다.");
+						running = false;
+						return;
+					}
 					createExpenditure(sc);
 					break;
 				case 2:
@@ -40,14 +43,24 @@ public class ExpenditureController {
 					findOneRequest(sc);
 					break;
 				case 4:
+					if (rankOrder >= 2) {
+						System.out.println("해당 기능에 대한 권한이 없습니다.");
+						running = false;
+						return;
+					}
 					updateRequest(sc);
 					break;
 				case 5:
+					if (rankOrder >= 2) {
+						System.out.println("해당 기능에 대한 권한이 없습니다.");
+						running = false;
+						return;
+					}
 					softDeleteRequest(sc);
 					break;
 				case 0:
 					running = false;
-					break;
+					return;
 				default:
 					System.out.println("잘못된 입력입니다.");
 				}
