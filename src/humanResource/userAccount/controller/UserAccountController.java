@@ -51,7 +51,10 @@ public class UserAccountController {
 
 
     private void login() {
-        System.out.println("\n===== 로그인 =====");
+        //System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        System.out.println();
+        System.out.println("  ▌│█║▌║▌║ ＬＯＧＩＮ ║▌║▌║█│▌");
+        System.out.println();
         System.out.print("사번: ");
         String id = scanner.nextLine();
         System.out.print("비밀번호: ");
@@ -61,8 +64,10 @@ public class UserAccountController {
             Employee emp = userAccountService.login(id, pw);
             if (emp != null) {
                 System.out.println("\n✅ 로그인 성공! 안녕하세요, " + emp.getName() + "님.");
+                System.out.println();
             } else {
                 System.out.println("❌ 로그인 실패. 정보가 일치하지 않습니다.");
+                System.out.println();
             }
         } catch (Exception e) {
             System.out.println("오류 발생: " + e.getMessage());
@@ -72,8 +77,9 @@ public class UserAccountController {
 
     private void createEmployee() {
         try {
-            System.out.println("\n===== 회원가입 =====");
-
+            System.out.println();
+            System.out.println("  ▌│█║▌║▌║ ＲＥＧＩＳＴ ║▌║▌║█│▌");
+            System.out.println();
             if (!promptYesOrNo("회원가입을 진행하시겠습니까?")) {
                 System.out.println("🔙 회원가입이 취소되었습니다. 로그인 메뉴로 돌아갑니다.");
                 return;
