@@ -44,7 +44,7 @@ public class BudgetRequestDao {
 					pstmt.setInt(3, budgetRequest.getYear());
 					pstmt.setInt(4, budgetRequest.getRequestedAmount());
 					pstmt.setInt(5, budgetRequest.getCategoryId());
-					pstmt.setInt(6, budgetRequest.getRequesterId());
+					pstmt.setString(6, budgetRequest.getRequesterId());
 					pstmt.setString(7, budgetRequest.getDescription());
 
 					pstmt.executeUpdate();
@@ -104,8 +104,8 @@ public class BudgetRequestDao {
 				budgetRequest.setRequestedAmount(rs.getInt("requested_amount"));
 				budgetRequest.setCategoryId(rs.getInt("category_id"));
 				budgetRequest.setStatus(rs.getString("status"));
-				budgetRequest.setRequesterId(rs.getInt("requester_id"));
-				budgetRequest.setApproverId(rs.getInt("approver_id"));
+				budgetRequest.setRequesterId(rs.getString("requester_id"));
+				budgetRequest.setApproverId(rs.getString("approver_id"));
 				budgetRequest.setRequestDate(rs.getDate("request_date"));
 				budgetRequest.setApprovalDate(rs.getDate("approval_date"));
 				budgetRequest.setDescription(rs.getString("description"));
@@ -152,8 +152,8 @@ public class BudgetRequestDao {
 					budgetRequest.setRequestedAmount(rs.getInt("requested_amount"));
 					budgetRequest.setCategoryId(rs.getInt("category_id"));
 					budgetRequest.setStatus(rs.getString("status"));
-					budgetRequest.setRequesterId(rs.getInt("requester_id"));
-					budgetRequest.setApproverId(rs.getInt("approver_id"));
+					budgetRequest.setRequesterId(rs.getString("requester_id"));
+					budgetRequest.setApproverId(rs.getString("approver_id"));
 					budgetRequest.setRequestDate(rs.getDate("request_date"));
 					budgetRequest.setApprovalDate(rs.getDate("approval_date"));
 					budgetRequest.setDescription(rs.getString("description"));

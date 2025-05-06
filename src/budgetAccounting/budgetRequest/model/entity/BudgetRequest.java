@@ -15,8 +15,8 @@ public class BudgetRequest {
 	private int requestedAmount;
 	private int categoryId;
 	private String status;
-	private int requesterId;
-	private int approverId;
+	private String requesterId;
+	private String approverId;
 	private Date requestDate;
 	private Date approvalDate;
 	private String description;
