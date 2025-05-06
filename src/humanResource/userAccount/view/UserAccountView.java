@@ -3,8 +3,6 @@ package humanResource.userAccount.view;
 public class UserAccountView {
     public void findUserAccountMenu(){
 
-
-
         System.out.println("" +
                 "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         System.out.println(
@@ -15,17 +13,20 @@ public class UserAccountView {
                 "        ┃┃︱┃┃ ┏┫┣┓ ┃┗━┛┃\n" +
                 "        ┗┛︱┗┛ ┗━━┛ ┗━━━┛");
 
-        System.out.println(
-                "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         System.out.println(""+
                 "┏━━━━━━━━━━━━━━━━━━━━━━┓\n" +
                 "┃           Hospital System V 1.0          ┃\n" +
                 "┗━━━━━━━━━━━━━━━━━━━━━━┛" +
                 "");
         System.out.println();
-        System.out.println("0\uFE0F⃣ 종료");
-        System.out.println("1\uFE0F⃣ 로그인");
-        System.out.println("2\uFE0F⃣ 회원가입");
+        System.out.println("\n====== 병원 관리 시스템 ======");
+        System.out.println("0️⃣ 종료");
+        System.out.println("1️⃣ 로그인");
+        System.out.println("2️⃣ 회원가입");
+        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+
+
         System.out.print("\u23E9 ");
     }
 }
