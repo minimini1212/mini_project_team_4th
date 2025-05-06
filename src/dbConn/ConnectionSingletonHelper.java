@@ -22,27 +22,23 @@ public class ConnectionSingletonHelper {
 	}
 
 	public static Connection getConnection(String dsn) {
-
-		if (conn != null) {
-			return conn;
-		}
-
 		try {
-			if (dsn.equals("mysql")) {
+			// 이미 커넥션이 존재하더라도 닫혀있으면 새로 생성
+			if (conn != null && !conn.isClosed()) {
+				return conn;
+			}
+
+			if ("mysql".equals(dsn)) {
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://@localhost:3306:kosaDB", "his", "mysql");
-				System.out.println("mysql connection success");
-			} else if (dsn.equals("oracle")) {
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kosaDB", "his", "mysql");
+			} else if ("oracle".equals(dsn)) {
 				Class.forName("oracle.jdbc.OracleDriver");
 				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "his", "oracle");
-				System.out.println("oracle connection success");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			return conn;
 		}
-
+		return conn;
 	}
 
 	public static void close() throws SQLException {

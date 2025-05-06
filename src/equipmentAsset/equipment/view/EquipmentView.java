@@ -2,14 +2,33 @@ package equipmentAsset.equipment.view;
 
 import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Types;
 
 public class EquipmentView {
 
 	/** =-=-=-=-=-=-=-=-=-=-=-= 컨트롤러 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
+	public void equipmentAdminMenu() {
+	    System.out.println("---- 장비 관리 ----");
+	    System.out.println("0. 이전 메뉴 돌아가기");
+	    System.out.println("1. 장비 정보 조회");
+	    System.out.println("2. 장비 정보 등록");
+	    System.out.println("3. 장비 정보 수정");
+	    System.out.println("4. 장비 정보 삭제");
+	    System.out.println("5. 장비 현황 대시보드");
+	    System.out.println("6. 카테고리 관리");
+		System.out.println("7. 장비 폐기");
+	    System.out.print("번호 입력 : ");
+	}
+
+	public void equipmentUserMenu() {
+		System.out.println("---- 장비 관리 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 장비 정보 조회");
+		System.out.println("2. 장비 정보 수정");
+		System.out.println("3. 장비 현황 대시보드");
+		System.out.print("번호 입력 : ");
+	}
+	
 	public void findEquipmentMenu() {
 		System.out.println("---- 장비 정보 조회 ----");
 		System.out.println("0. 이전 메뉴 돌아가기");
@@ -26,16 +45,15 @@ public class EquipmentView {
 		System.out.println("2. 카테고리 입력");
 		System.out.println("3. 담당자 입력");
 		System.out.println("4. 상태 및 추가 설명 입력");
-		System.out.println("5. 나중에 입력");
+		System.out.println("5. 나중에 입력하기");
 		System.out.print("번호 입력 : ");
 	}
 	
 	public void inputStatusAndDescriptionMenu() {
 		System.out.println("1. 정상");
 		System.out.println("2. 점검필요");
-		System.out.println("3. 수리중");
-		System.out.println("4. 폐기예정");
-		System.out.println("5. 폐기완료");
+		System.out.println("3. 수리필요");
+		System.out.println("4. 수리중");
 		System.out.print("번호 입력 : ");
 	}
 
@@ -45,11 +63,18 @@ public class EquipmentView {
 		System.out.println("1. 신규 장비 등록");
 		System.out.print("번호 입력 : ");
 	}
-
+	
 	public void updateEquipmentMenu() {
 		System.out.println("---- 장비 정보 수정 ----");
 		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 기존 장비 수정");
+		System.out.println("1. 장비 정보 수정");
+		System.out.print("번호 입력 : ");
+	}
+	
+	public void deleteEquipmentMenu() {
+		System.out.println("---- 장비 정보 삭제 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 장비 삭제");
 		System.out.print("번호 입력 : ");
 	}
 
@@ -71,16 +96,22 @@ public class EquipmentView {
 		System.out.println("3. 기존 카테고리 삭제");
 		System.out.print("번호 입력 : ");
 	}
-
+	
 	public void inputDepartment() {
 		System.out.println("---- 전체 부서 목록 ----");
-		System.out.println("1. 인사팀");
-		System.out.println("2. 재무팀");
-		System.out.println("3. 재고팀");
-		System.out.println("4. 장비팀");
+		System.out.println("1. 인사 관리 부서");
+		System.out.println("2. 예산/회계 관리 부서");
+		System.out.println("3. 자산 관리 부서");
 		System.out.print("번호 입력 : ");
 	}
 
+	// 폐기 메뉴 화면
+	public void disposeEquipmentMenu() {
+		System.out.println("---- 장비 폐기 ----");
+		System.out.println("0. 이전 메뉴 돌아가기");
+		System.out.println("1. 폐기할 장비 선택");
+		System.out.print("번호 입력 : ");
+	}
 	/** =-=-=-=-=-=-=-=-=-=-=-= DAO 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	// - 장비 정보 출력
@@ -213,7 +244,7 @@ public class EquipmentView {
 			e.printStackTrace();
 		}
 	} // end getRecentlyUpdatedEquipments
-
+	
 	// - 모든 카테고리 출력
 	public void findAllCategories(ResultSet rs) {
 		try {

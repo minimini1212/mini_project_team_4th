@@ -8,26 +8,38 @@ import budgetAccounting.budget.model.dao.BudgetDao;
 import budgetAccounting.budget.model.entity.Budget;
 import budgetAccounting.budgetRequest.model.dao.BudgetRequestDao;
 import budgetAccounting.budgetRequest.model.entity.BudgetRequest;
+import dbConn.ConnectionSingletonHelper;
 
 public class BudgetRequestService {
 	private BudgetRequestDao budgetRequestDao;
 	private BudgetDao budgetDao;
 	private Connection conn;
 
-	public BudgetRequestService(Connection conn) {
-		this.conn = conn;
-		this.budgetRequestDao = new BudgetRequestDao(conn);
-		this.budgetDao = new BudgetDao(conn);
-	}
-
 	// 예산 신청
 	public void createBudgetRequest(BudgetRequest request) throws SQLException {
-		budgetRequestDao.insertBudgetRequest(request);
+		
+		try {
+			conn = ConnectionSingletonHelper.getConnection("oracle");
+			budgetRequestDao = new BudgetRequestDao(conn);
+			budgetRequestDao.insertBudgetRequest(request);
+		} catch (SQLException e) {
+			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("서버 오류: " + e.getMessage());
+		} finally {
+			conn.close();
+		}
+		
+		
 	}
 
 	// 예산 승인 및 예산 테이블에 삽입
 	public void approveAndInsertToBudget(int requestId, int approverId) throws SQLException {
 		try {
+			
+			conn = ConnectionSingletonHelper.getConnection("oracle");
+			budgetRequestDao = new BudgetRequestDao(conn);
+			budgetDao = new BudgetDao(conn);
 			// 자동 커밋 false
 			conn.setAutoCommit(false);
 
@@ -47,7 +59,6 @@ public class BudgetRequestService {
 
 			// 예산 생성
 			budgetDao.insertBudget(budget);
-
 			// 커밋
 			conn.commit();
 		} catch (SQLException e) {
@@ -56,6 +67,7 @@ public class BudgetRequestService {
 			throw e;
 		} finally {
 			conn.setAutoCommit(true);
+			conn.close();
 		}
 	}
 
@@ -67,32 +79,77 @@ public class BudgetRequestService {
 		budget.setBudgetAmount(request.getRequestedAmount());
 		budget.setCategoryId(request.getCategoryId());
 		budget.setDescription(request.getDescription());
+		budget.setDescription(request.getDescription());
+		budget.setRemainingBudget(request.getRequestedAmount());
 
 		return budget;
 	}
 
 	// 전체 예산 신청 목록
 	public List<BudgetRequest> getAllBudgetRequests() throws SQLException {
-		return budgetRequestDao.findAllBudgetRequest();
+		try {
+			conn = ConnectionSingletonHelper.getConnection("oracle");
+			budgetRequestDao = new BudgetRequestDao(conn);
+			return budgetRequestDao.findAllBudgetRequest();
+		} catch (SQLException e) {
+			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+			return null;
+		} catch (Exception e) {
+			System.out.println("서버 오류: " + e.getMessage());
+			return null;
+		} finally {
+			conn.close();
+		}
+
 	}
 
 	// 특정 예산 신청 조회
 	public List<BudgetRequest> getBudgetRequestById(int requestId) throws SQLException {
-		return budgetRequestDao.findByBudgetRequestId(requestId);
+		try {
+			conn = ConnectionSingletonHelper.getConnection("oracle");
+			budgetRequestDao = new BudgetRequestDao(conn);
+			return budgetRequestDao.findByBudgetRequestId(requestId);
+		} catch (SQLException e) {
+			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+			return null;
+		} catch (Exception e) {
+			System.out.println("서버 오류: " + e.getMessage());
+			return null;
+		} finally {
+			conn.close();
+		}
+
 	}
 
 	// 예산 신청 수정
-	public void updateBudgetRequest(BudgetRequest request) throws SQLException {
-		budgetRequestDao.updateByBudgetRequestId(request);
+	public void updateBudgetRequest(BudgetRequest request, int requestId) throws SQLException {
+		try {
+			conn = ConnectionSingletonHelper.getConnection("oracle");
+			budgetRequestDao = new BudgetRequestDao(conn);
+			budgetRequestDao.updateByBudgetRequestId(request, requestId);
+		} catch (SQLException e) {
+			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("서버 오류: " + e.getMessage());
+		} finally {
+			conn.close();
+		}
+
 	}
 
 	// 소프트 삭제
 	public void softDeleteBudgetRequest(int requestId) throws SQLException {
-		budgetRequestDao.softDeleteByBudgetRequestId(requestId);
-	}
+		try {
+			conn = ConnectionSingletonHelper.getConnection("oracle");
+			budgetRequestDao = new BudgetRequestDao(conn);
+			budgetRequestDao.softDeleteByBudgetRequestId(requestId);
+		} catch (SQLException e) {
+			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("서버 오류: " + e.getMessage());
+		} finally {
+			conn.close();
+		}
 
-	// 완전 삭제
-	public void deleteBudgetRequest(int requestId) throws SQLException {
-		budgetRequestDao.deleteByBudgetRequestId(requestId);
 	}
 }
