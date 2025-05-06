@@ -64,6 +64,21 @@ public class CertificationDao {
         }
         return null;
     }
+    public Certification findByName(String name) throws SQLException {
+        String sql = "SELECT * FROM CERTIFICATION WHERE cert_name = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, name);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return new Certification(
+                    rs.getLong("cert_id"),
+                    rs.getString("cert_name"),
+                    rs.getString("issuing_org"),
+                    rs.getString("description")
+            );
+        }
+        return null;
+    }
 
     public void insert(Certification cert) throws SQLException {
         String sql = "INSERT INTO CERTIFICATION (cert_id, cert_name, issuing_org, description) " +

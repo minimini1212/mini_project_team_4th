@@ -32,6 +32,17 @@ public class CertificationService {
             dao.close();
         }
     }
+    public Certification getByName(String name) {
+        try {
+            dao.connect();
+            return dao.findByName(name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            dao.close();
+        }
+    }
 
     public void create(Certification cert) {
         try {

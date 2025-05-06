@@ -24,7 +24,10 @@ public class CertificationController {
                     service.modify(view.inputCertificationForUpdate());
                     break;
                 case 4:
-                    service.remove(view.inputCertId());
+                    Certification cert = view.inputCertificationForDelete();
+                    if (cert != null) {
+                        service.remove(cert.getCertId());
+                    }
                     break;
                 case 0:
                     return;

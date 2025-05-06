@@ -1,13 +1,14 @@
 package com.hospital.certification.view;
 
 import com.hospital.certification.model.entity.Certification;
+import com.hospital.certification.model.service.CertificationService;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CertificationView {
     private final Scanner scanner = new Scanner(System.in);
-
+    private final CertificationService service = new CertificationService();
     public void showMenu() {
         System.out.println("\n===== 자격증 관리 =====");
         System.out.println("1. 전체 자격증 조회");
@@ -43,21 +44,53 @@ public class CertificationView {
 
     public Certification inputCertificationForUpdate() {
         System.out.println("===== 자격증 수정 =====");
-        Certification c = new Certification();
-        System.out.print("수정할 자격증 ID: ");
-        c.setCertId(Long.parseLong(scanner.nextLine()));
+        System.out.print("수정할 자격증 ID 또는 이름: ");
+        String input = scanner.nextLine();
+
+        Certification cert;
+        try {
+            long id = Long.parseLong(input);
+            cert = service.getById(id);
+        } catch (NumberFormatException e) {
+            cert = service.getByName(input);
+        }
+
+        if (cert == null) {
+            System.out.println("❌ 해당 자격증을 찾을 수 없습니다.");
+            return null;
+        }
+
+        System.out.println("🔎 기존 정보: " + cert);
+
         System.out.print("새 자격증 이름: ");
-        c.setCertName(scanner.nextLine());
+        String newName = scanner.nextLine();
         System.out.print("새 발급 기관: ");
-        c.setIssuingOrg(scanner.nextLine());
+        String newOrg = scanner.nextLine();
         System.out.print("새 설명: ");
-        c.setDescription(scanner.nextLine());
-        return c;
+        String newDesc = scanner.nextLine();
+
+        return new Certification(cert.getCertId(), newName, newOrg, newDesc);
     }
 
-    public long inputCertId() {
-        System.out.print("삭제할 자격증 ID: ");
-        return Long.parseLong(scanner.nextLine());
+    public Certification inputCertificationForDelete() {
+        System.out.print("삭제할 자격증 ID 또는 이름: ");
+        String input = scanner.nextLine();
+
+        Certification cert;
+        try {
+            long id = Long.parseLong(input);
+            cert = service.getById(id);
+        } catch (NumberFormatException e) {
+            cert = service.getByName(input);
+        }
+
+        if (cert == null) {
+            System.out.println("❌ 해당 자격증을 찾을 수 없습니다.");
+            return null;
+        }
+
+        System.out.println("🔎 삭제할 자격증: " + cert);
+        return cert;
     }
 
     public void showError(String msg) {
