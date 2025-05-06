@@ -14,7 +14,7 @@ public class Budget {
 	private int budgetAmount;
 	private int categoryId;
 	private String description;
-	private int remainingBudget;
+	private int remainingAmount;
     private String departmentName;
     private String categoryName;
 	
@@ -28,7 +28,7 @@ public class Budget {
 	           "  \"부서명\"           : " + departmentName + ",\n" +
 	           "  \"년도\"            : " + year + ",\n" +
 	           "  \"예산 금액\"        : " + budgetAmount + ",\n" +
-	           "  \"잔여 예산\"        : " + remainingBudget + ",\n" +
+	           "  \"잔여 예산\"        : " + remainingAmount + ",\n" +
 	           "  \"카테고리 ID\"      : " + categoryId + ",\n" +
 	           "  \"카테고리명  \"      : " + categoryName + ",\n" +
 	           "  \"설명\"            : \"" + description + "\"\n" +
