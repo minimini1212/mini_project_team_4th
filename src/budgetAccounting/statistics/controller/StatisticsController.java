@@ -16,8 +16,8 @@ public class StatisticsController {
 	private StatisticsService statisticsService;
 	private StatisticsView statisticsView;
 
-	public StatisticsController(Connection conn, StatisticsView statisticsView) {
-		this.statisticsService = new StatisticsService(conn);
+	public StatisticsController(StatisticsView statisticsView) {
+		this.statisticsService = new StatisticsService();
 		this.statisticsView = statisticsView;
 	}
 
