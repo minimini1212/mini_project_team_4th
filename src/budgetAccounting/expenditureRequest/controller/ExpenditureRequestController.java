@@ -14,7 +14,7 @@ public class ExpenditureRequestController {
 	private ExpenditureRequestService expenditureRequestservice;
 
 	public ExpenditureRequestController(Connection conn) {
-		this.expenditureRequestservice = new ExpenditureRequestService(conn);
+		this.expenditureRequestservice = new ExpenditureRequestService();
 	}
 
 	public void run() {
