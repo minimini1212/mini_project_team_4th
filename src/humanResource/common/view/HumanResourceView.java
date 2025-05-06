@@ -6,5 +6,7 @@ public class HumanResourceView {
         System.out.println("\n=== 인사 관리 부서===");
         System.out.println("0️⃣ 뒤로 가기");
         System.out.println("1️⃣ 직원 관리");
+        System.out.println("2️⃣ 자격증 관리");
+        System.out.println("3️⃣ 휴가 관리");
     }
 }

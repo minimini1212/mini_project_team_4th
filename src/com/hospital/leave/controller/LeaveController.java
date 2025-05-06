@@ -65,6 +65,8 @@ public class LeaveController {
             view.showMessage("취소 완료");
         else view.showError("취소 실패");
     }
-
+    public void run() {
+        leaveMenu();
+    }
     }
 

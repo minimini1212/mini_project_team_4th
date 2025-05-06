@@ -11,11 +11,11 @@ public class LeaveView {
 
     public void showMenu() {
         System.out.println("\n===== 휴가 관리 =====");
-        System.out.println("1. 휴가 신청");
-        System.out.println("2. 휴가 승인/반려");
-        System.out.println("3. 휴가 현황 조회");
-        System.out.println("4. 휴가 취소");
-        System.out.println("0. 뒤로가기");
+        System.out.println("1️⃣ 휴가 신청");
+        System.out.println("2️⃣ 휴가 승인/반려");
+        System.out.println("3️⃣ 휴가 현황 조회");
+        System.out.println("4️⃣ 휴가 취소");
+        System.out.println("0️⃣ 뒤로가기");
         System.out.print("> ");
     }
 

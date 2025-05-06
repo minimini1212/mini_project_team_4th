@@ -36,4 +36,7 @@ public class CertificationController {
             }
         }
     }
+    public void run() {
+        certificationMenu();
+    }
 }

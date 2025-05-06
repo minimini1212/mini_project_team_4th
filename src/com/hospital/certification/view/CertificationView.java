@@ -11,11 +11,11 @@ public class CertificationView {
     private final CertificationService service = new CertificationService();
     public void showMenu() {
         System.out.println("\n===== 자격증 관리 =====");
-        System.out.println("1. 전체 자격증 조회");
-        System.out.println("2. 자격증 등록");
-        System.out.println("3. 자격증 수정");
-        System.out.println("4. 자격증 삭제");
-        System.out.println("0. 이전 메뉴");
+        System.out.println("1️⃣ 전체 자격증 조회");
+        System.out.println("2️⃣ 자격증 등록");
+        System.out.println("3️⃣ 자격증 수정");
+        System.out.println("4️⃣ 자격증 삭제");
+        System.out.println("0️⃣ 이전 메뉴");
         System.out.print("선택: ");
     }
 
