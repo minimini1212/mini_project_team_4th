@@ -9,10 +9,13 @@ import main.view.MainView;
 
 import java.util.Scanner;
 
+import budgetAccounting.common.controller.BudgetAccountingController;
+
 public class MainController {
     private final Scanner scanner;
     private final MainView mainView = new MainView();
     private EquipmentAssetController equipmentAssetController = new EquipmentAssetController();
+    private BudgetAccountingController budgetAccountingController = new BudgetAccountingController();
 
     public MainController(Scanner scanner) {
         this.scanner = scanner;
@@ -70,8 +73,7 @@ public class MainController {
                 new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
             case 3 -> {
-                // TODO: FinanceMenu 클래스를 생성하여 위임
-                System.out.println("🔹 예산/회계 관리 부서 진입이 아직 연결되지 않음");
+            	budgetAccountingController.budgetAccountingMenu(scanner, rankOrder);
             }
             case 4 -> {
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
@@ -90,8 +92,7 @@ public class MainController {
                 new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
             case 3 -> {
-                // TODO: FinanceMenu 클래스를 생성하여 위임
-                System.out.println("🔸 예산/회계 관리 부서 진입이 아직 연결되지 않음");
+            	budgetAccountingController.budgetAccountingMenu(scanner, rankOrder);
             }
             case 4 -> {
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
