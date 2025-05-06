@@ -1,6 +1,5 @@
 package budgetAccounting.statistics.controller;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -14,11 +13,10 @@ import budgetAccounting.statistics.view.StatisticsView;
 public class StatisticsController {
 
 	private StatisticsService statisticsService;
-	private StatisticsView statisticsView;
+	private StatisticsView statisticsView = new StatisticsView();
 
-	public StatisticsController(StatisticsView statisticsView) {
+	public StatisticsController() {
 		this.statisticsService = new StatisticsService();
-		this.statisticsView = statisticsView;
 	}
 
 	public void run() {
