@@ -1,5 +1,7 @@
 package equipmentAsset.history.view;
 
+import common.view.HospitalBannerUtils;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 
@@ -10,8 +12,7 @@ public class HistoryView {
     // 이력 관리 메인 메뉴
     public void historyAdminMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌  𝙃 𝙄 𝙎 𝙏 𝙊 𝙍 𝙔  ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printHistoryBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 이력 통합 조회");
@@ -25,8 +26,7 @@ public class HistoryView {
     // 이력 통합 조회 메뉴
     public void integratedHistoryMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌  𝙄 𝙉 𝙏 𝙀 𝙂 𝙍 𝘼 𝙏 𝙀 𝘿   ▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printIntegratedBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 모든 이력 조회");
@@ -38,8 +38,7 @@ public class HistoryView {
     // 점검 이력 조회 메뉴
     public void inspectionHistoryMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌   𝙄 𝙉 𝙎 𝙋 𝙀 𝘾 𝙏 𝙄 𝙊 𝙉   ▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printInspectionBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 모든 점검 이력 조회");
@@ -52,8 +51,7 @@ public class HistoryView {
     // 수리 이력 조회 메뉴
     public void repairHistoryMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙋 𝘼 𝙄 𝙍   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printRepairBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 모든 수리 이력 조회");
@@ -66,8 +64,7 @@ public class HistoryView {
     // 폐기 이력 조회 메뉴
     public void disposalHistoryMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌ 𝘿 𝙄 𝙎 𝙋 𝙊 𝙎 𝘼 𝙇 ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printDisposalBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 모든 폐기 이력 조회");
@@ -79,8 +76,7 @@ public class HistoryView {
     // 이력 유형 선택 메뉴
     public void getHistoryTypeMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌     𝙏 𝙔 𝙋 𝙀     ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printTypeBanner();
         System.out.println();
         System.out.println("1️⃣ 점검완료");
         System.out.println("2️⃣ 수리완료");
@@ -92,8 +88,7 @@ public class HistoryView {
     // 점검 결과 유형 선택 메뉴
     public void getInspectionResultTypeMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙎 𝙐 𝙇 𝙏   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printResultBanner();
         System.out.println();
         System.out.println("1️⃣ 양호");
         System.out.println("2️⃣ 조치필요");
@@ -104,8 +99,7 @@ public class HistoryView {
     // 수리 결과 유형 선택 메뉴
     public void getRepairResultTypeMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙎 𝙐 𝙇 𝙏   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printResultBanner();
         System.out.println();
         System.out.println("1️⃣ 수리완료");
         System.out.println("2️⃣ 수리불가");

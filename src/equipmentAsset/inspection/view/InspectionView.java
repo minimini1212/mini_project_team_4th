@@ -3,14 +3,15 @@ package equipmentAsset.inspection.view;
 import java.sql.Date;
 import java.sql.ResultSet;
 
+import common.view.HospitalBannerUtils;
+
 public class InspectionView {
 
 	/** =-=-=-=-=-=-=-=-=-=-=-= 컨트롤러 사용 메뉴 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	public void inspectionMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌   𝙄 𝙉 𝙎 𝙋 𝙀 𝘾 𝙏 𝙄 𝙊 𝙉  ▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printInspectionBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 일정 관리");
@@ -21,8 +22,7 @@ public class InspectionView {
 
 	public void inspectionScheduleMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌    𝙎 𝘾 𝙃 𝙀 𝘿 𝙐 𝙇 𝙀     ▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printScheduleBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 일정 등록");
@@ -35,8 +35,7 @@ public class InspectionView {
 
 	public void saveInspectionScheduleMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙂 𝙄 𝙎 𝙏   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printRegisterBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 일정 등록");
@@ -46,8 +45,7 @@ public class InspectionView {
 
 	public void findInspectionScheduleMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printSearchBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 모든 점검 일정 조회");
@@ -62,8 +60,7 @@ public class InspectionView {
 
 	public void updateInspectionScheduleMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printUpdateBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 일정 수정");
@@ -73,8 +70,7 @@ public class InspectionView {
 
 	public void deleteInspectionScheduleMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝘿 𝙀 𝙇 𝙀 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printDeleteBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 일정 삭제");
@@ -84,8 +80,7 @@ public class InspectionView {
 
 	public void inspectionResultMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌  𝙍 𝙀 𝙎 𝙐 𝙇 𝙏 𝙎  ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printResultsBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 결과 등록");
@@ -98,8 +93,7 @@ public class InspectionView {
 
 	public void saveInspectionResultMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙂 𝙄 𝙎 𝙏   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printRegisterBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 결과 등록");
@@ -109,8 +103,7 @@ public class InspectionView {
 
 	public void findInspectionResultMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printSearchBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 모든 점검 결과 조회");
@@ -122,8 +115,7 @@ public class InspectionView {
 
 	public void updateInspectionResultMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printUpdateBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 결과 수정");
@@ -133,8 +125,7 @@ public class InspectionView {
 
 	public void deleteInspectionResultMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝘿 𝙀 𝙇 𝙀 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printDeleteBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 결과 삭제");
@@ -144,8 +135,7 @@ public class InspectionView {
 
 	public void updateInspectionScheduleItemMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printUpdateBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 유형 수정");
@@ -159,8 +149,7 @@ public class InspectionView {
 
 	public void updateInspectionResultItemMenu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printUpdateBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 점검 일자 수정");
@@ -175,8 +164,7 @@ public class InspectionView {
 
 	public void getInspectionStatus() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙎 𝙏 𝘼 𝙏 𝙐 𝙎   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printStatusBanner();
 		System.out.println();
 		System.out.println("1️⃣ 예정");
 		System.out.println("2️⃣ 완료");
@@ -187,8 +175,7 @@ public class InspectionView {
 
 	public void getInspectionCycle() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌    𝘾 𝙔 𝘾 𝙇 𝙀    ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printCycleBanner();
 		System.out.println();
 		System.out.println("1️⃣ 월간");
 		System.out.println("2️⃣ 분기");
@@ -202,8 +189,7 @@ public class InspectionView {
 
 	public void getInspectionType() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌     𝙏 𝙔 𝙋 𝙀     ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printTypeBanner();
 		System.out.println();
 		System.out.println("1️⃣ 초기점검");
 		System.out.println("2️⃣ 정기점검");
@@ -215,8 +201,7 @@ public class InspectionView {
 
 	public void getInspectionResultType() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙎 𝙐 𝙇 𝙏   ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printResultsBanner();
 		System.out.println();
 		System.out.println("1️⃣ 양호");
 		System.out.println("2️⃣ 수리필요");

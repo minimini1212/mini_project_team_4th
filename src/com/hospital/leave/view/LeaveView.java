@@ -1,6 +1,7 @@
 package com.hospital.leave.view;
 
 import com.hospital.leave.model.entity.Leave;
+import common.view.HospitalBannerUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,8 +12,7 @@ public class LeaveView {
 
     public void showMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌    𝙑𝘼𝘾𝘼𝙏𝙄𝙊𝙉    ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printVacationBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 휴가 신청");

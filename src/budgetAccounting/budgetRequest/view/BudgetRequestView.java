@@ -1,5 +1,7 @@
 package budgetAccounting.budgetRequest.view;
 
+import common.view.HospitalBannerUtils;
+
 public class BudgetRequestView {
 
 //	public static void main(String[] args) {
@@ -16,8 +18,7 @@ public class BudgetRequestView {
 
 	public void menu() {
 		System.out.println();
-		System.out.println("  ▌│█║▌║▌ 𝘽𝙐𝘿𝙂𝙀𝙏 𝙍𝙀𝙌𝙐𝙀𝙎𝙏 ▌║▌║█│▌");
-		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		HospitalBannerUtils.printBudgetRequestBanner();
 		System.out.println();
 		System.out.println("0️⃣ 이전 메뉴 돌아가기");
 		System.out.println("1️⃣ 예산 신청 등록");

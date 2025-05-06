@@ -1,5 +1,7 @@
 package equipmentAsset.repair.view;
 
+import common.view.HospitalBannerUtils;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 
@@ -10,8 +12,7 @@ public class RepairView {
     // 최상위 수리 관리 메뉴
     public void repairMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙋 𝘼 𝙄 𝙍   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printRepairBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 요청 관리");
@@ -23,8 +24,7 @@ public class RepairView {
     // 수리 요청 관리 메뉴
     public void repairRequestMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌  𝙍 𝙀 𝙌 𝙐 𝙀 𝙎 𝙏  ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printRequestBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 요청 등록");
@@ -38,8 +38,7 @@ public class RepairView {
     // 수리 요청 등록 메뉴
     public void saveRepairRequestMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙂 𝙄 𝙎 𝙏   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printRegisterBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 요청 등록");
@@ -50,8 +49,7 @@ public class RepairView {
     // 수리 요청 조회 메뉴
     public void findRepairRequestMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printSearchBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 모든 수리 요청 조회");
@@ -65,8 +63,7 @@ public class RepairView {
     // 수리 요청 수정 메뉴
     public void updateRepairRequestMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printUpdateBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 요청 수정");
@@ -77,8 +74,7 @@ public class RepairView {
     // 수리 요청 삭제 메뉴
     public void deleteRepairRequestMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝘿 𝙀 𝙇 𝙀 𝙏 𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printDeleteBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 요청 삭제");
@@ -89,8 +85,7 @@ public class RepairView {
     // 수리 결과 관리 메뉴
     public void repairResultMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌  𝙍 𝙀 𝙎 𝙐 𝙇 𝙏 𝙎  ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printResultsBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 결과 등록");
@@ -104,8 +99,7 @@ public class RepairView {
     // 수리 결과 등록 메뉴
     public void saveRepairResultMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙂 𝙄 𝙎 𝙏   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printRegisterBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 결과 등록");
@@ -116,8 +110,7 @@ public class RepairView {
     // 수리 결과 조회 메뉴
     public void findRepairResultMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printSearchBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 모든 수리 결과 조회");
@@ -131,8 +124,7 @@ public class RepairView {
     // 수리 결과 수정 메뉴
     public void updateRepairResultMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printUpdateBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 결과 수정");
@@ -143,8 +135,7 @@ public class RepairView {
     // 수리 결과 삭제 메뉴
     public void deleteRepairResultMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝘿 𝙀 𝙇 𝙀 𝙏 𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printDeleteBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 결과 삭제");
@@ -155,8 +146,7 @@ public class RepairView {
     // 수리 요청 수정 항목 메뉴
     public void updateRepairRequestItemMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printUpdateBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 요청 일자 수정");
@@ -169,8 +159,7 @@ public class RepairView {
     // 수리 결과 수정 항목 메뉴
     public void updateRepairResultItemMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printUpdateBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 수리 내용 수정");
@@ -185,8 +174,7 @@ public class RepairView {
     // 수리 요청 상태 선택 출력
     public void getRepairRequestStatus() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝙎 𝙏 𝘼 𝙏 𝙐 𝙎   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printStatusBanner();
         System.out.println();
         System.out.println("1️⃣ 예정");
         System.out.println("2️⃣ 완료");
@@ -197,8 +185,7 @@ public class RepairView {
     // 수리 결과 유형 선택 출력
     public void getRepairResultType() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌  𝙍 𝙀 𝙎 𝙐 𝙇 𝙏 𝙎  ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printResultsBanner();
         System.out.println();
         System.out.println("1️⃣ 수리완료");
         System.out.println("2️⃣ 수리불가");

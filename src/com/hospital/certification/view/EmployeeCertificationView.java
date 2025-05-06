@@ -1,6 +1,7 @@
 package com.hospital.certification.view;
 
 import com.hospital.certification.model.entity.EmployeeCertification;
+import common.view.HospitalBannerUtils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,8 +11,7 @@ public class EmployeeCertificationView {
 
     public void showMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌ 𝙀𝙈𝙋 𝘾𝙀𝙍𝙏𝙄𝙁𝙄𝘾𝘼𝙏𝙀 ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printEmpCertificateBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 전체 자격증 내역 조회");

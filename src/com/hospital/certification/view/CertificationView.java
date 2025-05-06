@@ -2,6 +2,7 @@ package com.hospital.certification.view;
 
 import com.hospital.certification.model.entity.Certification;
 import com.hospital.certification.model.service.CertificationService;
+import common.view.HospitalBannerUtils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,8 +12,7 @@ public class CertificationView {
     private final CertificationService service = new CertificationService();
     public void showMenu() {
         System.out.println();
-        System.out.println("  ▌│█║▌║▌   𝘾𝙀𝙍𝙏𝙄𝙁𝙄𝘾𝘼𝙏𝙀   ▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printCertificateBanner();
         System.out.println();
         System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 전체 자격증 조회");

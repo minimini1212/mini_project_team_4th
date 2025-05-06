@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import common.view.HospitalBannerUtils;
+
 @RequiredArgsConstructor
 public class UserAccountController {
 
@@ -53,8 +55,7 @@ public class UserAccountController {
     private void login() {
         //System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         System.out.println();
-        System.out.println("  ▌│█║▌║▌║ \uD835\uDE47 \uD835\uDE4A \uD835\uDE42 \uD835\uDE44 \uD835\uDE49 ║▌║▌║█│▌");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printLoginBanner();
         System.out.println();
         System.out.print("사번: ");
         String id = scanner.nextLine();
@@ -79,8 +80,7 @@ public class UserAccountController {
     private void createEmployee() {
         try {
             System.out.println();
-            System.out.println("  ▌│█║▌║▌║ \uD835\uDE4D \uD835\uDE40 \uD835\uDE42 \uD835\uDE44 \uD835\uDE4E\uD835\uDE4F ║▌║▌║█│▌");
-            System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+            HospitalBannerUtils.printRegisterBanner();
             System.out.println();
             if (!promptYesOrNo("🔙 회원가입을 진행하시겠습니까?")) {
                 System.out.println();

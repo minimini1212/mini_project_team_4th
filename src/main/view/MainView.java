@@ -1,9 +1,11 @@
 package main.view;
 
+import common.view.HospitalBannerUtils;
+
+
 public class MainView {
     public void showDepartmentMenu() {
-        System.out.println("  ▌│█║▌║▌║ \uD835\uDE4E \uD835\uDE40 \uD835\uDE47 \uD835\uDE40 \uD835\uDE3E \uD835\uDE4F ║▌║▌║█│");
-        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        HospitalBannerUtils.printSelectBanner();
         System.out.println();
         System.out.println("0️⃣ 로그아웃");
         System.out.println("1️⃣ 병원장실");
