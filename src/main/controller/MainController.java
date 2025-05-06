@@ -37,6 +37,7 @@ public class MainController {
                 while (true) {
                     mainView.showDepartmentMenu();
                     int choice = promptIntInRange("\u23E9 ", 0, 4);
+                    System.out.println();
 
                     if (choice == 0) {
                         if (confirmLogout()) {

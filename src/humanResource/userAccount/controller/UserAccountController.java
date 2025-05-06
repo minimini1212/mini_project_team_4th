@@ -53,7 +53,8 @@ public class UserAccountController {
     private void login() {
         //System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         System.out.println();
-        System.out.println("  ▌│█║▌║▌║ ＬＯＧＩＮ ║▌║▌║█│▌");
+        System.out.println("  ▌│█║▌║▌║ \uD835\uDE47 \uD835\uDE4A \uD835\uDE42 \uD835\uDE44 \uD835\uDE49 ║▌║▌║█│▌");
+        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         System.out.println();
         System.out.print("사번: ");
         String id = scanner.nextLine();
@@ -78,9 +79,11 @@ public class UserAccountController {
     private void createEmployee() {
         try {
             System.out.println();
-            System.out.println("  ▌│█║▌║▌║ ＲＥＧＩＳＴ ║▌║▌║█│▌");
+            System.out.println("  ▌│█║▌║▌║ \uD835\uDE4D \uD835\uDE40 \uD835\uDE42 \uD835\uDE44 \uD835\uDE4E\uD835\uDE4F ║▌║▌║█│▌");
+            System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
             System.out.println();
-            if (!promptYesOrNo("회원가입을 진행하시겠습니까?")) {
+            if (!promptYesOrNo("🔙 회원가입을 진행하시겠습니까?")) {
+                System.out.println();
                 System.out.println("🔙 회원가입이 취소되었습니다. 로그인 메뉴로 돌아갑니다.");
                 return;
             }

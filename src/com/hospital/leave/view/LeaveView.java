@@ -10,13 +10,17 @@ public class LeaveView {
     private final Scanner scanner = new Scanner(System.in);
 
     public void showMenu() {
-        System.out.println("\n===== 휴가 관리 =====");
+        System.out.println();
+        System.out.println("  ▌│█║▌║▌    𝙑𝘼𝘾𝘼𝙏𝙄𝙊𝙉    ▌║▌║█│▌");
+        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        System.out.println();
+        System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 휴가 신청");
         System.out.println("2️⃣ 휴가 승인/반려");
         System.out.println("3️⃣ 휴가 현황 조회");
         System.out.println("4️⃣ 휴가 취소");
-        System.out.println("0️⃣ 뒤로가기");
-        System.out.print("> ");
+        System.out.println();
+        System.out.print("⏩ ");
     }
 
     public int inputMenu() {

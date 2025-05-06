@@ -11,16 +11,20 @@ public class ExpenditureRequestView {
 //			System.err.println("서버 오류: " + e.getMessage());
 //		}
 //	}
-	
+
 	public void menu() {
-		System.out.println("\n==== 지출 신청 관리 ====");
-		System.out.println("1. 지출 신청 등록");
-		System.out.println("2. 지출 신청 전체 조회");
-		System.out.println("3. 특정 지출 신청 조회");
-		System.out.println("4. 지출 신청 승인 및 지출 등록");
-		System.out.println("5. 지출 신청 수정");
-		System.out.println("6. 지출 신청 삭제");
-		System.out.println("0. 뒤로 가기");
-		System.out.print("선택: ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║  𝙀𝙓𝙋𝙀𝙉𝙎𝙀 𝙍𝙀𝙌𝙐𝙀𝙎𝙏  ║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 지출 신청 등록");
+		System.out.println("2️⃣ 지출 신청 전체 조회");
+		System.out.println("3️⃣ 특정 지출 신청 조회");
+		System.out.println("4️⃣ 지출 신청 승인 및 지출 등록");
+		System.out.println("5️⃣ 지출 신청 수정");
+		System.out.println("6️⃣ 지출 신청 삭제");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 }

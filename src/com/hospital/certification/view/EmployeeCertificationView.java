@@ -9,16 +9,19 @@ public class EmployeeCertificationView {
     private final Scanner scanner = new Scanner(System.in);
 
     public void showMenu() {
-        System.out.println("\n===== 사원 자격증 내역 관리 =====");
+        System.out.println();
+        System.out.println("  ▌│█║▌║▌ 𝙀𝙈𝙋 𝘾𝙀𝙍𝙏𝙄𝙁𝙄𝘾𝘼𝙏𝙀 ▌║▌║█│▌");
+        System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        System.out.println();
+        System.out.println("0️⃣ 이전 메뉴 돌아가기");
         System.out.println("1️⃣ 전체 자격증 내역 조회");
         System.out.println("2️⃣ 사원별 자격증 조회");
         System.out.println("3️⃣ 자격증 등록");
         System.out.println("4️⃣ 자격증 정보 수정");
         System.out.println("5️⃣ 자격증 삭제");
-        System.out.println("0️⃣ 이전 메뉴");
-        System.out.print("선택: ");
+        System.out.println();
+        System.out.print("⏩ ");
     }
-
     public int inputMenu() {
         return Integer.parseInt(scanner.nextLine());
     }

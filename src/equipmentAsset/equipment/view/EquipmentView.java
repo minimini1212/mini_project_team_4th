@@ -8,110 +8,164 @@ public class EquipmentView {
 	/** =-=-=-=-=-=-=-=-=-=-=-= 컨트롤러 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	public void equipmentAdminMenu() {
-	    System.out.println("---- 장비 관리 ----");
-	    System.out.println("0. 이전 메뉴 돌아가기");
-	    System.out.println("1. 장비 정보 조회");
-	    System.out.println("2. 장비 정보 등록");
-	    System.out.println("3. 장비 정보 수정");
-	    System.out.println("4. 장비 정보 삭제");
-	    System.out.println("5. 장비 현황 대시보드");
-	    System.out.println("6. 카테고리 관리");
-		System.out.println("7. 장비 폐기");
-	    System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌  𝙈 𝘼 𝙉 𝘼 𝙂 𝙀  ▌║▌║█│ ▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 장비 정보 조회");
+		System.out.println("2️⃣ 장비 정보 등록");
+		System.out.println("3️⃣ 장비 정보 수정");
+		System.out.println("4️⃣ 장비 정보 삭제");
+		System.out.println("5️⃣ 장비 현황 대시보드");
+		System.out.println("6️⃣ 카테고리 관리");
+		System.out.println("7️⃣ 장비 폐기");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 
 	public void equipmentUserMenu() {
-		System.out.println("---- 장비 관리 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 장비 정보 조회");
-		System.out.println("2. 장비 정보 수정");
-		System.out.println("3. 장비 현황 대시보드");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌  𝙈 𝘼 𝙉 𝘼 𝙂 𝙀  ▌║▌║█│ ▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 장비 정보 조회");
+		System.out.println("2️⃣ 장비 정보 수정");
+		System.out.println("3️⃣ 장비 현황 대시보드");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
-	
+
 	public void findEquipmentMenu() {
-		System.out.println("---- 장비 정보 조회 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 모든 장비 목록 조회");
-		System.out.println("2. 특정 ID 장비 조회");
-		System.out.println("3. 특정 상태 장비 조회");
-		System.out.println("4. 특정 부서 장비 조회");
-		System.out.println("5. 특정 카테고리 장비 조회");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌   𝙎 𝙀 𝘼 𝙍 𝘾 𝙃   ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 모든 장비 목록 조회");
+		System.out.println("2️⃣ 특정 ID 장비 조회");
+		System.out.println("3️⃣ 특정 상태 장비 조회");
+		System.out.println("4️⃣ 특정 부서 장비 조회");
+		System.out.println("5️⃣ 특정 카테고리 장비 조회");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 
 	public void createEquipmentMenu() {
-		System.out.println("1. 구매정보 입력");
-		System.out.println("2. 카테고리 입력");
-		System.out.println("3. 담당자 입력");
-		System.out.println("4. 상태 및 추가 설명 입력");
-		System.out.println("5. 나중에 입력하기");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌    𝙄 𝙉 𝙋 𝙐 𝙏    ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("1️⃣ 구매정보 입력");
+		System.out.println("2️⃣ 카테고리 입력");
+		System.out.println("3️⃣ 담당자 입력");
+		System.out.println("4️⃣ 상태 및 추가 설명 입력");
+		System.out.println("5️⃣ 나중에 입력하기");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
-	
+
 	public void inputStatusAndDescriptionMenu() {
-		System.out.println("1. 정상");
-		System.out.println("2. 점검필요");
-		System.out.println("3. 수리필요");
-		System.out.println("4. 수리중");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌   𝙎 𝙏 𝘼 𝙏 𝙐 𝙎   ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("1️⃣ 정상");
+		System.out.println("2️⃣ 점검필요");
+		System.out.println("3️⃣ 수리필요");
+		System.out.println("4️⃣ 수리중");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 
 	public void saveEquipmentMenu() {
-		System.out.println("---- 장비 정보 등록 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 신규 장비 등록");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌   𝙍 𝙀 𝙂 𝙄 𝙎 𝙏   ▌ ║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 신규 장비 등록");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
-	
+
 	public void updateEquipmentMenu() {
-		System.out.println("---- 장비 정보 수정 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 장비 정보 수정");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌   𝙐 𝙋 𝘿 𝘼 𝙏 𝙀   ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 장비 정보 수정");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
-	
+
 	public void deleteEquipmentMenu() {
-		System.out.println("---- 장비 정보 삭제 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 장비 삭제");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌   𝘿 𝙀 𝙇 𝙀 𝙏 𝙀   ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 장비 삭제");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 
 	public void showEquipmentDashboardMenu() {
-		System.out.println("---- 장비 현황 조회 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 상태별 장비 개수 조회");
-		System.out.println("2. 부서별 장비 개수 조회");
-		System.out.println("3. 카테고리별 장비 개수 조회");
-		System.out.println("4. 최근 수정된 장비 조회");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌   𝘿𝘼𝙎𝙃𝘽𝙊𝘼𝙍𝘿   ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 상태별 장비 개수 조회");
+		System.out.println("2️⃣ 부서별 장비 개수 조회");
+		System.out.println("3️⃣ 카테고리별 장비 개수 조회");
+		System.out.println("4️⃣ 최근 수정된 장비 조회");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 
 	public void manageCategoryMenu() {
-		System.out.println("---- 카테고리 관리 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 모든 카테고리 조회");
-		System.out.println("2. 신규 카테고리 추가");
-		System.out.println("3. 기존 카테고리 삭제");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌ 𝘾 𝘼 𝙏 𝙀 𝙂 𝙊 𝙍 𝙔 ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 모든 카테고리 조회");
+		System.out.println("2️⃣ 신규 카테고리 추가");
+		System.out.println("3️⃣ 기존 카테고리 삭제");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
-	
+
 	public void inputDepartment() {
-		System.out.println("---- 전체 부서 목록 ----");
-		System.out.println("1. 인사 관리 부서");
-		System.out.println("2. 예산/회계 관리 부서");
-		System.out.println("3. 자산 관리 부서");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌     𝘿 𝙀 𝙋 𝙏     ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("1️⃣ 인사 관리 부서");
+		System.out.println("2️⃣ 예산/회계 관리 부서");
+		System.out.println("3️⃣ 자산 관리 부서");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 
 	// 폐기 메뉴 화면
 	public void disposeEquipmentMenu() {
-		System.out.println("---- 장비 폐기 ----");
-		System.out.println("0. 이전 메뉴 돌아가기");
-		System.out.println("1. 폐기할 장비 선택");
-		System.out.print("번호 입력 : ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌ 𝘿 𝙄 𝙎 𝙋 𝙊 𝙎 𝘼 𝙇 ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 폐기할 장비 선택");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
+
+
+
+
 	/** =-=-=-=-=-=-=-=-=-=-=-= DAO 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
 	// - 장비 정보 출력

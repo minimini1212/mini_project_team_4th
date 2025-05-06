@@ -13,17 +13,21 @@ public class BudgetRequestView {
 //            System.err.println("서버 오류: " + e.getMessage());
 //        }
 //    }
-	
+
 	public void menu() {
-		System.out.println("\n==== 예산 신청 관리 ====");
-		System.out.println("1. 예산 신청 등록");
-		System.out.println("2. 예산 신청 전체 조회");
-		System.out.println("3. 특정 예산 신청 조회");
-		System.out.println("4. 예산 신청 승인 및 예산 등록");
-		System.out.println("5. 예산 신청 수정");
-		System.out.println("6. 예산 신청 삭제");
-		System.out.println("0. 뒤로 가기");
-		System.out.print("선택: ");
+		System.out.println();
+		System.out.println("  ▌│█║▌║▌ 𝘽𝙐𝘿𝙂𝙀𝙏 𝙍𝙀𝙌𝙐𝙀𝙎𝙏 ▌║▌║█│▌");
+		System.out.println("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+		System.out.println();
+		System.out.println("0️⃣ 이전 메뉴 돌아가기");
+		System.out.println("1️⃣ 예산 신청 등록");
+		System.out.println("2️⃣ 예산 신청 전체 조회");
+		System.out.println("3️⃣ 특정 예산 신청 조회");
+		System.out.println("4️⃣ 예산 신청 승인 및 예산 등록");
+		System.out.println("5️⃣ 예산 신청 수정");
+		System.out.println("6️⃣ 예산 신청 삭제");
+		System.out.println();
+		System.out.print("⏩ ");
 	}
 	
 }
