@@ -23,7 +23,7 @@ public class BudgetDao extends BaseDAO {
 	// 예산 생성
 	public void insertBudget(Budget budget) throws SQLException {
 		String sql = "INSERT INTO budget (" + "budget_id, budget_request_id, department_id, "
-				+ "year, budget_amount, category_id, description, " + "remaining_budget" + ") "
+				+ "year, budget_amount, category_id, description, " + "remaining_amount" + ") "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int sequence = getNextBudgetId();
 
@@ -40,7 +40,7 @@ public class BudgetDao extends BaseDAO {
 			pstmt.setInt(5, budget.getBudgetAmount());
 			pstmt.setInt(6, budget.getCategoryId());
 			pstmt.setString(7, budget.getDescription());
-			pstmt.setInt(8, budget.getRemainingBudget());
+			pstmt.setInt(8, budget.getRemainingAmount());
 
 			pstmt.executeUpdate();
 			System.out.println("예산이 등록되었습니다.");
@@ -71,7 +71,7 @@ public class BudgetDao extends BaseDAO {
 				budget.setBudgetAmount(rs.getInt("budget_amount"));
 				budget.setCategoryId(rs.getInt("category_id"));
 				budget.setDescription(rs.getString("description"));
-				budget.setRemainingBudget(rs.getInt("remaining_amount"));
+				budget.setRemainingAmount(rs.getInt("remaining_amount"));
 
 				// 부서 이름, 카테고리 이름 추가
 				int departmentId = rs.getInt("department_id");
@@ -114,7 +114,7 @@ public class BudgetDao extends BaseDAO {
 					budget.setBudgetAmount(rs.getInt("budget_amount"));
 					budget.setCategoryId(rs.getInt("category_id"));
 					budget.setDescription(rs.getString("description"));
-					budget.setRemainingBudget(rs.getInt("remaining_amount"));
+					budget.setRemainingAmount(rs.getInt("remaining_amount"));
 					
 					// 부서 이름, 카테고리 이름 추가
 					int departmentId = rs.getInt("department_id");
