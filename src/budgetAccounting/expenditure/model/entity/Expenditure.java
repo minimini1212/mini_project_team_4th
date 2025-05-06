@@ -29,6 +29,8 @@ public class Expenditure {
 	private int categoryId;
 	private String description;
 	private int year;
+	private String departmentName;
+    private String categoryName;
 
 	@Override
 	public String toString() {
@@ -38,9 +40,11 @@ public class Expenditure {
 	           "  \"지출 ID\"         : " + expenditureId + ",\n" +
 	           "  \"지출 신청 ID\"     : " + expenditureRequestId + ",\n" +
 	           "  \"부서 ID\"         : " + departmentId + ",\n" +
+	           "  \"부서명\"           : " + departmentName + ",\n" +
 	           "  \"지출일\"           : " + expenditureDate + ",\n" +
 	           "  \"지출 금액\"        : " + amount + ",\n" +
 	           "  \"카테고리 ID\"      : " + categoryId + ",\n" +
+	           "  \"카테고리명\"        : " + categoryName + ",\n" +
 	           "  \"설명\"            : \"" + description + "\"\n" +
 	           "  \"연도\"            : \"" + year + "\"\n" +
 	           "}\n" +

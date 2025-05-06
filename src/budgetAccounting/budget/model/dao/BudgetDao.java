@@ -22,17 +22,14 @@ public class BudgetDao extends BaseDAO {
 
 	// 예산 생성
 	public void insertBudget(Budget budget) throws SQLException {
-		String sql = "INSERT INTO budget (" 
-				+ "budget_id, budget_request_id, department_id, "
-				+ "year, budget_amount, category_id, description, " 
-				+ "remaining_budget"
-				+ ") "
+		String sql = "INSERT INTO budget (" + "budget_id, budget_request_id, department_id, "
+				+ "year, budget_amount, category_id, description, " + "remaining_budget" + ") "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		int sequence = getNextBudgetId();
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, sequence);
-			
+
 			if (budget.getBudgetRequestId() == 0) {
 				pstmt.setNull(2, Types.INTEGER);
 			} else {
@@ -44,13 +41,13 @@ public class BudgetDao extends BaseDAO {
 			pstmt.setInt(6, budget.getCategoryId());
 			pstmt.setString(7, budget.getDescription());
 			pstmt.setInt(8, budget.getRemainingBudget());
-			
+
 			pstmt.executeUpdate();
 			System.out.println("예산이 등록되었습니다.");
 
 		} catch (SQLIntegrityConstraintViolationException e) {
 			System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
-		} 
+		}
 	}
 
 	// 예산 전체 조회
@@ -74,8 +71,17 @@ public class BudgetDao extends BaseDAO {
 				budget.setBudgetAmount(rs.getInt("budget_amount"));
 				budget.setCategoryId(rs.getInt("category_id"));
 				budget.setDescription(rs.getString("description"));
-				budget.setRemainingBudget(rs.getInt("remaining_budget"));
+				budget.setRemainingBudget(rs.getInt("remaining_amount"));
 
+				// 부서 이름, 카테고리 이름 추가
+				int departmentId = rs.getInt("department_id");
+				int categoryId = rs.getInt("category_id");
+				String departmentName = getDepartmentNameById(departmentId);
+				String categoryName = getCategoryNameById(categoryId);
+
+				budget.setDepartmentName(departmentName);
+				budget.setCategoryName(categoryName);
+				
 				list.add(budget);
 
 			}
@@ -108,7 +114,17 @@ public class BudgetDao extends BaseDAO {
 					budget.setBudgetAmount(rs.getInt("budget_amount"));
 					budget.setCategoryId(rs.getInt("category_id"));
 					budget.setDescription(rs.getString("description"));
-					budget.setRemainingBudget(rs.getInt("remaining_budget"));
+					budget.setRemainingBudget(rs.getInt("remaining_amount"));
+					
+					// 부서 이름, 카테고리 이름 추가
+					int departmentId = rs.getInt("department_id");
+					int categoryId = rs.getInt("category_id");
+					String departmentName = getDepartmentNameById(departmentId);
+					String categoryName = getCategoryNameById(categoryId);
+
+					budget.setDepartmentName(departmentName);
+					budget.setCategoryName(categoryName);
+					
 					list.add(budget);
 				}
 
@@ -117,7 +133,6 @@ public class BudgetDao extends BaseDAO {
 				}
 			}
 		}
-
 
 		return list;
 	}
@@ -179,6 +194,36 @@ public class BudgetDao extends BaseDAO {
 				return rs.getInt(1);
 			} else {
 				throw new SQLException("시퀀스 값을 가져오지 못했습니다.");
+			}
+		}
+	}
+
+	// 카테고리ID로 카테고리명 찾는 메서드
+	public String getCategoryNameById(int categoryId) throws SQLException {
+		String sql = "SELECT category_name FROM vw_category_name WHERE category_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, categoryId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("category_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
+			}
+		}
+	}
+
+	// 부서ID로 부서명 찾는 메서드
+	public String getDepartmentNameById(int departmentId) throws SQLException {
+		String sql = "SELECT department_name FROM vw_department_name WHERE department_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, departmentId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("department_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
 			}
 		}
 	}

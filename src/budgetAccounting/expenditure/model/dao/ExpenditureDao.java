@@ -18,31 +18,6 @@ public class ExpenditureDao {
 		this.conn = conn;
 	}
 
-//	// 지출 생성
-//	public void insertExpenditure1(Expenditure expenditure) throws SQLException {
-//		String sql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-//		int sequence = getNextExpenditureId();
-//
-//		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//			pstmt.setInt(1, sequence);
-//
-//			if (expenditure.getExpenditureId() == 0) {
-//				pstmt.setNull(2, Types.INTEGER);
-//			} else {
-//				pstmt.setInt(2, expenditure.getExpenditureRequestId());
-//			}
-//			pstmt.setInt(3, expenditure.getDepartmentId());
-//			pstmt.setDate(4, new java.sql.Date(expenditure.getExpenditureDate().getTime()));
-//			pstmt.setInt(5, expenditure.getAmount());
-//			pstmt.setInt(6, expenditure.getCategoryId());
-//			pstmt.setString(7, expenditure.getDescription());
-//			pstmt.setInt(8, expenditure.getYear());
-//
-//			pstmt.executeUpdate();
-//			System.out.println("지출이 등록되었습니다.");
-//		}
-//	}
-
 	// 지출 생성
 	public void insertExpenditure(Expenditure expenditure) throws SQLException {
 		conn.setAutoCommit(false); // 트랜잭션 시작
@@ -135,6 +110,16 @@ public class ExpenditureDao {
 				expenditure.setDescription(rs.getString("description"));
 				expenditure.setYear(rs.getInt("year"));
 
+				// 부서 이름, 카테고리 이름 추가
+				int departmentId = rs.getInt("department_id");
+				int categoryId = rs.getInt("category_id");
+				String departmentName = getDepartmentNameById(departmentId);
+				String categoryName = getCategoryNameById(categoryId);
+
+				expenditure.setDepartmentName(departmentName);
+				expenditure.setCategoryName(categoryName);
+
+				
 				list.add(expenditure);
 
 			}
@@ -170,6 +155,15 @@ public class ExpenditureDao {
 					expenditure.setCategoryId(rs.getInt("category_id"));
 					expenditure.setDescription(rs.getString("description"));
 					expenditure.setYear(rs.getInt("year"));
+					
+					// 부서 이름, 카테고리 이름 추가
+					int departmentId = rs.getInt("department_id");
+					int categoryId = rs.getInt("category_id");
+					String departmentName = getDepartmentNameById(departmentId);
+					String categoryName = getCategoryNameById(categoryId);
+
+					expenditure.setDepartmentName(departmentName);
+					expenditure.setCategoryName(categoryName);
 
 					list.add(expenditure);
 				}
@@ -240,6 +234,36 @@ public class ExpenditureDao {
 				return rs.getInt(1);
 			} else {
 				throw new SQLException("시퀀스 값을 가져오지 못했습니다.");
+			}
+		}
+	}
+
+	// 카테고리ID로 카테고리명 찾는 메서드
+	public String getCategoryNameById(int categoryId) throws SQLException {
+		String sql = "SELECT category_name FROM vw_category_name WHERE category_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, categoryId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("category_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
+			}
+		}
+	}
+
+	// 부서ID로 부서명 찾는 메서드
+	public String getDepartmentNameById(int departmentId) throws SQLException {
+		String sql = "SELECT department_name FROM vw_department_name WHERE department_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, departmentId);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("department_name");
+				} else {
+					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+				}
 			}
 		}
 	}
