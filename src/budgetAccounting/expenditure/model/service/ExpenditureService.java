@@ -30,8 +30,8 @@ public class ExpenditureService {
 	}
 
 	// 지출 신청 수정
-	public void updateExpenditure(Expenditure expenditure) throws SQLException {
-		expenditureDao.updateByExpenditureId(expenditure);
+	public void updateExpenditure(Expenditure expenditure, int requestId) throws SQLException {
+		expenditureDao.updateByExpenditureId(expenditure, requestId);
 	}
 
 	// 소프트 삭제

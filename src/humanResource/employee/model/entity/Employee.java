@@ -29,5 +29,4 @@ public class Employee extends BaseEntity {
     private int departmentId;
     private int positionId;
     private int jobId;
-
 }

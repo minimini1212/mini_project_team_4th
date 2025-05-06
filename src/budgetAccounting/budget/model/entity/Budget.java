@@ -14,16 +14,18 @@ public class Budget {
 	private int budgetAmount;
 	private int categoryId;
 	private String description;
+	private int remainingBudget;
 	
 	@Override
 	public String toString() {
 	    return "\n" +
-	           "================ 예산 요청 정보 =================\n" +
+	           "================   예산    정보   =================\n" +
 	           "{\n" +
 	           "  \"예산 ID\"         : " + budgetId + ",\n" +
 	           "  \"부서 ID\"         : " + departmentId + ",\n" +
 	           "  \"년도\"            : " + year + ",\n" +
-	           "  \"요청 금액\"       : " + budgetAmount + ",\n" +
+	           "  \"예산 금액\"       : " + budgetAmount + ",\n" +
+	           "  \"잔여 예산\"       : " + remainingBudget + ",\n" +
 	           "  \"카테고리 ID\"     : " + categoryId + ",\n" +
 	           "  \"설명\"            : \"" + description + "\"\n" +
 	           "}\n" +
