@@ -34,7 +34,7 @@ public class BudgetRequestService {
 	}
 
 	// 예산 승인 및 예산 테이블에 삽입
-	public void approveAndInsertToBudget(int requestId, int approverId) throws SQLException {
+	public void approveAndInsertToBudget(int requestId, String approverId) throws SQLException {
 		try {
 			
 			conn = ConnectionSingletonHelper.getConnection("oracle");

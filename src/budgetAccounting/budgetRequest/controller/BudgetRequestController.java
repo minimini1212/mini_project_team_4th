@@ -165,7 +165,8 @@ public class BudgetRequestController {
 				System.out.print("승인할 신청 ID: ");
 				int requestId = sc.nextInt();
 				System.out.print("승인자 ID: ");
-				int approverId = sc.nextInt();
+				String approverId = sc.nextLine();
+				sc.nextLine();
 
 				budgetRequestservice.approveAndInsertToBudget(requestId, approverId);
 				
