@@ -7,6 +7,20 @@ public class BudgetAccountingView {
                 System.out.println();
                 HospitalBannerUtils.printAccountingBanner();
                 System.out.println();
+                System.out.println("0️⃣ 로그아웃");
+                System.out.println("1️⃣ 예산 관리");
+                System.out.println("2️⃣ 예산 신청 관리");
+                System.out.println("3️⃣ 지출 관리");
+                System.out.println("4️⃣ 지출 신청 관리");
+                System.out.println("5️⃣ 통계 조회");
+                System.out.println();
+                System.out.print("⏩ ");
+        }
+
+        public void budgetAccountingMenuForMaster() {
+                System.out.println();
+                HospitalBannerUtils.printAccountingBanner();
+                System.out.println();
                 System.out.println("0️⃣ 이전 메뉴 돌아가기");
                 System.out.println("1️⃣ 예산 관리");
                 System.out.println("2️⃣ 예산 신청 관리");
