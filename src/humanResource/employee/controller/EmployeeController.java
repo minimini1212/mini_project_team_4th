@@ -49,18 +49,21 @@ public class EmployeeController {
             String empNumber = scanner.nextLine().trim();
 
             Employee existing = employeeService.findByEmpNumber(empNumber);
+
             if (existing == null) {
                 System.out.println("❌ 해당 사번의 직원이 존재하지 않습니다.");
                 return;
             }
 
-            System.out.println("\n📋 현재 직원 정보:");
-            System.out.printf("이름: %s | 주소: %s | 전화번호: %s | 이메일: %s%n",
-                    existing.getName(), existing.getAddress(), existing.getPhone(), existing.getEmail());
-            System.out.printf("재직 상태: %s | 직급: %s | 직무: %s%n",
-                    existing.getStatus(),
-                    EmployeeOptionMapper.getPositionName(existing.getPositionId()),
-                    EmployeeOptionMapper.getJobName(existing.getJobId()));
+            System.out.println(existing);
+
+//            System.out.println("\n📋 현재 직원 정보:");
+//            System.out.printf("이름: %s | 주소: %s | 전화번호: %s | 이메일: %s%n",
+//                    existing.getName(), existing.getAddress(), existing.getPhone(), existing.getEmail());
+//            System.out.printf("재직 상태: %s | 직급: %s | 직무: %s%n",
+//                    existing.getStatus(),
+//                    EmployeeOptionMapper.getPositionName(existing.getPositionId()),
+//                    EmployeeOptionMapper.getJobName(existing.getJobId()));
 
             String confirm;
             while (true) {
@@ -182,6 +185,10 @@ public class EmployeeController {
             System.out.print("삭제할 직원의 사번을 입력하세요: ");
             String empNumber = scanner.nextLine();
 
+            Employee e = employeeService.findByEmpNumber(empNumber);
+            System.out.println(e);
+            System.out.println();
+
             String confirm;
             while (true) {
                 System.out.print("정말 삭제하시겠습니까? (y/n): ");
@@ -230,12 +237,26 @@ public class EmployeeController {
                         if (emp != null) results.add(emp);
                     }
                     case 3 -> {
-                        System.out.print("부서 ID(1. 인사관리 / 2. 예산·회계관리 / 3. 자산관리): ");
+                        System.out.print("부서\n ① 인사관리 \n ② 예산·회계관리 \n ③ 자산관리 \n입력: ");
                         int deptId = Integer.parseInt(scanner.nextLine());
+                        switch (deptId){
+                            case 1: {
+                                results = employeeService.findByDepartmentId(2);
+                                break;
+                            }
+                            case 2: {
+                                results = employeeService.findByDepartmentId(3);
+                                break;
+                            }
+                            case 3: {
+                                results = employeeService.findByDepartmentId(4);
+                                break;
+                            }
+                        }
                         results = employeeService.findByDepartmentId(deptId);
                     }
                     default -> {
-                        System.out.println("잘못된 선택입니다. 0~3 사이의 번호를 입력해주세요.");
+                        System.out.println("잘못된 선택입니다. 1~3 사이의 번호를 입력해주세요.");
                         continue;
                     }
                 }
@@ -246,20 +267,21 @@ public class EmployeeController {
                     System.out.println("━━━━━━━━━  검색 결과 ━━━━━━━━━");
                     for (Employee e : results) {
                         // 부서 ID → 부서명 매핑
-                        String deptName = switch (e.getDepartmentId()) {
-                            case 1 -> "인사관리부서";
-                            case 2 -> "예산/회계관리부서";
-                            case 3 -> "자산관리부서";
-                            default -> "알 수 없음";
-                        };
+//                        String deptName = switch (e.getDepartmentId()) {
+//                            case 2 -> "인사관리부서";
+//                            case 3 -> "예산/회계관리부서";
+//                            case 4 -> "자산관리부서";
+//                            default -> "알 수 없음";
+//                        };
 
                         // 직급, 직무, 상태는 Map 기반으로 변환
                         String positionName = EmployeeOptionMapper.getPositionName(e.getPositionId());
                         String jobName = EmployeeOptionMapper.getJobName(e.getJobId());
                         String statusName = EmployeeOptionMapper.getStatusName(e.getStatus());
+                        String departmentName = EmployeeOptionMapper.getDepartmentName(e.getDepartmentId());
 
-                        String hireDate = new SimpleDateFormat("yyyy-MM-dd").format(e.getHireDate());
 
+                        e.setDepartmentName(departmentName);
                         e.setPositionName(positionName);
                         e.setJobName(jobName);
                         e.setStatus(statusName);

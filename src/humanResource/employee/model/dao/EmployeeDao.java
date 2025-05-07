@@ -138,6 +138,8 @@ public class EmployeeDao {
         emp.setEmail(rs.getString("email"));
         emp.setStatus(rs.getString("status"));
         emp.setJobId(rs.getInt("job_id"));
+        emp.setBirthDate(rs.getDate("birth_date"));
+        emp.setGender(rs.getString("gender"));
         emp.setDelYn(rs.getString("del_yn"));
         return emp;
     }
