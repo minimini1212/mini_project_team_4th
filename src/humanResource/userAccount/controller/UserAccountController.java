@@ -57,9 +57,10 @@ public class UserAccountController {
         System.out.println();
         HospitalBannerUtils.printLoginBanner();
         System.out.println();
-        System.out.print("사번: ");
+        System.out.print("⏩ 사번: ");
         String id = scanner.nextLine();
-        System.out.print("비밀번호: ");
+        System.out.println();
+        System.out.print("⏩ 비밀번호: ");
         String pw = scanner.nextLine();
 
         try {
