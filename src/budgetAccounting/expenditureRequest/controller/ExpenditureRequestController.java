@@ -91,6 +91,7 @@ public class ExpenditureRequestController {
 				System.out.print("⏩ 입력: ");
 				int categoryId = Integer.parseInt(sc.nextLine());
 				
+				System.out.println();
 				System.out.println("⏩ 설명");
 				System.out.print("⏩ 입력: ");
 				String description = sc.nextLine();
