@@ -42,6 +42,27 @@ public class BudgetDao extends BaseDAO {
 			pstmt.setString(7, budget.getDescription());
 			pstmt.setInt(8, budget.getRemainingAmount());
 
+			int departmentId = budget.getDepartmentId();
+			int categoryId = budget.getCategoryId();
+
+			int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+			if (!contains(departmentIds, departmentId)) {
+				throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + departmentId);
+			}
+
+			int[] categoryIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+			if (!contains(categoryIds, categoryId)) {
+				throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + categoryId);
+			}
+			
+			int year = budget.getYear();
+			
+			if (year < 1000 || year > 9999 ) {
+				throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
+			}
+
 			pstmt.executeUpdate();
 			System.out.println("예산이 등록되었습니다.");
 
@@ -81,7 +102,7 @@ public class BudgetDao extends BaseDAO {
 
 				budget.setDepartmentName(departmentName);
 				budget.setCategoryName(categoryName);
-				
+
 				list.add(budget);
 
 			}
@@ -115,7 +136,7 @@ public class BudgetDao extends BaseDAO {
 					budget.setCategoryId(rs.getInt("category_id"));
 					budget.setDescription(rs.getString("description"));
 					budget.setRemainingAmount(rs.getInt("remaining_amount"));
-					
+
 					// 부서 이름, 카테고리 이름 추가
 					int departmentId = rs.getInt("department_id");
 					int categoryId = rs.getInt("category_id");
@@ -124,12 +145,12 @@ public class BudgetDao extends BaseDAO {
 
 					budget.setDepartmentName(departmentName);
 					budget.setCategoryName(categoryName);
-					
+
 					list.add(budget);
 				}
 
 				if (!hasData) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산이 존재하지 않습니다.");
 				}
 			}
 		}
@@ -149,7 +170,7 @@ public class BudgetDao extends BaseDAO {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, budget.getBudgetAmount());
@@ -174,7 +195,7 @@ public class BudgetDao extends BaseDAO {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, requestId);
@@ -222,10 +243,20 @@ public class BudgetDao extends BaseDAO {
 				if (rs.next()) {
 					return rs.getString("department_name");
 				} else {
-					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+					throw new SQLException("부서명을 가져오지 못했습니다.");
 				}
 			}
 		}
+	}
+
+	// 존재하는 값인지 아닌지 비교 (부서ID, 카테고리 ID)
+	private boolean contains(int[] arr, int value) {
+		for (int num : arr) {
+			if (num == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -23,12 +23,12 @@ public class ExpenditureDao {
 		conn.setAutoCommit(false); // 트랜잭션 시작
 
 		// 쿼리문 미리 선언
-		String selectBudgetSql = "SELECT budget_id, remaining_budget FROM budget "
+		String selectBudgetSql = "SELECT budget_id, remaining_amount FROM budget "
 				+ "WHERE department_id = ? AND category_id = ? AND year = ? AND del_yn = 'N' FOR UPDATE";
 
 		String insertExpenditureSql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-		String updateBudgetSql = "UPDATE budget SET remaining_budget = remaining_budget - ? WHERE budget_id = ?";
+		String updateBudgetSql = "UPDATE budget SET remaining_amount = remaining_amount - ? WHERE budget_id = ?";
 
 		int sequence = getNextExpenditureId();
 
@@ -43,7 +43,7 @@ public class ExpenditureDao {
 				}
 
 				int budgetId = rs.getInt("budget_id");
-				int remaining = rs.getInt("remaining_budget");
+				int remaining = rs.getInt("remaining_amount");
 
 				if (remaining < expenditure.getAmount()) {
 					throw new SQLException("잔여 예산이 부족합니다.");
@@ -63,6 +63,27 @@ public class ExpenditureDao {
 					pstmt2.setInt(6, expenditure.getCategoryId());
 					pstmt2.setString(7, expenditure.getDescription());
 					pstmt2.setInt(8, expenditure.getYear());
+
+					int departmentId = expenditure.getDepartmentId();
+					int categoryId = expenditure.getCategoryId();
+
+					int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+					if (!contains(departmentIds, departmentId)) {
+						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + departmentId);
+					}
+
+					int[] categoryIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+					if (!contains(categoryIds, categoryId)) {
+						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + categoryId);
+					}
+					
+					int year = expenditure.getYear();
+					
+					if (year < 1000 || year > 9999 ) {
+						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
+					}
 
 					pstmt2.executeUpdate();
 				}
@@ -119,7 +140,6 @@ public class ExpenditureDao {
 				expenditure.setDepartmentName(departmentName);
 				expenditure.setCategoryName(categoryName);
 
-				
 				list.add(expenditure);
 
 			}
@@ -155,7 +175,7 @@ public class ExpenditureDao {
 					expenditure.setCategoryId(rs.getInt("category_id"));
 					expenditure.setDescription(rs.getString("description"));
 					expenditure.setYear(rs.getInt("year"));
-					
+
 					// 부서 이름, 카테고리 이름 추가
 					int departmentId = rs.getInt("department_id");
 					int categoryId = rs.getInt("category_id");
@@ -169,7 +189,7 @@ public class ExpenditureDao {
 				}
 
 				if (!hasData) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 지출이 존재하지 않습니다.");
 				}
 			}
 		}
@@ -188,7 +208,7 @@ public class ExpenditureDao {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 지출이 존재하지 않습니다.");
 				}
 
 				pstmt.setString(1, expenditure.getDescription());
@@ -213,7 +233,7 @@ public class ExpenditureDao {
 			try (ResultSet rs = pstmt1.executeQuery()) { // 그리고 실행
 
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 지출이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, requestId);
@@ -262,9 +282,19 @@ public class ExpenditureDao {
 				if (rs.next()) {
 					return rs.getString("department_name");
 				} else {
-					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+					throw new SQLException("부서명을 가져오지 못했습니다.");
 				}
 			}
 		}
+	}
+
+	// 존재하는 값인지 아닌지 비교 (부서ID, 카테고리 ID)
+	private boolean contains(int[] arr, int value) {
+		for (int num : arr) {
+			if (num == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

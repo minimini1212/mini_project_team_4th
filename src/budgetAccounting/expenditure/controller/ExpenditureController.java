@@ -25,11 +25,11 @@ public class ExpenditureController {
 		while (running) {
 			expenditureView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -43,7 +43,7 @@ public class ExpenditureController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -51,7 +51,7 @@ public class ExpenditureController {
 					updateRequest(sc);
 					break;
 				case 5:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -156,7 +156,7 @@ public class ExpenditureController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 지출이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -195,7 +195,7 @@ public class ExpenditureController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 지출이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -226,7 +226,7 @@ public class ExpenditureController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 지출이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {

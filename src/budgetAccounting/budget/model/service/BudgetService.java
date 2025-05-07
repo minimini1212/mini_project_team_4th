@@ -21,6 +21,14 @@ public class BudgetService {
 			budgetDao.insertBudget(budget);
 		} catch (SQLException e) {
 			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+		} catch (IllegalArgumentException e) {
+
+			if ("연도는 4자리로 입력해주세요.".equals(e.getMessage())) {
+				System.out.println(e.getMessage());
+			} else {
+				System.out.println("존재하지 않는 부서 ID 또는 존재하지 않는 항목입니다.");
+			}
+
 		} catch (Exception e) {
 			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
@@ -29,7 +37,7 @@ public class BudgetService {
 
 	}
 
-	// 전체 예산 신청 목록
+	// 전체 예산 목록
 	public List<Budget> getAllBudget() throws SQLException {
 
 		try {
@@ -48,34 +56,24 @@ public class BudgetService {
 
 	}
 
-	// 특정 예산 신청 조회
+	// 특정 예산 조회
 	public List<Budget> getBudgetById(int requestId) throws SQLException {
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetDao = new BudgetDao(conn);
 			return budgetDao.findByBudgetId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-			return null;
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
-			return null;
 		} finally {
 			conn.close();
 		}
 
 	}
 
-	// 예산 신청 수정
+	// 예산 수정
 	public void updateBudget(Budget budget, int requestId) throws SQLException {
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetDao = new BudgetDao(conn);
 			budgetDao.updateByBudgetId(budget, requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}
@@ -88,10 +86,6 @@ public class BudgetService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetDao = new BudgetDao(conn);
 			budgetDao.softDeleteByBudgetId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}

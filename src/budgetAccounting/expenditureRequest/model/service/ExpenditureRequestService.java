@@ -34,7 +34,7 @@ public class ExpenditureRequestService {
 	}
 
 	// 지출 승인 및 예산 테이블에 삽입
-	public void approveAndInsertToExpenditure(int requestId, int approverId) throws SQLException {
+	public void approveAndInsertToExpenditure(int requestId, String approverId) throws SQLException {
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureDao = new ExpenditureDao(conn);
@@ -110,12 +110,6 @@ public class ExpenditureRequestService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureRequestDao = new ExpenditureRequestDao(conn);
 			return expenditureRequestDao.findByExpenditureRequestId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-			return null;
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
-			return null;
 		} finally {
 			conn.close();
 		}
@@ -124,38 +118,28 @@ public class ExpenditureRequestService {
 
 	// 지출 신청 수정
 	public void updateExpenditureRequest(ExpenditureRequest request, int requestId) throws SQLException {
-		
+
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureRequestDao = new ExpenditureRequestDao(conn);
 			expenditureRequestDao.updateByExpenditureRequestId(request, requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}
-		
-		
+
 	}
 
 	// 소프트 삭제
 	public void softDeleteExpenditureRequest(int requestId) throws SQLException {
-		
+
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureRequestDao = new ExpenditureRequestDao(conn);
 			expenditureRequestDao.softDeleteByExpenditureRequestId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}
-		
-		
+
 	}
 
 }

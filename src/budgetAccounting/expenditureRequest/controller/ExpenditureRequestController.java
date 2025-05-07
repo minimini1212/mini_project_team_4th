@@ -24,7 +24,7 @@ public class ExpenditureRequestController {
 		while (running) {
 			expenditureRequestView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:
@@ -37,7 +37,7 @@ public class ExpenditureRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -97,12 +97,13 @@ public class ExpenditureRequestController {
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
-
+			} catch (IllegalArgumentException e) {
+				System.out.println("연도는 4자리로 입력해주세요.");
 			} catch (SQLException e) {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("지출 조회 중 오류가 발생했습니다.");
+				System.out.println("지출 신청 등록 중 오류가 발생했습니다.");
 				sc.nextLine();
 			}
 		}
@@ -145,7 +146,7 @@ public class ExpenditureRequestController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				System.out.println("지출 신청 조회 중 오류가 발생했습니다. ");
 				sc.nextLine();
 			}
 		}
@@ -160,7 +161,8 @@ public class ExpenditureRequestController {
 				System.out.print("승인할 신청 ID: ");
 				int requestId = sc.nextInt();
 				System.out.print("승인자 ID: ");
-				int approverId = sc.nextInt();
+				String approverId = sc.nextLine();
+				sc.nextLine();
 
 				expenditureRequestservice.approveAndInsertToExpenditure(requestId, approverId);
 				break;
@@ -179,7 +181,7 @@ public class ExpenditureRequestController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				System.out.println("지출 신청 승인 중 오류가 발생했습니다. ");
 				sc.nextLine();
 			}
 		}
@@ -220,7 +222,7 @@ public class ExpenditureRequestController {
 					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				}
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				System.out.println("지출 신청 수정 중 오류가 발생했습니다. ");
 				sc.nextLine();
 			}
 		}
@@ -251,7 +253,7 @@ public class ExpenditureRequestController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. ");
+				System.out.println("지출 신청 삭제 중 오류가 발생했습니다. ");
 				sc.nextLine();
 			}
 		}

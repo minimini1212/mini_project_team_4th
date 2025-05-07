@@ -46,6 +46,12 @@ public class BudgetRequestDao {
 					pstmt.setInt(5, budgetRequest.getCategoryId());
 					pstmt.setString(6, budgetRequest.getRequesterId());
 					pstmt.setString(7, budgetRequest.getDescription());
+					
+					int year = budgetRequest.getYear();
+					
+					if (year < 1000 || year > 9999 ) {
+						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
+					}
 
 					pstmt.executeUpdate();
 					System.out.println("예산 신청이 완료되었습니다.");
@@ -61,7 +67,7 @@ public class BudgetRequestDao {
 	}
 
 	// 예산 신청 승인
-	public void approve(int requestId, int approverId) throws SQLException {
+	public void approve(int requestId, String approverId) throws SQLException {
 		String sql = "UPDATE budget_request SET status = 'APPROVED', " + "approver_id = ?, approval_date = SYSDATE "
 				+ "WHERE budget_request_id = ? AND del_yn = 'N'";
 		String selectSql = "SELECT * FROM budget_request WHERE budget_request_id = ? AND del_yn IN ('N', 'n')";
@@ -75,7 +81,7 @@ public class BudgetRequestDao {
 					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
-				pstmt.setInt(1, approverId);
+				pstmt.setString(1, approverId);
 				pstmt.setInt(2, requestId);
 				pstmt.executeUpdate();
 			}
@@ -171,7 +177,7 @@ public class BudgetRequestDao {
 				}
 
 				if (!hasData) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 			}
 		}
@@ -190,7 +196,7 @@ public class BudgetRequestDao {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, budgetRequest.getRequestedAmount());
@@ -215,7 +221,7 @@ public class BudgetRequestDao {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, requestId);
@@ -252,7 +258,7 @@ public class BudgetRequestDao {
 				if (rs.next()) {
 					return rs.getString("department_name");
 				} else {
-					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+					throw new SQLException("부서명을 가져오지 못했습니다.");
 				}
 			}
 		}

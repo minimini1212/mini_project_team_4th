@@ -25,7 +25,7 @@ public class StatisticsController {
 		while (running) {
 			statisticsView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:

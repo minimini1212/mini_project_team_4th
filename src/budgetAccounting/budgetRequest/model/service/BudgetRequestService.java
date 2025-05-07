@@ -17,7 +17,7 @@ public class BudgetRequestService {
 
 	// 예산 신청
 	public void createBudgetRequest(BudgetRequest request) throws SQLException {
-		
+
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetRequestDao = new BudgetRequestDao(conn);
@@ -29,14 +29,13 @@ public class BudgetRequestService {
 		} finally {
 			conn.close();
 		}
-		
-		
+
 	}
 
 	// 예산 승인 및 예산 테이블에 삽입
-	public void approveAndInsertToBudget(int requestId, int approverId) throws SQLException {
+	public void approveAndInsertToBudget(int requestId, String approverId) throws SQLException {
 		try {
-			
+
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetRequestDao = new BudgetRequestDao(conn);
 			budgetDao = new BudgetDao(conn);
@@ -79,7 +78,6 @@ public class BudgetRequestService {
 		budget.setBudgetAmount(request.getRequestedAmount());
 		budget.setCategoryId(request.getCategoryId());
 		budget.setDescription(request.getDescription());
-		budget.setDescription(request.getDescription());
 		budget.setRemainingAmount(request.getRequestedAmount());
 
 		return budget;
@@ -109,12 +107,6 @@ public class BudgetRequestService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetRequestDao = new BudgetRequestDao(conn);
 			return budgetRequestDao.findByBudgetRequestId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-			return null;
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
-			return null;
 		} finally {
 			conn.close();
 		}
@@ -127,10 +119,6 @@ public class BudgetRequestService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetRequestDao = new BudgetRequestDao(conn);
 			budgetRequestDao.updateByBudgetRequestId(request, requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}
@@ -143,10 +131,6 @@ public class BudgetRequestService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			budgetRequestDao = new BudgetRequestDao(conn);
 			budgetRequestDao.softDeleteByBudgetRequestId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}

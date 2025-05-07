@@ -25,7 +25,7 @@ public class BudgetRequestController {
 		while (running) {
 			budgetRequestView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:
@@ -38,7 +38,7 @@ public class BudgetRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -93,13 +93,15 @@ public class BudgetRequestController {
 				request.setRequesterId(requesterId);
 
 				budgetRequestservice.createBudgetRequest(request);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
-
+			} catch (IllegalArgumentException e) {
+				System.out.println("연도는 4자리로 입력해주세요.");
+				sc.nextLine();
 			} catch (SQLIntegrityConstraintViolationException e) {
 				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 				sc.nextLine();
@@ -107,7 +109,7 @@ public class BudgetRequestController {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. " + e.getMessage());
+				System.out.println("예산 신청 등록 중 오류가 발생했습니다. " + e.getMessage());
 				sc.nextLine();
 			}
 		}
@@ -141,7 +143,7 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산 신청이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -149,7 +151,7 @@ public class BudgetRequestController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 조회 중 오류가 발생했습니다. ");
+				System.out.println("예산 신청 조회 중 오류가 발생했습니다. ");
 				sc.nextLine();
 			}
 		}
@@ -165,10 +167,11 @@ public class BudgetRequestController {
 				System.out.print("승인할 신청 ID: ");
 				int requestId = sc.nextInt();
 				System.out.print("승인자 ID: ");
-				int approverId = sc.nextInt();
+				String approverId = sc.nextLine();
+				sc.nextLine();
 
 				budgetRequestservice.approveAndInsertToBudget(requestId, approverId);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
@@ -211,7 +214,7 @@ public class BudgetRequestController {
 				request.setDescription(description);
 
 				budgetRequestservice.updateBudgetRequest(request, requestId);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
@@ -219,7 +222,7 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산 신청이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -243,7 +246,7 @@ public class BudgetRequestController {
 				System.out.print("삭제할 신청 ID: ");
 				int requestId = sc.nextInt();
 				budgetRequestservice.softDeleteBudgetRequest(requestId);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
@@ -251,7 +254,7 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산 신청이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {

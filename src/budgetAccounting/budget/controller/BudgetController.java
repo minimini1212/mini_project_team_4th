@@ -25,11 +25,11 @@ public class BudgetController {
 		while (running) {
 			budgetView.menu();
 			int choice = sc.nextInt();
-
+			sc.nextLine();
 			try {
 				switch (choice) {
 				case 1:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -43,7 +43,7 @@ public class BudgetController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -51,7 +51,7 @@ public class BudgetController {
 					updateRequest(sc);
 					break;
 				case 5:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -143,7 +143,7 @@ public class BudgetController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -151,7 +151,7 @@ public class BudgetController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다.");
+				System.out.println("예산 조회 중 오류가 발생했습니다.");
 				sc.nextLine();
 			}
 		}
@@ -185,7 +185,7 @@ public class BudgetController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -193,7 +193,7 @@ public class BudgetController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다: ");
+				System.out.println("예산 수정 중 오류가 발생했습니다: ");
 				sc.nextLine();
 			}
 		}
@@ -216,7 +216,7 @@ public class BudgetController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -224,7 +224,7 @@ public class BudgetController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다: ");
+				System.out.println("예산 삭제 중 오류가 발생했습니다: ");
 				sc.nextLine();
 			}
 		}
