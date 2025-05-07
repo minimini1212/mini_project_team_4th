@@ -21,6 +21,8 @@ public class ExpenditureService {
 			expenditureDao.insertExpenditure(expenditure);
 		} catch (SQLException e) {
 			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
+		} catch (IllegalArgumentException e) {
+			System.out.println("존재하지 않는 부서 ID 또는 존재하지 않는 항목입니다.");
 		} catch (Exception e) {
 			System.out.println("서버 오류: " + e.getMessage());
 		} finally {

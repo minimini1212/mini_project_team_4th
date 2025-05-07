@@ -64,6 +64,21 @@ public class ExpenditureDao {
 					pstmt2.setString(7, expenditure.getDescription());
 					pstmt2.setInt(8, expenditure.getYear());
 
+					int departmentId = expenditure.getDepartmentId();
+					int categoryId = expenditure.getCategoryId();
+
+					int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+					if (!contains(departmentIds, departmentId)) {
+						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + departmentId);
+					}
+
+					int[] categoryIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+					if (!contains(categoryIds, categoryId)) {
+						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + categoryId);
+					}
+
 					pstmt2.executeUpdate();
 				}
 
@@ -119,7 +134,6 @@ public class ExpenditureDao {
 				expenditure.setDepartmentName(departmentName);
 				expenditure.setCategoryName(categoryName);
 
-				
 				list.add(expenditure);
 
 			}
@@ -155,7 +169,7 @@ public class ExpenditureDao {
 					expenditure.setCategoryId(rs.getInt("category_id"));
 					expenditure.setDescription(rs.getString("description"));
 					expenditure.setYear(rs.getInt("year"));
-					
+
 					// 부서 이름, 카테고리 이름 추가
 					int departmentId = rs.getInt("department_id");
 					int categoryId = rs.getInt("category_id");
@@ -266,5 +280,15 @@ public class ExpenditureDao {
 				}
 			}
 		}
+	}
+
+	// 존재하는 값인지 아닌지 비교 (부서ID, 카테고리 ID)
+	private boolean contains(int[] arr, int value) {
+		for (int num : arr) {
+			if (num == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
