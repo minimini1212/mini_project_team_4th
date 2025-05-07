@@ -54,7 +54,7 @@ public class ExpenditureRequestDao {
 					int departmentId = expenditureRequest.getDepartmentId();
 					int categoryId = expenditureRequest.getCategoryId();
 
-					int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
+					int[] departmentIds = { 2, 3, 4 }; // 허용된 부서 ID
 
 					if (!contains(departmentIds, departmentId)) {
 						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다.");
