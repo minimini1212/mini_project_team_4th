@@ -351,25 +351,30 @@ public class EquipmentController {
                 }
                 break;
             } else {
-                System.out.println();
                 System.out.println("❌ 날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
+                System.out.println();
             }
         }
 
         while (true) {
-            System.out.print("⏩ 구매 가격 입력 : ");
-            String priceStr = sc.nextLine();
-            System.out.println();
-            if (priceStr.isEmpty()) {
-                System.out.println("❌ 금액을 입력해주세요");
-                continue;
-            }
+            try {
+                System.out.print("⏩ 구매 가격 입력 : ");
+                String priceStr = sc.nextLine();
+                System.out.println();
+                if (priceStr.isEmpty()) {
+                    System.out.println("❌ 금액을 입력해주세요");
+                    continue;
+                }
 
-            priceStr = priceStr.replaceAll("[^0-9]", "");
-            if (!equipmentService.updatePurchasePrice(equipment.getEquipmentId(), Integer.parseInt(priceStr))) {
-                return false;
+                priceStr = priceStr.replaceAll("[^0-9]", "");
+                if (!equipmentService.updatePurchasePrice(equipment.getEquipmentId(), Integer.parseInt(priceStr))) {
+                    return false;
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println("❌ 숫자를 입력해주세요");
+                System.out.println();
             }
-            break;
         }
 
         return true;
