@@ -1,12 +1,10 @@
 package equipmentAsset.equipment.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import dbConn.*;
+import equipmentAsset.equipment.model.entity.Equipment;
 import equipmentAsset.equipment.model.entity.EquipmentCategory;
 import equipmentAsset.equipment.view.EquipmentView;
 import lombok.Getter;
@@ -31,7 +29,12 @@ public class CategoryDAO extends BaseDAO {
                 System.out.println("카테고리 정보가 없습니다.");
                 return false;
             }
-            equipmentVIew.findAllCategories(rs);
+
+            while (rs.next()) {
+                EquipmentCategory equipmentCategory = createCategoryFromResultSet(rs);
+                System.out.println(equipmentCategory);
+            }
+
             return true;
         } catch (SQLException e) {
             System.out.println("카테고리 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -158,4 +161,22 @@ public class CategoryDAO extends BaseDAO {
         }
         return false;
     }
+
+
+    /**
+     * =-=-=-=-=-=-=-=-=-=-=-=-= 재사용 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
+     **/
+
+    // ResultSet에서 카테고리 객체를 생성하는 메서드
+    private EquipmentCategory createCategoryFromResultSet(ResultSet rs) throws SQLException {
+        EquipmentCategory category = new EquipmentCategory();
+
+        category.setCategoryId(rs.getInt("CATEGORY_ID"));
+        category.setCategoryName(rs.getString("CATEGORY_NAME"));
+        category.setCategoryCode(rs.getString("CATEGORY_CODE"));
+
+        return category;
+    }
+
+
 }

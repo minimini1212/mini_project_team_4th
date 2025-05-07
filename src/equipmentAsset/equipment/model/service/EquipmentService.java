@@ -82,18 +82,6 @@ public class EquipmentService {
         }
     }
 
-    // - 담당자 명단 출력
-    public boolean findAllManager() {
-        try {
-            equipmentDAO.connect();
-            return equipmentDAO.findAllManager();
-        } catch (Exception e) {
-            System.out.println("데이터베이스 연결 중 오류가 발생하였습니다");
-            return false;
-        } finally {
-            equipmentDAO.close();
-        }
-    }
 
     // 카테고리 ID를 받아서 이름을 반환
     public String getCategoryNameById(int categoryId) {
@@ -110,6 +98,19 @@ public class EquipmentService {
             return null;
         } finally {
             categoryDAO.close();
+        }
+    }
+
+    // 담당자 조회
+    public boolean displayManagerList() {
+        try {
+            equipmentDAO.connect();
+            return equipmentDAO.displayManagerList();
+        } catch (Exception e) {
+            System.out.println("데이터베이스 연결 중 오류가 발생하였습니다");
+            return false;
+        } finally {
+            equipmentDAO.close();
         }
     }
 

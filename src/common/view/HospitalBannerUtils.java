@@ -200,7 +200,7 @@ public class HospitalBannerUtils {
         System.out.println();
         System.out.println(BLUE +
                 "  ▌│█║▌║▌  " + WHITE + "𝙈 𝘼 𝙉 𝘼 𝙂 𝙀" +
-                BLUE + "  ▌║▌║█│ ▌" + RESET);
+                BLUE + "  ▌║▌║█│ " + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
         System.out.println();
@@ -233,7 +233,7 @@ public class HospitalBannerUtils {
         System.out.println();
         System.out.println(BLUE +
                 "  ▌│█║▌║▌ " + WHITE + "𝘾 𝘼 𝙏 𝙀 𝙂 𝙊 𝙍 𝙔" +
-                BLUE + " ▌║▌║█│▌" + RESET);
+                BLUE + " ▌║▌║█│" + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
         System.out.println();
