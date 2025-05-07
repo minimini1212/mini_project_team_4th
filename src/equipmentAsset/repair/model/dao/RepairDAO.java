@@ -1,16 +1,13 @@
 package equipmentAsset.repair.model.dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dbConn.*;
+import equipmentAsset.equipment.model.dao.EquipmentDAO;
+import equipmentAsset.equipment.model.entity.Equipment;
 import equipmentAsset.repair.model.entity.RepairRequest;
 import equipmentAsset.repair.model.entity.RepairResult;
 import equipmentAsset.repair.view.RepairView;
@@ -21,6 +18,7 @@ public class RepairDAO extends BaseDAO {
 	private final String REQUEST_TABLE = "REPAIR_REQUEST";
 	private final String RESULT_TABLE = "REPAIR_RESULT";
 	private RepairView repairView = new RepairView();
+	private EquipmentDAO equipmentDAO = new EquipmentDAO();
 
 	/** =-=-=-=-=-=-=-=-=-=-=-=-= 조회 관련 메소드 =-=-=-=-=-=-=-=-=-=-=-=-= **/
 
@@ -36,7 +34,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairRequests(rs);
+			while (rs.next()) {
+				RepairRequest repairRequest = createRepairRequestFromResultSet(rs);
+				System.out.println(repairRequest);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -58,7 +60,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairRequests(rs);
+			while (rs.next()) {
+				RepairRequest repairRequest = createRepairRequestFromResultSet(rs);
+				System.out.println(repairRequest);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("장비 ID로 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -79,7 +85,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairRequests(rs);
+			while (rs.next()) {
+				RepairRequest repairRequest = createRepairRequestFromResultSet(rs);
+				System.out.println(repairRequest);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("요청 ID로 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -105,7 +115,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairRequests(rs);
+			while (rs.next()) {
+				RepairRequest repairRequest = createRepairRequestFromResultSet(rs);
+				System.out.println(repairRequest);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("상태별 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -125,7 +139,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairResults(rs);
+			while (rs.next()) {
+				RepairResult repairResult = createRepairResultFromResultSet(rs);
+				System.out.println(repairResult);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -145,7 +163,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairResults(rs);
+			while (rs.next()) {
+				RepairResult repairResult = createRepairResultFromResultSet(rs);
+				System.out.println(repairResult);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("요청 ID로 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -166,7 +188,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairResults(rs);
+			while (rs.next()) {
+				RepairResult repairResult = createRepairResultFromResultSet(rs);
+				System.out.println(repairResult);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("장비 ID로 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -190,7 +216,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairResults(rs);
+			while (rs.next()) {
+				RepairResult repairResult = createRepairResultFromResultSet(rs);
+				System.out.println(repairResult);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("결과 유형별 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -210,23 +240,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			System.out.printf("%-7s %-25s\t%-20s\t%-18s\t%-17s\t%-12s\t%-12s\n", "장비ID", "장비명", "모델명", "제조사", "시리얼번호",
-					"구매일", "구매가격");
-			System.out.println(
-					"--------------------------------------------------------------------------------------------------------------");
-
 			while (rs.next()) {
-				int equipmentId = rs.getInt("equipment_id");
-				String equipmentName = rs.getString("equipment_name");
-				String modelName = rs.getString("model_name");
-				String manufacturer = rs.getString("manufacturer");
-				String serialNumber = rs.getString("serial_number");
-				java.sql.Date purchaseDate = rs.getDate("purchase_date");
-				int purchasePrice = rs.getInt("purchase_price");
-
-				System.out.printf("%-7d %-25s\t%-20s\t%-18s\t%-17s\t%-8s\t%6d만원\n", equipmentId, equipmentName,
-						modelName, manufacturer, serialNumber, purchaseDate, purchasePrice / 10000);
+				Equipment equipment = equipmentDAO.createEquipmentFromResultSet(rs);
+				System.out.println(equipment);
 			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("수리 필요 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -248,7 +266,11 @@ public class RepairDAO extends BaseDAO {
 				return false;
 			}
 
-			repairView.displayRepairRequests(rs);
+			while (rs.next()) {
+				RepairRequest repairRequest = createRepairRequestFromResultSet(rs);
+				System.out.println(repairRequest);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("예정 상태 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -510,4 +532,38 @@ public class RepairDAO extends BaseDAO {
 		}
 		return nextId;
 	}
+
+	/**
+	 * =-=-=-=-=-=-=-=-=-=-=-=-= 재사용 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
+	 **/
+
+	// ResultSet에서 수리요청 객체를 생성하는 메서드
+	public RepairRequest createRepairRequestFromResultSet(ResultSet rs) throws SQLException {
+		RepairRequest repairRequest = new RepairRequest();
+
+		repairRequest.setRequestId(rs.getInt("REQUEST_ID"));
+		repairRequest.setEquipmentId(rs.getInt("EQUIPMENT_ID"));
+		repairRequest.setRequestDate(rs.getDate("REQUEST_DATE"));
+		repairRequest.setFailureSymptom(rs.getString("FAILURE_SYMPTOM"));
+		repairRequest.setStatus(rs.getString("STATUS"));
+		repairRequest.setLastUpdatedDate(rs.getDate("LAST_UPDATED_DATE"));
+
+		return repairRequest;
+	}
+
+	// ResultSet에서 수리결과 객체를 생성하는 메서드
+	public RepairResult createRepairResultFromResultSet(ResultSet rs) throws SQLException {
+		RepairResult repairResult = new RepairResult();
+
+		repairResult.setResultId(rs.getInt("RESULT_ID"));
+		repairResult.setRequestId(rs.getInt("REQUEST_ID"));
+		repairResult.setRepairContent(rs.getString("REPAIR_CONTENT"));
+		repairResult.setRepairCost(rs.getInt("REPAIR_COST"));
+		repairResult.setResult(rs.getString("REPAIR_RESULT"));
+		repairResult.setLastUpdatedDate(rs.getDate("LAST_UPDATED_DATE"));
+
+		return repairResult;
+	}
+
+
 }

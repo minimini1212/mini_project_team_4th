@@ -407,31 +407,6 @@ public class EquipmentService {
         }
     }
 
-    // - 카테고리별 구매 가격 합계
-    public boolean sumPurchasePriceByCategory() {
-        try {
-            equipmentDAO.connect();
-            return equipmentDAO.sumPurchasePriceByCategory();
-        } catch (Exception e) {
-            System.out.println("데이터베이스 연결 중 오류가 발생하였습니다");
-            return false;
-        } finally {
-            equipmentDAO.close();
-        }
-    }
-
-    // - 최근에 업데이트된 장비 목록
-    public boolean getRecentlyUpdatedEquipments() {
-        try {
-            equipmentDAO.connect();
-            return equipmentDAO.getRecentlyUpdatedEquipments();
-        } catch (Exception e) {
-            System.out.println("데이터베이스 연결 중 오류가 발생하였습니다");
-            return false;
-        } finally {
-            equipmentDAO.close();
-        }
-    }
 
     /**
      * =-=-=-=-=-=-=-=-=-=-=-=- 카테고리 관련 메소드 -=-=-=-=-=-=-=-=-=-=-=-=

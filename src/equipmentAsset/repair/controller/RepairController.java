@@ -36,7 +36,8 @@ public class RepairController {
 				repairResultMenu();
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				break;
 			}
 		}
@@ -62,7 +63,8 @@ public class RepairController {
 				deleteRepairRequestMenu();
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				break;
 			}
 		}
@@ -88,7 +90,8 @@ public class RepairController {
 				deleteRepairResultMenu();
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				break;
 			}
 		}
@@ -126,7 +129,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -162,7 +166,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -181,7 +186,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -200,7 +206,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -219,7 +226,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -238,7 +246,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -257,7 +266,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -276,7 +286,8 @@ public class RepairController {
 				}
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -290,29 +301,32 @@ public class RepairController {
 		RepairRequest request = new RepairRequest();
 
 		// 수리필요 상태의 장비만 선택
-		System.out.println("---- 수리 필요 장비 목록 ----");
+		System.out.println("━━━━━━━ 수리 필요 장비 목록 ━━━━━━━");
+		System.out.println();
 		if (!repairService.findRepairableEquipment()) {
-			System.out.println("수리가 필요한 장비가 없습니다. 장비 상태를 먼저 '수리필요'로 변경해주세요.");
+			System.out.println();
+			System.out.println("❌ 수리가 필요한 장비가 없습니다. 장비 상태를 먼저 '수리필요'로 변경해주세요.");
 			return false;
 		}
 
-		System.out.print("\n수리할 장비 번호를 입력하세요 : ");
+		System.out.print("\n⏩ 수리할 장비 번호를 입력하세요 : ");
 		int equipmentId;
 		try {
 			equipmentId = Integer.parseInt(sc.nextLine());
 		} catch (NumberFormatException e) {
-			System.out.println("숫자만 입력해주세요.");
+			System.out.println();
+			System.out.println("❌ 숫자만 입력해주세요.");
 			return false;
 		}
 
 		request.setEquipmentId(equipmentId);
 
-		System.out.println("---- 수리 요청 등록 ----");
-
+		System.out.println("━━━━━━━━ 수리 요청 등록 ━━━━━━━━");
+		System.out.println();
 		// 요청 일자 입력 - 날짜 정규표현식 (YYYY-MM-DD)
 		String dateRegex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
 		while (true) {
-			System.out.print("요청 일자 입력 (YYYY-MM-DD) : ");
+			System.out.print("⏩ 요청 일자 입력 (YYYY-MM-DD) : ");
 			String requestDateStr = sc.nextLine();
 
 			if (requestDateStr.matches(dateRegex)) {
@@ -322,15 +336,17 @@ public class RepairController {
 					request.setRequestDate(requestDate);
 					break;
 				} catch (ParseException e) {
-					System.out.println("날짜 변환 중 오류가 발생했습니다.");
+					System.out.println();
+					System.out.println("❌ 날짜 변환 중 오류가 발생했습니다.");
 				}
 			} else {
-				System.out.println("날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
+				System.out.println();
+				System.out.println("❌ 날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
 			}
 		}
 
 		// 고장 증상 입력
-		System.out.print("고장 증상 입력 : ");
+		System.out.print("⏩ 고장 증상 입력 : ");
 		request.setFailureSymptom(sc.nextLine());
 
 		// 수리 요청 등록 서비스 호출
@@ -339,7 +355,7 @@ public class RepairController {
 		}
 
 		System.out.println();
-		System.out.println("수리 요청이 등록되었습니다.");
+		System.out.println("✅ 수리 요청이 등록되었습니다.");
 		return true;
 	}
 
@@ -349,29 +365,32 @@ public class RepairController {
 		RepairResult result = new RepairResult();
 
 		// 요청 선택 - 상태가 '예정'인 요청만 조회
-		System.out.println("---- 결과 등록 가능한 수리 요청 ----");
+
+		System.out.println("━━━━━ 결과 등록 가능한 수리 요청 ━━━━━");
+		System.out.println();
 		if (!repairService.findPendingRepairRequests()) {
 			return false;
 		}
 
-		System.out.print("수리 요청 ID 선택: ");
+		System.out.print("⏩ 수리 요청 ID 선택: ");
 		try {
 			int requestId = Integer.parseInt(sc.nextLine());
 			result.setRequestId(requestId);
 		} catch (NumberFormatException e) {
-			System.out.println("유효한 숫자를 입력해주세요.");
+			System.out.println();
+			System.out.println("❌ 유효한 숫자를 입력해주세요.");
 			return false;
 		}
 
-		System.out.println("---- 수리 결과 등록 ----");
-
+		System.out.println("━━━━━━━━ 수리 결과 등록 ━━━━━━━━");
+		System.out.println();
 		// 수리 내용 입력
-		System.out.print("수리 내용 입력: ");
+		System.out.print("⏩ 수리 내용 입력: ");
 		result.setRepairContent(sc.nextLine());
 
 		// 수리 비용 입력
 		while (true) {
-			System.out.print("수리 비용 입력: ");
+			System.out.print("⏩ 수리 비용 입력: ");
 			String costStr = sc.nextLine();
 
 			try {
@@ -379,7 +398,8 @@ public class RepairController {
 				result.setRepairCost(repairCost);
 				break;
 			} catch (NumberFormatException e) {
-				System.out.println("숫자만 입력해주세요.");
+				System.out.println();
+				System.out.println("❌ 숫자만 입력해주세요.");
 			}
 		}
 
@@ -395,7 +415,8 @@ public class RepairController {
 			result.setResult("수리불가");
 			break;
 		default:
-			System.out.println("잘못된 입력입니다. 기본값 '수리완료'로 설정합니다");
+			System.out.println();
+			System.out.println("❌ 잘못된 입력입니다. 기본값 '수리완료'로 설정합니다");
 			result.setResult("수리완료");
 			break;
 		}
@@ -406,7 +427,7 @@ public class RepairController {
 		}
 
 		System.out.println();
-		System.out.println("수리 결과가 등록되었습니다.");
+		System.out.println("✅ 수리 결과가 등록되었습니다.");
 		return true;
 	}
 
@@ -424,7 +445,8 @@ public class RepairController {
 			status = "완료";
 			return repairService.findRepairRequestByStatus(status);
 		default:
-			System.out.println("잘못된 입력입니다");
+			System.out.println();
+			System.out.println("❌ 잘못된 입력입니다");
 			return false;
 		}
 	}
@@ -443,7 +465,8 @@ public class RepairController {
 			resultType = "수리불가";
 			return repairService.findRepairResultByType(resultType);
 		default:
-			System.out.println("잘못된 입력입니다");
+			System.out.println();
+			System.out.println("❌ 잘못된 입력입니다");
 			return false;
 		}
 	}
@@ -458,14 +481,16 @@ public class RepairController {
 
 		// 선택한 요청 정보 조회
 		if (!repairService.findRepairRequestById(requestId)) {
-			System.out.println("해당 요청을 찾을 수 없습니다.");
+			System.out.println();
+			System.out.println("❌ 해당 요청을 찾을 수 없습니다.");
 			return false;
 		}
 
 		// 수정 항목 선택 메뉴 반복
 		boolean isCompleted = true;
 		while (isCompleted) {
-			System.out.println("---- 수리 요청 수정 ----");
+			System.out.println("━━━━━━━━ 수리 요청 수정 ━━━━━━━━");
+			System.out.println();
 			repairView.updateRepairRequestItemMenu();
 			switch (sc.nextLine()) {
 			case "0": // 이전 메뉴 돌아가기
@@ -474,37 +499,42 @@ public class RepairController {
 			case "1": // 요청 일자 수정
 				String dateRegex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
 				while (true) {
-					System.out.print("요청 일자 입력 (YYYY-MM-DD) : ");
+					System.out.print("⏩ 요청 일자 입력 (YYYY-MM-DD) : ");
 					String requestDateStr = sc.nextLine();
 
 					if (requestDateStr.matches(dateRegex)) {
 						if (!repairService.updateRequestDate(requestId, requestDateStr)) {
 							break;
 						}
-						System.out.println("요청 일자가 수정되었습니다.");
+						System.out.println();
+						System.out.println("✅ 요청 일자가 수정되었습니다.");
 						break;
 					} else {
-						System.out.println("날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
+						System.out.println();
+						System.out.println("❌ 날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
 					}
 				}
 				break;
 			case "2": // 고장 증상 수정
-				System.out.print("고장 증상 입력 : ");
+				System.out.print("⏩ 고장 증상 입력 : ");
 				String failureSymptom = sc.nextLine();
 				if (!repairService.updateFailureSymptom(requestId, failureSymptom)) {
 					continue;
 				}
-				System.out.println("고장 증상이 수정되었습니다.");
+				System.out.println();
+				System.out.println("✅ 고장 증상이 수정되었습니다.");
 				break;
 			case "3": // 상태 수정
 				String status = getRepairRequestStatus();
 				if (!repairService.updateRequestStatus(requestId, status)) {
 					continue;
 				}
-				System.out.println("상태가 수정되었습니다.");
+				System.out.println();
+				System.out.println("✅ 상태가 수정되었습니다.");
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 
@@ -527,23 +557,25 @@ public class RepairController {
 		// 수정 항목 선택 메뉴 반복
 		boolean isCompleted = true;
 		while (isCompleted) {
-			System.out.println("---- 수리 결과 수정 ----");
+			System.out.println("━━━━━━━━ 수리 결과 수정 ━━━━━━━━");
+			System.out.println();
 			repairView.updateRepairResultItemMenu();
 			switch (sc.nextLine()) {
 			case "0": // 이전 메뉴 돌아가기
 				isCompleted = false;
 				break;
 			case "1": // 수리 내용 수정
-				System.out.print("수리 내용 입력: ");
+				System.out.print("⏩ 수리 내용 입력: ");
 				String repairContent = sc.nextLine();
 				if (!repairService.updateRepairContent(resultId, repairContent)) {
 					continue;
 				}
-				System.out.println("수리 내용이 수정되었습니다.");
+				System.out.println();
+				System.out.println("✅ 수리 내용이 수정되었습니다.");
 				break;
 			case "2": // 수리 비용 수정
 				while (true) {
-					System.out.print("수리 비용 입력: ");
+					System.out.print("⏩ 수리 비용 입력: ");
 					String costStr = sc.nextLine();
 
 					try {
@@ -551,10 +583,11 @@ public class RepairController {
 						if (!repairService.updateRepairCost(resultId, repairCost)) {
 							break;
 						}
-						System.out.println("수리 비용이 수정되었습니다.");
+						System.out.println();
+						System.out.println("✅ 수리 비용이 수정되었습니다.");
 						break;
 					} catch (NumberFormatException e) {
-						System.out.println("숫자만 입력해주세요.");
+						System.out.println("❌ 숫자만 입력해주세요.");
 					}
 				}
 				break;
@@ -563,10 +596,12 @@ public class RepairController {
 				if (!repairService.updateRepairResultType(resultId, repairResult)) {
 					continue;
 				}
-				System.out.println("결과 유형이 수정되었습니다.");
+				System.out.println();
+				System.out.println("✅ 결과 유형이 수정되었습니다.");
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 		}
@@ -583,21 +618,24 @@ public class RepairController {
 	    
 	    // 선택한 요청 정보 확인을 위해 조회
 	    if (!repairService.findRepairRequestById(requestId)) {
-	        System.out.println("해당 요청을 찾을 수 없습니다.");
+			System.out.println();
+	        System.out.println("❌ 해당 요청을 찾을 수 없습니다.");
 	        return false;
 	    }
 	    
-	    System.out.println("정말 삭제하시겠습니까? (Y/N)");
+	    System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
 	    String confirm = sc.nextLine();
 	    
 	    if (!confirm.equalsIgnoreCase("Y")) {
-	        System.out.println("삭제를 취소합니다.");
+			System.out.println();
+	        System.out.println("✅ 삭제를 취소합니다.");
 	        return false;
 	    }
 	    
 	    // 삭제 서비스 호출
 	    if (repairService.deleteRepairRequest(requestId)) {
-	        System.out.println("수리 요청이 성공적으로 삭제되었습니다.");
+			System.out.println();
+	        System.out.println("✅ 수리 요청이 성공적으로 삭제되었습니다.");
 	        return true;
 	    } else {
 	        // 오류 메시지는 DAO에서 이미 출력됨
@@ -613,17 +651,19 @@ public class RepairController {
 	        return false;
 	    }
 	    
-	    System.out.println("정말 삭제하시겠습니까? (Y/N)");
+	    System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
 	    String confirm = sc.nextLine();
 	    
 	    if (!confirm.equalsIgnoreCase("Y")) {
-	        System.out.println("삭제를 취소합니다.");
+			System.out.println();
+	        System.out.println("❌ 삭제를 취소합니다.");
 	        return false;
 	    }
 	    
 	    // 삭제 서비스 호출
 	    if (repairService.deleteRepairResult(resultId)) {
-	        System.out.println("수리 결과가 성공적으로 삭제되었습니다.");
+			System.out.println();
+	        System.out.println("✅ 수리 결과가 성공적으로 삭제되었습니다.");
 	        return true;
 	    } else {
 	        // 오류 메시지는 DAO에서 이미 출력됨
@@ -644,12 +684,14 @@ public class RepairController {
 		while (true) {
 			try {
 				System.out.println();
-				System.out.println("---------------------");
-				System.out.print("요청 번호 선택 : ");
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println();
+				System.out.print("⏩ 요청 번호 선택 : ");
 				requestId = Integer.parseInt(sc.nextLine());
 				break;
 			} catch (Exception e) {
-				System.out.println("숫자만 입력해주세요.");
+				System.out.println();
+				System.out.println("❌ 숫자만 입력해주세요.");
 			}
 		}
 		return requestId;
@@ -666,12 +708,14 @@ public class RepairController {
 		while (true) {
 			try {
 				System.out.println();
-				System.out.println("---------------------");
-				System.out.print("결과 번호 선택 : ");
+				System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━");
+				System.out.println();
+				System.out.print("⏩ 결과 번호 선택 : ");
 				resultId = Integer.parseInt(sc.nextLine());
 				break;
 			} catch (Exception e) {
-				System.out.println("숫자만 입력해주세요.");
+				System.out.println();
+				System.out.println("❌ 숫자만 입력해주세요.");
 			}
 		}
 		return resultId;
@@ -690,7 +734,8 @@ public class RepairController {
 				status = "완료";
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 			break;
@@ -711,7 +756,8 @@ public class RepairController {
 				resultType = "수리불가";
 				break;
 			default:
-				System.out.println("잘못된 입력입니다");
+				System.out.println();
+				System.out.println("❌ 잘못된 입력입니다");
 				continue;
 			}
 			break;

@@ -519,47 +519,6 @@ public class EquipmentDAO extends BaseDAO {
         }
     }
 
-    // - 카테고리별 구매 가격 합계
-    public boolean sumPurchasePriceByCategory() {
-        try {
-            rs = stmt.executeQuery(
-                    "SELECT CATEGORY_NAME, SUM(PURCHASE_PRICE) FROM V_EQUIPMENT_DETAIL GROUP BY CATEGORY_NAME ORDER BY SUM(PURCHASE_PRICE) DESC");
-
-            // 결과가 비어있는지 확인
-            if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 장비가 없어 카테고리별 구매 가격 합계를 계산할 수 없습니다.");
-                return false;
-            }
-
-            equipmentVIew.sumPurchasePriceByCategory(rs);
-            return true;
-        } catch (SQLException e) {
-            System.out.println("카테고리별 구매 가격 합계 계산 중 오류가 발생했습니다: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    // - 최근에 업데이트된 장비 목록
-    public boolean getRecentlyUpdatedEquipments() {
-        try {
-            rs = stmt.executeQuery("SELECT * FROM (SELECT EQUIPMENT_ID, EQUIPMENT_NAME, STATUS, LAST_UPDATED_DATE"
-                    + " FROM EQUIPMENT ORDER BY LAST_UPDATED_DATE DESC) WHERE ROWNUM <=5");
-
-            // 결과가 비어있는지 확인
-            if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 장비가 없어 최근 업데이트 장비를 조회할 수 없습니다.");
-                return false;
-            }
-
-            equipmentVIew.getRecentlyUpdatedEquipments(rs);
-            return true;
-        } catch (SQLException e) {
-            System.out.println("최근 업데이트 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     /**
      * =-=-=-=-=-=-=-=-=-=-=-=-= 시퀀스 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
@@ -587,7 +546,7 @@ public class EquipmentDAO extends BaseDAO {
      **/
 
     // ResultSet에서 Equipment 객체를 생성하는 메서드
-    private Equipment createEquipmentFromResultSet(ResultSet rs) throws SQLException {
+    public Equipment createEquipmentFromResultSet(ResultSet rs) throws SQLException {
         Equipment equipment = new Equipment();
 
         // 기본 필드 설정 (수정된 V_EQUIPMENT_DETAIL 뷰에 있는 모든 필드)
@@ -616,7 +575,7 @@ public class EquipmentDAO extends BaseDAO {
 
 
     // ResultSet에서 Employee 객체를 생성하는 메서드
-    private Employee createEmployeeFromResultSet(ResultSet rs) throws SQLException {
+    public Employee createEmployeeFromResultSet(ResultSet rs) throws SQLException {
         Employee employee = new Employee();
 
         // 기본 필드 설정
