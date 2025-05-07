@@ -248,7 +248,7 @@ public class EquipmentController {
     public boolean createEquipment() {
         Equipment equipment = new Equipment();
 
-        System.out.println("---- 장비 정보 등록 ----");
+        System.out.println("━━━━━━━━ 장비 정보 등록 ━━━━━━━━");
         System.out.print("장비 이름 입력 : ");
         equipment.setEquipmentName(sc.nextLine());
         System.out.print("장비 모델 입력 : ");
@@ -267,7 +267,7 @@ public class EquipmentController {
 
         boolean isCompleted = true;
         while (isCompleted) {
-            System.out.println("---- 추가 정보 입력 ----");
+            System.out.println("━━━━━━━━ 추가 정보 입력 ━━━━━━━━");
             equipmentView.createEquipmentMenu();
             switch (sc.nextLine()) {
                 case "1":
@@ -303,7 +303,7 @@ public class EquipmentController {
     public boolean createCategory() {
         EquipmentCategory category = new EquipmentCategory();
 
-        System.out.println("--- 카테고리 정보 등록 ---");
+        System.out.println("━━━━━━━ 카테고리 정보 등록 ━━━━━━━");
         System.out.print("카테고리 이름 입력 : ");
         category.setCategoryName(sc.nextLine());
         System.out.print("카테고리 코드 입력 : ");
@@ -328,7 +328,7 @@ public class EquipmentController {
             return false;
         }
         System.out.println();
-        System.out.println("---- 구매 정보 입력 ----");
+        System.out.println("━━━━━━━━ 구매 정보 입력 ━━━━━━━━");
 
         while (true) {
             System.out.print("구매 날짜 입력 (YYYY-MM-DD) : ");
@@ -380,11 +380,11 @@ public class EquipmentController {
     public boolean selectEquipmentManager(Equipment equipment) {
         while (true) {
             try {
-                if (!equipmentService.findAllManager()) {
+                if (!equipmentService.displayManagerList()) {
                     return false;
                 }
                 System.out.println();
-                System.out.println("---------------------");
+                System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━");
                 System.out.print("매니저 번호 선택 : ");
 
                 int managerId = Integer.parseInt(sc.nextLine());
@@ -432,7 +432,6 @@ public class EquipmentController {
         equipment.setEquipmentId(equipmentId);
 
         while (isCompleted) {
-            System.out.println("---- 장비 정보 수정 ----");
             equipmentView.createEquipmentMenu();
             switch (sc.nextLine()) {
                 case "1":
@@ -508,7 +507,7 @@ public class EquipmentController {
     // - 장비 폐기
     public boolean disposeEquipment() {
         // 폐기예정 상태의 장비만 조회
-        System.out.println("---- 폐기 가능한 장비 목록 ----");
+        System.out.println("━━━━━━ 폐기 가능한 장비 목록 ━━━━━━━");
         if (!equipmentService.findByStatusEquipment("폐기예정")) {
             System.out.println("폐기 가능한 장비가 없습니다.");
             return false;
@@ -593,7 +592,7 @@ public class EquipmentController {
     public String getEquipmentStatus() {
         String status;
         while (true) {
-            System.out.println("---- 입력 가능 상태 ----");
+            System.out.println("━━━━━━━━ 입력 가능 상태 ━━━━━━━━");
             equipmentView.inputStatusAndDescriptionMenu();
             switch (sc.nextLine()) {
                 case "1":

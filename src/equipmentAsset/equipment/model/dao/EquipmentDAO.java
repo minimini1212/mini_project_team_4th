@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import dbConn.*;
 import equipmentAsset.equipment.model.entity.Equipment;
 import equipmentAsset.equipment.view.EquipmentView;
+import humanResource.employee.model.entity.Employee;
 import lombok.Getter;
 
 @Getter
@@ -22,6 +23,7 @@ public class EquipmentDAO extends BaseDAO {
     // - 모든 장비 목록 조회
     public boolean findAllEquipment() {
         try {
+            // V_EQUIPMENT_DETAIL 뷰에서 모든 장비 정보를 가져오는 쿼리
             rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL ORDER BY EQUIPMENT_ID");
 
             // 결과가 비어있는지 확인
@@ -30,7 +32,11 @@ public class EquipmentDAO extends BaseDAO {
                 return false;
             }
 
-            equipmentVIew.findAllEquipment(rs);
+            // ResultSet에서 Equipment 객체를 생성하고 출력
+            while (rs.next()) {
+                Equipment equipment = createEquipmentFromResultSet(rs);
+                System.out.println(equipment);
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("장비 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -42,7 +48,7 @@ public class EquipmentDAO extends BaseDAO {
     // - ID로 특정 장비 조회
     public boolean findByIdEquipment(int equipmentId) {
         try {
-            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE EQUIPMENT_ID IN (" + equipmentId + ")");
+            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE EQUIPMENT_ID = " + equipmentId);
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
@@ -50,7 +56,11 @@ public class EquipmentDAO extends BaseDAO {
                 return false;
             }
 
-            equipmentVIew.findAllEquipment(rs);
+            // ResultSet에서 Equipment 객체를 생성하고 출력
+            while (rs.next()) {
+                Equipment equipment = createEquipmentFromResultSet(rs);
+                System.out.println(equipment);
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("장비 ID 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -62,7 +72,7 @@ public class EquipmentDAO extends BaseDAO {
     // - 특정 카테고리의 장비 조회
     public boolean findByCategoryEquipment(String categoryName) {
         try {
-            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE CATEGORY_NAME IN ('" + categoryName + "')");
+            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE CATEGORY_NAME = '" + categoryName + "'");
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
@@ -70,7 +80,11 @@ public class EquipmentDAO extends BaseDAO {
                 return false;
             }
 
-            equipmentVIew.findAllEquipment(rs);
+            // ResultSet에서 Equipment 객체를 생성하고 출력
+            while (rs.next()) {
+                Equipment equipment = createEquipmentFromResultSet(rs);
+                System.out.println(equipment);
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("카테고리별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -82,8 +96,7 @@ public class EquipmentDAO extends BaseDAO {
     // - 특정 부서의 장비 조회
     public boolean findByDepartmentEquipment(String departmentName) {
         try {
-            rs = stmt.executeQuery(
-                    "SELECT * FROM V_EQUIPMENT_DETAIL WHERE DEPARTMENT_NAME IN ('" + departmentName + "')");
+            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE DEPARTMENT_NAME = '" + departmentName + "'");
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
@@ -91,7 +104,11 @@ public class EquipmentDAO extends BaseDAO {
                 return false;
             }
 
-            equipmentVIew.findAllEquipment(rs);
+            // ResultSet에서 Equipment 객체를 생성하고 출력
+            while (rs.next()) {
+                Equipment equipment = createEquipmentFromResultSet(rs);
+                System.out.println(equipment);
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("부서별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -100,30 +117,11 @@ public class EquipmentDAO extends BaseDAO {
         }
     }
 
-    // - 담당자 명단 출력
-    public boolean findAllManager() {
-        try {
-            rs = stmt.executeQuery("SELECT EMPLOYEE_ID, DEPARTMENT_NAME, JOB_NAME, EMPLOYEE_NAME FROM V_EMPLOYEE_INFO ORDER BY EMPLOYEE_ID");
-
-            // 결과가 비어있는지 확인
-            if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 담당자가 없습니다.");
-                return false;
-            }
-
-            equipmentVIew.findAllManager(rs);
-            return true;
-        } catch (SQLException e) {
-            System.out.println("담당자 조회 중 오류가 발생했습니다: " + e.getMessage());
-            e.printStackTrace();
-            return false;
-        }
-    } // end findAllManager
 
     // - 특정 상태(정상, 점검필요, 수리중 등)의 장비 조회
     public boolean findByStatusEquipment(String status) {
         try {
-            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE STATUS IN ('" + status + "')");
+            rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE STATUS = '" + status + "'");
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
@@ -131,7 +129,11 @@ public class EquipmentDAO extends BaseDAO {
                 return false;
             }
 
-            equipmentVIew.findAllEquipment(rs);
+            // ResultSet에서 Equipment 객체를 생성하고 출력
+            while (rs.next()) {
+                Equipment equipment = createEquipmentFromResultSet(rs);
+                System.out.println(equipment); // toString() 메서드 호출하여 예쁘게 출력
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("상태별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -155,6 +157,41 @@ public class EquipmentDAO extends BaseDAO {
             return false;
         } catch (SQLException e) {
             System.out.println("장비 상태 확인 중 오류가 발생했습니다: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // 담당자 조회 메소드
+    public boolean displayManagerList() {
+        try {
+            rs = stmt.executeQuery("SELECT * FROM V_EMPLOYEE_INFO ORDER BY EMPLOYEE_ID");
+
+            // 결과가 비어있는지 확인
+            if (!rs.isBeforeFirst()) {
+                System.out.println("등록된 담당자가 없습니다.");
+                return false;
+            }
+
+            // 더 간결한 형태로 직원 목록 출력 (ID, 이름, 직무만 표시)
+            System.out.println();
+            System.out.println("━━━━━━━  👥 \033[1;36m담당자 목록\033[0m 👥 ━━━━━━");
+            System.out.println();
+            System.out.printf("  \033[1;34m%-6s\033[0m\t\t\033[1;34m%-15s\033[0m \033[1;34m%-15s\033[0m\n", "직원ID", "이름", "직무");
+            System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━");
+
+            while (rs.next()) {
+                int employeeId = rs.getInt("employee_id");
+                String name = rs.getString("employee_name");
+                String job = rs.getString("job_name");
+
+                System.out.printf("  \033[0;97m%-6d\033[0m\t\t\033[0;97m%-15s\033[0m \033[0;97m%-15s\033[0m\n", employeeId, name, job);
+            }
+            System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━");
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("담당자 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -543,6 +580,60 @@ public class EquipmentDAO extends BaseDAO {
             e.printStackTrace();
         }
         return nextId;
+    }
+
+    /**
+     * =-=-=-=-=-=-=-=-=-=-=-=-= 재사용 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
+     **/
+
+    // ResultSet에서 Equipment 객체를 생성하는 메서드
+    private Equipment createEquipmentFromResultSet(ResultSet rs) throws SQLException {
+        Equipment equipment = new Equipment();
+
+        // 기본 필드 설정 (수정된 V_EQUIPMENT_DETAIL 뷰에 있는 모든 필드)
+        equipment.setEquipmentId(rs.getInt("equipment_id"));
+        equipment.setEquipmentName(rs.getString("equipment_name"));
+        equipment.setModelName(rs.getString("model_name"));
+        equipment.setManufacturer(rs.getString("manufacturer"));
+        equipment.setSerialNumber(rs.getString("serial_number"));
+        equipment.setPurchaseDate(rs.getDate("purchase_date"));
+        equipment.setPurchasePrice(rs.getInt("purchase_price"));
+        equipment.setStatus(rs.getString("status"));
+
+        // 뷰에 새로 추가된 필드들을 설정
+        equipment.setDescription(rs.getString("description"));
+        equipment.setLastUpdatedDate(rs.getDate("last_updated_date"));
+
+        // 추가 정보 설정
+        equipment.setCategoryName(rs.getString("category_name"));
+        equipment.setDepartmentName(rs.getString("department_name"));
+        equipment.setManagerName(rs.getString("manager_name"));
+        equipment.setPositionName(rs.getString("position_name"));
+        equipment.setJobName(rs.getString("job_name"));
+
+        return equipment;
+    }
+
+
+    // ResultSet에서 Employee 객체를 생성하는 메서드
+    private Employee createEmployeeFromResultSet(ResultSet rs) throws SQLException {
+        Employee employee = new Employee();
+
+        // 기본 필드 설정
+        employee.setEmployeeId(rs.getInt("employee_id"));
+        employee.setName(rs.getString("employee_name"));
+
+        // V_EMPLOYEE_INFO 뷰에서 제공하는 정보
+        employee.setDepartmentId(rs.getInt("department_id"));
+        employee.setPositionId(rs.getInt("position_id"));
+        employee.setJobId(rs.getInt("job_id"));
+
+        // 이름 정보 설정 (V_EMPLOYEE_INFO 뷰에 있음)
+        employee.setDepartmentName(rs.getString("department_name"));
+        employee.setPositionName(rs.getString("position_name"));
+        employee.setJobName(rs.getString("job_name"));
+
+        return employee;
     }
 
 } // end class

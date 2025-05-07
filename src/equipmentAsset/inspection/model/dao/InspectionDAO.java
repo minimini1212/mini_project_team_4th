@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dbConn.*;
+import equipmentAsset.equipment.model.entity.EquipmentCategory;
 import equipmentAsset.inspection.model.entity.InspectionResult;
 import equipmentAsset.inspection.model.entity.InspectionSchedule;
 import equipmentAsset.inspection.view.InspectionView;
@@ -35,7 +36,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -56,7 +61,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("장비 ID로 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -77,7 +86,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("일정 ID로 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -102,7 +115,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("상태별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -127,7 +144,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("주기별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -152,7 +173,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("유형별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -176,7 +201,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("기타 상태별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -201,7 +230,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("기타 주기별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -226,7 +259,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspection(rs);
+			while (rs.next()) {
+				InspectionSchedule schedule = createInspectionScheduleFromResultSet(rs);
+				System.out.println(schedule);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("기타 유형별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -246,7 +283,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspectionResult(rs);
+			while (rs.next()) {
+				InspectionResult result = createInspectionResultFromResultSet(rs);
+				System.out.println(result);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -267,7 +308,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspectionResult(rs);
+			while (rs.next()) {
+				InspectionResult result = createInspectionResultFromResultSet(rs);
+				System.out.println(result);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("장비 ID로 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -287,7 +332,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspectionResult(rs);
+			while (rs.next()) {
+				InspectionResult result = createInspectionResultFromResultSet(rs);
+				System.out.println(result);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("결과 ID로 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -311,7 +360,11 @@ public class InspectionDAO extends BaseDAO {
 				return false;
 			}
 
-			inspectionView.findAllInspectionResult(rs);
+			while (rs.next()) {
+				InspectionResult result = createInspectionResultFromResultSet(rs);
+				System.out.println(result);
+			}
+
 			return true;
 		} catch (SQLException e) {
 			System.out.println("결과 유형별 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
@@ -651,4 +704,40 @@ public class InspectionDAO extends BaseDAO {
 		}
 		return nextId;
 	}
+
+	/**
+	 * =-=-=-=-=-=-=-=-=-=-=-=-= 재사용 메소드 =-=-=-=-=-=-=-=-=-=-=-=-=
+	 **/
+
+	// ResultSet에서 점검일정 객체를 생성하는 메서드
+	private InspectionSchedule createInspectionScheduleFromResultSet(ResultSet rs) throws SQLException {
+		InspectionSchedule schedule = new InspectionSchedule();
+
+		schedule.setScheduleId(rs.getInt("SCHEDULE_ID"));
+		schedule.setEquipmentId(rs.getInt("EQUIPMENT_ID"));
+		schedule.setInspectionType(rs.getString("INSPECTION_TYPE"));
+		schedule.setInspectionCycle(rs.getString("INSPECTION_CYCLE"));
+		schedule.setScheduledDate(rs.getDate("SCHEDULED_DATE"));
+		schedule.setStatus(rs.getString("STATUS"));
+		schedule.setDescription(rs.getString("DESCRIPTION"));
+		schedule.setLastUpdatedDate(rs.getDate("LAST_UPDATED_DATE"));
+
+		return schedule;
+	}
+
+	// ResultSet에서 점검결과 객체를 생성하는 메서드
+	private InspectionResult createInspectionResultFromResultSet(ResultSet rs) throws SQLException {
+		InspectionResult result = new InspectionResult();
+
+		result.setResultId(rs.getInt("RESULT_ID"));
+		result.setScheduleId(rs.getInt("SCHEDULE_ID"));
+		result.setInspectionDate(rs.getDate("INSPECTION_DATE"));
+		result.setInspectionResult(rs.getString("INSPECTION_RESULT"));
+		result.setInspectionContent(rs.getString("INSPECTION_CONTENT"));
+		result.setSpecialNote(rs.getString("SPECIAL_NOTE"));
+		result.setLastUpdatedDate(rs.getDate("LAST_UPDATED_DATE"));
+
+		return result;
+	}
+
 }

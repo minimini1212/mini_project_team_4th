@@ -158,57 +158,6 @@ public class EquipmentView {
 
 	/** =-=-=-=-=-=-=-=-=-=-=-= DAO 사용 메소드 =-=-=-=-=-=-=-=-=-=-=-= **/
 
-	// - 장비 정보 출력
-	public void findAllEquipment(ResultSet rs) {
-		try {
-			System.out.printf("%-7s %-25s\t%-20s\t%-18s\t%-17s\t%-12s\t%-12s\t%-10s\t%-15s\t%-15s\t%-15s\t%-15s\n",
-					"장비ID", "장비명", "모델명", "제조사", "시리얼번호", "구매일", "구매가격", "상태", "담당자", "부서", "직급", "직무");
-			System.out.println(
-					"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-			
-			while (rs.next()) {
-				int equipmentId = rs.getInt("equipment_id");
-				String categoryName = rs.getString("category_name");
-				String equipmentName = rs.getString("equipment_name");
-				String modelName = rs.getString("model_name");
-				String manufacturer = rs.getString("manufacturer");
-				String serialNumber = rs.getString("serial_number");
-				Date purchaseDate = rs.getDate("purchase_date");
-				int purchasePrice = rs.getInt("purchase_price");
-				String status = rs.getString("status");
-				String managerName = rs.getString("manager_name");
-				String departmentName = rs.getString("department_name");
-				String positionName = rs.getString("position_name");
-				String jobName = rs.getString("job_name");
-
-				System.out.printf("%-7d %-25s\t%-20s\t%-18s\t%-17s\t%-8s\t%6d만원\t%-10s\t%-15s\t%-15s\t%-15s\t%-15s\n",
-						equipmentId, equipmentName, modelName, manufacturer, serialNumber, purchaseDate,
-						purchasePrice / 10000, status, managerName, departmentName, positionName, jobName);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	} // end displayEquipmentResults()
-
-	// - 담당자 명단 출력
-	public void findAllManager(ResultSet rs) {
-		try {
-			System.out.printf("%-10s %-15s\t%-15s\t%-15s\n", "담당자ID", "부서명", "직무", "담당자명");
-			System.out.println("-------------------------------------------------------------");
-
-			while (rs.next()) {
-				int employeeId = rs.getInt("EMPLOYEE_ID");
-				String departmentName = rs.getString("DEPARTMENT_NAME");
-				String jobName = rs.getString("JOB_NAME");
-				String employeeName = rs.getString("EMPLOYEE_NAME");
-
-				System.out.printf("%-10d %-15s\t%-15s\t%-15s\n", employeeId, departmentName, jobName, employeeName);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	} // end findAllManager
-
 	// - 상태별 장비 개수 출력
 	public void countByStatus(ResultSet rs) {
 		try {

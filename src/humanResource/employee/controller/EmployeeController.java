@@ -241,9 +241,9 @@ public class EmployeeController {
                 }
 
                 if (results.isEmpty()) {
-                    System.out.println("🔍 검색 결과가 없습니다.");
+                    System.out.println("━━━━━ 🔍 검색 결과가 없습니다 ━━━━━━");
                 } else {
-                    System.out.println("===== 검색 결과 =====");
+                    System.out.println("━━━━━━━━━  검색 결과 ━━━━━━━━━");
                     for (Employee e : results) {
                         // 부서 ID → 부서명 매핑
                         String deptName = switch (e.getDepartmentId()) {
@@ -261,19 +261,12 @@ public class EmployeeController {
 
                         String hireDate = new SimpleDateFormat("yyyy-MM-dd").format(e.getHireDate());
 
-                        // 최종 출력
-                        System.out.printf(
-                                "사번: %s | 이름: %s | 부서: %s | 직급: %s | 직무: %s | 재직 상태: %s | 입사일: %s | 전화번호: %s | 주소: %s%n",
-                                e.getEmpNumber(),
-                                e.getName(),
-                                deptName,
-                                positionName,
-                                jobName,
-                                statusName,
-                                hireDate,
-                                e.getPhone(),
-                                e.getAddress()
-                        );
+                        e.setPositionName(positionName);
+                        e.setJobName(jobName);
+                        e.setStatus(statusName);
+
+                        System.out.println(e);
+
                     }
                 }
             } catch (NumberFormatException e) {
