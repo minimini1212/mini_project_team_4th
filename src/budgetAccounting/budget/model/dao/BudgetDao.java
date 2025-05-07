@@ -160,7 +160,7 @@ public class BudgetDao extends BaseDAO {
 
 	// 특정 예산 수정
 	public void updateByBudgetId(Budget budget, int requestId) throws SQLException {
-		String sql = "UPDATE budget SET budget_amount = ?, description = ? WHERE budget_id = ?";
+		String sql = "UPDATE budget SET budget_amount = ?, description = ?, remaining_amount = ? WHERE budget_id = ?";
 
 		String selectSql = "SELECT * FROM budget WHERE budget_id = ? AND del_yn IN ('N', 'n')";
 
@@ -175,7 +175,8 @@ public class BudgetDao extends BaseDAO {
 
 				pstmt.setInt(1, budget.getBudgetAmount());
 				pstmt.setString(2, budget.getDescription());
-				pstmt.setInt(3, budget.getBudgetRequestId());
+				pstmt.setInt(3, budget.getRemainingAmount());
+				pstmt.setInt(4, budget.getBudgetRequestId());
 
 				pstmt.executeUpdate();
 				System.out.println("예산이 수정되었습니다.");

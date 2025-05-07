@@ -174,6 +174,7 @@ public class BudgetController {
 				Budget request = new Budget();
 				request.setBudgetRequestId(requestId);
 				request.setBudgetAmount(amount);
+				request.setRemainingAmount(amount);
 				request.setDescription(description);
 
 				budgetservice.updateBudget(request, requestId);
