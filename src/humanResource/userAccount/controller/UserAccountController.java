@@ -107,15 +107,15 @@ public class UserAccountController {
             Date hireDate = new SimpleDateFormat("yyyy-MM-dd").parse(hireStr);
             emp.setHireDate(hireDate);
 
-            System.out.println("부서 선택(1. 병원장실 / 2. 인사 관리 부서 / 3. 예산・회계 관리 부서 / 4. 자산 관리 부서)");
-            int deptChoice = promptIntInRange("선택: ", 1, 4);
+            System.out.println("부서 선택 \n ① 인사 관리 부서 \n ② 예산・회계 관리 부서 \n ③ 자산 관리 부서");
+            int deptChoice = promptIntInRange("선택: ", 1, 3);
             emp.setDepartmentId(deptChoice);
 
-            System.out.println("직급 선택(1. 병원장 / 2. 부장 / 3. 차장 / 4. 과장 / 5. 대리 / 6. 사원 / 7. 인턴)");
+            System.out.println("직급 선택 \n ① 병원장 \n ② 부장 \n ③ 차장 \n ④ 과장 \n ⑤ 대리 \n ⑥ 사원 \n ⑦ 인턴");
             int positionChoice = promptIntInRange("선택: ", 1, 7);
             emp.setPositionId(positionChoice);
 
-            System.out.println("근무 형태 선택(1. 계약직 / 2. 정규직)");
+            System.out.println("근무 형태 선택 \n ① 계약직 \n ② 정규직");
             int empTypeChoice = promptIntInRange("선택: ", 1, 2);
             emp.setEmpType(empTypeChoice == 1 ? "계약직" : "정규직");
 
