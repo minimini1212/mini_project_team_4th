@@ -70,11 +70,7 @@ public class LeaveView {
     }
 
     public void showHistory(List<Leave> list) {
-        System.out.println("ID | 종류 | 시작일 | 종료일 | 일수 | 상태");
-        list.forEach(l -> System.out.printf(
-                "%d | %s | %s | %s | %.1f | %s\n",
-                l.getLeaveId(), l.getLeaveType(), l.getStartDate(), l.getEndDate(), l.getDays(), l.getStatus()
-        ));
+        list.forEach(l -> System.out.println(l));
     }
 
     public void showMessage(String msg) {
