@@ -57,6 +57,7 @@ public class UserAccountService {
                 SessionContext.set(emp, role);
                 SessionContext.setRankOrder(rankOrder);
                 SessionContext.setDeptId(emp.getDepartmentId());
+                SessionContext.setEmpNumber(emp.getEmpNumber());
 
                 return emp;
             }
