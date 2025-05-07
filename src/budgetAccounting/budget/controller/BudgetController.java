@@ -76,7 +76,7 @@ public class BudgetController {
 	private void createBudget(Scanner sc) throws SQLException {
 		while (true) {
 			try {
-				System.out.print("부서 ID (인사 1번, 예산/회계 2번, 자산 3번): ");
+				System.out.print("부서 ID (인사 2번, 예산/회계 3번, 자산 4번): ");
 				int deptId = sc.nextInt();
 				System.out.print("연도를 입력하세요(4자리): ");
 				int year = sc.nextInt();
@@ -104,6 +104,22 @@ public class BudgetController {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
 
+			} catch (IllegalArgumentException e) {
+				if ("존재하지 않는 부서 ID입니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					sc.nextLine();
+					break;
+				} else if ("존재하지 않는 항목 ID입니다.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					sc.nextLine();
+					break;
+				} else if ("연도는 4자리로 입력해주세요.".equals(e.getMessage())) {
+					System.out.println(e.getMessage());
+					sc.nextLine();
+					break;
+				} else {
+					System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
+				}
 			} catch (SQLIntegrityConstraintViolationException e) {
 				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 			} catch (SQLException e) {
