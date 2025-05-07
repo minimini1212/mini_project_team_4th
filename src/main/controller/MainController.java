@@ -81,13 +81,13 @@ public class MainController {
 
     private void handleUserDepartmentMenu(int deptId, int rankOrder) {
         switch (deptId) {
-            case 1 -> {
+            case 2 -> {
                 new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
-            case 2 -> {
+            case 3 -> {
             	budgetAccountingController.budgetAccountingMenu(scanner, rankOrder);
             }
-            case 3 -> {
+            case 4 -> {
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
             default -> System.out.println("⚠ 알 수 없는 부서입니다.");
