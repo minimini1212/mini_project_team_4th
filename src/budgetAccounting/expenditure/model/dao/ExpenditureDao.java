@@ -23,12 +23,12 @@ public class ExpenditureDao {
 		conn.setAutoCommit(false); // 트랜잭션 시작
 
 		// 쿼리문 미리 선언
-		String selectBudgetSql = "SELECT budget_id, remaining_budget FROM budget "
+		String selectBudgetSql = "SELECT budget_id, remaining_amount FROM budget "
 				+ "WHERE department_id = ? AND category_id = ? AND year = ? AND del_yn = 'N' FOR UPDATE";
 
 		String insertExpenditureSql = "INSERT INTO expenditure (expenditure_id, expenditure_request_id, department_id, expenditure_date, amount, category_id, description, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-		String updateBudgetSql = "UPDATE budget SET remaining_budget = remaining_budget - ? WHERE budget_id = ?";
+		String updateBudgetSql = "UPDATE budget SET remaining_amount = remaining_amount - ? WHERE budget_id = ?";
 
 		int sequence = getNextExpenditureId();
 
@@ -43,7 +43,7 @@ public class ExpenditureDao {
 				}
 
 				int budgetId = rs.getInt("budget_id");
-				int remaining = rs.getInt("remaining_budget");
+				int remaining = rs.getInt("remaining_amount");
 
 				if (remaining < expenditure.getAmount()) {
 					throw new SQLException("잔여 예산이 부족합니다.");

@@ -64,7 +64,7 @@ public class ExpenditureRequestDao {
 	}
 
 	// 지출 신청 승인
-	public void approve(int requestId, int approverId) throws SQLException {
+	public void approve(int requestId, String approverId) throws SQLException {
 		String sql = "UPDATE expenditure_request SET status = 'APPROVED', "
 				+ "approver_id = ?, approval_date = SYSDATE " + "WHERE expenditure_request_id = ? AND del_yn = 'N'";
 		String selectSql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
@@ -78,7 +78,7 @@ public class ExpenditureRequestDao {
 					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
 				}
 
-				pstmt.setInt(1, approverId);
+				pstmt.setString(1, approverId);
 				pstmt.setInt(2, requestId);
 				pstmt.executeUpdate();
 			}

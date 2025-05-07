@@ -34,7 +34,7 @@ public class ExpenditureRequestService {
 	}
 
 	// 지출 승인 및 예산 테이블에 삽입
-	public void approveAndInsertToExpenditure(int requestId, int approverId) throws SQLException {
+	public void approveAndInsertToExpenditure(int requestId, String approverId) throws SQLException {
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureDao = new ExpenditureDao(conn);
