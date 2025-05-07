@@ -10,6 +10,7 @@ import java.util.List;
 
 import budgetAccounting.expenditure.model.entity.Expenditure;
 import budgetAccounting.expenditureRequest.model.entity.ExpenditureRequest;
+import common.SessionContext;
 
 public class ExpenditureRequestDao {
 	private Connection conn;
@@ -47,7 +48,7 @@ public class ExpenditureRequestDao {
 					pstmt.setInt(3, expenditureRequest.getYear());
 					pstmt.setInt(4, expenditureRequest.getAmount());
 					pstmt.setInt(5, expenditureRequest.getCategoryId());
-					pstmt.setString(6, expenditureRequest.getRequesterId());
+					pstmt.setString(6, SessionContext.getEmpNumber());
 					pstmt.setString(7, expenditureRequest.getDescription());
 
 					int year = expenditureRequest.getYear();
@@ -70,7 +71,7 @@ public class ExpenditureRequestDao {
 	}
 
 	// 지출 신청 승인
-	public void approve(int requestId, String approverId) throws SQLException {
+	public void approve(int requestId) throws SQLException {
 		String sql = "UPDATE expenditure_request SET status = 'APPROVED', "
 				+ "approver_id = ?, approval_date = SYSDATE " + "WHERE expenditure_request_id = ? AND del_yn = 'N'";
 		String selectSql = "SELECT * FROM expenditure_request WHERE expenditure_request_id = ? AND del_yn IN ('N', 'n')";
@@ -84,7 +85,7 @@ public class ExpenditureRequestDao {
 					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
 				}
 
-				pstmt.setString(1, approverId);
+				pstmt.setString(1, SessionContext.getEmpNumber());
 				pstmt.setInt(2, requestId);
 				pstmt.executeUpdate();
 			}

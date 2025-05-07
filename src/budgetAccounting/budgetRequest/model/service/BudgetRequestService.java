@@ -33,7 +33,7 @@ public class BudgetRequestService {
 	}
 
 	// 예산 승인 및 예산 테이블에 삽입
-	public void approveAndInsertToBudget(int requestId, String approverId) throws SQLException {
+	public void approveAndInsertToBudget(int requestId) throws SQLException {
 		try {
 
 			conn = ConnectionSingletonHelper.getConnection("oracle");
@@ -43,7 +43,7 @@ public class BudgetRequestService {
 			conn.setAutoCommit(false);
 
 			// status = 'APPROVED'로
-			budgetRequestDao.approve(requestId, approverId);
+			budgetRequestDao.approve(requestId);
 
 			// 예산 신청 ID로 특정 예산 신청 가져오기
 			BudgetRequest budgetRequest = budgetRequestDao.findByBudgetRequestId(requestId).get(0);

@@ -80,8 +80,6 @@ public class ExpenditureRequestController {
 				sc.nextLine();
 				System.out.print("설명: ");
 				String description = sc.nextLine();
-				System.out.print("신청자 ID: ");
-				String requesterId = sc.nextLine();
 
 				ExpenditureRequest request = new ExpenditureRequest();
 				request.setDepartmentId(deptId);
@@ -89,7 +87,6 @@ public class ExpenditureRequestController {
 				request.setAmount(amount);
 				request.setCategoryId(categoryId);
 				request.setDescription(description);
-				request.setRequesterId(requesterId);
 
 				expenditureRequestservice.createExpenditureRequest(request);
 				break;
@@ -160,11 +157,9 @@ public class ExpenditureRequestController {
 			try {
 				System.out.print("승인할 신청 ID: ");
 				int requestId = sc.nextInt();
-				System.out.print("승인자 ID: ");
-				String approverId = sc.nextLine();
 				sc.nextLine();
 
-				expenditureRequestservice.approveAndInsertToExpenditure(requestId, approverId);
+				expenditureRequestservice.approveAndInsertToExpenditure(requestId);
 				break;
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");

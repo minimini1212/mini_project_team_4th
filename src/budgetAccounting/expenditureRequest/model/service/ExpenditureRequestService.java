@@ -34,7 +34,7 @@ public class ExpenditureRequestService {
 	}
 
 	// 지출 승인 및 예산 테이블에 삽입
-	public void approveAndInsertToExpenditure(int requestId, String approverId) throws SQLException {
+	public void approveAndInsertToExpenditure(int requestId) throws SQLException {
 		try {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureDao = new ExpenditureDao(conn);
@@ -43,7 +43,7 @@ public class ExpenditureRequestService {
 			conn.setAutoCommit(false);
 
 			// status = 'APPROVED'로
-			expenditureRequestDao.approve(requestId, approverId);
+			expenditureRequestDao.approve(requestId);
 
 			// 지출 신청 ID로 특정 예산 신청 가져오기
 			ExpenditureRequest expenditureRequest = expenditureRequestDao.findByExpenditureRequestId(requestId).get(0);

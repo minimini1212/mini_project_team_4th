@@ -78,10 +78,10 @@ public class ExpenditureDao {
 					if (!contains(categoryIds, categoryId)) {
 						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + categoryId);
 					}
-					
+
 					int year = expenditure.getYear();
-					
-					if (year < 1000 || year > 9999 ) {
+
+					if (year < 1000 || year > 9999) {
 						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
 					}
 

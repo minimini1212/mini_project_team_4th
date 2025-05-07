@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import budgetAccounting.budgetRequest.model.entity.BudgetRequest;
+import common.SessionContext;
 
 public class BudgetRequestDao {
 	private Connection conn;
@@ -44,12 +45,12 @@ public class BudgetRequestDao {
 					pstmt.setInt(3, budgetRequest.getYear());
 					pstmt.setInt(4, budgetRequest.getRequestedAmount());
 					pstmt.setInt(5, budgetRequest.getCategoryId());
-					pstmt.setString(6, budgetRequest.getRequesterId());
+					pstmt.setString(6, SessionContext.getEmpNumber());
 					pstmt.setString(7, budgetRequest.getDescription());
-					
+
 					int year = budgetRequest.getYear();
-					
-					if (year < 1000 || year > 9999 ) {
+
+					if (year < 1000 || year > 9999) {
 						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
 					}
 
@@ -67,7 +68,7 @@ public class BudgetRequestDao {
 	}
 
 	// 예산 신청 승인
-	public void approve(int requestId, String approverId) throws SQLException {
+	public void approve(int requestId) throws SQLException {
 		String sql = "UPDATE budget_request SET status = 'APPROVED', " + "approver_id = ?, approval_date = SYSDATE "
 				+ "WHERE budget_request_id = ? AND del_yn = 'N'";
 		String selectSql = "SELECT * FROM budget_request WHERE budget_request_id = ? AND del_yn IN ('N', 'n')";
@@ -81,7 +82,7 @@ public class BudgetRequestDao {
 					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
-				pstmt.setString(1, approverId);
+				pstmt.setString(1, SessionContext.getEmpNumber());
 				pstmt.setInt(2, requestId);
 				pstmt.executeUpdate();
 			}
@@ -115,7 +116,7 @@ public class BudgetRequestDao {
 				budgetRequest.setRequestDate(rs.getDate("request_date"));
 				budgetRequest.setApprovalDate(rs.getDate("approval_date"));
 				budgetRequest.setDescription(rs.getString("description"));
-				
+
 				// 부서 이름, 카테고리 이름 추가
 				int departmentId = rs.getInt("department_id");
 				int categoryId = rs.getInt("category_id");
@@ -163,7 +164,7 @@ public class BudgetRequestDao {
 					budgetRequest.setRequestDate(rs.getDate("request_date"));
 					budgetRequest.setApprovalDate(rs.getDate("approval_date"));
 					budgetRequest.setDescription(rs.getString("description"));
-					
+
 					// 부서 이름, 카테고리 이름 추가
 					int departmentId = rs.getInt("department_id");
 					int categoryId = rs.getInt("category_id");

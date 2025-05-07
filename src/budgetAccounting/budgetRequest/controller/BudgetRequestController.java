@@ -81,8 +81,6 @@ public class BudgetRequestController {
 				sc.nextLine();
 				System.out.print("설명: ");
 				String description = sc.nextLine();
-				System.out.print("신청자 ID: ");
-				String requesterId = sc.nextLine();
 
 				BudgetRequest request = new BudgetRequest();
 				request.setDepartmentId(deptId);
@@ -90,7 +88,6 @@ public class BudgetRequestController {
 				request.setRequestedAmount(amount);
 				request.setCategoryId(categoryId);
 				request.setDescription(description);
-				request.setRequesterId(requesterId);
 
 				budgetRequestservice.createBudgetRequest(request);
 
@@ -166,12 +163,9 @@ public class BudgetRequestController {
 
 				System.out.print("승인할 신청 ID: ");
 				int requestId = sc.nextInt();
-				System.out.print("승인자 ID: ");
-				String approverId = sc.nextLine();
 				sc.nextLine();
-
-				budgetRequestservice.approveAndInsertToBudget(requestId, approverId);
-
+				
+				budgetRequestservice.approveAndInsertToBudget(requestId);
 				break;
 
 			} catch (InputMismatchException e) {
