@@ -230,7 +230,7 @@ public class EmployeeController {
                         if (emp != null) results.add(emp);
                     }
                     case 3 -> {
-                        System.out.print("부서 ID(1. 병원장실 / 2. 인사관리 / 3. 예산·회계관리 / 4. 자산관리): ");
+                        System.out.print("부서 ID(1. 인사관리 / 2. 예산·회계관리 / 3. 자산관리): ");
                         int deptId = Integer.parseInt(scanner.nextLine());
                         results = employeeService.findByDepartmentId(deptId);
                     }
@@ -247,10 +247,9 @@ public class EmployeeController {
                     for (Employee e : results) {
                         // 부서 ID → 부서명 매핑
                         String deptName = switch (e.getDepartmentId()) {
-                            case 1 -> "병원장실";
-                            case 2 -> "인사관리부서";
-                            case 3 -> "예산/회계관리부서";
-                            case 4 -> "자산관리부서";
+                            case 1 -> "인사관리부서";
+                            case 2 -> "예산/회계관리부서";
+                            case 3 -> "자산관리부서";
                             default -> "알 수 없음";
                         };
 
