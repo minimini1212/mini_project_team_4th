@@ -46,6 +46,12 @@ public class BudgetRequestDao {
 					pstmt.setInt(5, budgetRequest.getCategoryId());
 					pstmt.setString(6, budgetRequest.getRequesterId());
 					pstmt.setString(7, budgetRequest.getDescription());
+					
+					int year = budgetRequest.getYear();
+					
+					if (year < 1000 || year > 9999 ) {
+						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
+					}
 
 					pstmt.executeUpdate();
 					System.out.println("예산 신청이 완료되었습니다.");

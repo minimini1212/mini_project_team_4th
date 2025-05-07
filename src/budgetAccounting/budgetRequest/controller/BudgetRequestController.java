@@ -38,7 +38,7 @@ public class BudgetRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -93,13 +93,15 @@ public class BudgetRequestController {
 				request.setRequesterId(requesterId);
 
 				budgetRequestservice.createBudgetRequest(request);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
-
+			} catch (IllegalArgumentException e) {
+				System.out.println("연도는 4자리로 입력해주세요.");
+				sc.nextLine();
 			} catch (SQLIntegrityConstraintViolationException e) {
 				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 				sc.nextLine();
@@ -169,7 +171,7 @@ public class BudgetRequestController {
 				sc.nextLine();
 
 				budgetRequestservice.approveAndInsertToBudget(requestId, approverId);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
@@ -212,7 +214,7 @@ public class BudgetRequestController {
 				request.setDescription(description);
 
 				budgetRequestservice.updateBudgetRequest(request, requestId);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {
@@ -244,7 +246,7 @@ public class BudgetRequestController {
 				System.out.print("삭제할 신청 ID: ");
 				int requestId = sc.nextInt();
 				budgetRequestservice.softDeleteBudgetRequest(requestId);
-				
+
 				break;
 
 			} catch (InputMismatchException e) {

@@ -29,7 +29,7 @@ public class ExpenditureController {
 			try {
 				switch (choice) {
 				case 1:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -43,7 +43,7 @@ public class ExpenditureController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -51,7 +51,7 @@ public class ExpenditureController {
 					updateRequest(sc);
 					break;
 				case 5:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;

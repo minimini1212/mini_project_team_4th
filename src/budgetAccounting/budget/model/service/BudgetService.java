@@ -22,7 +22,13 @@ public class BudgetService {
 		} catch (SQLException e) {
 			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
 		} catch (IllegalArgumentException e) {
-			System.out.println("존재하지 않는 부서 ID 또는 존재하지 않는 항목입니다.");
+
+			if ("연도는 4자리로 입력해주세요.".equals(e.getMessage())) {
+				System.out.println(e.getMessage());
+			} else {
+				System.out.println("존재하지 않는 부서 ID 또는 존재하지 않는 항목입니다.");
+			}
+
 		} catch (Exception e) {
 			System.out.println("서버 오류: " + e.getMessage());
 		} finally {

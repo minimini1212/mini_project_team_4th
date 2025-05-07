@@ -50,6 +50,12 @@ public class ExpenditureRequestDao {
 					pstmt.setString(6, expenditureRequest.getRequesterId());
 					pstmt.setString(7, expenditureRequest.getDescription());
 
+					int year = expenditureRequest.getYear();
+
+					if (year < 1000 || year > 9999) {
+						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
+					}
+
 					pstmt.executeUpdate();
 					System.out.println("지출 신청이 완료되었습니다.");
 				}
@@ -113,7 +119,7 @@ public class ExpenditureRequestDao {
 				expenditureRequest.setRequestDate(rs.getDate("request_date"));
 				expenditureRequest.setApprovalDate(rs.getDate("approval_date"));
 				expenditureRequest.setDescription(rs.getString("description"));
-				
+
 				// 부서 이름, 카테고리 이름 추가
 				int departmentId = rs.getInt("department_id");
 				int categoryId = rs.getInt("category_id");
@@ -161,7 +167,7 @@ public class ExpenditureRequestDao {
 					expenditureRequest.setRequestDate(rs.getDate("request_date"));
 					expenditureRequest.setApprovalDate(rs.getDate("approval_date"));
 					expenditureRequest.setDescription(rs.getString("description"));
-					
+
 					// 부서 이름, 카테고리 이름 추가
 					int departmentId = rs.getInt("department_id");
 					int categoryId = rs.getInt("category_id");

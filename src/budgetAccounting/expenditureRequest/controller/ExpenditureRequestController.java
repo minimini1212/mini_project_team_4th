@@ -37,7 +37,7 @@ public class ExpenditureRequestController {
 					findOneRequest(sc);
 					break;
 				case 4:
-					if (rankOrder >= 2) {
+					if (rankOrder >= 3) {
 						System.out.println("해당 기능에 대한 권한이 없습니다.");
 						running = false;
 						return;
@@ -97,7 +97,8 @@ public class ExpenditureRequestController {
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
-
+			} catch (IllegalArgumentException e) {
+				System.out.println("연도는 4자리로 입력해주세요.");
 			} catch (SQLException e) {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
