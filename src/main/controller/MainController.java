@@ -36,7 +36,7 @@ public class MainController {
             if (rankOrder == 1) {
                 while (true) {
                     mainView.showDepartmentMenu();
-                    int choice = promptIntInRange("\u23E9 ", 0, 4);
+                    int choice = promptIntInRange("\u23E9 ", 0, 3);
                     System.out.println();
 
                     if (choice == 0) {
@@ -67,16 +67,12 @@ public class MainController {
     private void handleDepartmentMenu(int choice, int rankOrder) {
         switch (choice) {
             case 1 -> {
-                // TODO: 병원장실
-                System.out.println("🔹 병원장실 진입이 아직 연결되지 않음");
-            }
-            case 2 -> {
                 new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
-            case 3 -> {
+            case 2 -> {
             	budgetAccountingController.budgetAccountingMenu(scanner, rankOrder);
             }
-            case 4 -> {
+            case 3 -> {
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
 
@@ -86,16 +82,12 @@ public class MainController {
     private void handleUserDepartmentMenu(int deptId, int rankOrder) {
         switch (deptId) {
             case 1 -> {
-                // TODO: 병원장실
-                System.out.println("🔹 병원장실 진입이 아직 연결되지 않음");
-            }
-            case 2 -> {
                 new HumanResourceController().humanResourceMenu(scanner, rankOrder);
             }
-            case 3 -> {
+            case 2 -> {
             	budgetAccountingController.budgetAccountingMenu(scanner, rankOrder);
             }
-            case 4 -> {
+            case 3 -> {
                 equipmentAssetController.equipmentAssetMenu(scanner, rankOrder);
             }
             default -> System.out.println("⚠ 알 수 없는 부서입니다.");
