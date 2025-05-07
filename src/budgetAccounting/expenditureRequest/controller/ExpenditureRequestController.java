@@ -93,8 +93,9 @@ public class ExpenditureRequestController {
 				
 				System.out.println("⏩ 설명");
 				System.out.print("⏩ 입력: ");
-				System.out.println();
 				String description = sc.nextLine();
+				System.out.println();
+				System.out.println("━━━━━━━ 지출 정보 등록 ━━━━━━━");
 
 				ExpenditureRequest request = new ExpenditureRequest();
 				request.setDepartmentId(deptId);
