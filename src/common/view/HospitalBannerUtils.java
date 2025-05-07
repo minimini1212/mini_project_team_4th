@@ -30,7 +30,7 @@ public class HospitalBannerUtils {
         // 시스템 버전 정보 - 파란색 테두리, 흰색 텍스트
         System.out.println(
                 BLUE + "┏━━━━━━━━━━━━━━━━━━━━━┓\n" + RESET +
-                        BLUE + "┃" + WHITE + "           Hospital System V 1.0          " + BLUE + "┃\n" + RESET +
+                        BLUE + " " + WHITE + "           Hospital System V 1.0         " + BLUE + "\n" + RESET +
                         BLUE + "┗━━━━━━━━━━━━━━━━━━━━━┛" + RESET);
     }
 
