@@ -781,7 +781,7 @@ public class InspectionController {
 			return false;
 		}
 
-		System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
+		System.out.print("⏩ 정말 삭제하시겠습니까? (Y/N) : ");
 		String confirm = sc.nextLine();
 
 		if (!confirm.equalsIgnoreCase("Y")) {
@@ -814,7 +814,7 @@ public class InspectionController {
 	        return false;
 	    }
 
-	    System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
+	    System.out.print("⏩ 정말 삭제하시겠습니까? (Y/N) : ");
 	    String confirm = sc.nextLine();
 
 	    if (!confirm.equalsIgnoreCase("Y")) {

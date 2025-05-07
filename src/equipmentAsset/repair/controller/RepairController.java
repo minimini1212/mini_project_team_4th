@@ -622,8 +622,8 @@ public class RepairController {
 	        System.out.println("❌ 해당 요청을 찾을 수 없습니다.");
 	        return false;
 	    }
-	    
-	    System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
+
+		System.out.print("⏩ 정말 삭제하시겠습니까? (Y/N) : ");
 	    String confirm = sc.nextLine();
 	    
 	    if (!confirm.equalsIgnoreCase("Y")) {
@@ -651,7 +651,7 @@ public class RepairController {
 	        return false;
 	    }
 	    
-	    System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
+	    System.out.print("⏩ 정말 삭제하시겠습니까? (Y/N) : ");
 	    String confirm = sc.nextLine();
 	    
 	    if (!confirm.equalsIgnoreCase("Y")) {

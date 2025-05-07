@@ -93,10 +93,7 @@ public class EquipmentController {
                     }
                     break;
                 case "2": // - 특정 ID 장비 조회
-                    int equipmentId = getEquipmentId();
-                    if (equipmentId != -1) {
-                        equipmentService.findByIdEquipment(equipmentId);
-                    }
+                    getEquipmentId();
                     break;
                 case "3": // - 특정 상태 장비 조회
                     String status = getEquipmentStatus();
@@ -505,7 +502,7 @@ public class EquipmentController {
             return false;
         }
 
-        System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
+        System.out.print("⏩ 정말 삭제하시겠습니까? (Y/N) : ");
 
         while (true) {
             String input = sc.nextLine();
