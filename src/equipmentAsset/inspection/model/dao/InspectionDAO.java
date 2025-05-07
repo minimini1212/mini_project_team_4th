@@ -1,17 +1,12 @@
 package equipmentAsset.inspection.model.dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import dbConn.*;
-import equipmentAsset.equipment.model.entity.EquipmentCategory;
 import equipmentAsset.inspection.model.entity.InspectionResult;
 import equipmentAsset.inspection.model.entity.InspectionSchedule;
 import equipmentAsset.inspection.view.InspectionView;
@@ -710,7 +705,7 @@ public class InspectionDAO extends BaseDAO {
 	 **/
 
 	// ResultSet에서 점검일정 객체를 생성하는 메서드
-	private InspectionSchedule createInspectionScheduleFromResultSet(ResultSet rs) throws SQLException {
+	public InspectionSchedule createInspectionScheduleFromResultSet(ResultSet rs) throws SQLException {
 		InspectionSchedule schedule = new InspectionSchedule();
 
 		schedule.setScheduleId(rs.getInt("SCHEDULE_ID"));
@@ -726,7 +721,7 @@ public class InspectionDAO extends BaseDAO {
 	}
 
 	// ResultSet에서 점검결과 객체를 생성하는 메서드
-	private InspectionResult createInspectionResultFromResultSet(ResultSet rs) throws SQLException {
+	public InspectionResult createInspectionResultFromResultSet(ResultSet rs) throws SQLException {
 		InspectionResult result = new InspectionResult();
 
 		result.setResultId(rs.getInt("RESULT_ID"));

@@ -46,7 +46,8 @@ public class EquipmentController {
                     disposeEquipmentMenu();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -68,7 +69,8 @@ public class EquipmentController {
                     showEquipmentDashboardMenu();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -114,7 +116,8 @@ public class EquipmentController {
                     }
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -131,7 +134,8 @@ public class EquipmentController {
                     createEquipment();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -148,7 +152,8 @@ public class EquipmentController {
                     updateEquipment();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -165,7 +170,8 @@ public class EquipmentController {
                     deleteEquipment();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -187,11 +193,9 @@ public class EquipmentController {
                 case "3": // - 카테고리별 장비 개수 조회
                     equipmentService.countByCategory();
                     break;
-                case "4": // - 최근 수정된 장비 조회
-                    equipmentService.getRecentlyUpdatedEquipments();
-                    break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -217,7 +221,8 @@ public class EquipmentController {
                     }
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -234,7 +239,8 @@ public class EquipmentController {
                     disposeEquipment();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -247,52 +253,60 @@ public class EquipmentController {
     // - 장비 생성
     public boolean createEquipment() {
         Equipment equipment = new Equipment();
-
+        System.out.println();
         System.out.println("━━━━━━━━ 장비 정보 등록 ━━━━━━━━");
-        System.out.print("장비 이름 입력 : ");
+        System.out.println();
+        System.out.print("⏩ 장비 이름 입력 : ");
         equipment.setEquipmentName(sc.nextLine());
-        System.out.print("장비 모델 입력 : ");
+        System.out.println();
+        System.out.print("⏩ 장비 모델 입력 : ");
         equipment.setModelName(sc.nextLine());
-        System.out.print("장비 제조사 입력 : ");
+        System.out.println();
+        System.out.print("⏩ 장비 제조사 입력 : ");
         equipment.setManufacturer(sc.nextLine());
-        System.out.print("시리얼번호 입력 : ");
+        System.out.println();
+        System.out.print("⏩ 시리얼번호 입력 : ");
         equipment.setSerialNumber(sc.nextLine());
+        System.out.println();
 
         if (!equipmentService.saveEquipment(equipment)) {
             return false;
         }
 
+        System.out.println("✅ 장비가 등록되었습니다");
         System.out.println();
-        System.out.println("장비가 등록되었습니다");
-
         boolean isCompleted = true;
         while (isCompleted) {
-            System.out.println("━━━━━━━━ 추가 정보 입력 ━━━━━━━━");
             equipmentView.createEquipmentMenu();
             switch (sc.nextLine()) {
                 case "1":
                     inputPurchaseInfo(equipment);
-                    System.out.println("입력이 완료되었습니다");
+                    System.out.println();
+                    System.out.println("✅ 입력이 완료되었습니다");
                     break;
                 case "2":
                     selectEquipmentCategory(equipment);
-                    System.out.println("입력이 완료되었습니다");
+                    System.out.println();
+                    System.out.println("✅ 입력이 완료되었습니다");
                     break;
                 case "3":
                     selectEquipmentManager(equipment);
-                    System.out.println("입력이 완료되었습니다");
+                    System.out.println();
+                    System.out.println("✅ 입력이 완료되었습니다");
                     break;
                 case "4":
                     inputStatusAndDescription(equipment);
-                    System.out.println("입력이 완료되었습니다");
+                    System.out.println();
+                    System.out.println("✅ 입력이 완료되었습니다");
                     break;
                 case "5":
-                    System.out.println("입력을 취소합니다");
+                    System.out.println();
+                    System.out.println("✅ 입력을 취소합니다");
                     isCompleted = false;
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
                     System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         } // end while
@@ -304,17 +318,20 @@ public class EquipmentController {
         EquipmentCategory category = new EquipmentCategory();
 
         System.out.println("━━━━━━━ 카테고리 정보 등록 ━━━━━━━");
-        System.out.print("카테고리 이름 입력 : ");
+        System.out.println();
+        System.out.print("⏩ 카테고리 이름 입력 : ");
         category.setCategoryName(sc.nextLine());
-        System.out.print("카테고리 코드 입력 : ");
+        System.out.println();
+        System.out.print("⏩ 카테고리 코드 입력 : ");
         category.setCategoryCode(sc.nextLine());
+        System.out.println();
 
         if (!equipmentService.saveCategory(category)) {
             return false;
         }
 
+        System.out.println("✅ 카테고리가 추가되었습니다");
         System.out.println();
-        System.out.println("카테고리가 추가되었습니다");
 
         return true;
     } // end createCategory
@@ -324,32 +341,30 @@ public class EquipmentController {
         // 날짜 정규표현식 (YYYY-MM-DD)
         String dateRegex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
 
-        if (!equipmentService.findByIdEquipment(equipment.getEquipmentId())) {
-            return false;
-        }
         System.out.println();
         System.out.println("━━━━━━━━ 구매 정보 입력 ━━━━━━━━");
-
+        System.out.println();
         while (true) {
-            System.out.print("구매 날짜 입력 (YYYY-MM-DD) : ");
+            System.out.print("⏩ 구매 날짜 입력 (YYYY-MM-DD) : ");
             String dateStr = sc.nextLine();
-
+            System.out.println();
             if (dateStr.matches(dateRegex)) {
                 if (!equipmentService.updatePurchaseDate(equipment.getEquipmentId(), dateStr)) {
                     return false;
                 }
                 break;
             } else {
-                System.out.println("날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
+                System.out.println();
+                System.out.println("❌ 날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식으로 입력하세요.");
             }
         }
 
         while (true) {
-            System.out.print("구매 가격 입력 : ");
+            System.out.print("⏩ 구매 가격 입력 : ");
             String priceStr = sc.nextLine();
-
+            System.out.println();
             if (priceStr.isEmpty()) {
-                System.out.println("금액을 입력해주세요");
+                System.out.println("❌ 금액을 입력해주세요");
                 continue;
             }
 
@@ -385,16 +400,18 @@ public class EquipmentController {
                 }
                 System.out.println();
                 System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━");
-                System.out.print("매니저 번호 선택 : ");
+                System.out.println();
+                System.out.print("⏩ 매니저 번호 선택 : ");
 
                 int managerId = Integer.parseInt(sc.nextLine());
-
+                System.out.println();
                 if (!equipmentService.updateEquipmentManager(equipment.getEquipmentId(), managerId)) {
                     return false;
                 }
                 break;
             } catch (Exception e) {
-                System.out.println("숫자만 입력해주세요.");
+                System.out.println();
+                System.out.println("❌ 숫자만 입력해주세요.");
             }
         }
         return true;
@@ -410,9 +427,9 @@ public class EquipmentController {
             return false;
         }
 
-        System.out.print("장비 추가 설명 입력 : ");
+        System.out.print("⏩ 장비 추가 설명 입력 : ");
         description = sc.nextLine();
-
+        System.out.println();
         if (!equipmentService.updateEquipmentDescription(equipment.getEquipmentId(), description)) {
             return false;
         }
@@ -438,36 +455,42 @@ public class EquipmentController {
                     System.out.println();
                     if (equipmentService.findByIdEquipment(equipmentId)) {
                         inputPurchaseInfo(equipment);
-                        System.out.println("입력이 완료되었습니다");
+                        System.out.println();
+                        System.out.println("✅ 입력이 완료되었습니다");
                     }
                     break;
                 case "2":
                     System.out.println();
                     if (equipmentService.findByIdEquipment(equipmentId)) {
                         selectEquipmentCategory(equipment);
-                        System.out.println("입력이 완료되었습니다");
+                        System.out.println();
+                        System.out.println("✅ 입력이 완료되었습니다");
                     }
                     break;
                 case "3":
                     System.out.println();
                     if (equipmentService.findByIdEquipment(equipmentId)) {
                         selectEquipmentManager(equipment);
-                        System.out.println("입력이 완료되었습니다");
+                        System.out.println();
+                        System.out.println("✅ 입력이 완료되었습니다");
                     }
                     break;
                 case "4":
                     System.out.println();
                     if (equipmentService.findByIdEquipment(equipmentId)) {
                         inputStatusAndDescription(equipment);
-                        System.out.println("입력이 완료되었습니다");
+                        System.out.println();
+                        System.out.println("✅ 입력이 완료되었습니다");
                     }
                     break;
                 case "5":
-                    System.out.println("입력을 취소합니다");
+                    System.out.println();
+                    System.out.println("❌ 입력을 취소합니다");
                     isCompleted = false;
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     System.out.println();
                     break;
             }
@@ -482,24 +505,24 @@ public class EquipmentController {
             return false;
         }
 
-        System.out.println("정말 삭제하시겠습니까? 취소하시면 이전 메뉴로 돌아갑니다");
-        System.out.print("Y / N : ");
+        System.out.println("⏩ 정말 삭제하시겠습니까? (Y/N)");
 
         while (true) {
             String input = sc.nextLine();
+            System.out.println();
             if (input.equalsIgnoreCase("n")) {
-                System.out.println("삭제를 취소합니다.");
+                System.out.println("❌ 삭제를 취소합니다.");
                 return false;
             }
             if (input.equalsIgnoreCase("y"))
                 break;
-            System.out.println("Y / N 을 입력해주세요");
+            System.out.println("❌ Y / N 을 입력해주세요");
         }
 
         if (!equipmentService.deleteEquipment(equipmentId)) {
             return false;
         } else {
-            System.out.println("삭제가 완료되었습니다");
+            System.out.println("✅ 삭제가 완료되었습니다");
             return true;
         }
     } // end deleteEquipment
@@ -508,52 +531,59 @@ public class EquipmentController {
     public boolean disposeEquipment() {
         // 폐기예정 상태의 장비만 조회
         System.out.println("━━━━━━ 폐기 가능한 장비 목록 ━━━━━━━");
+        System.out.println();
         if (!equipmentService.findByStatusEquipment("폐기예정")) {
-            System.out.println("폐기 가능한 장비가 없습니다.");
+            System.out.println();
+            System.out.println("❌ 폐기 가능한 장비가 없습니다.");
             return false;
         }
 
         // 장비 ID 입력 받기
-        System.out.print("\n폐기할 장비 번호를 입력하세요 : ");
+        System.out.print("\n⏩ 폐기할 장비 번호를 입력하세요 : ");
         int equipmentId;
         try {
             equipmentId = Integer.parseInt(sc.nextLine());
+            System.out.println();
         } catch (NumberFormatException e) {
-            System.out.println("숫자만 입력해주세요.");
+            System.out.println("❌ 숫자만 입력해주세요.");
+            System.out.println();
             return false;
         }
 
         // 선택한 장비가 폐기예정 상태인지 확인
         if (!equipmentService.isEquipmentStatus(equipmentId, "폐기예정")) {
-            System.out.println("선택한 장비는 폐기예정 상태가 아닙니다.");
+            System.out.println();
+            System.out.println("❌ 선택한 장비는 폐기예정 상태가 아닙니다.");
             return false;
         }
 
         // 폐기 사유 입력 받기
-        System.out.print("폐기 사유 입력 : ");
+        System.out.print("⏩ 폐기 사유 입력 : ");
         String disposeReason = sc.nextLine();
+        System.out.println();
 
         // 확인 메시지
         System.out.println("정말 폐기하시겠습니까? 폐기하면 상태가 '폐기완료'로 변경되고 이력에 기록됩니다.");
-        System.out.print("Y / N : ");
+        System.out.print("⏩ Y / N : ");
 
         while (true) {
             String input = sc.nextLine();
             if (input.equalsIgnoreCase("n")) {
-                System.out.println("폐기를 취소합니다.");
+                System.out.println();
+                System.out.println("❌ 폐기를 취소합니다.");
                 return false;
             }
             if (input.equalsIgnoreCase("y"))
                 break;
-            System.out.println("Y / N 을 입력해주세요");
+            System.out.println("❌ Y / N 을 입력해주세요");
         }
 
         // 폐기 처리
         if (!equipmentService.disposeEquipment(equipmentId, disposeReason)) {
             return false;
         }
-
-        System.out.println("장비가 성공적으로 폐기되었습니다.");
+        System.out.println();
+        System.out.println("✅ 장비가 성공적으로 폐기되었습니다.");
         return true;
     }
 
@@ -566,23 +596,25 @@ public class EquipmentController {
         int equipmentId;
 
         if (!equipmentService.findAllEquipment()) {
-            System.out.println("장비 목록을 불러올 수 없습니다. 다시 시도해주세요.");
+            System.out.println();
+            System.out.println("❌ 장비 목록을 불러올 수 없습니다. 다시 시도해주세요.");
             return -1;
         }
 
         while (true) {
             try {
-                System.out.println("");
-                System.out.print("장비 번호를 입력하세요 : ");
+                System.out.println();
+                System.out.print("⏩ 장비 번호를 입력하세요 : ");
                 equipmentId = Integer.parseInt(sc.nextLine());
-
                 if (!equipmentService.findByIdEquipment(equipmentId)) {
-                    System.out.println("정확한 번호를 입력하세요");
+                    System.out.println();
+                    System.out.println("❌ 정확한 번호를 입력하세요");
                     continue;
                 }
                 break;
             } catch (Exception e) {
-                System.out.println("번호만 입력해주세요");
+                System.out.println();
+                System.out.println("❌ 번호만 입력해주세요");
             }
         }
         return equipmentId;
@@ -593,6 +625,7 @@ public class EquipmentController {
         String status;
         while (true) {
             System.out.println("━━━━━━━━ 입력 가능 상태 ━━━━━━━━");
+            System.out.println();
             equipmentView.inputStatusAndDescriptionMenu();
             switch (sc.nextLine()) {
                 case "1":
@@ -608,7 +641,8 @@ public class EquipmentController {
                     status = "수리중";
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     continue;
             }
             break;
@@ -632,7 +666,8 @@ public class EquipmentController {
                     department = "자산 관리 부서";
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     continue;
             }
             break;
@@ -651,11 +686,12 @@ public class EquipmentController {
         while (true) {
             try {
                 System.out.println();
-                System.out.print("카테고리 번호 선택 : ");
+                System.out.print("⏩ 카테고리 번호 선택 : ");
                 categoryId = Integer.parseInt(sc.nextLine());
                 break;
             } catch (Exception e) {
-                System.out.println("숫자만 입력해주세요.");
+                System.out.println();
+                System.out.println("❌ 숫자만 입력해주세요.");
             }
         }
         return categoryId;

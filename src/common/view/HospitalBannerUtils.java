@@ -47,6 +47,7 @@ public class HospitalBannerUtils {
                 BLUE + "   ▌║▌║█│▌" + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
+        System.out.println();
     }
 
 
@@ -123,6 +124,7 @@ public class HospitalBannerUtils {
                 BLUE + "     ▌║▌║█│▌" + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
+        System.out.println();
     }
 
     public static void printCycleBanner() {
@@ -131,6 +133,7 @@ public class HospitalBannerUtils {
                 BLUE + "    ▌║▌║█│▌" + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
+        System.out.println();
     }
 
     public static void printScheduleBanner() {
@@ -139,6 +142,7 @@ public class HospitalBannerUtils {
                 BLUE + "     ▌║█│▌" + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
+        System.out.println();
     }
 
     public static void printInspectionBanner() {
@@ -147,6 +151,7 @@ public class HospitalBannerUtils {
                 BLUE + "  ▌║█│▌" + RESET);
 
         System.out.println(BLUE + DIVIDER + RESET);
+        System.out.println();
     }
 
 

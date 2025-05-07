@@ -34,7 +34,8 @@ public class HistoryController {
                     disposalHistoryMenu();
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     break;
             }
         }
@@ -59,7 +60,8 @@ public class HistoryController {
                     }
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     continue;
             }
         }
@@ -89,7 +91,8 @@ public class HistoryController {
                     }
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     continue;
             }
         }
@@ -119,7 +122,8 @@ public class HistoryController {
                     }
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     continue;
             }
         }
@@ -144,7 +148,8 @@ public class HistoryController {
                     }
                     break;
                 default:
-                    System.out.println("잘못된 입력입니다");
+                    System.out.println();
+                    System.out.println("❌ 잘못된 입력입니다");
                     continue;
             }
         }
@@ -166,7 +171,8 @@ public class HistoryController {
                 result = "조치필요";
                 return historyService.findInspectionHistoryByResult(result);
             default:
-                System.out.println("잘못된 입력입니다");
+                System.out.println();
+                System.out.println("❌ 잘못된 입력입니다");
                 return false;
         }
     }
@@ -185,7 +191,8 @@ public class HistoryController {
                 result = "수리불가";
                 return historyService.findRepairHistoryByResult(result);
             default:
-                System.out.println("잘못된 입력입니다");
+                System.out.println();
+                System.out.println("❌ 잘못된 입력입니다");
                 return false;
         }
     }
