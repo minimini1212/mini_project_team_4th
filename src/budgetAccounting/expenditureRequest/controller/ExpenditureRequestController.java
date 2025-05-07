@@ -165,6 +165,10 @@ public class ExpenditureRequestController {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
 
+			} catch (IllegalArgumentException e) {
+				System.out.println("신청자와 승인자는 같을 수 없습니다.");
+				break;
+
 			} catch (SQLIntegrityConstraintViolationException e) {
 				System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
 			} catch (SQLException e) {
