@@ -69,16 +69,31 @@ public class ExpenditureRequestController {
 
 		while (true) {
 			try {
-				System.out.print("부서 ID (인사 2번, 예산/회계 3번, 자산 4번): ");
-				int deptId = sc.nextInt();
-				System.out.print("연도를 입력하세요(4자리): ");
-				int year = sc.nextInt();
-				System.out.print("지출 신청 금액을 입력하세요: ");
-				int amount = sc.nextInt();
-				System.out.print("카테고리 ID (인건비 1번, 수리비 2번, 소모품비 3번, 출장비 4번, 운영비 5번): ");
-				int categoryId = sc.nextInt();
-				sc.nextLine();
-				System.out.print("설명: ");
+				System.out.println();
+				System.out.println("━━━━━━━ 지출 정보 등록 ━━━━━━━");
+				System.out.println();
+				System.out.println("⏩ 부서 ID (인사 2번, 예산/회계 3번, 자산 4번)");
+				System.out.print("⏩ 입력: ");
+				int deptId = Integer.parseInt(sc.nextLine());
+				
+				System.out.println();
+				System.out.println("⏩ 연도를 입력하세요(4자리)");
+				System.out.print("⏩ 입력: ");
+				int year = Integer.parseInt(sc.nextLine());
+				
+				System.out.println();
+				System.out.println("⏩ 지출 신청 금액을 입력하세요");
+				System.out.print("⏩ 입력: ");
+				int amount = Integer.parseInt(sc.nextLine());
+				
+				System.out.println();
+				System.out.println("⏩ 카테고리 ID (인건비 1번, 수리비 2번, 소모품비 3번, 출장비 4번, 운영비 5번)");
+				System.out.print("⏩ 입력: ");
+				int categoryId = Integer.parseInt(sc.nextLine());
+				
+				System.out.println("⏩ 설명");
+				System.out.print("⏩ 입력: ");
+				System.out.println();
 				String description = sc.nextLine();
 
 				ExpenditureRequest request = new ExpenditureRequest();

@@ -64,7 +64,7 @@ public class BudgetDao extends BaseDAO {
 			}
 
 			pstmt.executeUpdate();
-			System.out.println("예산이 등록되었습니다.");
+			System.out.println("✅예산이 등록되었습니다.");
 
 		} catch (SQLIntegrityConstraintViolationException e) {
 			System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");

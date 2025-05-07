@@ -73,7 +73,7 @@ public class ExpenditureRequestDao {
 					}
 
 					pstmt.executeUpdate();
-					System.out.println("지출 신청이 완료되었습니다.");
+					System.out.println("✅ 지출 신청이 완료되었습니다.");
 				}
 			}
 
