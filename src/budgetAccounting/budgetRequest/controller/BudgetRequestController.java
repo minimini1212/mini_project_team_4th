@@ -107,7 +107,7 @@ public class BudgetRequestController {
 				System.out.println("알맞지 않은 입력값이 있습니다. 다시 살펴봐주세요.");
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다. " + e.getMessage());
+				System.out.println("예산 신청 등록 중 오류가 발생했습니다. " + e.getMessage());
 				sc.nextLine();
 			}
 		}
@@ -149,7 +149,7 @@ public class BudgetRequestController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 조회 중 오류가 발생했습니다. ");
+				System.out.println("예산 신청 조회 중 오류가 발생했습니다. ");
 				sc.nextLine();
 			}
 		}

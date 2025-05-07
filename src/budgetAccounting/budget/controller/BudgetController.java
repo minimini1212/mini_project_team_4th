@@ -151,7 +151,7 @@ public class BudgetController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다.");
+				System.out.println("예산 조회 중 오류가 발생했습니다.");
 				sc.nextLine();
 			}
 		}
@@ -193,7 +193,7 @@ public class BudgetController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다: ");
+				System.out.println("예산 수정 중 오류가 발생했습니다: ");
 				sc.nextLine();
 			}
 		}
@@ -224,7 +224,7 @@ public class BudgetController {
 				}
 				sc.nextLine();
 			} catch (Exception e) {
-				System.out.println("예산 등록 중 오류가 발생했습니다: ");
+				System.out.println("예산 삭제 중 오류가 발생했습니다: ");
 				sc.nextLine();
 			}
 		}

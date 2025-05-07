@@ -54,12 +54,6 @@ public class ExpenditureService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureDao = new ExpenditureDao(conn);
 			return expenditureDao.findByExpenditureId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-			return null;
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
-			return null;
 		} finally {
 			conn.close();
 		}
@@ -73,10 +67,6 @@ public class ExpenditureService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureDao = new ExpenditureDao(conn);
 			expenditureDao.updateByExpenditureId(expenditure, requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}
@@ -90,10 +80,6 @@ public class ExpenditureService {
 			conn = ConnectionSingletonHelper.getConnection("oracle");
 			expenditureDao = new ExpenditureDao(conn);
 			expenditureDao.softDeleteByExpenditureId(requestId);
-		} catch (SQLException e) {
-			System.err.println("데이터베이스 연결 실패: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("서버 오류: " + e.getMessage());
 		} finally {
 			conn.close();
 		}
