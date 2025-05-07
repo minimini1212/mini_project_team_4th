@@ -263,7 +263,7 @@ public class ExpenditureRequestDao {
 				if (rs.next()) {
 					return rs.getString("department_name");
 				} else {
-					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+					throw new SQLException("부서명을 가져오지 못했습니다.");
 				}
 			}
 		}

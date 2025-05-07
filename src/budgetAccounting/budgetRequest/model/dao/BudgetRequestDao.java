@@ -177,7 +177,7 @@ public class BudgetRequestDao {
 				}
 
 				if (!hasData) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 			}
 		}
@@ -196,7 +196,7 @@ public class BudgetRequestDao {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, budgetRequest.getRequestedAmount());
@@ -221,7 +221,7 @@ public class BudgetRequestDao {
 
 			try (ResultSet rs = pstmt1.executeQuery()) {
 				if (!rs.next()) {
-					throw new SQLException("해당 조건에 맞는 지출 신청이 존재하지 않습니다.");
+					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
 				pstmt.setInt(1, requestId);
@@ -258,7 +258,7 @@ public class BudgetRequestDao {
 				if (rs.next()) {
 					return rs.getString("department_name");
 				} else {
-					throw new SQLException("카테고리명을 가져오지 못했습니다.");
+					throw new SQLException("부서명을 가져오지 못했습니다.");
 				}
 			}
 		}

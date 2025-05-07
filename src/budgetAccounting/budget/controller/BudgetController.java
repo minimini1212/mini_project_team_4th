@@ -143,7 +143,7 @@ public class BudgetController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -185,7 +185,7 @@ public class BudgetController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
@@ -216,7 +216,7 @@ public class BudgetController {
 				sc.nextLine();
 
 			} catch (SQLException e) {
-				if ("해당 조건에 맞는 지출 신청이 존재하지 않습니다.".equals(e.getMessage())) {
+				if ("해당 조건에 맞는 예산이 존재하지 않습니다.".equals(e.getMessage())) {
 					System.out.println(e.getMessage());
 					break;
 				} else {
