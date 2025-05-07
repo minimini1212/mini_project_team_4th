@@ -164,13 +164,17 @@ public class BudgetRequestController {
 				System.out.print("승인할 신청 ID: ");
 				int requestId = sc.nextInt();
 				sc.nextLine();
-				
+
 				budgetRequestservice.approveAndInsertToBudget(requestId);
 				break;
 
 			} catch (InputMismatchException e) {
 				System.out.println("올바르게 입력해주세요.");
 				sc.nextLine();
+
+			} catch (IllegalArgumentException e) {
+				System.out.println("신청자와 승인자는 같을 수 없습니다.");
+				break;
 
 			} catch (SQLException e) {
 				if ("해당 조건에 맞는 예산 신청이 존재하지 않습니다.".equals(e.getMessage())) {

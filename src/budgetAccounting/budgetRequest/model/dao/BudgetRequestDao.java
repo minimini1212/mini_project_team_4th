@@ -82,6 +82,10 @@ public class BudgetRequestDao {
 					throw new SQLException("해당 조건에 맞는 예산 신청이 존재하지 않습니다.");
 				}
 
+				if (SessionContext.getEmpNumber().equals(rs.getString("requester_id"))) {
+				    throw new IllegalArgumentException("신청자와 승인자는 같을 수 없습니다.");
+				}
+
 				pstmt.setString(1, SessionContext.getEmpNumber());
 				pstmt.setInt(2, requestId);
 				pstmt.executeUpdate();
