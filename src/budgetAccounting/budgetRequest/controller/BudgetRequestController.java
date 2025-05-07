@@ -94,8 +94,9 @@ public class BudgetRequestController {
 				
 				System.out.println("⏩ 설명");
 				System.out.print("⏩ 입력: ");
-				System.out.println();
 				String description = sc.nextLine();
+				System.out.println();
+				System.out.println("━━━━━━━ 생성 정보 등록 ━━━━━━━");
 
 				BudgetRequest request = new BudgetRequest();
 				request.setDepartmentId(deptId);
