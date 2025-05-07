@@ -45,16 +45,16 @@ public class BudgetDao extends BaseDAO {
 			int departmentId = budget.getDepartmentId();
 			int categoryId = budget.getCategoryId();
 
-			int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
+			int[] departmentIds = { 2, 3, 4 }; // 허용된 부서 ID
 
 			if (!contains(departmentIds, departmentId)) {
-				throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + departmentId);
+				throw new IllegalArgumentException("존재하지 않는 부서 ID입니다.");
 			}
 
-			int[] categoryIds = { 1, 2, 3 }; // 허용된 부서 ID
+			int[] categoryIds = { 1, 2, 3, 4, 5 }; // 허용된 항목 ID
 
 			if (!contains(categoryIds, categoryId)) {
-				throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + categoryId);
+				throw new IllegalArgumentException("존재하지 않는 항목 ID입니다.");
 			}
 			
 			int year = budget.getYear();
@@ -68,7 +68,7 @@ public class BudgetDao extends BaseDAO {
 
 		} catch (SQLIntegrityConstraintViolationException e) {
 			System.out.println("해당 부서에 이미 동일한 항목이 존재합니다.");
-		}
+		} 
 	}
 
 	// 예산 전체 조회

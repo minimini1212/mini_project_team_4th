@@ -70,13 +70,13 @@ public class ExpenditureDao {
 					int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
 
 					if (!contains(departmentIds, departmentId)) {
-						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + departmentId);
+						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다.");
 					}
 
-					int[] categoryIds = { 1, 2, 3 }; // 허용된 부서 ID
+					int[] categoryIds = { 1, 2, 3, 4, 5 }; // 허용된 부서 ID
 
 					if (!contains(categoryIds, categoryId)) {
-						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다: " + categoryId);
+						throw new IllegalArgumentException("존재하지 않는 항목 ID입니다.");
 					}
 
 					int year = expenditure.getYear();

@@ -51,6 +51,21 @@ public class ExpenditureRequestDao {
 					pstmt.setString(6, SessionContext.getEmpNumber());
 					pstmt.setString(7, expenditureRequest.getDescription());
 
+					int departmentId = expenditureRequest.getDepartmentId();
+					int categoryId = expenditureRequest.getCategoryId();
+
+					int[] departmentIds = { 1, 2, 3 }; // 허용된 부서 ID
+
+					if (!contains(departmentIds, departmentId)) {
+						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다.");
+					}
+
+					int[] categoryIds = { 1, 2, 3, 4, 5 }; // 허용된 부서 ID
+
+					if (!contains(categoryIds, categoryId)) {
+						throw new IllegalArgumentException("존재하지 않는 항목 ID입니다.");
+					}
+
 					int year = expenditureRequest.getYear();
 
 					if (year < 1000 || year > 9999) {
@@ -86,9 +101,9 @@ public class ExpenditureRequestDao {
 				}
 
 				if (SessionContext.getEmpNumber().equals(rs.getString("requester_id"))) {
-				    throw new IllegalArgumentException("신청자와 승인자는 같을 수 없습니다.");
+					throw new IllegalArgumentException("신청자와 승인자는 같을 수 없습니다.");
 				}
-				
+
 				pstmt.setString(1, SessionContext.getEmpNumber());
 				pstmt.setInt(2, requestId);
 				pstmt.executeUpdate();
@@ -272,6 +287,16 @@ public class ExpenditureRequestDao {
 				}
 			}
 		}
+	}
+
+	// 존재하는 값인지 아닌지 비교 (부서ID, 카테고리 ID)
+	private boolean contains(int[] arr, int value) {
+		for (int num : arr) {
+			if (num == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
