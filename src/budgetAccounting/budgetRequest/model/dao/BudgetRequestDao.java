@@ -54,23 +54,23 @@ public class BudgetRequestDao {
 					int[] departmentIds = { 2, 3, 4 }; // 허용된 부서 ID
 
 					if (!contains(departmentIds, departmentId)) {
-						throw new IllegalArgumentException("존재하지 않는 부서 ID입니다.");
+						throw new IllegalArgumentException("❌존재하지 않는 부서 ID입니다.");
 					}
 
 					int[] categoryIds = { 1, 2, 3, 4, 5 }; // 허용된 항목 ID
 
 					if (!contains(categoryIds, categoryId)) {
-						throw new IllegalArgumentException("존재하지 않는 항목 ID입니다.");
+						throw new IllegalArgumentException("❌존재하지 않는 항목 ID입니다.");
 					}
 
 					int year = budgetRequest.getYear();
 
 					if (year < 1000 || year > 9999) {
-						throw new IllegalArgumentException("연도는 4자리로 입력해주세요.");
+						throw new IllegalArgumentException("❌연도는 4자리로 입력해주세요.");
 					}
 
 					pstmt.executeUpdate();
-					System.out.println("예산 신청이 완료되었습니다.");
+					System.out.println("✅ 예산 신청이 완료되었습니다.");
 				}
 			}
 
