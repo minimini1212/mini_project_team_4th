@@ -25,7 +25,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 이력이 없습니다.");
+                System.out.println("❌ 등록된 이력이 없습니다.");
                 return false;
             }
 
@@ -36,7 +36,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -53,7 +53,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 이력이 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 이력이 없습니다.");
                 return false;
             }
 
@@ -64,7 +64,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("장비별 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비별 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -77,7 +77,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 점검 이력이 없습니다.");
+                System.out.println("❌ 등록된 점검 이력이 없습니다.");
                 return false;
             }
 
@@ -88,7 +88,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("점검 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 점검 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -105,7 +105,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 점검 이력이 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 점검 이력이 없습니다.");
                 return false;
             }
 
@@ -116,7 +116,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("장비별 점검 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비별 점검 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -133,7 +133,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println(result + " 결과에 해당하는 점검 이력이 없습니다.");
+                System.out.println(result + "❌ 결과에 해당하는 점검 이력이 없습니다.");
                 return false;
             }
 
@@ -144,7 +144,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("점검 결과별 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 점검 결과별 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -157,7 +157,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 수리 이력이 없습니다.");
+                System.out.println("❌ 등록된 수리 이력이 없습니다.");
                 return false;
             }
 
@@ -168,7 +168,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("수리 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 수리 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -185,7 +185,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 수리 이력이 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 수리 이력이 없습니다.");
                 return false;
             }
 
@@ -196,7 +196,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("장비별 수리 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비별 수리 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -213,7 +213,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println(result + " 유형의 수리 이력이 없습니다.");
+                System.out.println("❌ "+ result + " 유형의 수리 이력이 없습니다.");
                 return false;
             }
 
@@ -224,7 +224,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("수리 결과별 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 수리 결과별 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -237,7 +237,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 폐기 이력이 없습니다.");
+                System.out.println("❌ 등록된 폐기 이력이 없습니다.");
                 return false;
             }
 
@@ -248,7 +248,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("폐기 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 폐기 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -265,7 +265,7 @@ public class HistoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 폐기 이력이 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 폐기 이력이 없습니다.");
                 return false;
             }
 
@@ -276,7 +276,7 @@ public class HistoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("장비별 폐기 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비별 폐기 이력 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
