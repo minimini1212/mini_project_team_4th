@@ -26,7 +26,7 @@ public class CategoryDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("카테고리 정보가 없습니다.");
+                System.out.println("❌ 카테고리 정보가 없습니다.");
                 return false;
             }
 
@@ -37,7 +37,7 @@ public class CategoryDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("카테고리 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -55,10 +55,10 @@ public class CategoryDAO extends BaseDAO {
             if (rs.next()) {
                 categoryName = rs.getString("CATEGORY_NAME");
             } else {
-                System.out.println("카테고리 ID " + categoryId + "에 해당하는 카테고리가 없습니다.");
+                System.out.println("❌ 카테고리 ID " + categoryId + "에 해당하는 카테고리가 없습니다.");
             }
         } catch (SQLException e) {
-            System.out.println("카테고리 이름 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리 이름 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
         }
         return categoryName;
@@ -83,12 +83,12 @@ public class CategoryDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("카테고리 등록에 실패했습니다.");
+                System.out.println("❌ 카테고리 등록에 실패했습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("카테고리 등록 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리 등록 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -107,12 +107,12 @@ public class CategoryDAO extends BaseDAO {
             int result = pstmt.executeUpdate();
 
             if (result <= 0) {
-                System.out.println("카테고리 ID " + categoryId + "에 해당하는 카테고리가 없어 삭제할 수 없습니다.");
+                System.out.println("❌ 카테고리 ID " + categoryId + "에 해당하는 카테고리가 없어 삭제할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("카테고리 삭제 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리 삭제 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -130,10 +130,10 @@ public class CategoryDAO extends BaseDAO {
             if (rs.next()) {
                 nextId = rs.getInt(1);
             } else {
-                System.out.println("시퀀스 값을 가져오는데 실패했습니다.");
+                System.out.println("❌ 시퀀스 값을 가져오는데 실패했습니다.");
             }
         } catch (SQLException e) {
-            System.out.println("시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
         }
         return nextId;
@@ -152,11 +152,11 @@ public class CategoryDAO extends BaseDAO {
             rs = pstmt.executeQuery();
 
             if (rs.next() && rs.getInt(1) > 0) {
-                System.out.println("카테고리 ID " + categoryId + "는 현재 " + rs.getInt(1) + "개의 장비에서 사용 중입니다.");
+                System.out.println("❌ 카테고리 ID " + categoryId + "는 현재 " + rs.getInt(1) + "개의 장비에서 사용 중입니다.");
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("카테고리 사용 여부 확인 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리 사용 여부 확인 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
         }
         return false;

@@ -28,7 +28,7 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 장비가 없습니다.");
+                System.out.println("❌ 등록된 장비가 없습니다.");
                 return false;
             }
 
@@ -39,7 +39,7 @@ public class EquipmentDAO extends BaseDAO {
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("장비 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -52,7 +52,7 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없습니다.");
                 return false;
             }
 
@@ -63,7 +63,7 @@ public class EquipmentDAO extends BaseDAO {
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("장비 ID 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비 ID 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -76,7 +76,7 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("카테고리 '" + categoryName + "'에 해당하는 장비가 없습니다.");
+                System.out.println("❌ 카테고리 '" + categoryName + "'에 해당하는 장비가 없습니다.");
                 return false;
             }
 
@@ -87,7 +87,7 @@ public class EquipmentDAO extends BaseDAO {
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("카테고리별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -100,7 +100,7 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("부서 '" + departmentName + "'에 해당하는 장비가 없습니다.");
+                System.out.println("❌ 부서 '" + departmentName + "'에 해당하는 장비가 없습니다.");
                 return false;
             }
 
@@ -111,7 +111,7 @@ public class EquipmentDAO extends BaseDAO {
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("부서별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 부서별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -125,7 +125,7 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("상태 '" + status + "'에 해당하는 장비가 없습니다.");
+                System.out.println("❌ 상태 '" + status + "'에 해당하는 장비가 없습니다.");
                 return false;
             }
 
@@ -136,7 +136,7 @@ public class EquipmentDAO extends BaseDAO {
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("상태별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 상태별 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -156,7 +156,7 @@ public class EquipmentDAO extends BaseDAO {
             }
             return false;
         } catch (SQLException e) {
-            System.out.println("장비 상태 확인 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비 상태 확인 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -169,7 +169,7 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 담당자가 없습니다.");
+                System.out.println("❌ 등록된 담당자가 없습니다.");
                 return false;
             }
 
@@ -191,7 +191,7 @@ public class EquipmentDAO extends BaseDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("담당자 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 담당자 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -209,7 +209,7 @@ public class EquipmentDAO extends BaseDAO {
             int equipmentId = getNextEquipmentId();
 
             if (equipmentId == 0) {
-                System.out.println("장비 ID를 생성하는 데 실패했습니다.");
+                System.out.println("❌ 장비 ID를 생성하는 데 실패했습니다.");
                 return false;
             }
 
@@ -227,7 +227,7 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 등록에 실패했습니다.");
+                System.out.println("❌ 장비 등록에 실패했습니다.");
                 return false;
             }
 
@@ -235,7 +235,7 @@ public class EquipmentDAO extends BaseDAO {
             equipment.setEquipmentId(equipmentId);
             return true;
         } catch (SQLException e) {
-            System.out.println("장비 등록 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비 등록 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -259,7 +259,7 @@ public class EquipmentDAO extends BaseDAO {
                 parsedDate = dateFormat.parse(purchaseDateStr);
                 purchaseDate = new java.sql.Date(parsedDate.getTime());
             } catch (ParseException e) {
-                System.out.println("날짜 형식이 잘못되었습니다: " + e.getMessage());
+                System.out.println("❌ 날짜 형식이 잘못되었습니다: " + e.getMessage());
                 e.printStackTrace();
                 return false;
             }
@@ -270,12 +270,12 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없어 구매날짜를 업데이트할 수 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없어 구매날짜를 업데이트할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("구매날짜 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 구매날짜 업데이트 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -291,12 +291,12 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없어 구매가격을 업데이트할 수 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없어 구매가격을 업데이트할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("구매가격 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 구매가격 업데이트 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -312,12 +312,12 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없어 카테고리를 업데이트할 수 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없어 카테고리를 업데이트할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("카테고리 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리 업데이트 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -333,12 +333,12 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없어 담당자를 업데이트할 수 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없어 담당자를 업데이트할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("담당자 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 담당자 업데이트 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -354,12 +354,12 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없어 상태를 업데이트할 수 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없어 상태를 업데이트할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("상태 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 상태 업데이트 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -375,12 +375,12 @@ public class EquipmentDAO extends BaseDAO {
 
             int result = pstmt.executeUpdate();
             if (result <= 0) {
-                System.out.println("장비 ID " + equipmentId + "에 해당하는 장비가 없어 설명을 업데이트할 수 없습니다.");
+                System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 장비가 없어 설명을 업데이트할 수 없습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("설명 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 설명 업데이트 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -403,18 +403,18 @@ public class EquipmentDAO extends BaseDAO {
             int deleteResult = cstmt.getInt(2);
 
             if (deleteResult == 0) {
-                System.out.println("점검 또는 수리 이력이 있는 장비는 삭제할 수 없습니다.");
+                System.out.println("❌ 점검 또는 수리 이력이 있는 장비는 삭제할 수 없습니다.");
                 return false;
             } else if (deleteResult == 2) {
-                System.out.println("장비 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+                System.out.println("❌ 장비 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
                 return false;
             } else if (deleteResult == -1) {
-                System.out.println("장비 삭제 중 오류가 발생했습니다.");
+                System.out.println("❌ 장비 삭제 중 오류가 발생했습니다.");
                 return false;
             }
             return true;
         } catch (SQLException e) {
-            System.out.println("장비 삭제 중 오류 발생: " + e.getMessage());
+            System.out.println("❌ 장비 삭제 중 오류 발생: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -434,19 +434,19 @@ public class EquipmentDAO extends BaseDAO {
             int result = cstmt.getInt(3);
 
             if (result == 0) {
-                System.out.println("해당 장비가 폐기예정 상태가 아닙니다. 폐기예정 상태의 장비만 폐기할 수 있습니다.");
+                System.out.println("❌ 해당 장비가 폐기예정 상태가 아닙니다. 폐기예정 상태의 장비만 폐기할 수 있습니다.");
                 return false;
             } else if (result == -1) {
-                System.out.println("존재하지 않는 장비입니다.");
+                System.out.println("❌ 존재하지 않는 장비입니다.");
                 return false;
             } else if (result == -2) {
-                System.out.println("장비 폐기 처리 중 오류가 발생했습니다.");
+                System.out.println("❌ 장비 폐기 처리 중 오류가 발생했습니다.");
                 return false;
             }
 
             return true;
         } catch (SQLException e) {
-            System.out.println("장비 폐기 처리 중 오류 발생: " + e.getMessage());
+            System.out.println("❌ 장비 폐기 처리 중 오류 발생: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -464,14 +464,14 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 장비가 없어 상태별 집계가 불가능합니다.");
+                System.out.println("❌ 등록된 장비가 없어 상태별 집계가 불가능합니다.");
                 return false;
             }
 
             equipmentVIew.countByStatus(rs);
             return true;
         } catch (SQLException e) {
-            System.out.println("상태별 장비 개수 집계 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 상태별 장비 개수 집계 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -485,14 +485,14 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 장비가 없어 카테고리별 집계가 불가능합니다.");
+                System.out.println("❌ 등록된 장비가 없어 카테고리별 집계가 불가능합니다.");
                 return false;
             }
 
             equipmentVIew.countByCategory(rs);
             return true;
         } catch (SQLException e) {
-            System.out.println("카테고리별 장비 개수 집계 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 카테고리별 장비 개수 집계 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -506,14 +506,14 @@ public class EquipmentDAO extends BaseDAO {
 
             // 결과가 비어있는지 확인
             if (!rs.isBeforeFirst()) {
-                System.out.println("등록된 장비가 없어 부서별 집계가 불가능합니다.");
+                System.out.println("❌ 등록된 장비가 없어 부서별 집계가 불가능합니다.");
                 return false;
             }
 
             equipmentVIew.countByDepartment(rs);
             return true;
         } catch (SQLException e) {
-            System.out.println("부서별 장비 개수 집계 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 부서별 장비 개수 집계 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -532,10 +532,10 @@ public class EquipmentDAO extends BaseDAO {
             if (rs.next()) {
                 nextId = rs.getInt(1);
             } else {
-                System.out.println("장비 ID 시퀀스 값을 가져오는데 실패했습니다.");
+                System.out.println("❌ 장비 ID 시퀀스 값을 가져오는데 실패했습니다.");
             }
         } catch (SQLException e) {
-            System.out.println("장비 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
+            System.out.println("❌ 장비 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
             e.printStackTrace();
         }
         return nextId;

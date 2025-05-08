@@ -30,7 +30,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("등록된 수리 요청이 없습니다.");
+				System.out.println("❌ 등록된 수리 요청이 없습니다.");
 				return false;
 			}
 
@@ -41,7 +41,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -56,7 +56,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("장비 ID " + equipmentId + "에 해당하는 수리 요청이 없습니다.");
+				System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 수리 요청이 없습니다.");
 				return false;
 			}
 
@@ -67,7 +67,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("장비 ID로 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 장비 ID로 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -81,7 +81,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("요청 ID " + requestId + "에 해당하는 수리 요청이 없습니다.");
+				System.out.println("❌ 요청 ID " + requestId + "에 해당하는 수리 요청이 없습니다.");
 				return false;
 			}
 
@@ -92,7 +92,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("요청 ID로 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 요청 ID로 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -111,7 +111,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println(status + " 상태의 수리 요청이 없습니다.");
+				System.out.println("❌ " + status + " 상태의 수리 요청이 없습니다.");
 				return false;
 			}
 
@@ -122,7 +122,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("상태별 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 상태별 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -135,7 +135,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("등록된 수리 결과가 없습니다.");
+				System.out.println("❌ 등록된 수리 결과가 없습니다.");
 				return false;
 			}
 
@@ -146,7 +146,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -159,7 +159,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("요청 ID " + requestId + "에 해당하는 수리 결과가 없습니다.");
+				System.out.println("❌ 요청 ID " + requestId + "에 해당하는 수리 결과가 없습니다.");
 				return false;
 			}
 
@@ -170,7 +170,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("요청 ID로 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 요청 ID로 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -184,7 +184,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("장비 ID " + equipmentId + "에 해당하는 수리 결과가 없습니다.");
+				System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 수리 결과가 없습니다.");
 				return false;
 			}
 
@@ -195,7 +195,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("장비 ID로 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 장비 ID로 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -212,7 +212,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println(resultType + " 유형의 수리 결과가 없습니다.");
+				System.out.println("❌ " + resultType + " 유형의 수리 결과가 없습니다.");
 				return false;
 			}
 
@@ -223,7 +223,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("결과 유형별 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 결과 유형별 수리 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -232,11 +232,11 @@ public class RepairDAO extends BaseDAO {
 	// - 수리필요 상태 장비 조회
 	public boolean findRepairableEquipment() {
 		try {
-			rs = stmt.executeQuery("SELECT * FROM EQUIPMENT WHERE STATUS = '수리필요' ORDER BY EQUIPMENT_ID");
+			rs = stmt.executeQuery("SELECT * FROM V_EQUIPMENT_DETAIL WHERE STATUS = '수리필요' ORDER BY EQUIPMENT_ID");
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("수리가 필요한 장비가 없습니다.");
+				System.out.println("❌ 수리가 필요한 장비가 없습니다.");
 				return false;
 			}
 
@@ -247,7 +247,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("수리 필요 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 수리 필요 장비 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -262,7 +262,7 @@ public class RepairDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("결과 등록이 필요한 수리 요청이 없습니다.");
+				System.out.println("❌ 결과 등록이 필요한 수리 요청이 없습니다.");
 				return false;
 			}
 
@@ -273,7 +273,7 @@ public class RepairDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("예정 상태 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 예정 상태 수리 요청 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -300,7 +300,7 @@ public class RepairDAO extends BaseDAO {
 
 			return requestId;
 		} catch (SQLException e) {
-			System.out.println("수리 요청 저장 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 수리 요청 저장 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
@@ -326,7 +326,7 @@ public class RepairDAO extends BaseDAO {
 
 			return resultId;
 		} catch (SQLException e) {
-			System.out.println("수리 결과 저장 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 수리 결과 저장 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
@@ -345,7 +345,7 @@ public class RepairDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("요청 일자 업데이트 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 요청 일자 업데이트 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -362,7 +362,7 @@ public class RepairDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("고장 증상 업데이트 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 고장 증상 업데이트 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -379,7 +379,7 @@ public class RepairDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("요청 상태 업데이트 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 요청 상태 업데이트 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -396,7 +396,7 @@ public class RepairDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("수리 내용 업데이트 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 수리 내용 업데이트 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -413,7 +413,7 @@ public class RepairDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("수리 비용 업데이트 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 수리 비용 업데이트 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -430,7 +430,7 @@ public class RepairDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("결과 유형 업데이트 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 결과 유형 업데이트 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -451,19 +451,19 @@ public class RepairDAO extends BaseDAO {
 	        int deleteResult = cstmt.getInt(2);
 	        
 	        if (deleteResult == 0) {
-	            System.out.println("이미 결과가 등록된 수리 요청은 삭제할 수 없습니다.");
+	            System.out.println("❌ 이미 결과가 등록된 수리 요청은 삭제할 수 없습니다.");
 	            return false;
 	        } else if (deleteResult == 2) {
-	            System.out.println("요청 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+	            System.out.println("❌ 요청 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
 	            return false;
 	        } else if (deleteResult == -1) {
-	            System.out.println("수리 요청 삭제 중 오류가 발생했습니다.");
+	            System.out.println("❌ 수리 요청 삭제 중 오류가 발생했습니다.");
 	            return false;
 	        }
 	        
 	        return true;
 	    } catch (SQLException e) {
-	        System.out.println("수리 요청 삭제 중 오류 발생: " + e.getMessage());
+	        System.out.println("❌ 수리 요청 삭제 중 오류 발생: " + e.getMessage());
 	        e.printStackTrace();
 	        return false;
 	    }
@@ -482,16 +482,16 @@ public class RepairDAO extends BaseDAO {
 	        int deleteResult = cstmt.getInt(2);
 	        
 	        if (deleteResult == 0) {
-	            System.out.println("결과 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+	            System.out.println("❌ 결과 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
 	            return false;
 	        } else if (deleteResult == -1) {
-	            System.out.println("수리 결과 삭제 중 오류가 발생했습니다.");
+	            System.out.println("❌ 수리 결과 삭제 중 오류가 발생했습니다.");
 	            return false;
 	        }
 	        
 	        return true;
 	    } catch (SQLException e) {
-	        System.out.println("수리 결과 삭제 중 오류 발생: " + e.getMessage());
+	        System.out.println("❌ 수리 결과 삭제 중 오류 발생: " + e.getMessage());
 	        e.printStackTrace();
 	        return false;
 	    }
@@ -507,10 +507,10 @@ public class RepairDAO extends BaseDAO {
 			if (rs.next()) {
 				nextId = rs.getInt(1);
 			} else {
-				System.out.println("수리 요청 ID 시퀀스 값을 가져오는데 실패했습니다.");
+				System.out.println("❌ 수리 요청 ID 시퀀스 값을 가져오는데 실패했습니다.");
 			}
 		} catch (SQLException e) {
-			System.out.println("수리 요청 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 수리 요청 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return nextId;
@@ -524,10 +524,10 @@ public class RepairDAO extends BaseDAO {
 			if (rs.next()) {
 				nextId = rs.getInt(1);
 			} else {
-				System.out.println("수리 결과 ID 시퀀스 값을 가져오는데 실패했습니다.");
+				System.out.println("❌ 수리 결과 ID 시퀀스 값을 가져오는데 실패했습니다.");
 			}
 		} catch (SQLException e) {
-			System.out.println("수리 결과 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 수리 결과 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return nextId;
@@ -564,6 +564,4 @@ public class RepairDAO extends BaseDAO {
 
 		return repairResult;
 	}
-
-
 }

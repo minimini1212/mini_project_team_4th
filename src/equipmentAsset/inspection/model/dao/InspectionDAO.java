@@ -27,7 +27,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("등록된 점검 일정이 없습니다.");
+				System.out.println("❌ 등록된 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -38,7 +38,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -52,7 +52,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("장비 ID " + equipmentId + "에 해당하는 점검 일정이 없습니다.");
+				System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -63,7 +63,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("장비 ID로 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 장비 ID로 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -77,7 +77,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없습니다.");
+				System.out.println("❌ 일정 ID " + scheduleId + "에 해당하는 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -88,7 +88,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("일정 ID로 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 일정 ID로 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -106,7 +106,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// ResultSet이 비어 있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println(status + " 상태의 점검 일정이 없습니다.");
+				System.out.println("❌ " + status + " 상태의 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -117,7 +117,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("상태별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 상태별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -135,7 +135,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// ResultSet이 비어 있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println(cycle + " 주기의 점검 일정이 없습니다.");
+				System.out.println("❌ " + cycle + " 주기의 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -146,7 +146,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("주기별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 주기별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -164,7 +164,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// ResultSet이 비어 있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println(type + " 유형의 점검 일정이 없습니다.");
+				System.out.println("❌ " + type + " 유형의 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -175,7 +175,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("유형별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 유형별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -192,7 +192,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// ResultSet이 비어 있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("기타 상태의 점검 일정이 없습니다.");
+				System.out.println("❌ 기타 상태의 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -203,7 +203,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("기타 상태별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 기타 상태별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -221,7 +221,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// ResultSet이 비어 있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("기타 주기의 점검 일정이 없습니다.");
+				System.out.println("❌ 기타 주기의 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -232,7 +232,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("기타 주기별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 기타 주기별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -250,7 +250,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// ResultSet이 비어 있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("기타 유형의 점검 일정이 없습니다.");
+				System.out.println("❌ 기타 유형의 점검 일정이 없습니다.");
 				return false;
 			}
 
@@ -261,7 +261,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("기타 유형별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 기타 유형별 점검 일정 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -274,7 +274,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("등록된 점검 결과가 없습니다.");
+				System.out.println("❌ 등록된 점검 결과가 없습니다.");
 				return false;
 			}
 
@@ -285,7 +285,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -299,7 +299,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("장비 ID " + equipmentId + "에 해당하는 점검 결과가 없습니다.");
+				System.out.println("❌ 장비 ID " + equipmentId + "에 해당하는 점검 결과가 없습니다.");
 				return false;
 			}
 
@@ -310,7 +310,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("장비 ID로 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 장비 ID로 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -323,7 +323,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println("결과 ID " + resultId + "에 해당하는 점검 결과가 없습니다.");
+				System.out.println("❌ 결과 ID " + resultId + "에 해당하는 점검 결과가 없습니다.");
 				return false;
 			}
 
@@ -334,7 +334,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("결과 ID로 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 결과 ID로 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -351,7 +351,7 @@ public class InspectionDAO extends BaseDAO {
 
 			// 결과가 비어있는지 확인
 			if (!rs.isBeforeFirst()) {
-				System.out.println(resultType + " 유형의 점검 결과가 없습니다.");
+				System.out.println("❌ " + resultType + " 유형의 점검 결과가 없습니다.");
 				return false;
 			}
 
@@ -362,7 +362,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return true;
 		} catch (SQLException e) {
-			System.out.println("결과 유형별 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 결과 유형별 점검 결과 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -378,7 +378,7 @@ public class InspectionDAO extends BaseDAO {
 			int scheduleId = getNextInspectionScheduleId();
 
 			if (scheduleId == 0) {
-				System.out.println("일정 ID를 생성하는 데 실패했습니다.");
+				System.out.println("❌ 일정 ID를 생성하는 데 실패했습니다.");
 				return false;
 			}
 
@@ -397,12 +397,12 @@ public class InspectionDAO extends BaseDAO {
 
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
-				System.out.println("점검 일정 등록에 실패했습니다.");
+				System.out.println("❌ 점검 일정 등록에 실패했습니다.");
 				return false;
 			}
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 일정 등록 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 점검 일정 등록 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -429,7 +429,7 @@ public class InspectionDAO extends BaseDAO {
 
 			return resultId;
 		} catch (SQLException e) {
-			System.out.println("점검 결과 저장 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 점검 결과 저장 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
@@ -447,12 +447,12 @@ public class InspectionDAO extends BaseDAO {
 
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 점검 유형을 업데이트할 수 없습니다.");
+				System.out.println("❌ 일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 점검 유형을 업데이트할 수 없습니다.");
 				return false;
 			}
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 유형 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 점검 유형 업데이트 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -468,12 +468,12 @@ public class InspectionDAO extends BaseDAO {
 
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 점검 주기를 업데이트할 수 없습니다.");
+				System.out.println("❌ 일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 점검 주기를 업데이트할 수 없습니다.");
 				return false;
 			}
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 주기 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 점검 주기 업데이트 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -495,12 +495,12 @@ public class InspectionDAO extends BaseDAO {
 
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 예정 일자를 업데이트할 수 없습니다.");
+				System.out.println("❌ 일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 예정 일자를 업데이트할 수 없습니다.");
 				return false;
 			}
 			return true;
 		} catch (Exception e) {
-			System.out.println("예정 일자 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 예정 일자 업데이트 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -516,12 +516,12 @@ public class InspectionDAO extends BaseDAO {
 
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 상태를 업데이트할 수 없습니다.");
+				System.out.println("❌ 일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 상태를 업데이트할 수 없습니다.");
 				return false;
 			}
 			return true;
 		} catch (SQLException e) {
-			System.out.println("상태 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 상태 업데이트 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -537,12 +537,12 @@ public class InspectionDAO extends BaseDAO {
 
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
-				System.out.println("일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 설명을 업데이트할 수 없습니다.");
+				System.out.println("❌ 일정 ID " + scheduleId + "에 해당하는 점검 일정이 없어 설명을 업데이트할 수 없습니다.");
 				return false;
 			}
 			return true;
 		} catch (SQLException e) {
-			System.out.println("설명 업데이트 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 설명 업데이트 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -560,7 +560,7 @@ public class InspectionDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 일자 수정 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 점검 일자 수정 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -578,7 +578,7 @@ public class InspectionDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 결과 유형 수정 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 점검 결과 유형 수정 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -596,7 +596,7 @@ public class InspectionDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("점검 내용 수정 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 점검 내용 수정 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -614,7 +614,7 @@ public class InspectionDAO extends BaseDAO {
 			cstmt.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("특이사항 수정 중 오류 발생: " + e.getMessage());
+			System.out.println("❌ 특이사항 수정 중 오류 발생: " + e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -635,19 +635,19 @@ public class InspectionDAO extends BaseDAO {
 	        int deleteResult = cstmt.getInt(2);
 	        
 	        if (deleteResult == 0) {
-	            System.out.println("이미 결과가 등록된 점검 일정은 삭제할 수 없습니다.");
+	            System.out.println("❌ 이미 결과가 등록된 점검 일정은 삭제할 수 없습니다.");
 	            return false;
 	        } else if (deleteResult == 2) {
-	            System.out.println("일정 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+	            System.out.println("❌ 일정 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
 	            return false;
 	        } else if (deleteResult == -1) {
-	            System.out.println("점검 일정 삭제 중 오류가 발생했습니다.");
+	            System.out.println("❌ 점검 일정 삭제 중 오류가 발생했습니다.");
 	            return false;
 	        }
 	        
 	        return true;
 	    } catch (SQLException e) {
-	        System.out.println("점검 일정 삭제 중 오류 발생: " + e.getMessage());
+	        System.out.println("❌ 점검 일정 삭제 중 오류 발생: " + e.getMessage());
 	        e.printStackTrace();
 	        return false;
 	    }
@@ -666,16 +666,16 @@ public class InspectionDAO extends BaseDAO {
 	        int deleteResult = cstmt.getInt(2);
 	        
 	        if (deleteResult == 0) {
-	            System.out.println("결과 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
+	            System.out.println("❌ 결과 등록 후 24시간이 경과하여 삭제할 수 없습니다.");
 	            return false;
 	        } else if (deleteResult == -1) {
-	            System.out.println("점검 결과 삭제 중 오류가 발생했습니다.");
+	            System.out.println("❌ 점검 결과 삭제 중 오류가 발생했습니다.");
 	            return false;
 	        }
 	        
 	        return true;
 	    } catch (SQLException e) {
-	        System.out.println("점검 결과 삭제 중 오류 발생: " + e.getMessage());
+	        System.out.println("❌ 점검 결과 삭제 중 오류 발생: " + e.getMessage());
 	        e.printStackTrace();
 	        return false;
 	    }
@@ -691,10 +691,10 @@ public class InspectionDAO extends BaseDAO {
 			if (rs.next()) {
 				nextId = rs.getInt(1);
 			} else {
-				System.out.println("점검 일정 ID 시퀀스 값을 가져오는데 실패했습니다.");
+				System.out.println("❌ 점검 일정 ID 시퀀스 값을 가져오는데 실패했습니다.");
 			}
 		} catch (SQLException e) {
-			System.out.println("점검 일정 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
+			System.out.println("❌ 점검 일정 ID 시퀀스 조회 중 오류가 발생했습니다: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return nextId;
