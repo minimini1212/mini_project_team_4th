@@ -112,7 +112,7 @@ public class EmployeeController {
             }
 
             // 재직 상태
-            String status = "";
+            String status = existing.getStatus();
             while (true) {
                 System.out.println("재직 상태 선택 (현재: " + existing.getStatus() + ")");
                 EmployeeOptionMapper.printStatusOptions();

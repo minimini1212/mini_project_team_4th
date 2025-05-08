@@ -67,20 +67,23 @@ public class EmployeeDao {
 
     public void update(Employee emp) throws SQLException {
         String sql = """
-        UPDATE employee
-        SET name = ?, address = ?, phone = ?, email = ?, del_yn = ?
-        WHERE employee_id = (
-            SELECT employee_id FROM employee WHERE emp_number = ?
-        )
-        """;
+    UPDATE employee
+    SET name = ?, address = ?, phone = ?, email = ?, status = ?, position_id = ?, job_id = ?, del_yn = ?
+    WHERE employee_id = (
+        SELECT employee_id FROM employee WHERE emp_number = ?
+    )
+    """;
 
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, emp.getName());
         pstmt.setString(2, emp.getAddress());
         pstmt.setString(3, emp.getPhone());
         pstmt.setString(4, emp.getEmail());
-        pstmt.setString(5, emp.getDelYn());
-        pstmt.setString(6, emp.getEmpNumber());
+        pstmt.setString(5, emp.getStatus());         // ✅ status
+        pstmt.setInt(6, emp.getPositionId());        // ✅ position_id
+        pstmt.setInt(7, emp.getJobId());             // ✅ job_id
+        pstmt.setString(8, emp.getDelYn());
+        pstmt.setString(9, emp.getEmpNumber());
 
         pstmt.executeUpdate();
     }
